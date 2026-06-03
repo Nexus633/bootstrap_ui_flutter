@@ -1,9 +1,5 @@
+import 'package:bs_flutter_ui/ui/bs_ui.dart';
 import 'package:flutter/material.dart';
-import '../tokens/colors.dart';
-import '../tokens/spacing.dart';
-import '../tokens/typography.dart';
-import '../components/grid/bs_container.dart';
-import '../components/grid/bs_row.dart';
 
 /// Zeigt das BsContainer + BsRow + BsCol Grid-System.
 /// Resize das Fenster um Responsive-Verhalten zu sehen.
@@ -12,11 +8,12 @@ class GridShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bs = context.bs;
     return Scaffold(
-      backgroundColor: BsColors.bodyBg,
+      backgroundColor: bs.bodyBg,
       appBar: AppBar(
-        backgroundColor: BsColors.dark,
-        title: const Text('Grid System', style: TextStyle(color: Colors.white)),
+        backgroundColor: bs.bodyBg,
+        title: Text('Grid System', style: TextStyle(color: bs.bodyText)),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: BsSpacing.s4),
@@ -38,7 +35,7 @@ class GridShowcase extends StatelessWidget {
               ),
             ),
 
-            _divider(),
+            _divider(context),
 
             // ── col-6 col-6 ────────────────────────────────────────────────
             _SectionHeader('col-6 / col-6', '12 Spalten geteilt durch 2'),
@@ -51,7 +48,7 @@ class GridShowcase extends StatelessWidget {
               ),
             ),
 
-            _divider(),
+            _divider(context),
 
             // ── col-4 col-8 ────────────────────────────────────────────────
             _SectionHeader('col-4 / col-8', 'Sidebar + Hauptbereich'),
@@ -70,7 +67,7 @@ class GridShowcase extends StatelessWidget {
               ),
             ),
 
-            _divider(),
+            _divider(context),
 
             // ── Responsive: col-12 col-md-6 col-lg-4 ───────────────────────
             _SectionHeader(
@@ -90,7 +87,7 @@ class GridShowcase extends StatelessWidget {
               ),
             ),
 
-            _divider(),
+            _divider(context),
 
             // ── Automatischer Umbruch > 12 ──────────────────────────────────
             _SectionHeader(
@@ -109,7 +106,7 @@ class GridShowcase extends StatelessWidget {
               ),
             ),
 
-            _divider(),
+            _divider(context),
 
             // ── Container Fluid ─────────────────────────────────────────────
             _SectionHeader(
@@ -139,7 +136,7 @@ class GridShowcase extends StatelessWidget {
               ),
             ),
 
-            _divider(),
+            _divider(context),
 
             // ── Gutter Varianten ────────────────────────────────────────────
             _SectionHeader(
@@ -149,7 +146,7 @@ class GridShowcase extends StatelessWidget {
             BsContainer(
               child: Column(
                 children: [
-                  Text('g-1 (4px)', style: _labelStyle()),
+                  Text('g-1 (4px)', style: _labelStyle(context)),
                   const SizedBox(height: BsSpacing.s1),
                   BsRow(
                     gutterX: BsSpacing.s1,
@@ -170,7 +167,7 @@ class GridShowcase extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: BsSpacing.s3),
-                  Text('g-3 / default (16px)', style: _labelStyle()),
+                  Text('g-3 / default (16px)', style: _labelStyle(context)),
                   const SizedBox(height: BsSpacing.s1),
                   BsRow(
                     // gutterX: BsSpacing.s3,
@@ -201,14 +198,14 @@ class GridShowcase extends StatelessWidget {
     );
   }
 
-  Widget _divider() => const Padding(
+  Widget _divider(BuildContext context) => Padding(
     padding: EdgeInsets.symmetric(vertical: BsSpacing.s4),
-    child: Divider(color: BsColors.border),
+    child: Divider(color: context.bs.border),
   );
 
-  TextStyle _labelStyle() => BsTypography.body.copyWith(
+  TextStyle _labelStyle(BuildContext context) => BsTypography.body.copyWith(
     fontSize: BsTypography.fontSizeSm,
-    color: BsColors.mutedText,
+    color: context.bs.bodyTextSecondary,
   );
 }
 
@@ -242,7 +239,7 @@ class _SectionHeader extends StatelessWidget {
             description,
             style: BsTypography.body.copyWith(
               fontSize: BsTypography.fontSizeSm,
-              color: BsColors.mutedText,
+              color: context.bs.bodyTextSecondary,
             ),
           ),
         ],

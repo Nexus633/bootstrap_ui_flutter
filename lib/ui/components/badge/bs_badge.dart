@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../tokens/bs_theme.dart'; // <--- NEU: Theme Import
 import '../../tokens/colors.dart';
 
 enum BsBadgeVariant {
@@ -20,89 +21,82 @@ class BsBadge extends StatelessWidget {
     this.isPill = false,
   });
 
-  /// Der Text, der im Badge angezeigt wird.
   final String label;
-
-  /// Die Farbe des Badges.
   final BsBadgeVariant variant;
-
-  /// Wenn true, wird das Badge wie eine Pille (komplett rund) geformt.
-  /// Entspricht Bootstrap's .rounded-pill
   final bool isPill;
 
   @override
   Widget build(BuildContext context) {
-    final _BadgeStyle style = _resolveStyle(variant);
+    // 1. Theme abgreifen
+    final bsTheme = context.bs;
 
-    // Pill-Badges haben bei Bootstrap oft ein minimal breiteres horizontales Padding
+    // 2. Das Theme an die Farb-Logik weitergeben
+    final _BadgeStyle style = _resolveStyle(variant, bsTheme);
+
     final EdgeInsets padding = isPill
         ? const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0)
         : const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0);
 
     final BorderRadius radius = isPill
-        ? BorderRadius.circular(50.0) // .rounded-pill
-        : BorderRadius.circular(
-            4.0,
-          ); // Standard Radius (an deine Tokens anpassen)
+        ? BorderRadius.circular(50.0)
+        : BorderRadius.circular(4.0);
 
     return Container(
       padding: padding,
       decoration: BoxDecoration(
         color: style.backgroundColor,
         borderRadius: radius,
-        // Optional: Ein ganz leichter Rand für das Light-Badge, damit es sich vom weißen Hintergrund abhebt
+        // Optional: Ein leichter Rand für das Light-Badge (jetzt dynamisch aus dem Theme!)
         border: variant == BsBadgeVariant.light
-            ? Border.all(color: BsColors.border, width: 1.0)
+            ? Border.all(color: bsTheme.border, width: 1.0)
             : null,
       ),
       child: Text(
         label,
         style: TextStyle(
           color: style.textColor,
-          fontSize:
-              12.0, // Badges sind typischerweise ca. 0.75em der Basisgröße
-          fontWeight:
-              FontWeight.w700, // Bootstrap Badges sind standardmäßig bold
-          height:
-              1.0, // Verhindert zusätzliches vertikales Spacing durch Line-Height
+          fontSize: 12.0,
+          fontWeight: FontWeight.w700,
+          height: 1.0,
         ),
       ),
     );
   }
 
-  // ─── Farb-Logik (Greift auf deine Tokens zurück) ───────────────────────────
+  // ─── Farb-Logik ───────────────────────────────────────────────────────────
 
-  _BadgeStyle _resolveStyle(BsBadgeVariant variant) {
+  _BadgeStyle _resolveStyle(BsBadgeVariant variant, BsThemeData bs) {
     return switch (variant) {
-      BsBadgeVariant.primary => const _BadgeStyle(
-        backgroundColor: BsColors.primary,
+      BsBadgeVariant.primary => _BadgeStyle(
+        backgroundColor:
+            bs.primary, // Greift jetzt auf den Dark/Light Mode Wert zu!
         textColor: BsColors.onPrimary,
       ),
-      BsBadgeVariant.secondary => const _BadgeStyle(
-        backgroundColor: BsColors.secondary,
+      BsBadgeVariant.secondary => _BadgeStyle(
+        backgroundColor: bs.secondary,
         textColor: BsColors.onSecondary,
       ),
-      BsBadgeVariant.success => const _BadgeStyle(
-        backgroundColor: BsColors.success,
+      BsBadgeVariant.success => _BadgeStyle(
+        backgroundColor: bs.success,
         textColor: BsColors.onSuccess,
       ),
-      BsBadgeVariant.danger => const _BadgeStyle(
-        backgroundColor: BsColors.danger,
+      BsBadgeVariant.danger => _BadgeStyle(
+        backgroundColor: bs.danger,
         textColor: BsColors.onDanger,
       ),
-      BsBadgeVariant.warning => const _BadgeStyle(
-        backgroundColor: BsColors.warning,
+      BsBadgeVariant.warning => _BadgeStyle(
+        backgroundColor: bs.warning,
         textColor: BsColors.onWarning,
       ),
-      BsBadgeVariant.info => const _BadgeStyle(
-        backgroundColor: BsColors.info,
+      BsBadgeVariant.info => _BadgeStyle(
+        backgroundColor: bs.info,
         textColor: BsColors.onInfo,
       ),
-      BsBadgeVariant.light => const _BadgeStyle(
+      BsBadgeVariant.light => _BadgeStyle(
         backgroundColor: BsColors.light,
         textColor: BsColors.onLight,
       ),
-      BsBadgeVariant.dark => const _BadgeStyle(
+      BsBadgeVariant.dark => _BadgeStyle(
         backgroundColor: BsColors.dark,
         textColor: BsColors.onDark,
       ),
@@ -110,7 +104,6 @@ class BsBadge extends StatelessWidget {
   }
 }
 
-// ─── Internes Styling-Modell ──────────────────────────────────────────────────
 class _BadgeStyle {
   const _BadgeStyle({required this.backgroundColor, required this.textColor});
   final Color backgroundColor;

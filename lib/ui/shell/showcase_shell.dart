@@ -5,6 +5,8 @@ import '../showcase/alert_showcase.dart';
 import '../showcase/badge_showcase.dart';
 import '../showcase/button_showcase.dart';
 import '../showcase/grid_showcase.dart';
+import '../showcase/themes_showcase.dart';
+import '../../main.dart';
 // ─── Navigation Item Model ────────────────────────────────────────────────────
 
 class _NavItem {
@@ -38,12 +40,31 @@ class ShowcaseShell extends StatefulWidget {
 class _ShowcaseShellState extends State<ShowcaseShell> {
   // ── Navigation Items ────────────────────────────────────────────────────────
   // Neue Komponenten hier einfach anhängen!
-  static const List<_NavItem> _items = [
+  final List<_NavItem> _items = [
     _NavItem(
       group: 'Layout',
       label: 'Grid System',
       icon: Icons.grid_view_rounded,
       page: GridShowcase(),
+    ),
+    _NavItem(
+      group: 'Layout',
+      label: 'Themes',
+      icon: Icons.palette_rounded,
+      page: ValueListenableBuilder<ThemeMode>(
+        // WICHTIG: Du musst hier den themeNotifier aus deiner main.dart importieren!
+        // z.B. import '../../main.dart';
+        valueListenable: themeNotifier,
+        builder: (context, mode, _) {
+          return ThemeShowcase(
+            currentMode: mode,
+            onThemeChanged: (newMode) {
+              // Aktualisiert den globalen State -> App zeichnet sich neu
+              themeNotifier.value = newMode;
+            },
+          );
+        },
+      ),
     ),
     _NavItem(
       group: 'Components',

@@ -26,12 +26,13 @@ abstract class BsTypography {
   static const FontWeight weightNormal =
       FontWeight.w400; // --bs-body-font-weight
   static const FontWeight weightMedium = FontWeight.w500;
-  static const FontWeight weightBold = FontWeight.w700; // headings
+  static const FontWeight weightBold = FontWeight.w700;
+  static const FontWeight weightHeadings = FontWeight.w500; // headings
 
   // ─── Line Heights ─────────────────────────────────────────────────────────
   static const double lineHeightBase = 1.5; // --bs-body-line-height
   static const double lineHeightSm = 1.25; // --bs-line-height-sm
-  static const double lineHeightLg = 2.0; // --bs-line-height-lg
+  static const double lineHeightLg = 1.5; // --bs-line-height-lg
 
   // ─── Fertige TextStyle-Objekte ────────────────────────────────────────────
   static const TextStyle body = TextStyle(

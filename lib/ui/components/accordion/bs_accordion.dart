@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../tokens/colors.dart';
+import '../../tokens/bs_theme.dart'; // WICHTIG: Dein Theme-Import
 
 // ─── Datenmodell ──────────────────────────────────────────────────────────────
 
@@ -44,12 +44,11 @@ class BsAccordion extends StatefulWidget {
   final bool flush;
 
   /// Die Farbe des Headers und Icons, wenn das Item geöffnet ist.
-  /// Standardmäßig [BsColors.primary].
-  final Color? activeColor; // <--- NEU
+  /// Standardmäßig das Primary-Token des aktuellen Themes.
+  final Color? activeColor;
 
   /// Der Mauszeiger, der angezeigt wird, wenn man über den Header fährt.
-  /// Standardmäßig der normale Zeiger, da BS-Accordion-Header nicht unbedingt wie Buttons aussehen.
-  final MouseCursor? mouseCursor; // <--- NEU
+  final MouseCursor? mouseCursor;
 
   @override
   State<BsAccordion> createState() => _BsAccordionState();
@@ -62,7 +61,6 @@ class _BsAccordionState extends State<BsAccordion> {
   @override
   void initState() {
     super.initState();
-    // Initialisieren basierend auf initiallyExpanded
     _openIndexes = {};
     for (int i = 0; i < widget.items.length; i++) {
       if (widget.items[i].initiallyExpanded) {
@@ -76,19 +74,17 @@ class _BsAccordionState extends State<BsAccordion> {
       final bool isCurrentlyOpen = _openIndexes.contains(index);
 
       if (widget.alwaysOpen) {
-        // Unabhängiges Öffnen/Schließen
         if (isCurrentlyOpen) {
           _openIndexes.remove(index);
         } else {
           _openIndexes.add(index);
         }
       } else {
-        // Mutually exclusive (nur eins darf offen sein)
         if (isCurrentlyOpen) {
-          _openIndexes.remove(index); // Klick auf offenes Item schließt es
+          _openIndexes.remove(index);
         } else {
-          _openIndexes.clear(); // Alle anderen schließen
-          _openIndexes.add(index); // Neues öffnen
+          _openIndexes.clear();
+          _openIndexes.add(index);
         }
       }
     });
@@ -96,23 +92,27 @@ class _BsAccordionState extends State<BsAccordion> {
 
   @override
   Widget build(BuildContext context) {
-    // Wenn flush true ist, gibt es keinen äußeren Border und Radius
+    // 1. Theme abgreifen
+    final bsTheme = context.bs;
+
     final borderRadius = widget.flush
         ? BorderRadius.zero
-        : BorderRadius.circular(8.0); // Passe dies an deine Tokens an
-    final borderSide = BorderSide(color: BsColors.border, width: 1.0);
+        : BorderRadius.circular(8.0);
 
-    final resolvedActiveColor = widget.activeColor ?? BsColors.primary;
+    // 2. Rahmenfarbe dynamisch
+    final borderSide = BorderSide(color: bsTheme.border, width: 1.0);
+
+    // 3. Fallback-Farbe dynamisch (bsTheme.primary statt BsColors.primary)
+    final resolvedActiveColor = widget.activeColor ?? bsTheme.primary;
 
     return Container(
       decoration: BoxDecoration(
-        color: BsColors.bodyBg,
+        color: bsTheme.bodyBg, // 4. Hintergrund dynamisch
         borderRadius: borderRadius,
         border: widget.flush
             ? null
-            : Border.all(color: BsColors.border, width: 1.0),
+            : Border.all(color: bsTheme.border, width: 1.0), // Rahmen dynamisch
       ),
-      // ClipRRect sorgt dafür, dass die Kinder (Header-Hintergründe) nicht über die runden Ecken malen
       child: ClipRRect(
         borderRadius: borderRadius,
         child: Column(
@@ -124,8 +124,7 @@ class _BsAccordionState extends State<BsAccordion> {
               item: widget.items[index],
               isOpen: _openIndexes.contains(index),
               onToggle: () => _handleToggle(index),
-              showBottomBorder:
-                  !isLast, // Jedes Item außer dem letzten bekommt einen Rahmen unten
+              showBottomBorder: !isLast,
               borderSide: borderSide,
               activeColor: resolvedActiveColor,
               mouseCursor: widget.mouseCursor,
@@ -139,7 +138,6 @@ class _BsAccordionState extends State<BsAccordion> {
 
 // ─── Internes Item-Widget ─────────────────────────────────────────────────────
 
-/// Kümmert sich um die Animationen (Aufklappen, Pfeil-Rotation, Farben) eines einzelnen Items.
 class _BsAccordionItemWidget extends StatelessWidget {
   const _BsAccordionItemWidget({
     required this.item,
@@ -161,13 +159,15 @@ class _BsAccordionItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bsTheme = context.bs;
+
     // Bootstrap Styling für aktiven Header
     final headerBgColor = isOpen
         ? activeColor.withValues(alpha: 0.1)
         : Colors.transparent;
-    final headerTextColor = isOpen
-        ? activeColor
-        : BsColors.body; // Passe dark an dein Token an
+
+    // WICHTIG: Wenn geschlossen, nutzen wir bodyText (für den Kontrast)
+    final headerTextColor = isOpen ? activeColor : bsTheme.bodyText;
 
     return Container(
       decoration: BoxDecoration(
@@ -193,7 +193,6 @@ class _BsAccordionItemWidget extends StatelessWidget {
                     Expanded(
                       child: Text(
                         item.title,
-                        // Nutze dein eigenes Typografie-Token, z.B. BsTypography.body
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -201,11 +200,8 @@ class _BsAccordionItemWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // Der Pfeil, der sich dreht
                     AnimatedRotation(
-                      turns: isOpen
-                          ? -0.5
-                          : 0.0, // Dreht sich um 180° (-0.5 bedeutet gegen den Uhrzeigersinn wie in BS)
+                      turns: isOpen ? -0.5 : 0.0,
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
                       child: Icon(
@@ -223,15 +219,14 @@ class _BsAccordionItemWidget extends StatelessWidget {
           AnimatedSize(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
-            alignment: Alignment
-                .topCenter, // Wichtig: Animation klappt von oben nach unten auf
+            alignment: Alignment.topCenter,
             child: SizedBox(
               width: double.infinity,
-              // Wenn nicht offen, ist die Höhe 0 (durch leeren SizedBox)
               child: isOpen
                   ? Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: item.body,
+                      child: item
+                          .body, // Text-Styling machen wir meist beim Übergeben des Widgets (wie im Showcase gezeigt)
                     )
                   : const SizedBox.shrink(),
             ),

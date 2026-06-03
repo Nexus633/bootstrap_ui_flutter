@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import '../tokens/colors.dart';
+import '../tokens/bs_theme.dart'; // <--- WICHTIG: Theme Import
 import '../tokens/spacing.dart';
 import '../tokens/typography.dart';
 import '../components/button/bs_button.dart';
 import '../components/button/bs_button_group.dart';
 
-/// Zeigt alle AppButton-Varianten und Größen — wie die Bootstrap Dokumentation.
-/// Diese Seite dient als lebendige Referenz für das Design-System.
 class ButtonShowcase extends StatefulWidget {
   const ButtonShowcase({super.key});
 
@@ -15,7 +13,6 @@ class ButtonShowcase extends StatefulWidget {
 }
 
 class _ButtonShowcaseState extends State<ButtonShowcase> {
-  // State für den Loading-Button Demo.
   bool _isLoading = false;
 
   Future<void> _simulateLoading() async {
@@ -26,11 +23,20 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
 
   @override
   Widget build(BuildContext context) {
+    // Theme abgreifen
+    final bsTheme = context.bs;
+
     return Scaffold(
-      backgroundColor: BsColors.bodyBg,
+      backgroundColor: bsTheme.bodyBg, // Dynamischer Hintergrund
       appBar: AppBar(
-        backgroundColor: BsColors.dark,
-        title: const Text('Buttons', style: TextStyle(color: Colors.white)),
+        backgroundColor: bsTheme.bodyBg,
+        foregroundColor: bsTheme.bodyText,
+        title: const Text('Buttons'),
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(color: bsTheme.border, height: 1.0),
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(BsSpacing.s3),
@@ -90,7 +96,7 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
               ],
             ),
 
-            _divider(),
+            _divider(bsTheme.border),
             _sectionTitle('Outline Varianten'),
             _description('Entspricht: btn btn-outline-primary, etc.'),
             const SizedBox(height: BsSpacing.s2),
@@ -134,7 +140,7 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
               ],
             ),
 
-            _divider(),
+            _divider(bsTheme.border),
             _sectionTitle('Größen'),
             _description('Entspricht: btn-sm, (default), btn-lg'),
             const SizedBox(height: BsSpacing.s2),
@@ -161,7 +167,7 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
               ],
             ),
 
-            _divider(),
+            _divider(bsTheme.border),
             _sectionTitle('Mit Icon'),
             _description(
               'Entspricht: <button><i class="bi bi-..."></i> Label</button>',
@@ -173,6 +179,9 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   label: 'Speichern',
                   variant: BsButtonVariant.primary,
                   icon: Icons.save,
+                  iconVariant:
+                      BsIconVariant.success, // Beispiel für Icon-Variante
+                  iconColor: Colors.yellow, // Beispiel für Icon-Farbe
                   onPressed: () {},
                 ),
                 AppButton(
@@ -190,13 +199,12 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
               ],
             ),
 
-            _divider(),
+            _divider(bsTheme.border),
             _sectionTitle('States'),
             _description('Disabled (onPressed: null) und Loading'),
             const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
-                // Disabled: onPressed ist null → Bootstrap's disabled-Attribut
                 const AppButton(
                   label: 'Disabled',
                   variant: BsButtonVariant.primary,
@@ -205,7 +213,6 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   label: 'Disabled',
                   variant: BsButtonVariant.outlinePrimary,
                 ),
-                // Loading State
                 AppButton(
                   label: 'Laden...',
                   variant: BsButtonVariant.primary,
@@ -215,7 +222,7 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
               ],
             ),
 
-            _divider(),
+            _divider(bsTheme.border),
             _sectionTitle('Full Width (d-grid)'),
             _description(
               'Entspricht: <div class="d-grid"> → Button nimmt volle Breite',
@@ -235,7 +242,7 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
               onPressed: () {},
             ),
 
-            _divider(),
+            _divider(bsTheme.border),
             _sectionTitle('Button Gruppen'),
             _description('Entspricht: btn-group '),
             const SizedBox(height: BsSpacing.s2),
@@ -272,26 +279,24 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
     style: BsTypography.body.copyWith(
       fontSize: BsTypography.h5,
       fontWeight: BsTypography.weightBold,
-      color: BsColors.body,
+      color: context.bs.bodyText,
     ),
   );
 
   Widget _description(String text) => Text(
     text,
     style: BsTypography.body.copyWith(
-      color: BsColors.mutedText,
+      color: context.bs.bodyTextSecondary,
       fontSize: BsTypography.fontSizeSm,
     ),
   );
 
-  Widget _divider() => const Padding(
-    padding: EdgeInsets.symmetric(vertical: BsSpacing.s4),
-    child: Divider(color: BsColors.border),
+  Widget _divider(Color borderColor) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s4),
+    child: Divider(color: borderColor),
   );
 }
 
-/// Wrap-Widget das Buttons mit gleichmäßigem Abstand umschließt.
-/// Entspricht der Flexbox-Darstellung in der Bootstrap Doku.
 class _Wrap extends StatelessWidget {
   const _Wrap({required this.children});
   final List<Widget> children;

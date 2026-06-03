@@ -1,5 +1,5 @@
+import 'package:bs_flutter_ui/ui/bs_ui.dart';
 import 'package:flutter/material.dart';
-import '../../tokens/colors.dart';
 
 enum BsAlertVariant {
   primary,
@@ -149,46 +149,47 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
   // ─── Farb-Logik (Simulation der Bootstrap CSS-Variablen) ───────────────────
 
   _AlertColors _resolveColors(BsAlertVariant variant) {
-    final Color baseColor = switch (variant) {
-      BsAlertVariant.primary => BsColors.primary,
-      BsAlertVariant.secondary => BsColors.secondary,
-      BsAlertVariant.success => BsColors.success,
-      BsAlertVariant.danger => BsColors.danger,
-      BsAlertVariant.warning => BsColors.warning,
-      BsAlertVariant.info => BsColors.info,
-      BsAlertVariant.light => BsColors.light,
-      BsAlertVariant.dark => BsColors.dark,
-    };
+    final bs = context.bs;
 
     final Color textColor = switch (variant) {
-      BsAlertVariant.warning => BsColors.body,
-      BsAlertVariant.info => BsColors.body,
-      BsAlertVariant.light => BsColors.body,
-      BsAlertVariant.dark => BsColors.onDark,
-      _ => _darken(baseColor, 0.3),
+      BsAlertVariant.primary => bs.primaryTextEmphasis,
+      BsAlertVariant.secondary => bs.secondaryTextEmphasis,
+      BsAlertVariant.success => bs.successTextEmphasis,
+      BsAlertVariant.danger => bs.dangerTextEmphasis,
+      BsAlertVariant.warning => bs.warningTextEmphasis,
+      BsAlertVariant.info => bs.infoTextEmphasis,
+      BsAlertVariant.light => bs.lightTextEmphasis,
+      BsAlertVariant.dark => bs.darkTextEmphasis,
     };
 
-    final Color bgColor = variant == BsAlertVariant.dark
-        ? BsColors.dark
-        : baseColor.withValues(alpha: 0.15);
+    final Color bgColor = switch (variant) {
+      BsAlertVariant.primary => bs.primaryBgSubtle,
+      BsAlertVariant.secondary => bs.secondaryBgSubtle,
+      BsAlertVariant.success => bs.successBgSubtle,
+      BsAlertVariant.danger => bs.dangerBgSubtle,
+      BsAlertVariant.warning => bs.warningBgSubtle,
+      BsAlertVariant.info => bs.infoBgSubtle,
+      BsAlertVariant.light => bs.lightBgSubtle,
+      BsAlertVariant.dark => bs.darkBgSubtle,
+    };
 
-    final Color borderColor = variant == BsAlertVariant.dark
-        ? BsColors.dark
-        : baseColor.withValues(alpha: 0.3);
+    final Color borderColor = switch (variant) {
+      BsAlertVariant.primary => bs.primaryBorderSubtle,
+      BsAlertVariant.secondary => bs.secondaryBorderSubtle,
+      BsAlertVariant.success => bs.successBorderSubtle,
+      BsAlertVariant.danger => bs.dangerBorderSubtle,
+      BsAlertVariant.warning => bs.warningBorderSubtle,
+      BsAlertVariant.info => bs.infoBorderSubtle,
+      BsAlertVariant.light => bs.lightBorderSubtle,
+      BsAlertVariant.dark => bs.darkBorderSubtle,
+    };
 
     return _AlertColors(
       backgroundColor: bgColor,
       borderColor: borderColor,
       textColor: textColor,
-      iconColor: variant == BsAlertVariant.dark ? Colors.white : baseColor,
+      iconColor: textColor, // Bootstrap nutzt dieselbe Farbe für Icons im Alert
     );
-  }
-
-  Color _darken(Color color, double amount) {
-    final hsl = HSLColor.fromColor(color);
-    return hsl
-        .withLightness((hsl.lightness - amount).clamp(0.0, 1.0))
-        .toColor();
   }
 }
 

@@ -1,31 +1,46 @@
 import 'package:flutter/material.dart';
 import '../components/badge/bs_badge.dart';
 import '../components/button/bs_button.dart';
-// Wichtig: Hier deinen Button importieren, falls du das Button-Beispiel testen willst!
-// import '../components/button/bs_button.dart';
+import '../tokens/bs_theme.dart'; // <--- NEU: Theme Import
 
 class BadgeShowcase extends StatelessWidget {
   const BadgeShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Theme abgreifen
+    final bsTheme = context.bs;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Badge Showcase')),
+      backgroundColor: bsTheme.bodyBg, // Scaffold Hintergrund anpassen
+      appBar: AppBar(
+        title: const Text('Badge Showcase'),
+        backgroundColor: bsTheme.bodyBg,
+        foregroundColor: bsTheme.bodyText, // Text & Back-Button anpassen
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(color: bsTheme.border, height: 1.0),
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Standard Badges',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: bsTheme.bodyText,
+              ),
             ),
             const SizedBox(height: 16),
 
-            // Wrap ist perfekt für kleine Tags/Badges
             Wrap(
-              spacing: 8.0, // Horizontaler Abstand
-              runSpacing: 8.0, // Vertikaler Abstand beim Umbruch
+              spacing: 8.0,
+              runSpacing: 8.0,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,9 +94,13 @@ class BadgeShowcase extends StatelessWidget {
 
             const SizedBox(height: 48),
 
-            const Text(
+            Text(
               'Pill Badges (.rounded-pill)',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: bsTheme.bodyText,
+              ),
             ),
             const SizedBox(height: 16),
 
@@ -185,37 +204,43 @@ class BadgeShowcase extends StatelessWidget {
 
             const SizedBox(height: 48),
 
-            const Text(
+            Text(
               'Typografische Integration',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: bsTheme.bodyText,
+              ),
             ),
             const SizedBox(height: 16),
 
-            // So würde ein Badge neben einem Header aussehen
             Row(
-              children: const [
+              children: [
                 Text(
                   'Benachrichtigungen',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: bsTheme.bodyText,
+                  ),
                 ),
-                SizedBox(width: 8),
-                BsBadge(label: 'Neu', variant: BsBadgeVariant.danger),
+                const SizedBox(width: 8),
+                const BsBadge(label: 'Neu', variant: BsBadgeVariant.danger),
               ],
             ),
 
             const SizedBox(height: 48),
 
-            const Text(
+            Text(
               'Buttons mit Badges (Pill)',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: bsTheme.bodyText,
+              ),
             ),
             const SizedBox(height: 16),
 
-            // So würde ein Badge neben einem Header aussehen
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [],
-            ),
             Row(
               spacing: 16.0,
               children: [
@@ -287,19 +312,19 @@ class BadgeShowcase extends StatelessWidget {
                 ),
               ],
             ),
+
             const SizedBox(height: 48),
 
-            const Text(
+            Text(
               'Buttons mit Badges (Standard)',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: bsTheme.bodyText,
+              ),
             ),
             const SizedBox(height: 16),
 
-            // So würde ein Badge neben einem Header aussehen
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [],
-            ),
             Row(
               spacing: 16.0,
               children: [
@@ -371,18 +396,6 @@ class BadgeShowcase extends StatelessWidget {
                 ),
               ],
             ),
-            // ─── OPTIONAL: Integration in den eigenen AppButton ─────────────
-            // Falls du deinen AppButton hier hast, kannst du sehen, wie gut das Badge darin aussieht!
-            /*
-            AppButton(
-              label: 'Posteingang',
-              variant: BsButtonVariant.primary,
-              onPressed: () {},
-              // Wenn dein Button ein 'child' oder 'trailing' Widget unterstützen würde,
-              // könnte das Badge so eingebaut werden:
-              // trailing: const BsBadge(label: '99+', variant: BsBadgeVariant.danger, isPill: true),
-            ),
-            */
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/alert/bs_alert.dart';
+import '../tokens/bs_theme.dart'; // <--- WICHTIG: Theme Import
 
 class AlertShowcase extends StatefulWidget {
   const AlertShowcase({super.key});
@@ -18,30 +19,48 @@ class _AlertShowcaseState extends State<AlertShowcase> {
 
   @override
   Widget build(BuildContext context) {
+    // Theme abgreifen
+    final bsTheme = context.bs;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Alert Showcase')),
+      backgroundColor: bsTheme.bodyBg, // Scaffold Hintergrund anpassen
+      appBar: AppBar(
+        title: const Text('Alert Showcase'),
+        backgroundColor: bsTheme.bodyBg,
+        foregroundColor: bsTheme.bodyText, // Text & Back-Button anpassen
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(color: bsTheme.border, height: 1.0),
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Animierte dynamische Liste',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: bsTheme.bodyText,
+              ),
             ),
             const SizedBox(height: 16),
 
             if (activeAlerts.isEmpty)
-              const Text(
+              Text(
                 'Alle Alerts geschlossen!',
-                style: TextStyle(fontStyle: FontStyle.italic),
+                style: TextStyle(
+                  fontStyle: FontStyle.italic,
+                  color: bsTheme.bodyTextSecondary,
+                ),
               ),
 
             for (final alertName in activeAlerts)
               BsAlert(
-                key: ValueKey(
-                  alertName,
-                ), // WICHTIG: Key für Animation beim Löschen
+                key: ValueKey(alertName),
                 variant: BsAlertVariant.info,
                 icon: Icons.info_outline,
                 dismissible: true,
@@ -50,7 +69,9 @@ class _AlertShowcaseState extends State<AlertShowcase> {
                     activeAlerts.remove(alertName);
                   });
                 },
-                child: Text(alertName),
+                child: Text(
+                  alertName,
+                ), // Textfarbe wird vom Alert automatisch gemanagt!
               ),
 
             const SizedBox(height: 32),
@@ -69,12 +90,16 @@ class _AlertShowcaseState extends State<AlertShowcase> {
             ),
 
             const SizedBox(height: 48),
-            const Divider(),
+            Divider(color: bsTheme.border),
             const SizedBox(height: 24),
 
-            const Text(
+            Text(
               'Statische Alerts',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: bsTheme.bodyText,
+              ),
             ),
             const SizedBox(height: 16),
 
@@ -85,6 +110,8 @@ class _AlertShowcaseState extends State<AlertShowcase> {
                 'Erfolgreich gespeichert! Der Datensatz wurde angelegt.',
               ),
             ),
+
+            const SizedBox(height: 16),
 
             const BsAlert(
               variant: BsAlertVariant.danger,
