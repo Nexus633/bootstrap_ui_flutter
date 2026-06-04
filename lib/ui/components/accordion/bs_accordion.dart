@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../tokens/bs_theme.dart'; // WICHTIG: Dein Theme-Import
+import '../../tokens/bootstrap_theme.dart'; // WICHTIG: Dein Theme-Import
 
 // ─── Datenmodell ──────────────────────────────────────────────────────────────
 

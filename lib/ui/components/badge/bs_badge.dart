@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../tokens/bs_theme.dart'; // <--- NEU: Theme Import
+import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/colors.dart';
-
-enum BsBadgeVariant {
-  primary,
-  secondary,
-  success,
-  danger,
-  warning,
-  info,
-  light,
-  dark,
-}
+import '../../tokens/enums.dart';
 
 class BsBadge extends StatelessWidget {
   const BsBadge({

@@ -1,51 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../tokens/bs_theme.dart'; // <--- WICHTIG: Theme Import
+import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/colors.dart';
 import '../../tokens/spacing.dart';
 import '../../tokens/typography.dart';
+import '../../tokens/enums.dart'; // WICHTIG: Dein Theme-Import
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
-enum BsButtonVariant {
-  primary,
-  secondary,
-  success,
-  danger,
-  warning,
-  info,
-  light,
-  dark,
-  outlinePrimary,
-  outlineSecondary,
-  outlineSuccess,
-  outlineDanger,
-  outlineWarning,
-  outlineInfo,
-  outlineDark,
-  link,
-}
-
-enum BsIconVariant {
-  primary,
-  secondary,
-  success,
-  danger,
-  warning,
-  info,
-  light,
-  dark,
-}
-
-enum BsButtonSize { sm, md, lg }
-
-enum BsBadgePosition {
-  leading,
-  trailing,
-  topLeft,
-  topRight,
-  bottomLeft,
-  bottomRight,
-}
+// (Enums moved to tokens/enums.dart)
 
 // ─── Widget ───────────────────────────────────────────────────────────────────
 

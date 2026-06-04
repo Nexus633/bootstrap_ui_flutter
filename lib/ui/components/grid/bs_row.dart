@@ -109,12 +109,12 @@ class BsCol extends StatelessWidget {
 /// )
 /// ```
 class BsRow extends StatelessWidget {
-  const BsRow({
+  BsRow({
     super.key,
     required this.children,
     this.gutterX = BsSpacing.s3, // Bootstrap g-* default
     this.gutterY = BsSpacing.s3,
-  }) : assert(children.length > 0, 'BsRow requires at least one child widget.');
+  }) : assert(children.isNotEmpty, 'BsRow requires at least one child widget.');
 
   /// Nur BsCol-Widgets erlaubt.
   final List<BsCol> children;

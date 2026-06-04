@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../tokens/breakpoints.dart';
 import '../../tokens/spacing.dart';
-
-// ─── Container Varianten ──────────────────────────────────────────────────────
-
-/// Entspricht Bootstrap's Container-Typen:
-/// - fixed   → .container        (hat eine max-width je nach Breakpoint)
-/// - fluid   → .container-fluid  (immer 100% Breite)
-/// - sm/md/lg/xl/xxl → .container-sm etc. (fluid bis zum Breakpoint, dann fixed)
-enum BsContainerType { fixed, fluid, sm, md, lg, xl, xxl }
+import '../../tokens/enums.dart';
 
 // ─── BsContainer ─────────────────────────────────────────────────────────────
 
