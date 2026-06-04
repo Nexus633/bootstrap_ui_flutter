@@ -16,11 +16,11 @@ A Flutter component library that implements the Bootstrap 5.3 design system as f
 
 ## Installation
 
-Add `bootstrap_flutter` to your `pubspec.yaml`:
+Add `bootstrap_ui_flutter` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  bootstrap_ui_flutter: ^0.1.0
+  bootstrap_ui_flutter: ^0.1.1
 ```
 
 ## Example: Theme Usage

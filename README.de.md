@@ -16,11 +16,11 @@ Eine Flutter-Komponentenbibliothek, die das Bootstrap 5.3 Design-System so getre
 
 ## Installation
 
-Fügen Sie `bootstrap_flutter` zu Ihrer `pubspec.yaml` hinzu:
+Fügen Sie `bootstrap_ui_flutter` zu Ihrer `pubspec.yaml` hinzu:
 
 ```yaml
 dependencies:
-  bootstrap_ui_flutter: ^0.1.0
+  bootstrap_ui_flutter: ^0.1.1
 ```
 
 ## Beispiel: Theme Nutzung
