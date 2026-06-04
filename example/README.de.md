@@ -1,6 +1,6 @@
 # Bootstrap Flutter Showcase
 
-Diese Beispiel-App demonstriert alle verfügbaren Komponenten und Layout-Funktionen des `bootstrap_flutter` Pakets. Sie dient sowohl als Referenz-Implementierung als auch als Testumgebung für neue Features.
+Diese Beispiel-App demonstriert alle verfügbaren Komponenten und Layout-Funktionen des `bootstrap_ui_flutter` Pakets. Sie dient sowohl als Referenz-Implementierung als auch als Testumgebung für neue Features.
 
 ## Funktionen des Showcase
 

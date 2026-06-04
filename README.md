@@ -20,7 +20,7 @@ Add `bootstrap_flutter` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  bootstrap_flutter: ^0.1.0
+  bootstrap_ui_flutter: ^0.1.0
 ```
 
 ## Example: Theme Usage
@@ -29,7 +29,7 @@ To use the Bootstrap theme, wrap your app in a `MaterialApp` widget with the `Bs
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:bootstrap_flutter/bootstrap_flutter.dart';
+import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,5 +57,5 @@ class MyApp extends StatelessWidget {
 
 ## Documentation & Example
 
-- **Detailed Documentation:** Found in the [docs](./docs/index.md) folder (DE/EN).
+- **Detailed Documentation:** Found in the [docs](./doc/index.md) folder (DE/EN).
 - **Showcase App:** Check out the [example](./example) project to see all components in action.

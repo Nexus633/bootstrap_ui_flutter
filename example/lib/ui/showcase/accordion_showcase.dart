@@ -1,4 +1,4 @@
-import 'package:bootstrap_flutter/bootstrap_flutter.dart';
+import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
 class AccordionShowcase extends StatelessWidget {

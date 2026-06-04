@@ -1,0 +1,27 @@
+# Build outputs
+build/
+
+# IDE
+.idea/
+.vscode/
+.history/
+
+# Dart tool
+.dart_tool/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# GitHub Actions
+.github/
+
+# Example app
+example/
+
+# Metadata
+.metadata
+pubspec.lock
+
+# Readme DE
+README.de.md

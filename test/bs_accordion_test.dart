@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bootstrap_flutter/bootstrap_flutter.dart';
+import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 
 void main() {
   Widget wrap(Widget child) {
@@ -11,19 +11,23 @@ void main() {
   }
 
   group('BsAccordion Tests', () {
-    testWidgets('renders all items and toggles expansion', (WidgetTester tester) async {
-      await tester.pumpWidget(wrap(
-        const BsAccordion(
-          items: [
-            BsAccordionItem(title: 'Item 1', body: Text('Content 1')),
-            BsAccordionItem(title: 'Item 2', body: Text('Content 2')),
-          ],
+    testWidgets('renders all items and toggles expansion', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        wrap(
+          const BsAccordion(
+            items: [
+              BsAccordionItem(title: 'Item 1', body: Text('Content 1')),
+              BsAccordionItem(title: 'Item 2', body: Text('Content 2')),
+            ],
+          ),
         ),
-      ));
+      );
 
       expect(find.text('Item 1'), findsOneWidget);
       expect(find.text('Item 2'), findsOneWidget);
-      
+
       // Content should not be visible initially
       expect(find.text('Content 1'), findsNothing);
 
@@ -41,16 +45,20 @@ void main() {
       expect(find.text('Content 2'), findsOneWidget);
     });
 
-    testWidgets('alwaysOpen allows multiple items expanded', (WidgetTester tester) async {
-      await tester.pumpWidget(wrap(
-        const BsAccordion(
-          alwaysOpen: true,
-          items: [
-            BsAccordionItem(title: 'Item 1', body: Text('Content 1')),
-            BsAccordionItem(title: 'Item 2', body: Text('Content 2')),
-          ],
+    testWidgets('alwaysOpen allows multiple items expanded', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        wrap(
+          const BsAccordion(
+            alwaysOpen: true,
+            items: [
+              BsAccordionItem(title: 'Item 1', body: Text('Content 1')),
+              BsAccordionItem(title: 'Item 2', body: Text('Content 2')),
+            ],
+          ),
         ),
-      ));
+      );
 
       await tester.tap(find.text('Item 1'));
       await tester.tap(find.text('Item 2'));
@@ -61,12 +69,14 @@ void main() {
     });
 
     testWidgets('flush removes border', (WidgetTester tester) async {
-      await tester.pumpWidget(wrap(
-        const BsAccordion(
-          flush: true,
-          items: [BsAccordionItem(title: 'Item 1', body: Text('Content 1'))],
+      await tester.pumpWidget(
+        wrap(
+          const BsAccordion(
+            flush: true,
+            items: [BsAccordionItem(title: 'Item 1', body: Text('Content 1'))],
+          ),
         ),
-      ));
+      );
 
       final container = tester.widget<Container>(find.byType(Container).first);
       final decoration = container.decoration as BoxDecoration;
