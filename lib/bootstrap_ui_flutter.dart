@@ -11,3 +11,5 @@ export 'ui/components/grid/bs_row.dart';
 export 'ui/components/accordion/bs_accordion.dart';
 export 'ui/components/alert/bs_alert.dart';
 export 'ui/components/badge/bs_badge.dart';
+export 'ui/components/image/bs_image.dart';
+export 'ui/components/image/bs_figure.dart';

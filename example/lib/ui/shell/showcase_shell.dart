@@ -6,6 +6,8 @@ import '../showcase/badge_showcase.dart';
 import '../showcase/button_showcase.dart';
 import '../showcase/grid_showcase.dart';
 import '../showcase/themes_showcase.dart';
+import '../showcase/image_showcase.dart';
+import '../showcase/figure_showcase.dart';
 import '../../main.dart';
 // ─── Navigation Item Model ────────────────────────────────────────────────────
 
@@ -89,6 +91,18 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
       label: 'Badge',
       icon: Icons.badge_rounded,
       page: BadgeShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Image',
+      icon: Icons.image_rounded,
+      page: ImageShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Figure',
+      icon: Icons.add_photo_alternate_rounded,
+      page: FigureShowcase(),
     ),
     // Future components:
     // _NavItem(group: 'Components', label: 'Badge',  icon: Icons.label_rounded,       page: BadgeShowcase()),
