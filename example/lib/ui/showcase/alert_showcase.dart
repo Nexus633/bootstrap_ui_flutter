@@ -9,24 +9,24 @@ class AlertShowcase extends StatefulWidget {
 }
 
 class _AlertShowcaseState extends State<AlertShowcase> {
-  // Liste zur Verwaltung der sichtbaren Alerts
+  // List to manage visible alerts
   List<String> activeAlerts = [
-    'Erster Hinweis',
-    'Zweiter Hinweis',
-    'Dritter Hinweis',
+    'First hint',
+    'Second hint',
+    'Third hint',
   ];
 
   @override
   Widget build(BuildContext context) {
-    // Theme abgreifen
+    // Get theme
     final bsTheme = context.bs;
 
     return Scaffold(
-      backgroundColor: bsTheme.bodyBg, // Scaffold Hintergrund anpassen
+      backgroundColor: bsTheme.bodyBg, // Adjust Scaffold background
       appBar: AppBar(
         title: const Text('Alert Showcase'),
         backgroundColor: bsTheme.bodyBg,
-        foregroundColor: bsTheme.bodyText, // Text & Back-Button anpassen
+        foregroundColor: bsTheme.bodyText, // Adjust text & back button
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -39,7 +39,7 @@ class _AlertShowcaseState extends State<AlertShowcase> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Animierte dynamische Liste',
+              'Animated dynamic list',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -50,7 +50,7 @@ class _AlertShowcaseState extends State<AlertShowcase> {
 
             if (activeAlerts.isEmpty)
               Text(
-                'Alle Alerts geschlossen!',
+                'All alerts closed!',
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   color: bsTheme.bodyTextSecondary,
@@ -70,7 +70,7 @@ class _AlertShowcaseState extends State<AlertShowcase> {
                 },
                 child: Text(
                   alertName,
-                ), // Textfarbe wird vom Alert automatisch gemanagt!
+                ), // Text color is automatically managed by the alert!
               ),
 
             const SizedBox(height: 32),
@@ -79,20 +79,20 @@ class _AlertShowcaseState extends State<AlertShowcase> {
               onPressed: () {
                 setState(() {
                   activeAlerts = [
-                    'Erster Hinweis',
-                    'Zweiter Hinweis',
-                    'Dritter Hinweis',
+                    'First hint',
+                    'Second hint',
+                    'Third hint',
                   ];
                 });
               },
-              child: const Text('Alle Alerts wiederherstellen'),
+              child: const Text('Restore all alerts'),
             ),
 
             Divider(color: bsTheme.border),
             const SizedBox(height: 24),
 
             Text(
-              'Animationen',
+              'Animations',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -105,35 +105,35 @@ class _AlertShowcaseState extends State<AlertShowcase> {
               variant: BsAlertVariant.primary,
               animation: BsAlertAnimation.slideLeft,
               dismissible: true,
-              child: Text('Einfahren von Links (slideLeft)'),
+              child: Text('Sliding in from left (slideLeft)'),
             ),
 
             const BsAlert(
               variant: BsAlertVariant.secondary,
               animation: BsAlertAnimation.slideRight,
               dismissible: true,
-              child: Text('Einfahren von Rechts (slideRight)'),
+              child: Text('Sliding in from right (slideRight)'),
             ),
 
             const BsAlert(
               variant: BsAlertVariant.warning,
               animation: BsAlertAnimation.slideTop,
               dismissible: true,
-              child: Text('Einfahren von Oben (slideTop)'),
+              child: Text('Sliding in from top (slideTop)'),
             ),
 
             const BsAlert(
               variant: BsAlertVariant.danger,
               animation: BsAlertAnimation.slideBottom,
               dismissible: true,
-              child: Text('Einfahren von Unten (slideBottom)'),
+              child: Text('Sliding in from bottom (slideBottom)'),
             ),
 
             const BsAlert(
               variant: BsAlertVariant.info,
               animation: BsAlertAnimation.none,
               dismissible: true,
-              child: Text('Keine Animation (none)'),
+              child: Text('No animation (none)'),
             ),
 
             const BsAlert(
@@ -142,7 +142,7 @@ class _AlertShowcaseState extends State<AlertShowcase> {
               dismissible: true,
               autoCloseDuration: Duration(seconds: 5),
               child: Text(
-                'Dieser Alert schließt sich automatisch nach 5 Sekunden.',
+                'This alert closes automatically after 5 seconds.',
               ),
             ),
 
@@ -151,7 +151,7 @@ class _AlertShowcaseState extends State<AlertShowcase> {
             const SizedBox(height: 24),
 
             Text(
-              'Statische Alerts',
+              'Static alerts',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -164,7 +164,7 @@ class _AlertShowcaseState extends State<AlertShowcase> {
               variant: BsAlertVariant.success,
               icon: Icons.check_circle_outline,
               child: Text(
-                'Erfolgreich gespeichert! Der Datensatz wurde angelegt.',
+                'Successfully saved! The record has been created.',
               ),
             ),
 
@@ -177,12 +177,12 @@ class _AlertShowcaseState extends State<AlertShowcase> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Ein Fehler ist aufgetreten',
+                    'An error occurred',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    'Die Verbindung zum Server konnte nicht hergestellt werden.',
+                    'The connection to the server could not be established.',
                   ),
                 ],
               ),

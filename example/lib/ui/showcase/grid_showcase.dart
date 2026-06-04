@@ -1,8 +1,8 @@
 import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
-/// Zeigt das BsContainer + BsRow + BsCol Grid-System.
-/// Resize das Fenster um Responsive-Verhalten zu sehen.
+/// Shows the BsContainer + BsRow + BsCol grid system.
+/// Resize the window to see responsive behavior.
 class GridShowcase extends StatelessWidget {
   const GridShowcase({super.key});
 
@@ -20,10 +20,10 @@ class GridShowcase extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // ── col (auto, gleichmäßig) ─────────────────────────────────────
+            // ── col (auto, uniform) ─────────────────────────────────────────
             _SectionHeader(
               'col (auto)',
-              'Alle gleich breit — wie Bootstrap\'s .col',
+              'All equally wide — like Bootstrap\'s .col',
             ),
             BsContainer(
               child: BsRow(
@@ -38,7 +38,7 @@ class GridShowcase extends StatelessWidget {
             _divider(context),
 
             // ── col-6 col-6 ────────────────────────────────────────────────
-            _SectionHeader('col-6 / col-6', '12 Spalten geteilt durch 2'),
+            _SectionHeader('col-6 / col-6', '12 columns divided by 2'),
             BsContainer(
               child: BsRow(
                 children: [
@@ -51,7 +51,7 @@ class GridShowcase extends StatelessWidget {
             _divider(context),
 
             // ── col-4 col-8 ────────────────────────────────────────────────
-            _SectionHeader('col-4 / col-8', 'Sidebar + Hauptbereich'),
+            _SectionHeader('col-4 / col-8', 'Sidebar + Main area'),
             BsContainer(
               child: BsRow(
                 children: [
@@ -61,7 +61,7 @@ class GridShowcase extends StatelessWidget {
                   ),
                   BsCol(
                     config: BsColConfig.all(8),
-                    child: _ColBox('col-8\nInhalt'),
+                    child: _ColBox('col-8\nContent'),
                   ),
                 ],
               ),
@@ -72,7 +72,7 @@ class GridShowcase extends StatelessWidget {
             // ── Responsive: col-12 col-md-6 col-lg-4 ───────────────────────
             _SectionHeader(
               'col-12 col-md-6 col-lg-4',
-              'Mobile: 1 Spalte → Tablet: 2 → Desktop: 3',
+              'Mobile: 1 column → Tablet: 2 → Desktop: 3',
             ),
             BsContainer(
               child: BsRow(
@@ -89,10 +89,10 @@ class GridShowcase extends StatelessWidget {
 
             _divider(context),
 
-            // ── Automatischer Umbruch > 12 ──────────────────────────────────
+            // ── Automatic line break > 12 ───────────────────────────────────
             _SectionHeader(
-              'Automatischer Umbruch',
-              'col-8 + col-6 → zweite Zeile weil 8+6 > 12',
+              'Automatic line break',
+              'col-8 + col-6 → second line because 8+6 > 12',
             ),
             BsContainer(
               child: BsRow(
@@ -100,7 +100,7 @@ class GridShowcase extends StatelessWidget {
                   BsCol(config: BsColConfig.all(8), child: _ColBox('col-8')),
                   BsCol(
                     config: BsColConfig.all(6),
-                    child: _ColBox('col-6\n→ neue Zeile'),
+                    child: _ColBox('col-6\n→ new line'),
                   ),
                 ],
               ),
@@ -111,7 +111,7 @@ class GridShowcase extends StatelessWidget {
             // ── Container Fluid ─────────────────────────────────────────────
             _SectionHeader(
               'container-fluid',
-              'Immer volle Breite — kein max-width',
+              'Always full width — no max-width',
             ),
             BsContainer.fluid(
               child: BsRow(
@@ -138,7 +138,7 @@ class GridShowcase extends StatelessWidget {
 
             _divider(context),
 
-            // ── Gutter Varianten ────────────────────────────────────────────
+            // ── Gutter Variations ───────────────────────────────────────────
             _SectionHeader(
               'Gutter (g-*)',
               'g-1 = 4px, g-3 = 16px (default), g-5 = 48px',
@@ -250,7 +250,7 @@ class _SectionHeader extends StatelessWidget {
 
 // ─── Demo Box ─────────────────────────────────────────────────────────────────
 
-/// Visualisiert eine Spalte — wie Bootstrap's blaue Demo-Boxes in der Doku.
+/// Visualizes a column — like Bootstrap's blue demo boxes in the documentation.
 class _ColBox extends StatelessWidget {
   const _ColBox(this.label, {this.fluid = false});
   final String label;

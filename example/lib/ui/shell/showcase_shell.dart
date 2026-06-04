@@ -21,15 +21,15 @@ class _NavItem {
   final IconData icon;
   final Widget page;
 
-  /// Gruppe für die Sidebar-Überschriften (z.B. "Layout", "Components").
+  /// Group for sidebar headings (e.g., "Layout", "Components").
   final String? group;
 }
 
 // ─── Showcase Shell ───────────────────────────────────────────────────────────
 
-/// Die Haupt-Shell für alle Showcases.
-/// Füge einfach einen neuen _NavItem zur [_items] Liste hinzu
-/// um eine neue Komponente anzuzeigen.
+/// Main shell for all showcases.
+/// Simply add a new _NavItem to the [_items] list
+/// to display a new component.
 class ShowcaseShell extends StatefulWidget {
   const ShowcaseShell({super.key});
 
@@ -39,7 +39,7 @@ class ShowcaseShell extends StatefulWidget {
 
 class _ShowcaseShellState extends State<ShowcaseShell> {
   // ── Navigation Items ────────────────────────────────────────────────────────
-  // Neue Komponenten hier einfach anhängen!
+  // Simply append new components here!
   final List<_NavItem> _items = [
     _NavItem(
       group: 'Layout',
@@ -52,14 +52,14 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
       label: 'Themes',
       icon: Icons.palette_rounded,
       page: ValueListenableBuilder<ThemeMode>(
-        // WICHTIG: Du musst hier den themeNotifier aus deiner main.dart importieren!
-        // z.B. import '../../main.dart';
+        // IMPORTANT: You must import the themeNotifier from your main.dart here!
+        // e.g., import '../../main.dart';
         valueListenable: themeNotifier,
         builder: (context, mode, _) {
           return ThemeShowcase(
             currentMode: mode,
             onThemeChanged: (newMode) {
-              // Aktualisiert den globalen State -> App zeichnet sich neu
+              // Updates the global state -> App rebuilds
               themeNotifier.value = newMode;
             },
           );
@@ -90,7 +90,7 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
       icon: Icons.badge_rounded,
       page: BadgeShowcase(),
     ),
-    // Zukünftige Komponenten:
+    // Future components:
     // _NavItem(group: 'Components', label: 'Badge',  icon: Icons.label_rounded,       page: BadgeShowcase()),
     // _NavItem(group: 'Components', label: 'Alert',  icon: Icons.info_rounded,         page: AlertShowcase()),
     // _NavItem(group: 'Components', label: 'Card',   icon: Icons.credit_card_rounded,  page: CardShowcase()),
@@ -110,7 +110,7 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
             selectedIndex: _selectedIndex,
             onSelect: (index) => setState(() => _selectedIndex = index),
           ),
-          // ── Vertikaler Divider ────────────────────────────────────────────────
+          // ── Vertical Divider ────────────────────────────────────────────────
           const VerticalDivider(width: 1, color: BsColors.border),
           // ── Content ───────────────────────────────────────────────────────────
           Expanded(child: _items[_selectedIndex].page),
@@ -135,17 +135,17 @@ class _Sidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Baue die Sidebar-Einträge mit Gruppen-Überschriften.
+    // Build sidebar entries with group headings.
     final List<Widget> sidebarChildren = [];
     String? lastGroup;
 
     for (int i = 0; i < items.length; i++) {
       final item = items[i];
 
-      // Gruppen-Überschrift einfügen wenn sich die Gruppe ändert.
+      // Insert group heading if the group changes.
       if (item.group != null && item.group != lastGroup) {
         if (lastGroup != null) {
-          // Trennlinie zwischen Gruppen
+          // Divider between groups
           sidebarChildren.add(
             const Padding(
               padding: EdgeInsets.symmetric(vertical: BsSpacing.s2),

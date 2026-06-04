@@ -19,11 +19,11 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    // Theme abgreifen
+    // Get theme
     final bsTheme = context.bs;
 
     return Scaffold(
-      backgroundColor: bsTheme.bodyBg, // Dynamischer Hintergrund
+      backgroundColor: bsTheme.bodyBg, // Dynamic background
       appBar: AppBar(
         backgroundColor: bsTheme.bodyBg,
         foregroundColor: bsTheme.bodyText,
@@ -39,8 +39,8 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _sectionTitle('Solid Varianten'),
-            _description('Entspricht: btn btn-primary, btn-secondary, etc.'),
+            _sectionTitle('Solid Variants'),
+            _description('Corresponds to: btn btn-primary, btn-secondary, etc.'),
             const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
@@ -93,8 +93,8 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
             ),
 
             _divider(bsTheme.border),
-            _sectionTitle('Outline Varianten'),
-            _description('Entspricht: btn btn-outline-primary, etc.'),
+            _sectionTitle('Outline Variants'),
+            _description('Corresponds to: btn btn-outline-primary, etc.'),
             const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
@@ -137,8 +137,8 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
             ),
 
             _divider(bsTheme.border),
-            _sectionTitle('Größen'),
-            _description('Entspricht: btn-sm, (default), btn-lg'),
+            _sectionTitle('Sizes'),
+            _description('Corresponds to: btn-sm, (default), btn-lg'),
             const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
@@ -164,24 +164,24 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
             ),
 
             _divider(bsTheme.border),
-            _sectionTitle('Mit Icon'),
+            _sectionTitle('With Icon'),
             _description(
-              'Entspricht: <button><i class="bi bi-..."></i> Label</button>',
+              'Corresponds to: <button><i class="bi bi-..."></i> Label</button>',
             ),
             const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
                 BsButton(
-                  label: 'Speichern',
+                  label: 'Save',
                   variant: BsButtonVariant.primary,
                   icon: Icons.save,
                   iconVariant:
-                      BsIconVariant.light, // Beispiel für Icon-Variante
-                  iconColor: Colors.yellow, // Beispiel für Icon-Farbe
+                      BsIconVariant.light, // Example of icon variant
+                  iconColor: Colors.yellow, // Example of icon color
                   onPressed: () {},
                 ),
                 BsButton(
-                  label: 'Löschen',
+                  label: 'Delete',
                   variant: BsButtonVariant.danger,
                   icon: Icons.delete,
                   onPressed: () {},
@@ -197,7 +197,7 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
 
             _divider(bsTheme.border),
             _sectionTitle('States'),
-            _description('Disabled (onPressed: null) und Loading'),
+            _description('Disabled (onPressed: null) and Loading'),
             const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
@@ -210,7 +210,7 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   variant: BsButtonVariant.outlinePrimary,
                 ),
                 BsButton(
-                  label: 'Laden...',
+                  label: 'Loading...',
                   variant: BsButtonVariant.primary,
                   isLoading: _isLoading,
                   onPressed: _simulateLoading,
@@ -221,7 +221,7 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
             _divider(bsTheme.border),
             _sectionTitle('Full Width (d-grid)'),
             _description(
-              'Entspricht: <div class="d-grid"> → Button nimmt volle Breite',
+              'Corresponds to: <div class="d-grid"> → Button takes full width',
             ),
             const SizedBox(height: BsSpacing.s2),
             BsButton(
@@ -239,8 +239,8 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
             ),
 
             _divider(bsTheme.border),
-            _sectionTitle('Button Gruppen'),
-            _description('Entspricht: btn-group '),
+            _sectionTitle('Button Groups'),
+            _description('Corresponds to: btn-group '),
             const SizedBox(height: BsSpacing.s2),
             BsButtonGroup(
               groupSize: BsButtonSize.md,
