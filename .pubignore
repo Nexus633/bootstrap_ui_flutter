@@ -16,9 +16,6 @@ Thumbs.db
 # GitHub Actions
 .github/
 
-# Example app
-example/
-
 # Metadata
 .metadata
 pubspec.lock

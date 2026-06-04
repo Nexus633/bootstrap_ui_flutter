@@ -1,3 +1,6 @@
+## 0.1.3
+ * Removed example/ from .pubignore to improve example detection
+
 ## 0.1.2
  * **Pub.dev Optimization**: Improved example detection by adding a primary example entry point.
  * **Documentation**: Achieved 100% dartdoc coverage for the public API.
