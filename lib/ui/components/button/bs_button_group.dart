@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-
 import '../../tokens/spacing.dart';
 import '../../tokens/enums.dart';
 import 'bs_button.dart';
 
-// Deine Imports für AppButton und BsRadius hier einfügen...
-
+/// A Bootstrap-style button group component.
+///
+/// Group a series of buttons together on a single line with the button group.
 class BsButtonGroup extends StatelessWidget {
+  /// Creates a [BsButtonGroup] widget.
   const BsButtonGroup({
     super.key,
     required this.children,
@@ -14,14 +15,13 @@ class BsButtonGroup extends StatelessWidget {
     this.groupSize,
   });
 
-  /// WICHTIG: Wir verlangen explizit 'AppButton', damit wir die
-  /// Properties auslesen und die Buttons neu bauen können.
-  final List<AppButton> children;
+  /// The list of [BsButton] widgets to group together.
+  final List<BsButton> children;
 
-  /// Bootstrap's .btn-group-vertical
+  /// Whether the buttons should be stacked vertically.
   final bool vertical;
 
-  /// Alle Buttons in der Gruppe haben die gleiche Größe (sm/md/lg).
+  /// Overrides the size of all buttons in the group.
   final BsButtonSize? groupSize;
 
   @override
@@ -37,15 +37,15 @@ class BsButtonGroup extends StatelessWidget {
       final bool isLast = i == children.length - 1;
 
       final BsButtonSize finalSize = groupSize ?? button.size;
-      // 1. Spezifischen Radius für die Position in der Gruppe berechnen
+      // 1. Calculate specific radius for the position in the group
       final BorderRadius groupRadius = _calculateRadius(
         finalSize,
         isFirst,
         isLast,
       );
 
-      // 2. Wir "klonen" den Button und injizieren den neuen Radius
-      Widget modifiedButton = AppButton(
+      // 2. We "clone" the button and inject the new radius
+      Widget modifiedButton = BsButton(
         key: button.key,
         label: button.label,
         onPressed: button.onPressed,
@@ -56,12 +56,12 @@ class BsButtonGroup extends StatelessWidget {
         fullWidth: button.fullWidth,
         badge: button.badge,
         badgePosition: button.badgePosition,
-        customBorderRadius: groupRadius, // Hier überschreiben wir die Ecken!
+        customBorderRadius: groupRadius, // Here we override the corners!
       );
 
-      // 3. CSS "margin-left: -1px" simulieren
-      // Wenn wir Outline-Buttons nebeneinander legen, entstehen sonst doppelte 2px Ränder.
-      // Wir schieben jeden Button (außer den ersten) optisch um 1px nach links (oder oben).
+      // 3. Simulate CSS "margin-left: -1px"
+      // If we place outline buttons next to each other, double 2px borders are otherwise created.
+      // We move each button (except the first one) visually by 1px to the left (or top).
       if (i > 0) {
         modifiedButton = Transform.translate(
           offset: vertical ? const Offset(0, -1) : const Offset(-1, 0),
@@ -72,7 +72,7 @@ class BsButtonGroup extends StatelessWidget {
       groupedButtons.add(modifiedButton);
     }
 
-    // 4. In Row oder Column rendern
+    // 4. Render in Row or Column
     return vertical
         ? Column(
             mainAxisSize: MainAxisSize.min,
@@ -82,17 +82,17 @@ class BsButtonGroup extends StatelessWidget {
         : Row(mainAxisSize: MainAxisSize.min, children: groupedButtons);
   }
 
-  /// Berechnet, welche Ecken abgerundet bleiben dürfen
+  /// Calculates which corners should remain rounded based on position in group.
   BorderRadius _calculateRadius(BsButtonSize size, bool isFirst, bool isLast) {
-    // Basis-Radius aus deinen Tokens holen
+    // Get base radius from tokens
     final BorderRadius baseRadius = switch (size) {
       BsButtonSize.sm => BsRadius.sm,
       BsButtonSize.md => BsRadius.md,
       BsButtonSize.lg => BsRadius.lg,
     };
 
-    // Wir extrahieren den reinen Radius-Wert (z.B. Radius.circular(6)) von oben links,
-    // da wir ihn gleich für spezifische Seiten (links/rechts/oben/unten) neu zusammensetzen.
+    // We extract the pure radius value (e.g. Radius.circular(6)) from the top left,
+    // as we assemble it again for specific sides (left/right/top/bottom).
     final Radius r = baseRadius.topLeft;
 
     if (vertical) {
@@ -103,7 +103,7 @@ class BsButtonGroup extends StatelessWidget {
       if (isLast) return BorderRadius.horizontal(right: r);
     }
 
-    // Mittlere Buttons (weder first noch last) sind komplett eckig
+    // Middle buttons (neither first nor last) are completely square
     return BorderRadius.zero;
   }
 }

@@ -7,20 +7,10 @@ import '../../tokens/enums.dart';
 
 /// Bootstrap's .container / .container-fluid in Flutter.
 ///
-/// In Bootstrap zentriert .container den Inhalt horizontal und hat
-/// automatische seitliche Padding (--bs-gutter-x: 1.5rem = 24px je Seite).
-///
-/// Verwendung:
-/// ```dart
-/// BsContainer(
-///   child: BsRow(...),
-/// )
-///
-/// BsContainer.fluid(
-///   child: BsRow(...),
-/// )
-/// ```
+/// In Bootstrap, .container centers content horizontally and has
+/// automatic horizontal padding (--bs-gutter-x: 1.5rem = 24px each side).
 class BsContainer extends StatelessWidget {
+  /// Creates a [BsContainer] widget.
   const BsContainer({
     super.key,
     required this.child,
@@ -28,33 +18,37 @@ class BsContainer extends StatelessWidget {
     this.padding,
   });
 
-  /// Shortcut für .container-fluid
+  /// Shortcut for .container-fluid.
+  /// Creates a container that is always 100% wide.
   const BsContainer.fluid({super.key, required this.child, this.padding})
     : type = BsContainerType.fluid;
 
+  /// The widget to display inside the container.
   final Widget child;
+
+  /// The type of container (fixed, fluid, or responsive breakpoint-specific).
   final BsContainerType type;
 
-  /// Überschreibt das Standard-Padding (default: 24px horizontal = 1.5rem).
+  /// Overrides the default padding (default: 24px horizontal = 1.5rem).
   final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
-    // LayoutBuilder gibt uns die verfügbare Breite — das ist unser "Viewport".
+    // LayoutBuilder gives us the available width — this is our "viewport".
     return LayoutBuilder(
       builder: (context, constraints) {
         final double availableWidth = constraints.maxWidth;
 
-        // Berechne die max-width je nach Container-Typ und verfügbarer Breite.
-        // "fluid" hat keine max-width → double.infinity
+        // Calculate the max-width depending on the container type and available width.
+        // "fluid" has no max-width → double.infinity
         final double maxWidth = _resolveMaxWidth(availableWidth);
 
         return Center(
           child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: maxWidth),
             child: Padding(
-              // Bootstrap: --bs-gutter-x = 1.5rem = 24px (je Seite → 12px)
-              // d.h. 12px links + 12px rechts = 24px Gesamtpadding
+              // Bootstrap: --bs-gutter-x = 1.5rem = 24px (each side → 12px)
+              // i.e. 12px left + 12px right = 24px total padding
               padding:
                   padding ??
                   const EdgeInsets.symmetric(horizontal: BsSpacing.s3 * 0.75),
@@ -66,14 +60,14 @@ class BsContainer extends StatelessWidget {
     );
   }
 
-  /// Berechnet die maximale Breite analog zu Bootstrap's Container-Logik.
+  /// Calculates the maximum width analogous to Bootstrap's container logic.
   double _resolveMaxWidth(double availableWidth) {
     switch (type) {
-      // .container-fluid → immer volle Breite
+      // .container-fluid → always full width
       case BsContainerType.fluid:
         return double.infinity;
 
-      // .container → Stufen je nach Viewport-Breite
+      // .container → levels depending on the viewport width
       case BsContainerType.fixed:
         if (availableWidth >= BsBreakpoints.xxl) {
           return BsBreakpoints.containerXxl;
@@ -92,7 +86,7 @@ class BsContainer extends StatelessWidget {
         }
         return double.infinity; // xs → fluid
 
-      // .container-sm: fluid bis sm, dann fixed
+      // .container-sm: fluid until sm, then fixed
       case BsContainerType.sm:
         if (availableWidth >= BsBreakpoints.sm) {
           return BsBreakpoints.containerSm;

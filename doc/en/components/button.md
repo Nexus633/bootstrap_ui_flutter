@@ -1,11 +1,11 @@
 # Button
 
-The `AppButton` component provides various styles for actions in forms, dialogs, and more.
+The `BsButton` component provides various styles for actions in forms, dialogs, and more.
 
 ## Usage
 
 ```dart
-AppButton(
+BsButton(
   label: 'Click me',
   onPressed: () => print('Clicked!'),
   variant: BsButtonVariant.primary,
@@ -40,9 +40,9 @@ AppButton(
 ```dart
 BsButtonGroup(
   children: [
-    AppButton(label: 'Left', onPressed: () {}),
-    AppButton(label: 'Middle', onPressed: () {}),
-    AppButton(label: 'Right', onPressed: () {}),
+    BsButton(label: 'Left', onPressed: () {}),
+    BsButton(label: 'Middle', onPressed: () {}),
+    BsButton(label: 'Right', onPressed: () {}),
   ],
 )
 ```
@@ -51,6 +51,6 @@ BsButtonGroup(
 
 | Property | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `children` | `List<AppButton>` | **Required** | The list of buttons in the group. |
+| `children` | `List<BsButton>` | **Required** | The list of buttons in the group. |
 | `vertical` | `bool` | `false` | If `true`, buttons are arranged vertically. |
 | `groupSize` | `BsButtonSize?` | `null` | Overrides the size of all buttons in the group. |

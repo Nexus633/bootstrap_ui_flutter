@@ -3,16 +3,17 @@ import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/colors.dart';
 import '../../tokens/spacing.dart';
 import '../../tokens/typography.dart';
-import '../../tokens/enums.dart'; // WICHTIG: Dein Theme-Import
-
-// ─── Enums ────────────────────────────────────────────────────────────────────
-
-// (Enums moved to tokens/enums.dart)
+import '../../tokens/enums.dart';
 
 // ─── Widget ───────────────────────────────────────────────────────────────────
 
-class AppButton extends StatefulWidget {
-  const AppButton({
+/// A Bootstrap-style button component.
+///
+/// Use [BsButton] for actions in forms, dialogs, and more with support for
+/// multiple sizes, states, and variants.
+class BsButton extends StatefulWidget {
+  /// Creates a [BsButton] widget.
+  const BsButton({
     super.key,
     required this.label,
     this.onPressed,
@@ -28,24 +29,47 @@ class AppButton extends StatefulWidget {
     this.badgePosition = BsBadgePosition.trailing,
   });
 
+  /// The text label to display on the button.
   final String label;
+
+  /// Callback when the button is pressed. If null, the button is disabled.
   final VoidCallback? onPressed;
+
+  /// The color variant of the button.
   final BsButtonVariant variant;
+
+  /// The size variant of the button.
   final BsButtonSize size;
+
+  /// Whether the button is in a loading state, showing a progress indicator.
   final bool isLoading;
+
+  /// Optional icon to display alongside the label.
   final IconData? icon;
+
+  /// Specific color for the icon.
   final Color? iconColor;
+
+  /// Variant color for the icon.
   final BsIconVariant? iconVariant;
+
+  /// Whether the button should take up the full width of its parent.
   final bool fullWidth;
+
+  /// Custom border radius for the button.
   final BorderRadius? customBorderRadius;
+
+  /// Optional badge widget to display on or next to the button.
   final Widget? badge;
+
+  /// Position of the badge relative to the button content.
   final BsBadgePosition badgePosition;
 
   @override
-  State<AppButton> createState() => _AppButtonState();
+  State<BsButton> createState() => _BsButtonState();
 }
 
-class _AppButtonState extends State<AppButton> {
+class _BsButtonState extends State<BsButton> {
   bool _isPressed = false;
   bool _isHovered = false;
 
@@ -53,10 +77,10 @@ class _AppButtonState extends State<AppButton> {
 
   @override
   Widget build(BuildContext context) {
-    // 1. Theme abgreifen
+    // 1. Get theme
     final bsTheme = context.bs;
 
-    // 2. Theme in die Auflösung der Styles weitergeben
+    // 2. Pass theme to style resolution
     final _ButtonStyle style = _resolveStyle(
       widget.variant,
       widget.size,
@@ -89,7 +113,7 @@ class _AppButtonState extends State<AppButton> {
       child: _buildContent(style, fgColor),
     );
 
-    // Absolute Badges (Ecken)
+    // Absolute Badges (corners)
     final bool isAbsoluteBadge =
         widget.badge != null &&
         (widget.badgePosition == BsBadgePosition.topLeft ||
@@ -168,11 +192,11 @@ class _AppButtonState extends State<AppButton> {
     );
   }
 
-  // ─── Farb-Logik ─────────────────────────────────────────────────────────────
+  // ─── Color Logic ─────────────────────────────────────────────────────────────
 
   Color _resolveBackgroundColor(_ButtonStyle style, BsThemeData bsTheme) {
     if (_isDisabled) {
-      return bsTheme.bodyBgSecondary; // Dynamischer Disabled-Background
+      return bsTheme.bodyBgSecondary; // Dynamic disabled background
     }
 
     if (widget.variant == BsButtonVariant.link) {
@@ -184,13 +208,13 @@ class _AppButtonState extends State<AppButton> {
     if (_isPressed) {
       return isOutline
           ? style.foregroundColor.withValues(alpha: 0.85)
-          : _darken(style.backgroundColor, 0.15); // Dynamischer Active-State
+          : _darken(style.backgroundColor, 0.15); // Dynamic active state
     }
 
     if (_isHovered) {
       return isOutline
           ? style.foregroundColor.withValues(alpha: 0.15)
-          : _darken(style.backgroundColor, 0.08); // Dynamischer Hover-State
+          : _darken(style.backgroundColor, 0.08); // Dynamic hover state
     }
 
     return style.backgroundColor;
@@ -198,7 +222,7 @@ class _AppButtonState extends State<AppButton> {
 
   Color _resolveForegroundColor(_ButtonStyle style, BsThemeData bsTheme) {
     if (_isDisabled) {
-      return bsTheme.bodyTextTertiary; // Dynamischer Disabled-Text
+      return bsTheme.bodyTextTertiary; // Dynamic disabled text
     }
 
     final bool isOutline = widget.variant.name.startsWith('outline');
@@ -266,19 +290,18 @@ class _AppButtonState extends State<AppButton> {
       }
 
       if (widget.icon != null) {
-        // 1. Wir definieren eine eigene Farbe NUR für das Icon.
-        // Der Standard-Fallback ist die normale Textfarbe des Buttons.
+        // 1. We define a specific color ONLY for the icon.
+        // The default fallback is the normal button text color.
         Color resolvedIconColor = textColor;
 
         if (widget.iconVariant != null && widget.iconColor != null) {
-          // Wenn beide angegeben sind, könntest du hier entscheiden, welche Priorität hat. Zum Beispiel:
+          // If both are specified, you can decide which priority wins.
           debugPrint(
             'Warning: Both iconVariant and iconColor are set. iconVariant will take precedence.',
           );
         }
-        // 2. Wir prüfen die Prioritäten (Variant schlägt Color schlägt Fallback)
+        // 2. Check priorities (Variant beats Color beats Fallback)
         if (widget.iconVariant != null) {
-          // Angenommen, du hast dir eine Hilfsmethode dafür geschrieben
           resolvedIconColor = _resolveVariantColor(
             widget.iconVariant!,
             context.bs,
@@ -287,13 +310,12 @@ class _AppButtonState extends State<AppButton> {
           resolvedIconColor = widget.iconColor!;
         }
 
-        // 3. Wir nutzen die neue Variable für das Icon
+        // 3. Use the new variable for the icon
         content.add(
           Icon(
             widget.icon,
             size: style.textStyle.fontSize,
-            color:
-                resolvedIconColor, // <--- Hier die exklusive Icon-Farbe nutzen
+            color: resolvedIconColor, // <--- Use exclusive icon color here
           ),
         );
         content.add(const SizedBox(width: 6));
@@ -402,16 +424,16 @@ class _AppButtonState extends State<AppButton> {
         borderRadius: borderRadius,
       ),
       BsButtonVariant.light => _ButtonStyle(
-        backgroundColor: BsColors.light, // HART codiert, nicht bs.light
-        foregroundColor: BsColors.onLight, // Garantiert dunkle Schrift
+        backgroundColor: BsColors.light, // HARDcoded, not bs.light
+        foregroundColor: BsColors.onLight, // Guaranteed dark text
         border: BsColors.light,
         padding: padding,
         textStyle: textStyle,
         borderRadius: borderRadius,
       ),
       BsButtonVariant.dark => _ButtonStyle(
-        backgroundColor: BsColors.dark, // HART codiert, nicht bs.dark
-        foregroundColor: BsColors.onDark, // Garantiert weiße Schrift
+        backgroundColor: BsColors.dark, // HARDcoded, not bs.dark
+        foregroundColor: BsColors.onDark, // Guaranteed white text
         border: BsColors.dark,
         padding: padding,
         textStyle: textStyle,
@@ -467,8 +489,8 @@ class _AppButtonState extends State<AppButton> {
       ),
       BsButtonVariant.outlineDark => _ButtonStyle(
         backgroundColor: Colors.transparent,
-        // bs.bodyText ist schwarz im Light Mode und hellgrau im Dark Mode!
-        // Perfekt, damit der Button auf dunklen Hintergründen sichtbar wird.
+        // bs.bodyText is black in Light Mode and light gray in Dark Mode!
+        // Perfect for visibility on dark backgrounds.
         foregroundColor: bs.bodyText,
         border: bs.bodyText,
         padding: padding,
@@ -476,7 +498,7 @@ class _AppButtonState extends State<AppButton> {
         borderRadius: borderRadius,
       ),
 
-      // Link bleibt gleich
+      // Link remains the same
       BsButtonVariant.link => _ButtonStyle(
         backgroundColor: Colors.transparent,
         foregroundColor: bs.linkColor,

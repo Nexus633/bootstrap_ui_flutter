@@ -3,7 +3,11 @@ import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/colors.dart';
 import '../../tokens/enums.dart';
 
+/// A Bootstrap-style badge component.
+///
+/// Badges are small count and labeling components.
 class BsBadge extends StatelessWidget {
+  /// Creates a [BsBadge] widget.
   const BsBadge({
     super.key,
     required this.label,
@@ -11,16 +15,21 @@ class BsBadge extends StatelessWidget {
     this.isPill = false,
   });
 
+  /// The text label to display inside the badge.
   final String label;
+
+  /// The color variant of the badge.
   final BsBadgeVariant variant;
+
+  /// Whether the badge should have a pill-like shape (fully rounded).
   final bool isPill;
 
   @override
   Widget build(BuildContext context) {
-    // 1. Theme abgreifen
+    // 1. Get theme
     final bsTheme = context.bs;
 
-    // 2. Das Theme an die Farb-Logik weitergeben
+    // 2. Pass the theme to the color logic
     final _BadgeStyle style = _resolveStyle(variant, bsTheme);
 
     final EdgeInsets padding = isPill
@@ -36,7 +45,7 @@ class BsBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: style.backgroundColor,
         borderRadius: radius,
-        // Optional: Ein leichter Rand für das Light-Badge (jetzt dynamisch aus dem Theme!)
+        // Optional: A light border for the light badge (now dynamic from the theme!)
         border: variant == BsBadgeVariant.light
             ? Border.all(color: bsTheme.border, width: 1.0)
             : null,
@@ -53,13 +62,12 @@ class BsBadge extends StatelessWidget {
     );
   }
 
-  // ─── Farb-Logik ───────────────────────────────────────────────────────────
+  // ─── Color Logic ───────────────────────────────────────────────────────────
 
   _BadgeStyle _resolveStyle(BsBadgeVariant variant, BsThemeData bs) {
     return switch (variant) {
       BsBadgeVariant.primary => _BadgeStyle(
-        backgroundColor:
-            bs.primary, // Greift jetzt auf den Dark/Light Mode Wert zu!
+        backgroundColor: bs.primary, // Now accesses the Dark/Light Mode value!
         textColor: BsColors.onPrimary,
       ),
       BsBadgeVariant.secondary => _BadgeStyle(

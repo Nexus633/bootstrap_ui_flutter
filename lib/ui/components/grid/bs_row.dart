@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import '../../tokens/breakpoints.dart';
 import '../../tokens/spacing.dart';
 
-// ─── BsCol Konfiguration ──────────────────────────────────────────────────────
+// ─── BsCol Configuration ──────────────────────────────────────────────────────
 
-/// Definiert wie viele der 12 Spalten eine Kolonne belegt — pro Breakpoint.
-/// null = erbt vom kleineren Breakpoint (Bootstrap-Verhalten: mobile first).
-///
-/// Beispiel Bootstrap:  class="col-12 col-md-6 col-lg-4"
-/// Beispiel Flutter:
-/// ```dart
-/// BsColConfig(xs: 12, md: 6, lg: 4)
-/// ```
+/// Defines how many of the 12 columns a column occupies — per breakpoint.
+/// null = inherits from the smaller breakpoint (Bootstrap behavior: mobile first).
 class BsColConfig {
+  /// Creates a [BsColConfig] with optional spans for each breakpoint.
   const BsColConfig({
     this.xs, // < 576px  (Standard / mobile)
     this.sm, // >= 576px
@@ -22,7 +17,7 @@ class BsColConfig {
     this.xxl, // >= 1400px
   });
 
-  /// Shortcut: gleiche Spaltenanzahl auf allen Breakpoints.
+  /// Shortcut: same column span on all breakpoints.
   const BsColConfig.all(int span)
     : xs = span,
       sm = span,
@@ -31,18 +26,29 @@ class BsColConfig {
       xl = span,
       xxl = span;
 
+  /// Span for extra small screens (< 576px).
   final int? xs;
+
+  /// Span for small screens (>= 576px).
   final int? sm;
+
+  /// Span for medium screens (>= 768px).
   final int? md;
+
+  /// Span for large screens (>= 992px).
   final int? lg;
+
+  /// Span for extra large screens (>= 1200px).
   final int? xl;
+
+  /// Span for extra extra large screens (>= 1400px).
   final int? xxl;
 
-  /// Gibt die aktive Spaltenanzahl für eine gegebene Breite zurück.
-  /// Mobile-first: nimmt den größten passenden Breakpoint.
-  /// Gibt null zurück wenn keine Konfiguration gesetzt → "auto" (gleichmäßig verteilt).
+  /// Returns the active column count for a given width.
+  /// Mobile-first: takes the largest matching breakpoint.
+  /// Returns null if no configuration is set → "auto" (evenly distributed).
   int? resolveFor(double width) {
-    int? result = xs; // Basiswert (mobile first)
+    int? result = xs; // Base value (mobile first)
     if (width >= BsBreakpoints.sm && sm != null) result = sm;
     if (width >= BsBreakpoints.md && md != null) result = md;
     if (width >= BsBreakpoints.lg && lg != null) result = lg;
@@ -54,61 +60,37 @@ class BsColConfig {
 
 // ─── BsCol ────────────────────────────────────────────────────────────────────
 
-/// Eine Spalte im Bootstrap 12-Spalten-Grid.
+/// A column in the Bootstrap 12-column grid.
 ///
-/// Wird IMMER innerhalb eines BsRow verwendet.
-/// Der BsRow liest die [config] aus und berechnet die Breite.
-///
-/// Verwendung:
-/// ```dart
-/// BsCol(
-///   config: BsColConfig(xs: 12, md: 6, lg: 4),
-///   child: Text('Inhalt'),
-/// )
-/// ```
+/// MUST always be used inside a [BsRow].
 class BsCol extends StatelessWidget {
+  /// Creates a [BsCol] widget.
   const BsCol({
     super.key,
     required this.child,
     this.config = const BsColConfig(),
   });
 
+  /// The content of the column.
   final Widget child;
 
-  /// Responsive Spalten-Konfiguration.
+  /// Responsive column configuration.
   final BsColConfig config;
 
   @override
   Widget build(BuildContext context) {
-    // BsCol rendert sich selbst nicht direkt —
-    // BsRow liest die config und wrапpt in Expanded/SizedBox.
-    // Trotzdem brauchen wir ein build() da BsCol ein Widget ist.
+    // BsCol does not render itself directly —
+    // BsRow reads the config and wraps in Expanded/SizedBox.
+    // Nevertheless, we need a build() since BsCol is a Widget.
     return child;
   }
 }
 
 // ─── BsRow ────────────────────────────────────────────────────────────────────
 
-/// Bootstrap's .row in Flutter — das Herzstück des 12-Spalten-Grids.
-///
-/// BsRow:
-/// 1. Misst die verfügbare Breite mit LayoutBuilder
-/// 2. Liest die BsColConfig jedes Kindes aus
-/// 3. Berechnet flex-Werte (col-Span = flex) oder feste Breiten
-/// 4. Bricht in neue Zeilen um wenn Spalten-Summe > 12 (wie Bootstrap)
-///
-/// Verwendung:
-/// ```dart
-/// BsRow(
-///   gutterX: BsSpacing.s3,   // g-3
-///   gutterY: BsSpacing.s3,
-///   children: [
-///     BsCol(config: BsColConfig(xs: 12, md: 6), child: CardA()),
-///     BsCol(config: BsColConfig(xs: 12, md: 6), child: CardB()),
-///   ],
-/// )
-/// ```
+/// Bootstrap's .row in Flutter — the heart of the 12-column grid.
 class BsRow extends StatelessWidget {
+  /// Creates a [BsRow] widget with the given [children].
   BsRow({
     super.key,
     required this.children,
@@ -116,14 +98,13 @@ class BsRow extends StatelessWidget {
     this.gutterY = BsSpacing.s3,
   }) : assert(children.isNotEmpty, 'BsRow requires at least one child widget.');
 
-  /// Nur BsCol-Widgets erlaubt.
+  /// Only [BsCol] widgets are allowed.
   final List<BsCol> children;
 
-  /// Horizontaler Abstand zwischen Spalten (Bootstrap: gutter-x).
-  /// Bootstrap g-3 = 1rem = 16px → je Seite 8px.
+  /// Horizontal distance between columns (Bootstrap: gutter-x).
   final double gutterX;
 
-  /// Vertikaler Abstand zwischen Zeilen (Bootstrap: gutter-y).
+  /// Vertical distance between rows (Bootstrap: gutter-y).
   final double gutterY;
 
   @override
@@ -132,12 +113,12 @@ class BsRow extends StatelessWidget {
       builder: (context, constraints) {
         final double rowWidth = constraints.maxWidth;
 
-        // ── Schritt 1: Spalten in Zeilen aufteilen ───────────────────────────
-        // Bootstrap bricht automatisch um wenn col-Summe > 12.
-        // Wir bauen die gleiche Logik nach.
+        // ── Step 1: Divide columns into rows ───────────────────────────
+        // Bootstrap breaks automatically when col-sum > 12.
+        // We replicate the same logic.
         final List<List<BsCol>> rows = _buildRows(rowWidth);
 
-        // ── Schritt 2: Zeilen rendern ─────────────────────────────────────────
+        // ── Step 2: Render rows ─────────────────────────────────────────
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -151,9 +132,9 @@ class BsRow extends StatelessWidget {
     );
   }
 
-  // ─── Zeilen-Aufteilung ────────────────────────────────────────────────────
+  // ─── Row Division ────────────────────────────────────────────────────
 
-  /// Teilt die Kinder in Zeilen auf — genau wie Bootstrap's Flexbox-Wrapping.
+  /// Divides the children into rows — exactly like Bootstrap's flexbox wrapping.
   List<List<BsCol>> _buildRows(double width) {
     final List<List<BsCol>> rows = [];
     List<BsCol> currentRow = [];
@@ -163,7 +144,7 @@ class BsRow extends StatelessWidget {
       final int span =
           col.config.resolveFor(width) ?? _autoSpan(children.length);
 
-      // Würde diese Spalte über 12 hinausgehen? → neue Zeile.
+      // Would this column exceed 12? → new row.
       if (currentSpan + span > 12 && currentRow.isNotEmpty) {
         rows.add(currentRow);
         currentRow = [];
@@ -178,11 +159,11 @@ class BsRow extends StatelessWidget {
     return rows;
   }
 
-  /// Fallback wenn keine config gesetzt: gleichmäßig verteilen.
-  /// Wie Bootstrap's .col (ohne Zahl).
+  /// Fallback if no config is set: distribute evenly.
+  /// Like Bootstrap's .col (without number).
   int _autoSpan(int totalChildren) => (12 / totalChildren).round();
 
-  // ─── Einzelne Zeile rendern ───────────────────────────────────────────────
+  // ─── Render Single Row ───────────────────────────────────────────────
 
   Widget _buildSingleRow(List<BsCol> cols, double width) {
     return Row(
@@ -190,7 +171,7 @@ class BsRow extends StatelessWidget {
       children: [
         for (int i = 0; i < cols.length; i++) ...[
           if (i > 0) SizedBox(width: gutterX),
-          // Expanded mit flex = Spaltenanzahl → proportionale Breite
+          // Expanded with flex = column count → proportional width
           Expanded(
             flex: cols[i].config.resolveFor(width) ?? _autoSpan(cols.length),
             child: cols[i].child,

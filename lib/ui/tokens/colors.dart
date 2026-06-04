@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// Bootstrap 5.3 Farbpalette — exakte Werte aus _variables.scss.
+/// Bootstrap 5.3 color palette — exact values from _variables.scss.
 ///
-/// Alle Tint/Shade-Werte werden via mix() berechnet (identisch zu
-/// Bootstraps tint-color() / shade-color() Sass-Funktionen).
+/// All tint/shade values are calculated via mix() (identical to
+/// Bootstrap's tint-color() / shade-color() Sass functions).
 abstract class BsColors {
-  // ─── Semantische Theme-Farben ────────────────────────────────────────────
-  // Quelle: $theme-colors in _variables.scss
+  // ─── Semantic Theme Colors ────────────────────────────────────────────
+  // Source: $theme-colors in _variables.scss
   static const Color primary = Color(0xFF0D6EFD); // $blue
   static const Color secondary = Color(0xFF6C757D); // $gray-600
   static const Color success = Color(0xFF198754); // $green
@@ -16,18 +16,18 @@ abstract class BsColors {
   static const Color light = Color(0xFFF8F9FA); // $gray-100
   static const Color dark = Color(0xFF212529); // $gray-900
 
-  // ─── Text auf semantischen Farben ────────────────────────────────────────
-  // Bootstrap berechnet diese per color-contrast() — hier als feste Werte.
+  // ─── Text on Semantic Colors ──────────────────────────────────────────
+  // Bootstrap calculates these per color-contrast() — fixed values here.
   static const Color onPrimary = Colors.white;
   static const Color onSecondary = Colors.white;
   static const Color onSuccess = Colors.white;
   static const Color onDanger = Colors.white;
-  static const Color onWarning = Color(0xFF212529); // dunkel auf Gelb
-  static const Color onInfo = Color(0xFF212529); // dunkel auf Cyan
+  static const Color onWarning = Color(0xFF212529); // dark on yellow
+  static const Color onInfo = Color(0xFF212529); // dark on cyan
   static const Color onLight = Color(0xFF212529);
   static const Color onDark = Colors.white;
 
-  // ─── Body / Struktur ─────────────────────────────────────────────────────
+  // ─── Body / Structure ─────────────────────────────────────────────────────
   static const Color bodyBg = Color(0xFFFFFFFF); // --bs-body-bg
   static const Color border = Color(
     0xFFDEE2E6,
@@ -35,7 +35,7 @@ abstract class BsColors {
   static const Color disabledBg = Color(0xFFE9ECEF); // $gray-200
   static const Color disabledText = Color(0xFF6C757D); // $gray-600
 
-  // ─── Hover-Varianten ─────────────────────────────────────────────────────
+  // ─── Hover Variants ─────────────────────────────────────────────────────
   // Bootstrap shade-color($color, 20%)
   static const Color primaryHover = Color(0xFF0A58CA); // blue-600
   static const Color secondaryHover = Color(0xFF565E64); // gray-700 shade-20
@@ -48,8 +48,8 @@ abstract class BsColors {
   ); // gray-200 (tint-20 of gray-100)
   static const Color darkHover = Color(0xFF1A1E21); // gray-900 shade-20
 
-  // ─── Farbpaletten (100–900) ───────────────────────────────────────────────
-  // Berechnet via: tint-color($base, x%) = mix(white, $base, x%)
+  // ─── Color Palettes (100–900) ───────────────────────────────────────────────
+  // Calculated via: tint-color($base, x%) = mix(white, $base, x%)
   //                shade-color($base, x%) = mix(black, $base, x%)
 
   static const MaterialColor blue = MaterialColor(0xFF0D6EFD, {

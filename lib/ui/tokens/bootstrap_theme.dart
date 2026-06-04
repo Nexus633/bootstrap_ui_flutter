@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'colors.dart';
 
-/// Bootstrap 5.3 Theme Extension für Flutter.
+/// Bootstrap 5.3 Theme Extension for Flutter.
 ///
-/// Alle Farbwerte referenzieren BsColors-Paletten — keine hardcodierten
-/// Hex-Werte außer dort, wo Bootstrap selbst fixe Werte vorgibt
-/// (z.B. rgba-Transparenzen und bodyBg white/black).
+/// All color values reference BsColors palettes — no hardcoded
+/// hex values except where Bootstrap itself specifies fixed values
+/// (e.g., rgba transparencies and bodyBg white/black).
 class BsThemeData extends ThemeExtension<BsThemeData> {
+  /// Creates a [BsThemeData] instance with the given Bootstrap-specific colors.
   const BsThemeData({
-    // ── Semantische Hauptfarben ────────────────────────────────────────────
+    // ── Main Semantic Colors ────────────────────────────────────────────
     required this.primary,
     required this.secondary,
     required this.success,
@@ -46,7 +47,7 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
     required this.linkColor,
     required this.linkHoverColor,
 
-    // ── Text-Emphasis (für Alerts, Badges etc.) ───────────────────────────
+    // ── Text Emphasis (for Alerts, Badges, etc.) ───────────────────────────
     // --bs-{color}-text-emphasis
     required this.primaryTextEmphasis,
     required this.secondaryTextEmphasis,
@@ -57,7 +58,7 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
     required this.lightTextEmphasis,
     required this.darkTextEmphasis,
 
-    // ── Subtle Backgrounds (für Alerts, Badges etc.) ──────────────────────
+    // ── Subtle Backgrounds (for Alerts, Badges, etc.) ──────────────────────
     // --bs-{color}-bg-subtle
     required this.primaryBgSubtle,
     required this.secondaryBgSubtle,
@@ -94,6 +95,7 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
   final Color bodyTextTertiary;
   final Color emphasisColor;
 
+  /// The main background color of the body.
   final Color bodyBg;
   final Color bodyBgSecondary;
   final Color bodyBgTertiary;
@@ -132,9 +134,9 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
   final Color darkBorderSubtle;
 
   // ─── Light Theme ─────────────────────────────────────────────────────────
-  // Quelle: _root.scss :root / [data-bs-theme=light]
+  // Source: _root.scss :root / [data-bs-theme=light]
   //
-  // Mapping-Logik:
+  // Mapping Logic:
   //   bodyText           = gray[900]            ($body-color)
   //   bodyTextSecondary  = gray[900] @ 75%      (rgba($body-color, .75))
   //   bodyTextTertiary   = gray[900] @ 50%      (rgba($body-color, .50))
@@ -147,9 +149,9 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
   //   linkColor          = blue[500]            ($primary)
   //   linkHoverColor     = blue[700]            (shade-color($primary, 20%) = blue-600)
   //
-  //   *TextEmphasis  = shade-color($color, 60%) → 800er Stop der jeweiligen Palette
-  //   *BgSubtle      = tint-color($color, 80%)  → 100er Stop
-  //   *BorderSubtle  = tint-color($color, 60%)  → 200er Stop
+  //   *TextEmphasis  = shade-color($color, 60%) → 800 stop of the respective palette
+  //   *BgSubtle      = tint-color($color, 80%)  → 100 stop
+  //   *BorderSubtle  = tint-color($color, 60%)  → 200 stop
   static final BsThemeData lightTheme = BsThemeData(
     primary: BsColors.primary,
     secondary: BsColors.secondary,
@@ -175,7 +177,7 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
     linkColor: BsColors.blue[500]!, // $primary = blue-500
     linkHoverColor:
         BsColors.blue[600]!, // shade-color($primary, 20%) = blue-600
-    // shade-color($color, 60%) = 800er Stop
+    // shade-color($color, 60%) = 800 stop
     primaryTextEmphasis: BsColors.blue[800]!,
     secondaryTextEmphasis: BsColors.gray[700]!,
     successTextEmphasis: BsColors.green[800]!,
@@ -185,17 +187,17 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
     lightTextEmphasis: BsColors.gray[600]!,
     darkTextEmphasis: BsColors.gray[600]!,
 
-    // tint-color($color, 80%) = 100er Stop
+    // tint-color($color, 80%) = 100 stop
     primaryBgSubtle: BsColors.blue[100]!,
     secondaryBgSubtle: BsColors
-        .gray[100]!, // tint-color($secondary, 80%) ≈ gray-100 Bereich; Bootstrap nutzt #e2e3e5, nahe gray-200
+        .gray[100]!, // tint-color($secondary, 80%) ≈ gray-100 range; Bootstrap uses #e2e3e5, close to gray-200
     successBgSubtle: BsColors.green[100]!,
     dangerBgSubtle: BsColors.red[100]!,
     warningBgSubtle: BsColors.yellow[100]!,
     infoBgSubtle: BsColors.cyan[100]!,
     lightBgSubtle: BsColors.gray[100]!, // tint-color($light, 80%) ≈ gray-100
     darkBgSubtle: BsColors.gray[400]!, // Bootstrap: #ced4da = gray-400
-    // tint-color($color, 60%) = 200er Stop
+    // tint-color($color, 60%) = 200 stop
     primaryBorderSubtle: BsColors.blue[200]!,
     secondaryBorderSubtle: BsColors.gray[200]!,
     successBorderSubtle: BsColors.green[200]!,
@@ -207,30 +209,30 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
   );
 
   // ─── Dark Theme ──────────────────────────────────────────────────────────
-  // Quelle: _variables-dark.scss / [data-bs-theme=dark]
+  // Source: _variables-dark.scss / [data-bs-theme=dark]
   //
-  // Mapping-Logik:
+  // Mapping Logic:
   //   bodyText           = gray[300]            ($body-color-dark = $gray-300)
   //   bodyTextSecondary  = gray[300] @ 75%      (rgba($body-color-dark, .75))
   //   bodyTextTertiary   = gray[300] @ 50%
   //   emphasisColor      = white
   //   bodyBg             = gray[900]            ($body-bg-dark = $gray-900)
   //   bodyBgSecondary    = gray[800] (#343a40)  ($secondary-bg-dark)
-  //   bodyBgTertiary     = #2b3035              ($tertiary-bg-dark — kein exakter Palette-Stop)
+  //   bodyBgTertiary     = #2b3035              ($tertiary-bg-dark — no exact palette stop)
   //   border             = gray[700]            ($border-color-dark = $gray-700)
   //   borderTranslucent  = white @ 15%          (rgba(255,255,255,.15))
   //   linkColor          = blue[300]            (tint-color($primary, 40%))
   //   linkHoverColor     = blue[200]            (tint-color($primary, 60%)) — Bootstrap: #8bb9fe
-  //                                              Hinweis: Bootstrap gibt #8bb9fe an, das liegt zwischen
-  //                                              blue-200 (#9EC5FE) und blue-300 (#6EA8FE).
-  //                                              Wir nutzen blue[200] als nächsten Stop.
+  //                                              Note: Bootstrap specifies #8bb9fe, which lies between
+  //                                              blue-200 (#9EC5FE) and blue-300 (#6EA8FE).
+  //                                              We use blue[200] as the next stop.
   //
-  //   *TextEmphasis  = tint-color($color, 40%)  → 300er Stop
-  //   *BgSubtle      = shade-color($color, 80%) → 900er Stop
-  //   *BorderSubtle  = shade-color($color, 40%) → 700er Stop (teils 600er)
+  //   *TextEmphasis  = tint-color($color, 40%)  → 300 stop
+  //   *BgSubtle      = shade-color($color, 80%) → 900 stop
+  //   *BorderSubtle  = shade-color($color, 40%) → 700 stop (partially 600)
   static final BsThemeData darkTheme = BsThemeData(
-    // Im Dark Mode bleiben die semantischen Farben unverändert.
-    // Komponenten nutzen die *TextEmphasis/*BgSubtle-Tokens für dunkle Darstellung.
+    // Semantic colors remain unchanged in Dark Mode.
+    // Components use *TextEmphasis/*BgSubtle tokens for dark representation.
     primary: BsColors.primary,
     secondary: BsColors.secondary,
     success: BsColors.success,
@@ -249,17 +251,17 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
     bodyBgSecondary: BsColors.gray[800]!, // #343a40 = gray-800
     bodyBgTertiary: const Color(
       0xFF2B3035,
-    ), // Bootstrap-fixwert — kein exakter Palette-Stop
+    ), // Bootstrap fixed value — no exact palette stop
 
     border: BsColors.gray[700]!, // #495057 = gray-700
     borderTranslucent: const Color(0x26FFFFFF), // rgba(255,255,255,.15)
 
     linkColor: BsColors.blue[300]!, // tint-color($primary, 40%) = blue-300
-    linkHoverColor: BsColors.blue[200]!, // nächster Stop zu #8bb9fe
-    // tint-color($color, 40%) = 300er Stop
+    linkHoverColor: BsColors.blue[200]!, // next stop to #8bb9fe
+    // tint-color($color, 40%) = 300 stop
     primaryTextEmphasis: BsColors.blue[300]!,
     secondaryTextEmphasis:
-        BsColors.gray[400]!, // Bootstrap: #a7acb1 — zwischen gray-400/500
+        BsColors.gray[400]!, // Bootstrap: #a7acb1 — between gray-400/500
     successTextEmphasis: BsColors.green[300]!,
     dangerTextEmphasis: BsColors.red[300]!,
     warningTextEmphasis: BsColors.yellow[300]!,
@@ -267,7 +269,7 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
     lightTextEmphasis: BsColors.gray[100]!,
     darkTextEmphasis: BsColors.gray[300]!,
 
-    // shade-color($color, 80%) = 900er Stop
+    // shade-color($color, 80%) = 900 stop
     primaryBgSubtle: BsColors.blue[900]!,
     secondaryBgSubtle: BsColors.gray[900]!,
     successBgSubtle: BsColors.green[900]!,
@@ -277,7 +279,7 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
     lightBgSubtle: BsColors.gray[800]!,
     darkBgSubtle:
         BsColors.gray[900]!, // Bootstrap: #1a1d20 — shade-color(gray-800, 20%)
-    // shade-color($color, 40%) = 700er Stop
+    // shade-color($color, 40%) = 700 stop
     primaryBorderSubtle: BsColors.blue[700]!,
     secondaryBorderSubtle: BsColors.gray[700]!,
     successBorderSubtle: BsColors.green[700]!,
@@ -516,6 +518,8 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
   }
 }
 
+/// Provides access to [BsThemeData] from the [BuildContext].
 extension BsThemeContext on BuildContext {
+  /// Returns the [BsThemeData] defined in the current [Theme].
   BsThemeData get bs => Theme.of(this).extension<BsThemeData>()!;
 }

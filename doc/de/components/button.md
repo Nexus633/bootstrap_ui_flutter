@@ -1,11 +1,11 @@
 # Button
 
-Die `AppButton` Komponente bietet verschiedene Stile für Aktionen in Formularen, Dialogen und mehr.
+Die `BsButton` Komponente bietet verschiedene Stile für Aktionen in Formularen, Dialogen und mehr.
 
 ## Verwendung
 
 ```dart
-AppButton(
+BsButton(
   label: 'Klick mich',
   onPressed: () => print('Geklickt!'),
   variant: BsButtonVariant.primary,
@@ -40,9 +40,9 @@ Mit `BsButtonGroup` können mehrere Buttons in einer Reihe oder Spalte gruppiert
 ```dart
 BsButtonGroup(
   children: [
-    AppButton(label: 'Links', onPressed: () {}),
-    AppButton(label: 'Mitte', onPressed: () {}),
-    AppButton(label: 'Rechts', onPressed: () {}),
+    BsButton(label: 'Links', onPressed: () {}),
+    BsButton(label: 'Mitte', onPressed: () {}),
+    BsButton(label: 'Rechts', onPressed: () {}),
   ],
 )
 ```
@@ -51,6 +51,6 @@ BsButtonGroup(
 
 | Eigenschaft | Typ | Standard | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `children` | `List<AppButton>` | **Erforderlich** | Die Liste der Buttons in der Gruppe. |
+| `children` | `List<BsButton>` | **Erforderlich** | Die Liste der Buttons in der Gruppe. |
 | `vertical` | `bool` | `false` | Wenn `true`, werden die Buttons vertikal untereinander angeordnet. |
 | `groupSize` | `BsButtonSize?` | `null` | Überschreibt die Größe aller Buttons in der Gruppe. |

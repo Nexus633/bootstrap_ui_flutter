@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 /// Bootstrap 5 Typography-System.
-/// Bootstrap nutzt systemnahe Fonts — in Flutter nehmen wir die Standard-Schrift
-/// und definieren die Größen/Gewichte exakt nach Bootstrap.
-/// Quelle: https://getbootstrap.com/docs/5.3/content/typography/
+/// Bootstrap uses system-near fonts — in Flutter we use the standard font
+/// and define sizes/weights exactly according to Bootstrap.
+/// Source: https://getbootstrap.com/docs/5.3/content/typography/
 abstract class BsTypography {
   // ─── Font Sizes ──────────────────────────────────────────────────────────
   // --bs-body-font-size: 1rem = 16px
@@ -34,7 +34,7 @@ abstract class BsTypography {
   static const double lineHeightSm = 1.25; // --bs-line-height-sm
   static const double lineHeightLg = 1.5; // --bs-line-height-lg
 
-  // ─── Fertige TextStyle-Objekte ────────────────────────────────────────────
+  // ─── Ready-to-use TextStyle objects ────────────────────────────────────────────
   static const TextStyle body = TextStyle(
     fontSize: fontSizeBase,
     fontWeight: weightNormal,

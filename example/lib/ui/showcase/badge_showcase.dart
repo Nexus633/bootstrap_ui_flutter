@@ -242,7 +242,7 @@ class BadgeShowcase extends StatelessWidget {
             Row(
               spacing: 16.0,
               children: [
-                AppButton(
+                BsButton(
                   label: 'TopLeft',
                   variant: BsButtonVariant.warning,
                   badge: const BsBadge(
@@ -253,7 +253,7 @@ class BadgeShowcase extends StatelessWidget {
                   badgePosition: BsBadgePosition.topLeft,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'TopRight',
                   variant: BsButtonVariant.danger,
                   badge: const BsBadge(
@@ -264,7 +264,7 @@ class BadgeShowcase extends StatelessWidget {
                   badgePosition: BsBadgePosition.topRight,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'BottomLeft',
                   variant: BsButtonVariant.primary,
                   badge: const BsBadge(
@@ -275,7 +275,7 @@ class BadgeShowcase extends StatelessWidget {
                   badgePosition: BsBadgePosition.bottomLeft,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'BottomRight',
                   variant: BsButtonVariant.secondary,
                   badge: const BsBadge(
@@ -286,7 +286,7 @@ class BadgeShowcase extends StatelessWidget {
                   badgePosition: BsBadgePosition.bottomRight,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Leading',
                   variant: BsButtonVariant.info,
                   badge: const BsBadge(
@@ -297,7 +297,7 @@ class BadgeShowcase extends StatelessWidget {
                   badgePosition: BsBadgePosition.leading,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Trailing',
                   variant: BsButtonVariant.success,
                   badge: const BsBadge(
@@ -326,7 +326,7 @@ class BadgeShowcase extends StatelessWidget {
             Row(
               spacing: 16.0,
               children: [
-                AppButton(
+                BsButton(
                   label: 'TopLeft',
                   variant: BsButtonVariant.warning,
                   badge: const BsBadge(
@@ -337,7 +337,7 @@ class BadgeShowcase extends StatelessWidget {
                   badgePosition: BsBadgePosition.topLeft,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'TopRight',
                   variant: BsButtonVariant.danger,
                   badge: const BsBadge(
@@ -348,7 +348,7 @@ class BadgeShowcase extends StatelessWidget {
                   badgePosition: BsBadgePosition.topRight,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'BottomLeft',
                   variant: BsButtonVariant.primary,
                   badge: const BsBadge(
@@ -359,7 +359,7 @@ class BadgeShowcase extends StatelessWidget {
                   badgePosition: BsBadgePosition.bottomLeft,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'BottomRight',
                   variant: BsButtonVariant.secondary,
                   badge: const BsBadge(
@@ -370,7 +370,7 @@ class BadgeShowcase extends StatelessWidget {
                   badgePosition: BsBadgePosition.bottomRight,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Leading',
                   variant: BsButtonVariant.info,
                   badge: const BsBadge(
@@ -381,7 +381,7 @@ class BadgeShowcase extends StatelessWidget {
                   badgePosition: BsBadgePosition.leading,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Trailing',
                   variant: BsButtonVariant.success,
                   badge: const BsBadge(

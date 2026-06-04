@@ -10,11 +10,11 @@ void main() {
     );
   }
 
-  group('AppButton Tests', () {
+  group('BsButton Tests', () {
     testWidgets('renders label and handles tap', (WidgetTester tester) async {
       bool pressed = false;
       await tester.pumpWidget(
-        wrap(AppButton(label: 'Click Me', onPressed: () => pressed = true)),
+        wrap(BsButton(label: 'Click Me', onPressed: () => pressed = true)),
       );
 
       expect(find.text('Click Me'), findsOneWidget);
@@ -26,7 +26,7 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        wrap(const AppButton(label: 'Loading', isLoading: true)),
+        wrap(const BsButton(label: 'Loading', isLoading: true)),
       );
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -34,7 +34,7 @@ void main() {
 
     testWidgets('disabled when onPressed is null', (WidgetTester tester) async {
       await tester.pumpWidget(
-        wrap(const AppButton(label: 'Disabled', onPressed: null)),
+        wrap(const BsButton(label: 'Disabled', onPressed: null)),
       );
 
       // Try to tap - nothing should happen (we can check the internal state or just existence)
@@ -49,7 +49,7 @@ void main() {
 
     testWidgets('renders icon correctly', (WidgetTester tester) async {
       await tester.pumpWidget(
-        wrap(const AppButton(label: 'Icon Button', icon: Icons.add)),
+        wrap(const BsButton(label: 'Icon Button', icon: Icons.add)),
       );
 
       expect(find.byIcon(Icons.add), findsOneWidget);

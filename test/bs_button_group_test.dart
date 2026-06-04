@@ -16,8 +16,8 @@ void main() {
         wrap(
           BsButtonGroup(
             children: [
-              AppButton(label: 'Button 1', onPressed: () {}),
-              AppButton(label: 'Button 2', onPressed: () {}),
+              BsButton(label: 'Button 1', onPressed: () {}),
+              BsButton(label: 'Button 2', onPressed: () {}),
             ],
           ),
         ),
@@ -33,8 +33,8 @@ void main() {
           BsButtonGroup(
             vertical: true,
             children: [
-              AppButton(label: 'Button 1', onPressed: () {}),
-              AppButton(label: 'Button 2', onPressed: () {}),
+              BsButton(label: 'Button 1', onPressed: () {}),
+              BsButton(label: 'Button 2', onPressed: () {}),
             ],
           ),
         ),
@@ -51,12 +51,12 @@ void main() {
           BsButtonGroup(
             groupSize: BsButtonSize.lg,
             children: [
-              AppButton(
+              BsButton(
                 label: 'Button 1',
                 onPressed: () {},
                 size: BsButtonSize.sm,
               ),
-              AppButton(label: 'Button 2', onPressed: () {}),
+              BsButton(label: 'Button 2', onPressed: () {}),
             ],
           ),
         ),

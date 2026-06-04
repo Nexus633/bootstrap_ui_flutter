@@ -1,53 +1,58 @@
 import 'package:flutter/material.dart';
-import '../../tokens/bootstrap_theme.dart'; // WICHTIG: Dein Theme-Import
+import '../../tokens/bootstrap_theme.dart';
 
-// ─── Datenmodell ──────────────────────────────────────────────────────────────
+// ─── Data Model ──────────────────────────────────────────────────────────────
 
-/// Repräsentiert ein einzelnes Element im Accordion.
+/// Represents a single item in the accordion.
 class BsAccordionItem {
+  /// Creates a [BsAccordionItem] with a title and body.
   const BsAccordionItem({
     required this.title,
     required this.body,
     this.initiallyExpanded = false,
   });
 
-  /// Der Text im Header
+  /// The text in the header.
   final String title;
 
-  /// Der Inhalt, der beim Aufklappen sichtbar wird
+  /// The content that becomes visible when expanded.
   final Widget body;
 
-  /// Ob das Item von Anfang an geöffnet sein soll
+  /// Whether the item should be open initially.
   final bool initiallyExpanded;
 }
 
-// ─── Haupt-Widget ─────────────────────────────────────────────────────────────
+// ─── Main Widget ─────────────────────────────────────────────────────────────
 
-/// Bootstrap-kompatibles Accordion.
+/// Bootstrap-compatible accordion.
+///
+/// It displays a list of [BsAccordionItem]s that can be expanded or collapsed.
 class BsAccordion extends StatefulWidget {
+  /// Creates a [BsAccordion] with the given [items].
   const BsAccordion({
     super.key,
     required this.items,
     this.alwaysOpen = false,
-    this.flush = false, // Bootstrap's .accordion-flush Variante
+    this.flush = false, // Bootstrap's .accordion-flush variant
     this.activeColor,
     this.mouseCursor,
   });
 
+  /// The list of items to display in the accordion.
   final List<BsAccordionItem> items;
 
-  /// Wenn true, können mehrere Items gleichzeitig offen sein.
-  /// Wenn false (Bootstrap Default), schließt sich ein Item, wenn ein anderes öffnet.
+  /// If true, multiple items can be open at the same time.
+  /// If false (Bootstrap default), one item closes when another opens.
   final bool alwaysOpen;
 
-  /// Wenn true, werden die äußeren Rahmen und runden Ecken entfernt (gut für Edge-to-Edge).
+  /// If true, outer borders and rounded corners are removed (good for edge-to-edge).
   final bool flush;
 
-  /// Die Farbe des Headers und Icons, wenn das Item geöffnet ist.
-  /// Standardmäßig das Primary-Token des aktuellen Themes.
+  /// The color of the header and icon when the item is open.
+  /// Defaults to the primary token of the current theme.
   final Color? activeColor;
 
-  /// Der Mauszeiger, der angezeigt wird, wenn man über den Header fährt.
+  /// The mouse cursor shown when hovering over the header.
   final MouseCursor? mouseCursor;
 
   @override
@@ -55,7 +60,7 @@ class BsAccordion extends StatefulWidget {
 }
 
 class _BsAccordionState extends State<BsAccordion> {
-  // Speichert die Indizes der aktuell geöffneten Items
+  // Stores the indexes of the currently open items.
   late Set<int> _openIndexes;
 
   @override
@@ -92,26 +97,26 @@ class _BsAccordionState extends State<BsAccordion> {
 
   @override
   Widget build(BuildContext context) {
-    // 1. Theme abgreifen
+    // 1. Get theme
     final bsTheme = context.bs;
 
     final borderRadius = widget.flush
         ? BorderRadius.zero
         : BorderRadius.circular(8.0);
 
-    // 2. Rahmenfarbe dynamisch
+    // 2. Dynamic border color
     final borderSide = BorderSide(color: bsTheme.border, width: 1.0);
 
-    // 3. Fallback-Farbe dynamisch (bsTheme.primary statt BsColors.primary)
+    // 3. Dynamic fallback color (bsTheme.primary instead of BsColors.primary)
     final resolvedActiveColor = widget.activeColor ?? bsTheme.primary;
 
     return Container(
       decoration: BoxDecoration(
-        color: bsTheme.bodyBg, // 4. Hintergrund dynamisch
+        color: bsTheme.bodyBg, // 4. Dynamic background
         borderRadius: borderRadius,
         border: widget.flush
             ? null
-            : Border.all(color: bsTheme.border, width: 1.0), // Rahmen dynamisch
+            : Border.all(color: bsTheme.border, width: 1.0), // Dynamic border
       ),
       child: ClipRRect(
         borderRadius: borderRadius,
@@ -136,7 +141,7 @@ class _BsAccordionState extends State<BsAccordion> {
   }
 }
 
-// ─── Internes Item-Widget ─────────────────────────────────────────────────────
+// ─── Internal Item Widget ─────────────────────────────────────────────────────
 
 class _BsAccordionItemWidget extends StatelessWidget {
   const _BsAccordionItemWidget({
@@ -161,12 +166,12 @@ class _BsAccordionItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final bsTheme = context.bs;
 
-    // Bootstrap Styling für aktiven Header
+    // Bootstrap styling for active header
     final headerBgColor = isOpen
         ? activeColor.withValues(alpha: 0.1)
         : Colors.transparent;
 
-    // WICHTIG: Wenn geschlossen, nutzen wir bodyText (für den Kontrast)
+    // IMPORTANT: When closed, we use bodyText (for contrast)
     final headerTextColor = isOpen ? activeColor : bsTheme.bodyText;
 
     return Container(
@@ -215,7 +220,7 @@ class _BsAccordionItemWidget extends StatelessWidget {
             ),
           ),
 
-          // ─── Body (Animiert) ────────────────────────────────────────────────
+          // ─── Body (Animated) ────────────────────────────────────────────────
           AnimatedSize(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
@@ -226,7 +231,7 @@ class _BsAccordionItemWidget extends StatelessWidget {
                   ? Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: item
-                          .body, // Text-Styling machen wir meist beim Übergeben des Widgets (wie im Showcase gezeigt)
+                          .body, // Text styling is usually done when passing the widget
                     )
                   : const SizedBox.shrink(),
             ),

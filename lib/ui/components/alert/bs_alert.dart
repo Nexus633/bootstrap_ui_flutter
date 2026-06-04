@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
 
+/// A Bootstrap-style alert component.
+///
+/// Alerts are used to provide contextual feedback messages for typical user actions
+/// with the handful of available and flexible alert messages.
 class BsAlert extends StatefulWidget {
+  /// Creates a [BsAlert] widget.
   const BsAlert({
     super.key,
     required this.child,
@@ -19,35 +24,39 @@ class BsAlert extends StatefulWidget {
     this.autoCloseDuration,
   });
 
-  /// Der Text oder Inhalt des Alerts.
+  /// The text or content of the alert.
   final Widget child;
+
+  /// The color variant of the alert.
   final BsAlertVariant variant;
 
-  /// Ein optionales Icon links neben dem Text.
+  /// An optional icon to the left of the text.
   final IconData? icon;
 
+  /// Specific color for the icon. If null, uses the variant's text color.
   final Color? iconColor;
 
+  /// Variant color for the icon.
   final BsIconVariant? iconVariant;
 
-  /// Zeigt ein "X" (Schließen-Icon) auf der rechten Seite.
+  /// Shows an "X" (close icon) on the right side.
   final bool dismissible;
 
-  /// Wird aufgerufen, wenn das Schließen-Icon geklickt wird.
+  /// Called when the close icon is clicked.
   final VoidCallback? onClose;
 
-  /// Die Art der Animation beim Ein- und Ausblenden.
+  /// The type of animation when showing and hiding.
   final BsAlertAnimation animation;
 
-  /// Die Dauer der Animation beim Einblenden.
-  /// Standardmäßig 200ms (Bootstrap-Standard).
+  /// The duration of the animation when showing.
+  /// Default is 200ms (Bootstrap standard).
   final Duration animationInDuration;
 
-  /// Die Dauer der Animation beim Ausblenden.
-  /// Standardmäßig 200ms (Bootstrap-Standard).
+  /// The duration of the animation when hiding.
+  /// Default is 200ms (Bootstrap standard).
   final Duration animationOutDuration;
 
-  /// Wenn gesetzt, schließt sich der Alert nach dieser Dauer automatisch.
+  /// If set, the alert closes automatically after this duration.
   final Duration? autoCloseDuration;
 
   @override
@@ -64,7 +73,7 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    // Bootstrap-Fades sind schnell (ca. 150-200ms in CSS)
+    // Bootstrap fades are fast (approx. 150-200ms in CSS)
     _controller = AnimationController(
       vsync: this,
       duration: widget.animationInDuration,
@@ -125,7 +134,7 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
 
   void _handleClose() {
     if (widget.animation == BsAlertAnimation.none) {
-      _controller.value = 0.0; // Sofort ausblenden
+      _controller.value = 0.0; // Hide immediately
       widget.onClose?.call();
     } else {
       _controller.reverse().then((_) {
@@ -190,13 +199,13 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
 
     Widget animatedContent = content;
 
-    // Fade Transition (wird bei 'none' zum Jump-Cut)
+    // Fade Transition (becomes a jump-cut when 'none' is selected)
     animatedContent = FadeTransition(
       opacity: _curvedAnimation,
       child: animatedContent,
     );
 
-    // Slide Transition (nur wenn eine Slide-Animation gewählt wurde)
+    // Slide Transition (only if a slide animation was selected)
     if (widget.animation != BsAlertAnimation.fade &&
         widget.animation != BsAlertAnimation.none) {
       animatedContent = SlideTransition(
@@ -205,7 +214,7 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
       );
     }
 
-    // Size Transition für das "Zusammenschieben" des Layouts
+    // Size Transition for the "collapsing" of the layout
     return SizeTransition(
       sizeFactor: _curvedAnimation,
       alignment: Alignment.topCenter,

@@ -118,7 +118,7 @@ class ThemeShowcase extends StatelessWidget {
             const SizedBox(height: 16),
 
             // Test Button
-            const AppButton(
+            const BsButton(
               label: 'Primary Action',
               variant: BsButtonVariant.primary,
               icon: Icons.send,

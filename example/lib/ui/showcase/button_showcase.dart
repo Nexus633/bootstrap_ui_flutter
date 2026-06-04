@@ -44,47 +44,47 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
             const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
-                AppButton(
+                BsButton(
                   label: 'Primary',
                   variant: BsButtonVariant.primary,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Secondary',
                   variant: BsButtonVariant.secondary,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Success',
                   variant: BsButtonVariant.success,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Danger',
                   variant: BsButtonVariant.danger,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Warning',
                   variant: BsButtonVariant.warning,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Info',
                   variant: BsButtonVariant.info,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Light',
                   variant: BsButtonVariant.light,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Dark',
                   variant: BsButtonVariant.dark,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Link',
                   variant: BsButtonVariant.link,
                   onPressed: () {},
@@ -98,37 +98,37 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
             const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
-                AppButton(
+                BsButton(
                   label: 'Primary',
                   variant: BsButtonVariant.outlinePrimary,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Secondary',
                   variant: BsButtonVariant.outlineSecondary,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Success',
                   variant: BsButtonVariant.outlineSuccess,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Danger',
                   variant: BsButtonVariant.outlineDanger,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Warning',
                   variant: BsButtonVariant.outlineWarning,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Info',
                   variant: BsButtonVariant.outlineInfo,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Dark',
                   variant: BsButtonVariant.outlineDark,
                   onPressed: () {},
@@ -142,19 +142,19 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
             const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
-                AppButton(
+                BsButton(
                   label: 'Small',
                   variant: BsButtonVariant.primary,
                   size: BsButtonSize.sm,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Medium',
                   variant: BsButtonVariant.primary,
                   size: BsButtonSize.md,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Large',
                   variant: BsButtonVariant.primary,
                   size: BsButtonSize.lg,
@@ -171,7 +171,7 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
             const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
-                AppButton(
+                BsButton(
                   label: 'Speichern',
                   variant: BsButtonVariant.primary,
                   icon: Icons.save,
@@ -180,13 +180,13 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   iconColor: Colors.yellow, // Beispiel für Icon-Farbe
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Löschen',
                   variant: BsButtonVariant.danger,
                   icon: Icons.delete,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Info',
                   variant: BsButtonVariant.info,
                   icon: Icons.info,
@@ -201,15 +201,15 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
             const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
-                const AppButton(
+                const BsButton(
                   label: 'Disabled',
                   variant: BsButtonVariant.primary,
                 ),
-                const AppButton(
+                const BsButton(
                   label: 'Disabled',
                   variant: BsButtonVariant.outlinePrimary,
                 ),
-                AppButton(
+                BsButton(
                   label: 'Laden...',
                   variant: BsButtonVariant.primary,
                   isLoading: _isLoading,
@@ -224,14 +224,14 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
               'Entspricht: <div class="d-grid"> → Button nimmt volle Breite',
             ),
             const SizedBox(height: BsSpacing.s2),
-            AppButton(
+            BsButton(
               label: 'Full Width Button',
               variant: BsButtonVariant.primary,
               fullWidth: true,
               onPressed: () {},
             ),
             const SizedBox(height: BsSpacing.s2),
-            AppButton(
+            BsButton(
               label: 'Full Width Outline',
               variant: BsButtonVariant.outlinePrimary,
               fullWidth: true,
@@ -245,17 +245,17 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
             BsButtonGroup(
               groupSize: BsButtonSize.md,
               children: [
-                AppButton(
+                BsButton(
                   label: 'Left',
                   variant: BsButtonVariant.primary,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Middle',
                   variant: BsButtonVariant.warning,
                   onPressed: () {},
                 ),
-                AppButton(
+                BsButton(
                   label: 'Right',
                   variant: BsButtonVariant.danger,
                   onPressed: () {},
