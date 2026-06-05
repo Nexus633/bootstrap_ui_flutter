@@ -22,7 +22,6 @@ class BadgeShowcase extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -42,10 +41,10 @@ class BadgeShowcase extends StatelessWidget {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     Row(
                       spacing: 8.0,
-                      children: const [
+                      children: [
                         BsBadge(
                           label: 'Primary',
                           variant: BsBadgeVariant.primary,
@@ -71,10 +70,10 @@ class BadgeShowcase extends StatelessWidget {
                         BsBadge(label: 'Dark', variant: BsBadgeVariant.dark),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Row(
                       spacing: 8.0,
-                      children: const [
+                      children: [
                         BsBadge(label: '8', variant: BsBadgeVariant.primary),
                         BsBadge(label: '12', variant: BsBadgeVariant.secondary),
                         BsBadge(label: '8', variant: BsBadgeVariant.success),
@@ -105,10 +104,10 @@ class BadgeShowcase extends StatelessWidget {
             Wrap(
               spacing: 8.0,
               runSpacing: 8.0,
-              children: [
+              children: const [
                 Row(
                   spacing: 8.0,
-                  children: const [
+                  children: [
                     BsBadge(
                       label: 'Primary',
                       variant: BsBadgeVariant.primary,
@@ -151,10 +150,10 @@ class BadgeShowcase extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Row(
                   spacing: 8.0,
-                  children: const [
+                  children: [
                     BsBadge(
                       label: '8',
                       variant: BsBadgeVariant.primary,
@@ -395,7 +394,7 @@ class BadgeShowcase extends StatelessWidget {
               ],
             ),
           ],
-        ),
+        ).p(24),
       ),
     );
   }

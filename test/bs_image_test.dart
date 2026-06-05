@@ -53,7 +53,10 @@ void main() {
 
       expect(decoration.border, isA<Border>());
       expect(decoration.borderRadius, equals(BsRadius.md));
-      expect(container.padding, equals(const EdgeInsets.all(BsSpacing.s1)));
+      final paddingFinder = find.ancestor(of: containerFinder, matching: find.byType(Padding));
+      expect(paddingFinder, findsOneWidget);
+      final padding = tester.widget<Padding>(paddingFinder);
+      expect(padding.padding, equals(const EdgeInsets.all(BsSpacing.s1)));
       
       // Should contain a ClipRRect for the image
       expect(find.descendant(of: containerFinder, matching: find.byType(ClipRRect)), findsOneWidget);

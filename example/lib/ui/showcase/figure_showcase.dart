@@ -7,39 +7,44 @@ class FigureShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(BsSpacing.s3),
       child: BsContainer.fluid(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Figures', style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: BsSpacing.s3),
-            
-            _description('Anytime you need to display a piece of content—like an image with an optional caption, consider using a <figure>.'),
-            
-            _sectionTitle('Basic Figure'),
-            _description('Figures are shrink-wrapped to their content by default (inline-block behavior).'),
-            const Center(
-              child: BsFigure(
-                image: BsImage(
-                  image: NetworkImage('https://picsum.photos/id/101/400/300'),
-                  rounded: true,
-                ),
-                caption: Text('A caption for the above image.'),
-              ),
+
+            _description(
+              'Anytime you need to display a piece of content—like an image with an optional caption, consider using a <figure>.',
             ),
+
+            _sectionTitle('Basic Figure'),
+            _description(
+              'Figures are shrink-wrapped to their content by default (inline-block behavior).',
+            ),
+            const BsFigure(
+              image: BsImage(
+                image: NetworkImage('https://picsum.photos/id/101/400/300'),
+                rounded: true,
+              ),
+              caption: Text('A caption for the above image.'),
+            ).center(),
             const SizedBox(height: BsSpacing.s4),
 
             _sectionTitle('Caption Alignment'),
-            _description('Use captionAlignment to position the caption relative to the image.'),
-            
+            _description(
+              'Use captionAlignment to position the caption relative to the image.',
+            ),
+
             BsRow(
               children: [
                 BsCol(
                   config: const BsColConfig(xs: 12, md: 6),
                   child: const BsFigure(
                     image: BsImage(
-                      image: NetworkImage('https://picsum.photos/id/102/300/200'),
+                      image: NetworkImage(
+                        'https://picsum.photos/id/102/300/200',
+                      ),
                       rounded: true,
                       fluid: true,
                     ),
@@ -51,7 +56,9 @@ class FigureShowcase extends StatelessWidget {
                   config: const BsColConfig(xs: 12, md: 6),
                   child: const BsFigure(
                     image: BsImage(
-                      image: NetworkImage('https://picsum.photos/id/103/300/200'),
+                      image: NetworkImage(
+                        'https://picsum.photos/id/103/300/200',
+                      ),
                       rounded: true,
                       fluid: true,
                     ),
@@ -61,11 +68,13 @@ class FigureShowcase extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             const SizedBox(height: BsSpacing.s4),
 
             _sectionTitle('Figure with Thumbnail'),
-            _description('Combining Figures with the thumbnail styling from BsImage.'),
+            _description(
+              'Combining Figures with the thumbnail styling from BsImage.',
+            ),
             const BsFigure(
               image: BsImage(
                 image: NetworkImage('https://picsum.photos/id/104/250/250'),
@@ -75,7 +84,7 @@ class FigureShowcase extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ).p3(),
     );
   }
 

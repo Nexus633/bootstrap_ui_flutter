@@ -4,6 +4,7 @@ import '../../tokens/colors.dart';
 import '../../tokens/spacing.dart';
 import '../../tokens/typography.dart';
 import '../../tokens/enums.dart';
+import '../forms/bs_input_group.dart';
 
 // ─── Widget ───────────────────────────────────────────────────────────────────
 
@@ -82,6 +83,7 @@ class _BsButtonState extends State<BsButton> {
 
     // 2. Pass theme to style resolution
     final _ButtonStyle style = _resolveStyle(
+      context,
       widget.variant,
       widget.size,
       bsTheme,
@@ -352,27 +354,46 @@ class _BsButtonState extends State<BsButton> {
   // ─── Style Resolution ───────────────────────────────────────────────────────
 
   _ButtonStyle _resolveStyle(
+    BuildContext context,
     BsButtonVariant variant,
     BsButtonSize size,
     BsThemeData bs,
   ) {
-    final EdgeInsets padding = switch (size) {
+    final groupContext = BsInputGroupChildContext.of(context);
+    final BsButtonSize effectiveSize = groupContext != null ? 
+      (groupContext.size == BsInputSize.sm ? BsButtonSize.sm : 
+       (groupContext.size == BsInputSize.lg ? BsButtonSize.lg : BsButtonSize.md))
+      : size;
+
+    final EdgeInsets padding = switch (effectiveSize) {
       BsButtonSize.sm => BsSpacing.btnPaddingSm,
       BsButtonSize.md => BsSpacing.btnPaddingMd,
       BsButtonSize.lg => BsSpacing.btnPaddingLg,
     };
-    final TextStyle textStyle = switch (size) {
+    final TextStyle textStyle = switch (effectiveSize) {
       BsButtonSize.sm => BsTypography.btnSm,
       BsButtonSize.md => BsTypography.btnMd,
       BsButtonSize.lg => BsTypography.btnLg,
     };
+    
+    final double baseRadius = effectiveSize == BsButtonSize.sm ? 4.0 : (effectiveSize == BsButtonSize.lg ? 8.0 : 6.0);
+    final Radius r = Radius.circular(baseRadius);
+
+    BorderRadius? groupBorderRadius;
+    if (groupContext != null) {
+      if (groupContext.isFirst && groupContext.isLast) {
+        groupBorderRadius = BorderRadius.all(r);
+      } else if (groupContext.isFirst) {
+        groupBorderRadius = BorderRadius.horizontal(left: r);
+      } else if (groupContext.isLast) {
+        groupBorderRadius = BorderRadius.horizontal(right: r);
+      } else {
+        groupBorderRadius = BorderRadius.zero;
+      }
+    }
+
     final BorderRadius borderRadius =
-        widget.customBorderRadius ??
-        switch (size) {
-          BsButtonSize.sm => BsRadius.sm,
-          BsButtonSize.md => BsRadius.md,
-          BsButtonSize.lg => BsRadius.lg,
-        };
+        groupBorderRadius ?? widget.customBorderRadius ?? BorderRadius.all(r);
 
     return switch (variant) {
       BsButtonVariant.primary => _ButtonStyle(

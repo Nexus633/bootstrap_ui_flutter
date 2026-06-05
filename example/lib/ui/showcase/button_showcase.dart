@@ -35,13 +35,11 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(BsSpacing.s3),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _sectionTitle('Solid Variants'),
             _description('Corresponds to: btn btn-primary, btn-secondary, etc.'),
-            const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
                 BsButton(
@@ -90,12 +88,11 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   onPressed: () {},
                 ),
               ],
-            ),
+            ).pt2(),
 
             _divider(bsTheme.border),
             _sectionTitle('Outline Variants'),
             _description('Corresponds to: btn btn-outline-primary, etc.'),
-            const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
                 BsButton(
@@ -134,12 +131,11 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   onPressed: () {},
                 ),
               ],
-            ),
+            ).pt2(),
 
             _divider(bsTheme.border),
             _sectionTitle('Sizes'),
             _description('Corresponds to: btn-sm, (default), btn-lg'),
-            const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
                 BsButton(
@@ -161,14 +157,13 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   onPressed: () {},
                 ),
               ],
-            ),
+            ).pt2(),
 
             _divider(bsTheme.border),
             _sectionTitle('With Icon'),
             _description(
               'Corresponds to: <button><i class="bi bi-..."></i> Label</button>',
             ),
-            const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
                 BsButton(
@@ -193,12 +188,11 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   onPressed: () {},
                 ),
               ],
-            ),
+            ).pt2(),
 
             _divider(bsTheme.border),
             _sectionTitle('States'),
             _description('Disabled (onPressed: null) and Loading'),
-            const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
                 const BsButton(
@@ -216,32 +210,29 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   onPressed: _simulateLoading,
                 ),
               ],
-            ),
+            ).pt2(),
 
             _divider(bsTheme.border),
             _sectionTitle('Full Width (d-grid)'),
             _description(
               'Corresponds to: <div class="d-grid"> → Button takes full width',
             ),
-            const SizedBox(height: BsSpacing.s2),
             BsButton(
               label: 'Full Width Button',
               variant: BsButtonVariant.primary,
               fullWidth: true,
               onPressed: () {},
-            ),
-            const SizedBox(height: BsSpacing.s2),
+            ).pt2(),
             BsButton(
               label: 'Full Width Outline',
               variant: BsButtonVariant.outlinePrimary,
               fullWidth: true,
               onPressed: () {},
-            ),
+            ).pt2(),
 
             _divider(bsTheme.border),
             _sectionTitle('Button Groups'),
             _description('Corresponds to: btn-group '),
-            const SizedBox(height: BsSpacing.s2),
             BsButtonGroup(
               groupSize: BsButtonSize.md,
               children: [
@@ -261,9 +252,9 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   onPressed: () {},
                 ),
               ],
-            ),
+            ).pt2(),
           ],
-        ),
+        ).p3(),
       ),
     );
   }

@@ -16,7 +16,6 @@ class GridShowcase extends StatelessWidget {
         title: Text('Grid System', style: TextStyle(color: bs.bodyText)),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: BsSpacing.s4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -146,45 +145,26 @@ class GridShowcase extends StatelessWidget {
             BsContainer(
               child: Column(
                 children: [
-                  Text('g-1 (4px)', style: _labelStyle(context)),
-                  const SizedBox(height: BsSpacing.s1),
+                  Text('g-1 (4px)', style: _labelStyle(context)).pb1(),
                   BsRow(
                     gutterX: BsSpacing.s1,
                     gutterY: BsSpacing.s1,
                     children: [
-                      BsCol(
-                        config: BsColConfig.all(4),
-                        child: _ColBox('col-4'),
-                      ),
-                      BsCol(
-                        config: BsColConfig.all(4),
-                        child: _ColBox('col-4'),
-                      ),
-                      BsCol(
-                        config: BsColConfig.all(4),
-                        child: _ColBox('col-4'),
-                      ),
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
                     ],
                   ),
                   const SizedBox(height: BsSpacing.s3),
-                  Text('g-3 / default (16px)', style: _labelStyle(context)),
-                  const SizedBox(height: BsSpacing.s1),
+                  Text('g-3 / default (16px)', style: _labelStyle(context))
+                      .pb1(),
                   BsRow(
                     // gutterX: BsSpacing.s3,
                     // gutterY: BsSpacing.s3,
                     children: [
-                      BsCol(
-                        config: BsColConfig.all(4),
-                        child: _ColBox('col-4'),
-                      ),
-                      BsCol(
-                        config: BsColConfig.all(4),
-                        child: _ColBox('col-4'),
-                      ),
-                      BsCol(
-                        config: BsColConfig.all(4),
-                        child: _ColBox('col-4'),
-                      ),
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
                     ],
                   ),
                 ],
@@ -193,7 +173,7 @@ class GridShowcase extends StatelessWidget {
 
             const SizedBox(height: BsSpacing.s5),
           ],
-        ),
+        ).py4(),
       ),
     );
   }

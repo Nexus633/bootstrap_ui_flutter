@@ -7,15 +7,16 @@ class ImageShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(BsSpacing.s3),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Images', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: BsSpacing.s3),
-          
+
           _sectionTitle('Responsive images'),
-          _description('Images in Bootstrap are made responsive with .img-fluid. max-width: 100%; and height: auto; are applied to the image so that it scales with the parent element.'),
+          _description(
+            'Images in Bootstrap are made responsive with .img-fluid. max-width: 100%; and height: auto; are applied to the image so that it scales with the parent element.',
+          ),
           BsImage.network(
             'https://picsum.photos/id/10/800/400',
             fluid: true,
@@ -24,7 +25,9 @@ class ImageShowcase extends StatelessWidget {
           const SizedBox(height: BsSpacing.s4),
 
           _sectionTitle('Image thumbnails'),
-          _description('In addition to our border-radius utilities, you can use .img-thumbnail to give an image a rounded 1px border appearance.'),
+          _description(
+            'In addition to our border-radius utilities, you can use .img-thumbnail to give an image a rounded 1px border appearance.',
+          ),
           BsImage.network(
             'https://picsum.photos/id/20/200/200',
             thumbnail: true,
@@ -61,7 +64,9 @@ class ImageShowcase extends StatelessWidget {
           const SizedBox(height: BsSpacing.s4),
 
           _sectionTitle('Aligning images'),
-          _description('Align images with the helper float classes or text alignment classes. block-level images can be centered using the .mx-auto margin utility class.'),
+          _description(
+            'Align images with the helper float classes or text alignment classes. block-level images can be centered using the .mx-auto margin utility class.',
+          ),
           const Text('Float Start (Left)'),
           BsImage.network(
             'https://picsum.photos/id/50/100/100',
@@ -86,7 +91,7 @@ class ImageShowcase extends StatelessWidget {
             semanticLabel: 'Aligned center',
           ),
         ],
-      ),
+      ).p3(),
     );
   }
 

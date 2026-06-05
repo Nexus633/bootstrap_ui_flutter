@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../utilities/size_extension.dart';
+import '../../utilities/spacing_extension.dart';
 
 /// A Bootstrap-style alert component.
 ///
@@ -147,55 +149,45 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final _AlertColors colors = _resolveColors(widget.variant);
 
-    Widget content = Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-        decoration: BoxDecoration(
-          color: colors.backgroundColor,
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(color: colors.borderColor, width: 1.0),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (widget.icon != null) ...[
-              Icon(
-                widget.icon,
-                color: _resolveIconColor(colors.iconColor),
-                size: 24,
-              ),
-              const SizedBox(width: 12),
-            ],
-            Expanded(
-              child: DefaultTextStyle(
-                style: TextStyle(color: colors.textColor, fontSize: 16),
-                child: widget.child,
+    Widget content = Container(
+      decoration: BoxDecoration(
+        color: colors.backgroundColor,
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(color: colors.borderColor, width: 1.0),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (widget.icon != null) ...[
+            Icon(
+              widget.icon,
+              color: _resolveIconColor(colors.iconColor),
+              size: 24,
+            ),
+            const SizedBox(width: 12),
+          ],
+          DefaultTextStyle(
+            style: TextStyle(color: colors.textColor, fontSize: 16),
+            child: widget.child,
+          ).expanded(),
+          if (widget.dismissible) ...[
+            const SizedBox(width: 12),
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: _handleClose,
+                borderRadius: BorderRadius.circular(4.0),
+                child: Icon(
+                  Icons.close,
+                  color: colors.textColor.withValues(alpha: 0.5),
+                  size: 20,
+                ).p(2),
               ),
             ),
-            if (widget.dismissible) ...[
-              const SizedBox(width: 12),
-              Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: _handleClose,
-                  borderRadius: BorderRadius.circular(4.0),
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: Icon(
-                      Icons.close,
-                      color: colors.textColor.withValues(alpha: 0.5),
-                      size: 20,
-                    ),
-                  ),
-                ),
-              ),
-            ],
           ],
-        ),
-      ),
-    );
+        ],
+      ).p3(),
+    ).w100().pb3();
 
     Widget animatedContent = content;
 

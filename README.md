@@ -20,7 +20,7 @@ Add `bootstrap_ui_flutter` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  bootstrap_ui_flutter: ^0.1.1
+  bootstrap_ui_flutter: ^0.1.3
 ```
 
 ## Example: Theme Usage

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../tokens/spacing.dart';
 import '../../tokens/bootstrap_theme.dart';
+import '../../utilities/alignment_extension.dart';
+import '../../utilities/spacing_extension.dart';
 
 /// A Bootstrap-style image component.
 ///
@@ -80,32 +82,27 @@ class BsImage extends StatelessWidget {
     if (thumbnail) {
       final theme = context.bs;
       current = Container(
-        padding: const EdgeInsets.all(BsSpacing.s1),
         decoration: BoxDecoration(
           color: theme.bodyBg,
           border: Border.all(color: theme.border, width: 1.0),
           borderRadius: BsRadius.md,
         ),
         child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(5.0)), // Slightly less than md (6.0) to fit inside padding
+          borderRadius: const BorderRadius.all(
+            Radius.circular(5.0),
+          ), // Slightly less than md (6.0) to fit inside padding
           child: current,
         ),
-      );
+      ).p1();
     } else if (circle) {
       current = ClipOval(child: current);
     } else if (rounded) {
-      current = ClipRRect(
-        borderRadius: BsRadius.md,
-        child: current,
-      );
+      current = ClipRRect(borderRadius: BsRadius.md, child: current);
     }
 
     // Apply Alignment
     if (alignment != null) {
-      current = Align(
-        alignment: alignment!,
-        child: current,
-      );
+      current = current.align(alignment!);
     }
 
     return current;

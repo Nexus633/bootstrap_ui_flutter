@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../tokens/spacing.dart';
 import '../../tokens/typography.dart';
 import '../../tokens/bootstrap_theme.dart';
+import '../../utilities/alignment_extension.dart';
 
 /// A Bootstrap-style figure component for displaying images with captions.
 ///
@@ -93,10 +94,7 @@ class BsFigure extends StatelessWidget {
     );
 
     if (captionAlignment != null) {
-      captionWidget = Align(
-        alignment: captionAlignment!,
-        child: captionWidget,
-      );
+      captionWidget = captionWidget.align(captionAlignment!);
     }
 
     return captionWidget;

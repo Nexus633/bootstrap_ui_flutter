@@ -34,7 +34,6 @@ class _AlertShowcaseState extends State<AlertShowcase> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -68,9 +67,7 @@ class _AlertShowcaseState extends State<AlertShowcase> {
                     activeAlerts.remove(alertName);
                   });
                 },
-                child: Text(
-                  alertName,
-                ), // Text color is automatically managed by the alert!
+                child: Text(alertName),
               ),
 
             const SizedBox(height: 32),
@@ -78,18 +75,13 @@ class _AlertShowcaseState extends State<AlertShowcase> {
             ElevatedButton(
               onPressed: () {
                 setState(() {
-                  activeAlerts = [
-                    'First hint',
-                    'Second hint',
-                    'Third hint',
-                  ];
+                  activeAlerts = ['First hint', 'Second hint', 'Third hint'];
                 });
               },
               child: const Text('Restore all alerts'),
             ),
 
-            Divider(color: bsTheme.border),
-            const SizedBox(height: 24),
+            Divider(color: bsTheme.border).py3(),
 
             Text(
               'Animations',
@@ -141,14 +133,11 @@ class _AlertShowcaseState extends State<AlertShowcase> {
               icon: Icons.timer_outlined,
               dismissible: true,
               autoCloseDuration: Duration(seconds: 5),
-              child: Text(
-                'This alert closes automatically after 5 seconds.',
-              ),
+              child: Text('This alert closes automatically after 5 seconds.'),
             ),
 
             const SizedBox(height: 48),
-            Divider(color: bsTheme.border),
-            const SizedBox(height: 24),
+            Divider(color: bsTheme.border).py3(),
 
             Text(
               'Static alerts',
@@ -163,9 +152,7 @@ class _AlertShowcaseState extends State<AlertShowcase> {
             const BsAlert(
               variant: BsAlertVariant.success,
               icon: Icons.check_circle_outline,
-              child: Text(
-                'Successfully saved! The record has been created.',
-              ),
+              child: Text('Successfully saved! The record has been created.'),
             ),
 
             const SizedBox(height: 16),
@@ -188,7 +175,7 @@ class _AlertShowcaseState extends State<AlertShowcase> {
               ),
             ),
           ],
-        ),
+        ).p(24),
       ),
     );
   }

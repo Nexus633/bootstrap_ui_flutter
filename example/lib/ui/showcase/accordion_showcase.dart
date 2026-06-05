@@ -23,7 +23,6 @@ class AccordionShowcase extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -45,9 +44,47 @@ class AccordionShowcase extends StatelessWidget {
                   initiallyExpanded: true,
                   body: Text(
                     'This is the first body. You can place any widgets here.',
-                    style: TextStyle(
-                      color: bsTheme.bodyTextSecondary,
-                    ), // Secondary is often more readable for body text
+                    style: TextStyle(color: bsTheme.bodyTextSecondary),
+                  ),
+                ),
+                BsAccordionItem(
+                  title: 'Accordion Item #2',
+                  body: Text(
+                    'This is the second body. It is closed by default.',
+                    style: TextStyle(color: bsTheme.bodyTextSecondary),
+                  ),
+                ),
+                BsAccordionItem(
+                  title: 'Accordion Item #3',
+                  body: Text(
+                    'And this is the third one in the group.',
+                    style: TextStyle(color: bsTheme.bodyTextSecondary),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 48),
+
+            Text(
+              'Accordion with Custom Cursor',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: bsTheme.bodyText,
+              ),
+            ),
+            const SizedBox(height: 16),
+            BsAccordion(
+              mouseCursor: SystemMouseCursors.click,
+              flush: false,
+              items: [
+                BsAccordionItem(
+                  title: 'Accordion Item #1',
+                  initiallyExpanded: true,
+                  body: Text(
+                    'This is the first body. You can place any widgets here.',
+                    style: TextStyle(color: bsTheme.bodyTextSecondary),
                   ),
                 ),
                 BsAccordionItem(
@@ -98,7 +135,7 @@ class AccordionShowcase extends StatelessWidget {
               ],
             ),
           ],
-        ),
+        ).p(24),
       ),
     );
   }

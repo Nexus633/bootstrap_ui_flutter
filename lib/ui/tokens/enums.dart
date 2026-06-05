@@ -207,3 +207,87 @@ enum BsBadgePosition {
   /// Positioned at the bottom right corner.
   bottomRight,
 }
+
+/// Variant types for [BsTable].
+enum BsTableVariant {
+  /// Primary table variant.
+  primary,
+
+  /// Secondary table variant.
+  secondary,
+
+  /// Success table variant.
+  success,
+
+  /// Danger table variant.
+  danger,
+
+  /// Warning table variant.
+  warning,
+
+  /// Info table variant.
+  info,
+
+  /// Light table variant.
+  light,
+
+  /// Dark table variant.
+  dark,
+}
+
+/// Vertical alignment options for [BsTable] cells.
+enum BsTableVerticalAlign {
+  /// Align to the top.
+  top,
+
+  /// Align to the middle.
+  middle,
+
+  /// Align to the bottom.
+  bottom,
+}
+
+/// Responsive behavior options for [BsTable].
+enum BsTableResponsive {
+  /// Always responsive (horizontally scrollable).
+  always,
+
+  /// Responsive until 'sm' breakpoint.
+  sm,
+
+  /// Responsive until 'md' breakpoint.
+  md,
+
+  /// Responsive until 'lg' breakpoint.
+  lg,
+
+  /// Responsive until 'xl' breakpoint.
+  xl,
+
+  /// Responsive until 'xxl' breakpoint.
+  xxl,
+}
+
+/// Sizing options for Bootstrap form controls.
+enum BsInputSize {
+  /// Small input size (`.form-control-sm`).
+  sm,
+
+  /// Default input size (`.form-control`).
+  md,
+
+  /// Large input size (`.form-control-lg`).
+  lg,
+}
+
+/// Validation states for Bootstrap form controls.
+enum BsValidationState {
+  /// No validation state applied.
+  none,
+
+  /// Valid state (`.is-valid`), typically renders green feedback.
+  valid,
+
+  /// Invalid state (`.is-invalid`), typically renders red feedback.
+  invalid,
+}

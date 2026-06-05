@@ -31,7 +31,6 @@ class ThemeShowcase extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -146,7 +145,7 @@ class ThemeShowcase extends StatelessWidget {
               ),
             ),
           ],
-        ),
+        ).p(24),
       ),
     );
   }
@@ -160,39 +159,36 @@ class ThemeShowcase extends StatelessWidget {
     required bool isActive,
     required BsThemeData theme,
   }) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => onThemeChanged(mode),
-        behavior: HitTestBehavior.opaque,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 12.0),
-          decoration: BoxDecoration(
-            color: isActive ? theme.primary : Colors.transparent,
-            borderRadius: BorderRadius.circular(
-              7.0,
-            ), // 1px smaller than the outer frame
-          ),
-          child: Column(
-            children: [
-              Icon(
-                icon,
-                size: 20,
+    return GestureDetector(
+      onTap: () => onThemeChanged(mode),
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        decoration: BoxDecoration(
+          color: isActive ? theme.primary : Colors.transparent,
+          borderRadius: BorderRadius.circular(
+            7.0,
+          ), // 1px smaller than the outer frame
+        ),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              size: 20,
+              color: isActive ? Colors.white : theme.bodyText,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
                 color: isActive ? Colors.white : theme.bodyText,
               ),
-              const SizedBox(height: 4),
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-                  color: isActive ? Colors.white : theme.bodyText,
-                ),
-              ),
-            ],
-          ),
-        ),
+            ),
+          ],
+        ).py(12),
       ),
-    );
+    ).expanded();
   }
 }
 

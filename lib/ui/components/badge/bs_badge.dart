@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/colors.dart';
 import '../../tokens/enums.dart';
+import '../../utilities/spacing_extension.dart';
 
 /// A Bootstrap-style badge component.
 ///
@@ -32,23 +33,18 @@ class BsBadge extends StatelessWidget {
     // 2. Pass the theme to the color logic
     final _BadgeStyle style = _resolveStyle(variant, bsTheme);
 
-    final EdgeInsets padding = isPill
-        ? const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0)
-        : const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0);
-
-    final BorderRadius radius = isPill
-        ? BorderRadius.circular(50.0)
-        : BorderRadius.circular(4.0);
+    final BorderRadius radius =
+        isPill ? BorderRadius.circular(50.0) : BorderRadius.circular(4.0);
 
     return Container(
-      padding: padding,
       decoration: BoxDecoration(
         color: style.backgroundColor,
         borderRadius: radius,
-        // Optional: A light border for the light badge (now dynamic from the theme!)
-        border: variant == BsBadgeVariant.light
-            ? Border.all(color: bsTheme.border, width: 1.0)
-            : null,
+        // Optional: A light border for the light badge
+        border:
+            variant == BsBadgeVariant.light
+                ? Border.all(color: bsTheme.border, width: 1.0)
+                : null,
       ),
       child: Text(
         label,
@@ -58,7 +54,7 @@ class BsBadge extends StatelessWidget {
           fontWeight: FontWeight.w700,
           height: 1.0,
         ),
-      ),
+      ).px(isPill ? 10 : 6).py(4),
     );
   }
 
