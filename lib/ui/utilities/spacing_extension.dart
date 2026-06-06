@@ -15,6 +15,9 @@ import '../tokens/spacing.dart';
 extension BsSpacingExtension on Widget {
   // ─── Padding Utilities (Dynamic Values) ──────────────────────────────────
 
+  /// Applies custom [EdgeInsets] as padding.
+  Widget padding(EdgeInsets value) => Padding(padding: value, child: this);
+
   /// Applies uniform padding on all sides.
   Widget p(double value) =>
       Padding(padding: EdgeInsets.all(value), child: this);

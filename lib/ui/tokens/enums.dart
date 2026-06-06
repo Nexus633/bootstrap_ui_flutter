@@ -291,3 +291,109 @@ enum BsValidationState {
   /// Invalid state (`.is-invalid`), typically renders red feedback.
   invalid,
 }
+
+/// Heading levels corresponding to Bootstrap's `<h1>` through `<h6>` tags.
+enum BsHeadingLevel {
+  /// Heading 1 (`<h1>`) level.
+  h1,
+
+  /// Heading 2 (`<h2>`) level.
+  h2,
+
+  /// Heading 3 (`<h3>`) level.
+  h3,
+
+  /// Heading 4 (`<h4>`) level.
+  h4,
+
+  /// Heading 5 (`<h5>`) level.
+  h5,
+
+  /// Heading 6 (`<h6>`) level.
+  h6,
+}
+
+/// Color variants for [BsCard].
+enum BsCardVariant {
+  /// Primary variant.
+  primary,
+
+  /// Secondary variant.
+  secondary,
+
+  /// Success variant.
+  success,
+
+  /// Danger variant.
+  danger,
+
+  /// Warning variant.
+  warning,
+
+  /// Info variant.
+  info,
+
+  /// Light variant.
+  light,
+
+  /// Dark variant.
+  dark,
+}
+
+/// Image positions for [BsCard].
+enum BsCardImagePosition {
+  /// Image at the top of the card.
+  top,
+
+  /// Image at the bottom of the card.
+  bottom,
+
+  /// Image as background overlay.
+  overlay,
+
+  /// Image on the left side of the card.
+  left,
+
+  /// Image on the right side of the card.
+  right,
+}
+
+/// Direction in which the dropdown menu opens.
+enum BsDropdownDirection {
+  /// Opens below the trigger (default).
+  down,
+
+  /// Opens above the trigger (.dropup).
+  up,
+
+  /// Opens to the right of the trigger (.dropend).
+  end,
+
+  /// Opens to the left of the trigger (.dropstart).
+  start,
+}
+
+/// Alignment of the dropdown menu relative to its trigger.
+enum BsDropdownAlignment {
+  /// Aligns the start edge of the menu with the start of the trigger (default).
+  start,
+
+  /// Aligns the end edge of the menu with the end of the trigger.
+  end,
+}
+
+/// Auto-close behavior of the dropdown when clicking inside or outside.
+enum BsDropdownAutoClose {
+  /// Closes when clicking outside the dropdown or on a menu item (default).
+  always,
+
+  /// Closes only when clicking on a menu item.
+  inside,
+
+  /// Closes only when clicking outside the dropdown.
+  outside,
+
+  /// Only closes programmatically or by clicking the toggle again.
+  none,
+}
+

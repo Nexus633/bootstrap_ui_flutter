@@ -4,6 +4,7 @@ import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
 import '../../utilities/size_extension.dart';
 import '../../utilities/spacing_extension.dart';
+import '../button/bs_close_button.dart';
 
 /// A Bootstrap-style alert component.
 ///
@@ -172,17 +173,9 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
           ).expanded(),
           if (widget.dismissible) ...[
             const SizedBox(width: 12),
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: _handleClose,
-                borderRadius: BorderRadius.circular(4.0),
-                child: Icon(
-                  Icons.close,
-                  color: colors.textColor.withValues(alpha: 0.5),
-                  size: 20,
-                ).p(2),
-              ),
+            BsCloseButton(
+              onPressed: _handleClose,
+              color: colors.textColor,
             ),
           ],
         ],
@@ -224,8 +217,8 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
         BsIconVariant.danger => bs.danger,
         BsIconVariant.warning => bs.warning,
         BsIconVariant.info => bs.info,
-        BsIconVariant.light => const Color(0xFFF8F9FA),
-        BsIconVariant.dark => const Color(0xFF212529),
+        BsIconVariant.light => bs.light,
+        BsIconVariant.dark => bs.dark,
       };
     }
     return widget.iconColor ?? fallback;

@@ -48,7 +48,7 @@ class BsContainer extends StatelessWidget {
           constraints: BoxConstraints(maxWidth: maxWidth),
           child:
               padding != null
-                  ? child.p(padding!.left) // Simplified, assuming symmetric
+                  ? child.padding(padding!)
                   : child.px(12),
         ).center();
       },

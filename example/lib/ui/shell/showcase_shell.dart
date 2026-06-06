@@ -13,6 +13,11 @@ import '../showcase/form_showcase.dart';
 import '../showcase/breadcrumb_showcase.dart';
 import '../showcase/helpers_showcase.dart';
 import '../showcase/utilities_showcase.dart';
+import '../showcase/heading_showcase.dart';
+import '../showcase/card_showcase.dart';
+import '../showcase/carousel_showcase.dart';
+import '../showcase/collapse_showcase.dart';
+import '../showcase/dropdown_showcase.dart';
 import '../../main.dart';
 
 // ─── Navigation Item Model ────────────────────────────────────────────────────
@@ -106,6 +111,30 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
     ),
     _NavItem(
       group: 'Components',
+      label: 'Card',
+      icon: Icons.credit_card_rounded,
+      page: const CardShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Carousel',
+      icon: Icons.view_carousel_rounded,
+      page: const CarouselShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Collapse',
+      icon: Icons.unfold_less_rounded,
+      page: const CollapseShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Dropdown',
+      icon: Icons.arrow_drop_down_circle_rounded,
+      page: const DropdownShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
       label: 'Figure',
       icon: Icons.add_photo_alternate_rounded,
       page: FigureShowcase(),
@@ -115,6 +144,12 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
       label: 'Forms',
       icon: Icons.edit_document,
       page: FormShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Headings',
+      icon: Icons.title_rounded,
+      page: const HeadingShowcase(),
     ),
     _NavItem(
       group: 'Components',

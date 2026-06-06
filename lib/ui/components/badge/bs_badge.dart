@@ -87,12 +87,12 @@ class BsBadge extends StatelessWidget {
         textColor: BsColors.onInfo,
       ),
       BsBadgeVariant.light => _BadgeStyle(
-        backgroundColor: BsColors.light,
-        textColor: BsColors.onLight,
+        backgroundColor: bs.light,
+        textColor: bs.onLight,
       ),
       BsBadgeVariant.dark => _BadgeStyle(
-        backgroundColor: BsColors.dark,
-        textColor: BsColors.onDark,
+        backgroundColor: bs.dark,
+        textColor: bs.onDark,
       ),
     };
   }

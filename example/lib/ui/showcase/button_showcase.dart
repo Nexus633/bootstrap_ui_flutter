@@ -253,6 +253,36 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                 ),
               ],
             ).pt2(),
+            _divider(bsTheme.border),
+            _sectionTitle('Close Buttons'),
+            _description('Corresponds to: btn-close. Supports default, disabled, white overrides (on dark backgrounds), and custom colors.'),
+            _Wrap(
+              children: [
+                BsCloseButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Close button clicked!')),
+                    );
+                  },
+                ),
+                const BsCloseButton(
+                  disabled: true,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF212529),
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                  child: const BsCloseButton(
+                    white: true,
+                  ),
+                ),
+                const BsCloseButton(
+                  color: Colors.blue,
+                ),
+              ],
+            ).pt2(),
           ],
         ).p3(),
       ),

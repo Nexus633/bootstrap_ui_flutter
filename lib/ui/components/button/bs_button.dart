@@ -346,8 +346,8 @@ class _BsButtonState extends State<BsButton> {
       BsIconVariant.danger => bs.danger,
       BsIconVariant.warning => bs.warning,
       BsIconVariant.info => bs.info,
-      BsIconVariant.light => BsColors.light,
-      BsIconVariant.dark => BsColors.dark,
+      BsIconVariant.light => bs.light,
+      BsIconVariant.dark => bs.dark,
     };
   }
 
@@ -445,17 +445,17 @@ class _BsButtonState extends State<BsButton> {
         borderRadius: borderRadius,
       ),
       BsButtonVariant.light => _ButtonStyle(
-        backgroundColor: BsColors.light, // HARDcoded, not bs.light
-        foregroundColor: BsColors.onLight, // Guaranteed dark text
-        border: BsColors.light,
+        backgroundColor: bs.light,
+        foregroundColor: bs.onLight,
+        border: bs.light,
         padding: padding,
         textStyle: textStyle,
         borderRadius: borderRadius,
       ),
       BsButtonVariant.dark => _ButtonStyle(
-        backgroundColor: BsColors.dark, // HARDcoded, not bs.dark
-        foregroundColor: BsColors.onDark, // Guaranteed white text
-        border: BsColors.dark,
+        backgroundColor: bs.dark,
+        foregroundColor: bs.onDark,
+        border: bs.dark,
         padding: padding,
         textStyle: textStyle,
         borderRadius: borderRadius,
