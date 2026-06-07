@@ -18,6 +18,10 @@ import '../showcase/card_showcase.dart';
 import '../showcase/carousel_showcase.dart';
 import '../showcase/collapse_showcase.dart';
 import '../showcase/dropdown_showcase.dart';
+import '../showcase/list_group_showcase.dart';
+import '../showcase/modal_showcase.dart';
+import '../showcase/navbar_showcase.dart';
+import '../showcase/nav_showcase.dart';
 import '../../main.dart';
 
 // ─── Navigation Item Model ────────────────────────────────────────────────────
@@ -162,6 +166,30 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
       label: 'Table',
       icon: Icons.table_chart_rounded,
       page: TableShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'List Group',
+      icon: Icons.format_list_bulleted_rounded,
+      page: const ListGroupShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Modal',
+      icon: Icons.picture_in_picture_rounded,
+      page: const ModalShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Navbar',
+      icon: Icons.menu_open_rounded,
+      page: const NavbarShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Navs & Tabs',
+      icon: Icons.tab_rounded,
+      page: const NavShowcase(),
     ),
 
     // ── Helpers ──────────────────────────────────────────────────────────────

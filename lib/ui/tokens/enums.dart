@@ -397,3 +397,143 @@ enum BsDropdownAutoClose {
   none,
 }
 
+/// Color variants for [BsListGroupItem].
+enum BsListGroupItemVariant {
+  /// Primary variant.
+  primary,
+
+  /// Secondary variant.
+  secondary,
+
+  /// Success variant.
+  success,
+
+  /// Danger variant.
+  danger,
+
+  /// Warning variant.
+  warning,
+
+  /// Info variant.
+  info,
+
+  /// Light variant.
+  light,
+
+  /// Dark variant.
+  dark,
+}
+
+/// Defines the backdrop behavior of a Bootstrap modal.
+enum BsModalBackdrop {
+  /// The backdrop is active and clicking it closes the modal.
+  enabled,
+
+  /// The backdrop is active but clicking it doesn't close the modal, instead triggering a shake/pulse animation.
+  static,
+
+  /// No backdrop is shown and clicking outside does nothing.
+  disabled,
+}
+
+/// Defines the size variants of a Bootstrap modal.
+enum BsModalSize {
+  /// Small modal (max-width: 300px).
+  sm,
+
+  /// Medium modal (default, max-width: 500px).
+  md,
+
+  /// Large modal (max-width: 800px).
+  lg,
+
+  /// Extra large modal (max-width: 1140px).
+  xl,
+
+  /// Fullscreen modal.
+  fullscreen,
+}
+
+/// Defines the expand behavior of a Bootstrap navbar.
+enum BsNavbarExpand {
+  /// Always expand the navbar (horizontal layout, no collapse/toggler).
+  always,
+
+  /// Expand on screens wider than `sm` (>= 576px).
+  sm,
+
+  /// Expand on screens wider than `md` (>= 768px).
+  md,
+
+  /// Expand on screens wider than `lg` (>= 992px).
+  lg,
+
+  /// Expand on screens wider than `xl` (>= 1200px).
+  xl,
+
+  /// Expand on screens wider than `xxl` (>= 1400px).
+  xxl,
+
+  /// Never expand the navbar (always collapsed with toggler).
+  never,
+}
+
+/// Defines the color variant of a navbar link or brand.
+enum BsNavbarLinkVariant {
+  /// The primary brand/link color variant.
+  primary,
+
+  /// The secondary brand/link color variant.
+  secondary,
+
+  /// The success brand/link color variant.
+  success,
+
+  /// The danger brand/link color variant.
+  danger,
+
+  /// The warning brand/link color variant.
+  warning,
+
+  /// The info brand/link color variant.
+  info,
+
+  /// The light brand/link color variant.
+  light,
+
+  /// The dark brand/link color variant.
+  dark,
+}
+
+/// The variant style of the [BsNav] component.
+enum BsNavVariant {
+  /// A plain list of links without tabs or pills decoration.
+  plain,
+
+  /// A classic tabbed interface with bottom borders.
+  tabs,
+
+  /// Pill-style navigation items.
+  pills,
+
+  /// Underline-style navigation items.
+  underline,
+}
+
+/// The horizontal alignment of the items inside [BsNav].
+enum BsNavAlignment {
+  /// Align items to the start.
+  start,
+
+  /// Center the items horizontally.
+  center,
+
+  /// Align items to the end.
+  end,
+
+  /// Fill all available space, expanding items proportionally.
+  fill,
+
+  /// Fill all available space, expanding items to equal width.
+  justified,
+}

@@ -69,7 +69,20 @@ BsCheckbox(
 )
 ```
 
-### 4. `BsRange` (Schieberegler)
+### 4. `BsRadio` (Radio-Buttons)
+
+Eine Komponente für Standard-Radio-Buttons, die sich an Bootstraps Checkbox/Radio-Steuerelementen orientiert.
+
+```dart
+BsRadio<String>(
+  value: 'eins',
+  groupValue: selectedValue,
+  onChanged: (val) => setState(() => selectedValue = val),
+  label: const Text('Option Eins'),
+)
+```
+
+### 5. `BsRange` (Schieberegler)
 
 Ein benutzerdefinierter Schieberegler (Slider), der `.form-range` entspricht.
 
@@ -82,7 +95,7 @@ BsRange(
 )
 ```
 
-### 5. `BsInputGroup` (Eingabegruppen)
+### 6. `BsInputGroup` (Eingabegruppen)
 
 Kombinieren Sie Eingabefelder problemlos mit Textzusätzen oder Buttons. Die `BsInputGroup` fungiert als Flex-Container, der mit seinen untergeordneten Elementen (`BsInput`, `BsSelect`, `BsButton`, `BsInputGroupText`) kommuniziert, um die Rahmenradien automatisch anzupassen und doppelte Rahmen zu vermeiden.
 

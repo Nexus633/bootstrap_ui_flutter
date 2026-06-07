@@ -245,7 +245,7 @@ class _BsCheckboxState extends FormFieldState<bool> {
     List<Widget> rowChildren = [];
     if (widget.reverse) {
       if (labelWidget != null) {
-        rowChildren.add(Expanded(child: labelWidget));
+        rowChildren.add(widget.inline ? labelWidget : Expanded(child: labelWidget));
         rowChildren.add(
           const SizedBox(width: 8.0),
         ); // .5rem margin-left for reverse
@@ -257,7 +257,7 @@ class _BsCheckboxState extends FormFieldState<bool> {
         rowChildren.add(
           const SizedBox(width: 8.0),
         ); // .5rem margin-right for normal
-        rowChildren.add(Expanded(child: labelWidget));
+        rowChildren.add(widget.inline ? labelWidget : Expanded(child: labelWidget));
       }
     }
 

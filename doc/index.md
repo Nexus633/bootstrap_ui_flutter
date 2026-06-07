@@ -46,6 +46,9 @@ Here is a quick overview of all documented topics in both languages:
 | 🔠 **Heading** | [Heading](./en/components/heading.md) | [Heading](./de/components/heading.md) |
 | 📷 **Image** | [Image](./en/components/image.md) | [Image](./de/components/image.md) |
 | 📊 **Table** | [Table](./en/components/table.md) | [Table](./de/components/table.md) |
+| 📋 **List Group** | [List Group](./en/components/list_group.md) | [Listengruppe](./de/components/list_group.md) |
+| 💬 **Modal** | [Modal](./en/components/modal.md) | [Modaldialoge](./de/components/modal.md) |
+| 🗺️ **Navbar** | [Navbar](./en/components/navbar.md) | [Navigationsleiste](./de/components/navbar.md) |
 
 ### 🛠️ Helpers & Utilities / Hilfen & Werkzeuge
 

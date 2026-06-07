@@ -314,14 +314,17 @@ class _BsDropdownState extends State<BsDropdown> {
     }
 
     if (widget.toggle != null) {
-      return GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: widget.disabled ? null : _toggleMenu,
-        child: CompositedTransformTarget(
-          link: _layerLink,
-          child: AbsorbPointer(
-            absorbing: !widget.disabled,
-            child: widget.toggle!,
+      return MouseRegion(
+        cursor: widget.disabled ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: widget.disabled ? null : _toggleMenu,
+          child: CompositedTransformTarget(
+            link: _layerLink,
+            child: AbsorbPointer(
+              absorbing: !widget.disabled,
+              child: widget.toggle!,
+            ),
           ),
         ),
       );
