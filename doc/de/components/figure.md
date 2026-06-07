@@ -1,5 +1,12 @@
 # Figure (Abbildung)
 
+## Vorschau
+
+| Figure Standard | Figure mit Beschriftung |
+|:---:|:---:|
+| <img src="../../assets/Figures-1.png" width="380" alt="Figure Standard"> | <img src="../../assets/Figures-2.png" width="380" alt="Figure mit Beschriftung"> |
+
+
 Die Figure-Komponente wird verwendet, um zusammengehörige Inhalte wie ein Bild mit einer optionalen Beschriftung anzuzeigen, entsprechend der Bootstrap 5 Funktionalität.
 
 ## Zweck

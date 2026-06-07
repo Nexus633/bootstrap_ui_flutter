@@ -1,5 +1,12 @@
 # Table
 
+## Preview
+
+| Standard Table | Striped Table | Responsive Table |
+|:---:|:---:|:---:|
+| <img src="../../assets/Table-1.png" width="250" alt="Standard Table"> | <img src="../../assets/Table-2.png" width="250" alt="Striped Table"> | <img src="../../assets/Table-3.png" width="250" alt="Responsive Table"> |
+
+
 Documentation and examples for opt-in styling of tables (given their prevalent use in ubiquitous widgets like calendars and date pickers).
 
 ## Features

@@ -1,5 +1,10 @@
 # Heading
 
+## Preview
+
+![Preview](../../assets/Headings.png)
+
+
 The `BsHeading` widget is used to render standard heading levels from `<h1>` to `<h6>` with Bootstrap-compatible styles, including the default bottom margins and correct line heights.
 
 ## Usage

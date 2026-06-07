@@ -1,5 +1,12 @@
 # Card
 
+## Preview
+
+| Standard Card | Header & Footer / Image | Card Group |
+|:---:|:---:|:---:|
+| <img src="../../assets/Card-1.png" width="250" alt="Standard Card"> | <img src="../../assets/Card-2.png" width="250" alt="Header & Footer / Image"> | <img src="../../assets/Card-3.png" width="250" alt="Card Group"> |
+
+
 The `BsCard` widget is a flexible and extensible content container. It supports headers, footers, body content, images (top, bottom, left, right, overlay), color variants, and custom layouts.
 
 ## Usage

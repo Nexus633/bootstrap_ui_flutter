@@ -1,5 +1,10 @@
 # Kollabieren (Collapse)
 
+## Vorschau
+
+![Vorschau](../../assets/Collapse.png)
+
+
 Die `BsCollapse`-Komponente schaltet die Sichtbarkeit von Inhalten mit einer weichen vertikalen (Höhe) oder horizontalen (Breite) Übergangsanimation um. Sie entspricht den Bootstrap-Utility-Klassen `.collapse` und `.collapse-horizontal`.
 
 ## Verwendung

@@ -1,5 +1,10 @@
 # Überschrift (Heading)
 
+## Vorschau
+
+![Vorschau](../../assets/Headings.png)
+
+
 Das `BsHeading`-Widget wird verwendet, um Standard-Überschriften von `<h1>` bis `<h6>` mit Bootstrap-kompatiblen Stilen zu rendern, einschließlich des standardmäßigen unteren Abstands (Margin) und der korrekten Zeilenhöhe (Line-Height).
 
 ## Verwendung

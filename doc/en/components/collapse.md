@@ -1,5 +1,10 @@
 # Collapse
 
+## Preview
+
+![Preview](../../assets/Collapse.png)
+
+
 The `BsCollapse` component toggles the visibility of content with a smooth vertical (height) or horizontal (width) transition. It corresponds to Bootstraps `.collapse` and `.collapse-horizontal` utility classes.
 
 ## Usage

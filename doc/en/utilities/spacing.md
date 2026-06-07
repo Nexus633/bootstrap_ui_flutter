@@ -1,5 +1,10 @@
 # Spacing Utilities
 
+## Preview
+
+![Preview](../../assets/Utilities-1.png)
+
+
 The `BsSpacingExtension` provides a set of concise methods to apply padding and margin to any Flutter widget, mirroring the naming convention of Bootstrap's utility classes.
 
 ## Features

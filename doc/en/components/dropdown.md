@@ -1,5 +1,14 @@
 # Dropdown
 
+## Preview
+
+| Dropdown Left | Dropdown Split Button | Dropdown Up |
+|:---:|:---:|:---:|
+| <img src="../../assets/Dropdown-1.png" width="250" alt="Dropdown Left"> | <img src="../../assets/Dropdown-2.png" width="250" alt="Dropdown Split Button"> | <img src="../../assets/Dropdown-3.png" width="250" alt="Dropdown Up"> |
+| **Dropdown Right** | **Dropdown Left** | **Dropdown Alignment** |
+| <img src="../../assets/Dropdown-4.png" width="250" alt="Dropdown Right"> | <img src="../../assets/Dropdown-5.png" width="250" alt="Dropdown Left"> | <img src="../../assets/Dropdown-6.png" width="250" alt="Dropdown Alignment"> |
+
+
 Dropdowns are toggleable overlays that display lists of links or actions. The suite contains:
 * `BsDropdown`: The main wrapper managing trigger actions and floating overlay alignment.
 * `BsDropdownMenu`: The actual menu container holding items.

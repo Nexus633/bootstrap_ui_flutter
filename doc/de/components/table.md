@@ -1,5 +1,12 @@
 # Tabelle (Table)
 
+## Vorschau
+
+| Tabelle Standard | Tabelle Gestreift | Tabelle Responsive |
+|:---:|:---:|:---:|
+| <img src="../../assets/Table-1.png" width="250" alt="Tabelle Standard"> | <img src="../../assets/Table-2.png" width="250" alt="Tabelle Gestreift"> | <img src="../../assets/Table-3.png" width="250" alt="Tabelle Responsive"> |
+
+
 Dokumentation und Beispiele für das Styling von Tabellen nach Bootstrap-Standard.
 
 ## Features

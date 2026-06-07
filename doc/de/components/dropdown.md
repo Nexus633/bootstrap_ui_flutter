@@ -1,5 +1,14 @@
 # Dropdown
 
+## Vorschau
+
+| Dropdown Links | Dropdown Split Button | Dropdown Oben |
+|:---:|:---:|:---:|
+| <img src="../../assets/Dropdown-1.png" width="250" alt="Dropdown Links"> | <img src="../../assets/Dropdown-2.png" width="250" alt="Split Button"> | <img src="../../assets/Dropdown-3.png" width="250" alt="Dropdown Oben"> |
+| **Dropdown Rechts** | **Dropdown Links** | **Dropdown Ausrichtung** |
+| <img src="../../assets/Dropdown-4.png" width="250" alt="Dropdown Rechts"> | <img src="../../assets/Dropdown-5.png" width="250" alt="Dropdown Links"> | <img src="../../assets/Dropdown-6.png" width="250" alt="Dropdown Ausrichtung"> |
+
+
 Dropdowns sind einblendbare Menüs, die Listen von Links oder Aktionen anzeigen. Das Paket enthält:
 * `BsDropdown`: Die Hauptkomponente, die den Trigger und die schwebende Positionierung verwaltet.
 * `BsDropdownMenu`: Der eigentliche Menü-Container.

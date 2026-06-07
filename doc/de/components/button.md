@@ -1,5 +1,10 @@
 # Button
 
+## Vorschau
+
+![Vorschau](../../assets/Button.png)
+
+
 Die `BsButton` Komponente bietet verschiedene Stile für Aktionen in Formularen, Dialogen und mehr.
 
 ## Verwendung

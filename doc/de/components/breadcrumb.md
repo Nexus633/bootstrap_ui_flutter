@@ -1,5 +1,10 @@
 # Breadcrumb
 
+## Vorschau
+
+![Vorschau](../../assets/Breadcrumb.png)
+
+
 Zeigt den Standort der aktuellen Seite innerhalb einer Navigationshierarchie an, wobei Trennzeichen automatisch hinzugefügt werden.
 
 ## Verwendung

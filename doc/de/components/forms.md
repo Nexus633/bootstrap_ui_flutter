@@ -1,5 +1,14 @@
 # Formulare (Forms)
 
+## Vorschau
+
+| Formular Layout 1 | Formular Layout 2 |
+|:---:|:---:|
+| <img src="../../assets/Forms-1.png" width="380" alt="Formular Layout 1"> | <img src="../../assets/Forms-2.png" width="380" alt="Formular Layout 2"> |
+| **Formular Layout 3** | **Formular Layout 4** |
+| <img src="../../assets/Forms-3.png" width="380" alt="Formular Layout 3"> | <img src="../../assets/Forms-4.png" width="380" alt="Formular Layout 4"> |
+
+
 Formular-Komponenten sind essenziell für die Erfassung von Benutzereingaben. Das `bootstrap_ui_flutter` Paket bietet ein umfassendes Set an Steuerelementen, die das Verhalten von Bootstraps `.form-control`, `.form-select`, `.form-check` und `.input-group` exakt nachbilden und sich gleichzeitig nahtlos in Flutters natives `Form` und `FormField` System integrieren.
 
 ## Features

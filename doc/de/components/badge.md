@@ -1,5 +1,10 @@
 # Badge
 
+## Vorschau
+
+![Vorschau](../../assets/Badge.png)
+
+
 Das `BsBadge` wird verwendet, um kleine Informationseinheiten wie Zähler oder Status-Labels anzuzeigen.
 
 ## Verwendung

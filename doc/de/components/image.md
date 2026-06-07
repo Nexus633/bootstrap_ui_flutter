@@ -1,5 +1,12 @@
 # Image
 
+## Vorschau
+
+| Image Fluid | Image Thumbnail |
+|:---:|:---:|
+| <img src="../../assets/Images-1.png" width="380" alt="Image Fluid"> | <img src="../../assets/Images-2.png" width="380" alt="Image Thumbnail"> |
+
+
 Bilder-Komponente zur Nachbildung der Bootstrap 5 Image-Funktionalitäten.
 
 ## Zweck
