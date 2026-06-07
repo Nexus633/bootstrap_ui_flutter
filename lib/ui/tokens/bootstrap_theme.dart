@@ -79,6 +79,8 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
     required this.infoBorderSubtle,
     required this.lightBorderSubtle,
     required this.darkBorderSubtle,
+    required this.onDark,
+    required this.onLight,
   });
 
   final Color primary;
@@ -89,6 +91,9 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
   final Color info;
   final Color light;
   final Color dark;
+
+  final Color onDark;
+  final Color onLight;
 
   final Color bodyText;
   final Color bodyTextSecondary;
@@ -161,6 +166,8 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
     info: BsColors.info,
     light: BsColors.light,
     dark: BsColors.dark,
+    onDark: const Color(0xFFFFFFFF),
+    onLight: const Color(0xFF000000),
 
     bodyText: BsColors.gray[900]!,
     bodyTextSecondary: BsColors.gray[900]!.withValues(alpha: 0.75),
@@ -241,6 +248,8 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
     info: BsColors.info,
     light: BsColors.gray[800]!,
     dark: BsColors.gray[200]!,
+    onDark: const Color(0xFF000000),
+    onLight: const Color(0xFFFFFFFF),
 
     bodyText: BsColors.gray[300]!,
     bodyTextSecondary: BsColors.gray[300]!.withValues(alpha: 0.75),
@@ -302,6 +311,8 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
     Color? info,
     Color? light,
     Color? dark,
+    Color? onDark,
+    Color? onLight,
     Color? bodyText,
     Color? bodyTextSecondary,
     Color? bodyTextTertiary,
@@ -347,6 +358,8 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
       info: info ?? this.info,
       light: light ?? this.light,
       dark: dark ?? this.dark,
+      onDark: onDark ?? this.onDark,
+      onLight: onLight ?? this.onLight,
       bodyText: bodyText ?? this.bodyText,
       bodyTextSecondary: bodyTextSecondary ?? this.bodyTextSecondary,
       bodyTextTertiary: bodyTextTertiary ?? this.bodyTextTertiary,
@@ -399,6 +412,8 @@ class BsThemeData extends ThemeExtension<BsThemeData> {
       info: Color.lerp(info, other.info, t)!,
       light: Color.lerp(light, other.light, t)!,
       dark: Color.lerp(dark, other.dark, t)!,
+      onDark: Color.lerp(onDark, other.onDark, t)!,
+      onLight: Color.lerp(onLight, other.onLight, t)!,
       bodyText: Color.lerp(bodyText, other.bodyText, t)!,
       bodyTextSecondary: Color.lerp(
         bodyTextSecondary,

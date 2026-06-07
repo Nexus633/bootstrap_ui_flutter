@@ -33,6 +33,8 @@ abstract class BsTypography {
   static const double lineHeightBase = 1.5; // --bs-body-line-height
   static const double lineHeightSm = 1.25; // --bs-line-height-sm
   static const double lineHeightLg = 1.5; // --bs-line-height-lg
+  // --bs-heading-line-height
+  static const double lineHeightHeadings = 1.2;
 
   // ─── Ready-to-use TextStyle objects ────────────────────────────────────────────
   static const TextStyle body = TextStyle(

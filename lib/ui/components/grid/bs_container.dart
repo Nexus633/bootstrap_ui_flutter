@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../tokens/breakpoints.dart';
-import '../../tokens/spacing.dart';
 import '../../tokens/enums.dart';
+import '../../utilities/alignment_extension.dart';
+import '../../utilities/spacing_extension.dart';
 
 // ─── BsContainer ─────────────────────────────────────────────────────────────
 
@@ -43,19 +44,13 @@ class BsContainer extends StatelessWidget {
         // "fluid" has no max-width → double.infinity
         final double maxWidth = _resolveMaxWidth(availableWidth);
 
-        return Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: maxWidth),
-            child: Padding(
-              // Bootstrap: --bs-gutter-x = 1.5rem = 24px (each side → 12px)
-              // i.e. 12px left + 12px right = 24px total padding
-              padding:
-                  padding ??
-                  const EdgeInsets.symmetric(horizontal: BsSpacing.s3 * 0.75),
-              child: child,
-            ),
-          ),
-        );
+        return ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: maxWidth),
+          child:
+              padding != null
+                  ? child.padding(padding!)
+                  : child.px(12),
+        ).center();
       },
     );
   }

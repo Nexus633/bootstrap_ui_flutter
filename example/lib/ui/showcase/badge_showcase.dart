@@ -6,15 +6,15 @@ class BadgeShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Theme abgreifen
+    // Get theme
     final bsTheme = context.bs;
 
     return Scaffold(
-      backgroundColor: bsTheme.bodyBg, // Scaffold Hintergrund anpassen
+      backgroundColor: bsTheme.bodyBg, // Adjust Scaffold background
       appBar: AppBar(
         title: const Text('Badge Showcase'),
         backgroundColor: bsTheme.bodyBg,
-        foregroundColor: bsTheme.bodyText, // Text & Back-Button anpassen
+        foregroundColor: bsTheme.bodyText, // Adjust text & back button
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -22,7 +22,6 @@ class BadgeShowcase extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -42,10 +41,10 @@ class BadgeShowcase extends StatelessWidget {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     Row(
                       spacing: 8.0,
-                      children: const [
+                      children: [
                         BsBadge(
                           label: 'Primary',
                           variant: BsBadgeVariant.primary,
@@ -71,10 +70,10 @@ class BadgeShowcase extends StatelessWidget {
                         BsBadge(label: 'Dark', variant: BsBadgeVariant.dark),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Row(
                       spacing: 8.0,
-                      children: const [
+                      children: [
                         BsBadge(label: '8', variant: BsBadgeVariant.primary),
                         BsBadge(label: '12', variant: BsBadgeVariant.secondary),
                         BsBadge(label: '8', variant: BsBadgeVariant.success),
@@ -105,10 +104,10 @@ class BadgeShowcase extends StatelessWidget {
             Wrap(
               spacing: 8.0,
               runSpacing: 8.0,
-              children: [
+              children: const [
                 Row(
                   spacing: 8.0,
-                  children: const [
+                  children: [
                     BsBadge(
                       label: 'Primary',
                       variant: BsBadgeVariant.primary,
@@ -151,10 +150,10 @@ class BadgeShowcase extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Row(
                   spacing: 8.0,
-                  children: const [
+                  children: [
                     BsBadge(
                       label: '8',
                       variant: BsBadgeVariant.primary,
@@ -203,7 +202,7 @@ class BadgeShowcase extends StatelessWidget {
             const SizedBox(height: 48),
 
             Text(
-              'Typografische Integration',
+              'Typographic Integration',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -215,7 +214,7 @@ class BadgeShowcase extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Benachrichtigungen',
+                  'Notifications',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -223,14 +222,14 @@ class BadgeShowcase extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 8),
-                const BsBadge(label: 'Neu', variant: BsBadgeVariant.danger),
+                const BsBadge(label: 'New', variant: BsBadgeVariant.danger),
               ],
             ),
 
             const SizedBox(height: 48),
 
             Text(
-              'Buttons mit Badges (Pill)',
+              'Buttons with Badges (Pill)',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -314,7 +313,7 @@ class BadgeShowcase extends StatelessWidget {
             const SizedBox(height: 48),
 
             Text(
-              'Buttons mit Badges (Standard)',
+              'Buttons with Badges (Standard)',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -395,7 +394,7 @@ class BadgeShowcase extends StatelessWidget {
               ],
             ),
           ],
-        ),
+        ).p(24),
       ),
     );
   }

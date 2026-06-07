@@ -13,12 +13,12 @@ class ThemeShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Hier greifen wir auf unser aktuelles Theme zu!
+    // Access the current theme!
     final bsTheme = context.bs;
 
     return Scaffold(
-      // Die Hintergrundfarbe wird automatisch durch das Theme gesetzt,
-      // aber wir können auch explizit bsTheme.bodyBg nutzen.
+      // The background color is automatically set by the theme,
+      // but we can also explicitly use bsTheme.bodyBg.
       backgroundColor: bsTheme.bodyBg,
       appBar: AppBar(
         title: const Text('Theme Settings'),
@@ -31,13 +31,12 @@ class ThemeShowcase extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ─── Theme Switcher ───────────────────────────────────────────────
+            // ─── Appearance ──────────────────────────────────────────────────
             Text(
-              'Erscheinungsbild',
+              'Appearance',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -46,10 +45,10 @@ class ThemeShowcase extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Ein eleganter Toggle, um zwischen den Modes zu wechseln
+            // An elegant toggle to switch between modes
             Container(
               decoration: BoxDecoration(
-                color: bsTheme.light, // Nutzt die Light-Farbe als Hintergrund
+                color: bsTheme.light, // Uses the light color as background
                 borderRadius: BorderRadius.circular(8.0),
                 border: Border.all(color: bsTheme.border),
               ),
@@ -82,9 +81,9 @@ class ThemeShowcase extends StatelessWidget {
 
             const SizedBox(height: 48),
 
-            // ─── Farb-Palette zur Kontrolle ───────────────────────────────────
+            // ─── Color palette for verification ───────────────────────────────────
             Text(
-              'Semantische Farben',
+              'Semantic Colors',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -106,9 +105,9 @@ class ThemeShowcase extends StatelessWidget {
 
             const SizedBox(height: 48),
 
-            // ─── Komponenten im Live-Test ─────────────────────────────────────
+            // ─── Live component test ─────────────────────────────────────
             Text(
-              'Live Komponenten',
+              'Live Components',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -122,7 +121,7 @@ class ThemeShowcase extends StatelessWidget {
               label: 'Primary Action',
               variant: BsButtonVariant.primary,
               icon: Icons.send,
-              badge: BsBadge(label: 'Neu', variant: BsBadgeVariant.warning),
+              badge: BsBadge(label: 'New', variant: BsBadgeVariant.warning),
               badgePosition: BsBadgePosition.topRight,
             ),
 
@@ -133,7 +132,7 @@ class ThemeShowcase extends StatelessWidget {
               variant: BsAlertVariant.success,
               icon: Icons.check_circle,
               dismissible: true,
-              child: const Text('Das Theme wurde erfolgreich geladen!'),
+              child: const Text('The theme has been successfully loaded!'),
             ),
 
             const SizedBox(height: 16),
@@ -142,16 +141,16 @@ class ThemeShowcase extends StatelessWidget {
               variant: BsAlertVariant.dark,
               icon: Icons.dark_mode,
               child: const Text(
-                'Dieser Dark-Alert passt sich perfekt ins UI ein.',
+                'This dark alert blends perfectly into the UI.',
               ),
             ),
           ],
-        ),
+        ).p(24),
       ),
     );
   }
 
-  // ─── Hilfs-Widgets für den Showcase ─────────────────────────────────────────
+  // ─── Helper widgets for the showcase ─────────────────────────────────────────
 
   Widget _buildToggleItem({
     required String label,
@@ -160,43 +159,40 @@ class ThemeShowcase extends StatelessWidget {
     required bool isActive,
     required BsThemeData theme,
   }) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => onThemeChanged(mode),
-        behavior: HitTestBehavior.opaque,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 12.0),
-          decoration: BoxDecoration(
-            color: isActive ? theme.primary : Colors.transparent,
-            borderRadius: BorderRadius.circular(
-              7.0,
-            ), // 1px kleiner als der Außenrahmen
-          ),
-          child: Column(
-            children: [
-              Icon(
-                icon,
-                size: 20,
+    return GestureDetector(
+      onTap: () => onThemeChanged(mode),
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        decoration: BoxDecoration(
+          color: isActive ? theme.primary : Colors.transparent,
+          borderRadius: BorderRadius.circular(
+            7.0,
+          ), // 1px smaller than the outer frame
+        ),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              size: 20,
+              color: isActive ? Colors.white : theme.bodyText,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
                 color: isActive ? Colors.white : theme.bodyText,
               ),
-              const SizedBox(height: 4),
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-                  color: isActive ? Colors.white : theme.bodyText,
-                ),
-              ),
-            ],
-          ),
-        ),
+            ),
+          ],
+        ).py(12),
       ),
-    );
+    ).expanded();
   }
 }
 
-// Kleines Widget, um die Farbkreise zu zeichnen
+// Small widget to draw color swatches
 class _ColorSwatch extends StatelessWidget {
   const _ColorSwatch({required this.name, required this.color});
 

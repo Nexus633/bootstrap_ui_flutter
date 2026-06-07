@@ -19,11 +19,11 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    // Theme abgreifen
+    // Get theme
     final bsTheme = context.bs;
 
     return Scaffold(
-      backgroundColor: bsTheme.bodyBg, // Dynamischer Hintergrund
+      backgroundColor: bsTheme.bodyBg, // Dynamic background
       appBar: AppBar(
         backgroundColor: bsTheme.bodyBg,
         foregroundColor: bsTheme.bodyText,
@@ -35,13 +35,11 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(BsSpacing.s3),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _sectionTitle('Solid Varianten'),
-            _description('Entspricht: btn btn-primary, btn-secondary, etc.'),
-            const SizedBox(height: BsSpacing.s2),
+            _sectionTitle('Solid Variants'),
+            _description('Corresponds to: btn btn-primary, btn-secondary, etc.'),
             _Wrap(
               children: [
                 BsButton(
@@ -90,12 +88,11 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   onPressed: () {},
                 ),
               ],
-            ),
+            ).pt2(),
 
             _divider(bsTheme.border),
-            _sectionTitle('Outline Varianten'),
-            _description('Entspricht: btn btn-outline-primary, etc.'),
-            const SizedBox(height: BsSpacing.s2),
+            _sectionTitle('Outline Variants'),
+            _description('Corresponds to: btn btn-outline-primary, etc.'),
             _Wrap(
               children: [
                 BsButton(
@@ -134,12 +131,11 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   onPressed: () {},
                 ),
               ],
-            ),
+            ).pt2(),
 
             _divider(bsTheme.border),
-            _sectionTitle('Größen'),
-            _description('Entspricht: btn-sm, (default), btn-lg'),
-            const SizedBox(height: BsSpacing.s2),
+            _sectionTitle('Sizes'),
+            _description('Corresponds to: btn-sm, (default), btn-lg'),
             _Wrap(
               children: [
                 BsButton(
@@ -161,27 +157,26 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   onPressed: () {},
                 ),
               ],
-            ),
+            ).pt2(),
 
             _divider(bsTheme.border),
-            _sectionTitle('Mit Icon'),
+            _sectionTitle('With Icon'),
             _description(
-              'Entspricht: <button><i class="bi bi-..."></i> Label</button>',
+              'Corresponds to: <button><i class="bi bi-..."></i> Label</button>',
             ),
-            const SizedBox(height: BsSpacing.s2),
             _Wrap(
               children: [
                 BsButton(
-                  label: 'Speichern',
+                  label: 'Save',
                   variant: BsButtonVariant.primary,
                   icon: Icons.save,
                   iconVariant:
-                      BsIconVariant.light, // Beispiel für Icon-Variante
-                  iconColor: Colors.yellow, // Beispiel für Icon-Farbe
+                      BsIconVariant.light, // Example of icon variant
+                  iconColor: Colors.yellow, // Example of icon color
                   onPressed: () {},
                 ),
                 BsButton(
-                  label: 'Löschen',
+                  label: 'Delete',
                   variant: BsButtonVariant.danger,
                   icon: Icons.delete,
                   onPressed: () {},
@@ -193,12 +188,11 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   onPressed: () {},
                 ),
               ],
-            ),
+            ).pt2(),
 
             _divider(bsTheme.border),
             _sectionTitle('States'),
-            _description('Disabled (onPressed: null) und Loading'),
-            const SizedBox(height: BsSpacing.s2),
+            _description('Disabled (onPressed: null) and Loading'),
             _Wrap(
               children: [
                 const BsButton(
@@ -210,38 +204,35 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   variant: BsButtonVariant.outlinePrimary,
                 ),
                 BsButton(
-                  label: 'Laden...',
+                  label: 'Loading...',
                   variant: BsButtonVariant.primary,
                   isLoading: _isLoading,
                   onPressed: _simulateLoading,
                 ),
               ],
-            ),
+            ).pt2(),
 
             _divider(bsTheme.border),
             _sectionTitle('Full Width (d-grid)'),
             _description(
-              'Entspricht: <div class="d-grid"> → Button nimmt volle Breite',
+              'Corresponds to: <div class="d-grid"> → Button takes full width',
             ),
-            const SizedBox(height: BsSpacing.s2),
             BsButton(
               label: 'Full Width Button',
               variant: BsButtonVariant.primary,
               fullWidth: true,
               onPressed: () {},
-            ),
-            const SizedBox(height: BsSpacing.s2),
+            ).pt2(),
             BsButton(
               label: 'Full Width Outline',
               variant: BsButtonVariant.outlinePrimary,
               fullWidth: true,
               onPressed: () {},
-            ),
+            ).pt2(),
 
             _divider(bsTheme.border),
-            _sectionTitle('Button Gruppen'),
-            _description('Entspricht: btn-group '),
-            const SizedBox(height: BsSpacing.s2),
+            _sectionTitle('Button Groups'),
+            _description('Corresponds to: btn-group '),
             BsButtonGroup(
               groupSize: BsButtonSize.md,
               children: [
@@ -261,9 +252,39 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   onPressed: () {},
                 ),
               ],
-            ),
+            ).pt2(),
+            _divider(bsTheme.border),
+            _sectionTitle('Close Buttons'),
+            _description('Corresponds to: btn-close. Supports default, disabled, white overrides (on dark backgrounds), and custom colors.'),
+            _Wrap(
+              children: [
+                BsCloseButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Close button clicked!')),
+                    );
+                  },
+                ),
+                const BsCloseButton(
+                  disabled: true,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF212529),
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                  child: const BsCloseButton(
+                    white: true,
+                  ),
+                ),
+                const BsCloseButton(
+                  color: Colors.blue,
+                ),
+              ],
+            ).pt2(),
           ],
-        ),
+        ).p3(),
       ),
     );
   }

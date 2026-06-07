@@ -6,7 +6,20 @@ import '../showcase/badge_showcase.dart';
 import '../showcase/button_showcase.dart';
 import '../showcase/grid_showcase.dart';
 import '../showcase/themes_showcase.dart';
+import '../showcase/image_showcase.dart';
+import '../showcase/figure_showcase.dart';
+import '../showcase/table_showcase.dart';
+import '../showcase/form_showcase.dart';
+import '../showcase/breadcrumb_showcase.dart';
+import '../showcase/helpers_showcase.dart';
+import '../showcase/utilities_showcase.dart';
+import '../showcase/heading_showcase.dart';
+import '../showcase/card_showcase.dart';
+import '../showcase/carousel_showcase.dart';
+import '../showcase/collapse_showcase.dart';
+import '../showcase/dropdown_showcase.dart';
 import '../../main.dart';
+
 // ─── Navigation Item Model ────────────────────────────────────────────────────
 
 class _NavItem {
@@ -21,15 +34,15 @@ class _NavItem {
   final IconData icon;
   final Widget page;
 
-  /// Gruppe für die Sidebar-Überschriften (z.B. "Layout", "Components").
+  /// Group for sidebar headings (e.g., "Layout", "Components").
   final String? group;
 }
 
 // ─── Showcase Shell ───────────────────────────────────────────────────────────
 
-/// Die Haupt-Shell für alle Showcases.
-/// Füge einfach einen neuen _NavItem zur [_items] Liste hinzu
-/// um eine neue Komponente anzuzeigen.
+/// Main shell for all showcases.
+/// Simply add a new _NavItem to the [_items] list
+/// to display a new component.
 class ShowcaseShell extends StatefulWidget {
   const ShowcaseShell({super.key});
 
@@ -39,8 +52,9 @@ class ShowcaseShell extends StatefulWidget {
 
 class _ShowcaseShellState extends State<ShowcaseShell> {
   // ── Navigation Items ────────────────────────────────────────────────────────
-  // Neue Komponenten hier einfach anhängen!
+  // Simply append new components here!
   final List<_NavItem> _items = [
+    // ── Layout ───────────────────────────────────────────────────────────────
     _NavItem(
       group: 'Layout',
       label: 'Grid System',
@@ -52,26 +66,19 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
       label: 'Themes',
       icon: Icons.palette_rounded,
       page: ValueListenableBuilder<ThemeMode>(
-        // WICHTIG: Du musst hier den themeNotifier aus deiner main.dart importieren!
-        // z.B. import '../../main.dart';
         valueListenable: themeNotifier,
         builder: (context, mode, _) {
           return ThemeShowcase(
             currentMode: mode,
             onThemeChanged: (newMode) {
-              // Aktualisiert den globalen State -> App zeichnet sich neu
               themeNotifier.value = newMode;
             },
           );
         },
       ),
     ),
-    _NavItem(
-      group: 'Components',
-      label: 'Buttons',
-      icon: Icons.smart_button_rounded,
-      page: ButtonShowcase(),
-    ),
+
+    // ── Components ───────────────────────────────────────────────────────────
     _NavItem(
       group: 'Components',
       label: 'Accordion',
@@ -90,11 +97,88 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
       icon: Icons.badge_rounded,
       page: BadgeShowcase(),
     ),
-    // Zukünftige Komponenten:
-    // _NavItem(group: 'Components', label: 'Badge',  icon: Icons.label_rounded,       page: BadgeShowcase()),
-    // _NavItem(group: 'Components', label: 'Alert',  icon: Icons.info_rounded,         page: AlertShowcase()),
-    // _NavItem(group: 'Components', label: 'Card',   icon: Icons.credit_card_rounded,  page: CardShowcase()),
-    // _NavItem(group: 'Components', label: 'Input',  icon: Icons.text_fields_rounded,  page: InputShowcase()),
+    _NavItem(
+      group: 'Components',
+      label: 'Breadcrumb',
+      icon: Icons.linear_scale_rounded,
+      page: BreadcrumbShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Buttons',
+      icon: Icons.smart_button_rounded,
+      page: ButtonShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Card',
+      icon: Icons.credit_card_rounded,
+      page: const CardShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Carousel',
+      icon: Icons.view_carousel_rounded,
+      page: const CarouselShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Collapse',
+      icon: Icons.unfold_less_rounded,
+      page: const CollapseShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Dropdown',
+      icon: Icons.arrow_drop_down_circle_rounded,
+      page: const DropdownShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Figure',
+      icon: Icons.add_photo_alternate_rounded,
+      page: FigureShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Forms',
+      icon: Icons.edit_document,
+      page: FormShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Headings',
+      icon: Icons.title_rounded,
+      page: const HeadingShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Image',
+      icon: Icons.image_rounded,
+      page: ImageShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Table',
+      icon: Icons.table_chart_rounded,
+      page: TableShowcase(),
+    ),
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+    _NavItem(
+      group: 'Helpers',
+      label: 'Helpers',
+      icon: Icons.help_outline_rounded,
+      page: HelpersShowcase(),
+    ),
+
+    // ── Utilities ────────────────────────────────────────────────────────────
+    _NavItem(
+      group: 'Utilities',
+      label: 'Utilities',
+      icon: Icons.build_rounded,
+      page: UtilitiesShowcase(),
+    ),
   ];
 
   int _selectedIndex = 0;
@@ -110,10 +194,10 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
             selectedIndex: _selectedIndex,
             onSelect: (index) => setState(() => _selectedIndex = index),
           ),
-          // ── Vertikaler Divider ────────────────────────────────────────────────
-          const VerticalDivider(width: 1, color: BsColors.border),
+          // ── Vertical Divider ────────────────────────────────────────────────
+          VerticalDivider(width: 1, color: context.bs.border),
           // ── Content ───────────────────────────────────────────────────────────
-          Expanded(child: _items[_selectedIndex].page),
+          _items[_selectedIndex].page.expanded(),
         ],
       ),
     );
@@ -135,22 +219,19 @@ class _Sidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Baue die Sidebar-Einträge mit Gruppen-Überschriften.
+    // Build sidebar entries with group headings.
     final List<Widget> sidebarChildren = [];
     String? lastGroup;
 
     for (int i = 0; i < items.length; i++) {
       final item = items[i];
 
-      // Gruppen-Überschrift einfügen wenn sich die Gruppe ändert.
+      // Insert group heading if the group changes.
       if (item.group != null && item.group != lastGroup) {
         if (lastGroup != null) {
-          // Trennlinie zwischen Gruppen
+          // Divider between groups
           sidebarChildren.add(
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: BsSpacing.s2),
-              child: Divider(color: BsColors.border, height: 1),
-            ),
+            Divider(color: context.bs.border, height: 1).py2(),
           );
         }
         sidebarChildren.add(_GroupLabel(item.group!));
@@ -169,7 +250,7 @@ class _Sidebar extends StatelessWidget {
     return SizedBox(
       width: 220,
       child: ColoredBox(
-        color: BsColors.dark,
+        color: context.bs.bodyBg,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -177,15 +258,7 @@ class _Sidebar extends StatelessWidget {
             const _SidebarHeader(),
             const Divider(color: Color(0xFF495057), height: 1),
             // ── Nav Items ──────────────────────────────────────────────────────
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.symmetric(
-                  vertical: BsSpacing.s2,
-                  horizontal: BsSpacing.s2,
-                ),
-                children: sidebarChildren,
-              ),
-            ),
+            ListView(children: sidebarChildren).px2().py2().expanded(),
             // ── Footer ─────────────────────────────────────────────────────────
             const Divider(color: Color(0xFF495057), height: 1),
             const _SidebarFooter(),
@@ -203,47 +276,40 @@ class _SidebarHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(BsSpacing.s3),
-      child: Row(
-        children: [
-          Container(
-            width: 32,
-            height: 32,
-            decoration: BoxDecoration(
-              color: BsColors.primary,
-              borderRadius: BsRadius.md,
-            ),
-            child: const Icon(
-              Icons.bolt_rounded,
-              color: Colors.white,
-              size: 20,
-            ),
+    return Row(
+      children: [
+        Container(
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            color: context.bs.primary,
+            borderRadius: BsRadius.md,
           ),
-          const SizedBox(width: BsSpacing.s2),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Bootstrap UI',
-                style: BsTypography.body.copyWith(
-                  color: Colors.white,
-                  fontWeight: BsTypography.weightBold,
-                  fontSize: 14,
-                ),
+          child: const Icon(Icons.bolt_rounded, color: Colors.white, size: 20),
+        ),
+        const SizedBox(width: BsSpacing.s2),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Bootstrap UI',
+              style: BsTypography.body.copyWith(
+                color: context.bs.bodyText,
+                fontWeight: BsTypography.weightBold,
+                fontSize: 14,
               ),
-              Text(
-                'Flutter Components',
-                style: BsTypography.body.copyWith(
-                  color: const Color(0xFFadb5bd),
-                  fontSize: 11,
-                ),
+            ),
+            Text(
+              'Flutter Components',
+              style: BsTypography.body.copyWith(
+                color: context.bs.bodyTextSecondary,
+                fontSize: 11,
               ),
-            ],
-          ),
-        ],
-      ),
-    );
+            ),
+          ],
+        ),
+      ],
+    ).p3();
   }
 }
 
@@ -255,23 +321,15 @@ class _GroupLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        BsSpacing.s2,
-        BsSpacing.s2,
-        BsSpacing.s2,
-        BsSpacing.s1,
+    return Text(
+      label.toUpperCase(),
+      style: BsTypography.body.copyWith(
+        color: const Color(0xFF6c757d),
+        fontSize: 10,
+        fontWeight: BsTypography.weightBold,
+        letterSpacing: 1.2,
       ),
-      child: Text(
-        label.toUpperCase(),
-        style: BsTypography.body.copyWith(
-          color: const Color(0xFF6c757d),
-          fontSize: 10,
-          fontWeight: BsTypography.weightBold,
-          letterSpacing: 1.2,
-        ),
-      ),
-    );
+    ).ps2().pe2().pt2().pb1();
   }
 }
 
@@ -290,12 +348,15 @@ class _NavTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bs = context.bs;
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 2),
       child: Material(
         color: Colors.transparent,
         borderRadius: BsRadius.md,
         child: InkWell(
+          mouseCursor: SystemMouseCursors.click,
           onTap: onTap,
           borderRadius: BsRadius.md,
           hoverColor: Colors.white.withValues(alpha: 0.05),
@@ -307,11 +368,11 @@ class _NavTile extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               color: isSelected
-                  ? BsColors.primary.withValues(alpha: 0.2)
+                  ? bs.primary.withValues(alpha: 0.2)
                   : Colors.transparent,
               borderRadius: BsRadius.md,
               border: isSelected
-                  ? Border.all(color: BsColors.primary.withValues(alpha: 0.4))
+                  ? Border.all(color: bs.primary.withValues(alpha: 0.4))
                   : null,
             ),
             child: Row(
@@ -319,18 +380,18 @@ class _NavTile extends StatelessWidget {
                 Icon(
                   item.icon,
                   size: 16,
-                  color: isSelected
-                      ? BsColors.primary
-                      : const Color(0xFFadb5bd),
+                  color: isSelected ? bs.primary : const Color(0xFFadb5bd),
                 ),
                 const SizedBox(width: BsSpacing.s2),
                 Text(
                   item.label,
                   style: BsTypography.body.copyWith(
                     fontSize: 13,
-                    color: isSelected ? Colors.white : const Color(0xFFadb5bd),
+                    color: isSelected
+                        ? context.bs.bodyText
+                        : context.bs.bodyText,
                     fontWeight: isSelected
-                        ? BsTypography.weightMedium
+                        ? BsTypography.weightBold
                         : BsTypography.weightNormal,
                   ),
                 ),
@@ -350,15 +411,12 @@ class _SidebarFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(BsSpacing.s3),
-      child: Text(
-        'Bootstrap 5 · Flutter',
-        style: BsTypography.body.copyWith(
-          color: const Color(0xFF495057),
-          fontSize: 11,
-        ),
+    return Text(
+      'Bootstrap 5 · Flutter',
+      style: BsTypography.body.copyWith(
+        color: context.bs.bodyTextSecondary,
+        fontSize: 11,
       ),
-    );
+    ).p3();
   }
 }

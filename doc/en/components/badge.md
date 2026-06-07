@@ -1,5 +1,10 @@
 # Badge
 
+## Preview
+
+![Preview](../../assets/Badge.png)
+
+
 The `BsBadge` is used to display small pieces of information such as counters or status labels.
 
 ## Usage

@@ -32,7 +32,7 @@ void main() {
         ),
       );
 
-      final closeIcon = find.byIcon(Icons.close);
+      final closeIcon = find.byIcon(Icons.close_rounded);
       expect(closeIcon, findsOneWidget);
 
       await tester.pumpAndSettle(); // Finish "In" animation

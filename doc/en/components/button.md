@@ -1,5 +1,10 @@
 # Button
 
+## Preview
+
+![Preview](../../assets/Button.png)
+
+
 The `BsButton` component provides various styles for actions in forms, dialogs, and more.
 
 ## Usage

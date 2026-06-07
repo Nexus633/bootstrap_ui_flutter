@@ -6,11 +6,11 @@ class AccordionShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 1. Das Theme für den aktuellen Modus (Hell/Dunkel) abgreifen
+    // 1. Get the theme for the current mode (Light/Dark)
     final bsTheme = context.bs;
 
     return Scaffold(
-      // 2. Scaffold und AppBar an das Theme anpassen
+      // 2. Adapt Scaffold and AppBar to the theme
       backgroundColor: bsTheme.bodyBg,
       appBar: AppBar(
         title: const Text('Accordion Showcase'),
@@ -23,13 +23,12 @@ class AccordionShowcase extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Standard Accordion',
-              // 3. Textfarbe dynamisch machen (kein "const" mehr)
+              // 3. Make text color dynamic (no longer "const")
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -44,23 +43,61 @@ class AccordionShowcase extends StatelessWidget {
                   title: 'Accordion Item #1',
                   initiallyExpanded: true,
                   body: Text(
-                    'Das ist der erste Body. Man kann hier beliebige Widgets reinlegen.',
-                    style: TextStyle(
-                      color: bsTheme.bodyTextSecondary,
-                    ), // Für Fließtext oft Secondary besser lesbar
+                    'This is the first body. You can place any widgets here.',
+                    style: TextStyle(color: bsTheme.bodyTextSecondary),
                   ),
                 ),
                 BsAccordionItem(
                   title: 'Accordion Item #2',
                   body: Text(
-                    'Das ist der zweite Body. Er ist standardmäßig zu.',
+                    'This is the second body. It is closed by default.',
                     style: TextStyle(color: bsTheme.bodyTextSecondary),
                   ),
                 ),
                 BsAccordionItem(
                   title: 'Accordion Item #3',
                   body: Text(
-                    'Und das ist der dritte im Bunde.',
+                    'And this is the third one in the group.',
+                    style: TextStyle(color: bsTheme.bodyTextSecondary),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 48),
+
+            Text(
+              'Accordion with Custom Cursor',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: bsTheme.bodyText,
+              ),
+            ),
+            const SizedBox(height: 16),
+            BsAccordion(
+              mouseCursor: SystemMouseCursors.click,
+              flush: false,
+              items: [
+                BsAccordionItem(
+                  title: 'Accordion Item #1',
+                  initiallyExpanded: true,
+                  body: Text(
+                    'This is the first body. You can place any widgets here.',
+                    style: TextStyle(color: bsTheme.bodyTextSecondary),
+                  ),
+                ),
+                BsAccordionItem(
+                  title: 'Accordion Item #2',
+                  body: Text(
+                    'This is the second body. It is closed by default.',
+                    style: TextStyle(color: bsTheme.bodyTextSecondary),
+                  ),
+                ),
+                BsAccordionItem(
+                  title: 'Accordion Item #3',
+                  body: Text(
+                    'And this is the third one in the group.',
                     style: TextStyle(color: bsTheme.bodyTextSecondary),
                   ),
                 ),
@@ -82,14 +119,14 @@ class AccordionShowcase extends StatelessWidget {
               alwaysOpen: true,
               items: [
                 BsAccordionItem(
-                  title: 'Item A (Kann unabhängig geöffnet werden)',
+                  title: 'Item A (Can be opened independently)',
                   body: Text(
                     'Body A',
                     style: TextStyle(color: bsTheme.bodyTextSecondary),
                   ),
                 ),
                 BsAccordionItem(
-                  title: 'Item B (Kann unabhängig geöffnet werden)',
+                  title: 'Item B (Can be opened independently)',
                   body: Text(
                     'Body B',
                     style: TextStyle(color: bsTheme.bodyTextSecondary),
@@ -98,7 +135,7 @@ class AccordionShowcase extends StatelessWidget {
               ],
             ),
           ],
-        ),
+        ).p(24),
       ),
     );
   }

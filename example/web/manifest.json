@@ -1,6 +1,6 @@
 {
-    "name": "bootstrap_flutter_example",
-    "short_name": "bootstrap_flutter_example",
+    "name": "bootstrap_ui_flutter_example",
+    "short_name": "bootstrap_ui_flutter_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

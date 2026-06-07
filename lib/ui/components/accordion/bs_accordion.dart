@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
+import '../../utilities/size_extension.dart';
+import '../../utilities/spacing_extension.dart';
 
 // ─── Data Model ──────────────────────────────────────────────────────────────
 
@@ -187,36 +189,28 @@ class _BsAccordionItemWidget extends StatelessWidget {
             child: InkWell(
               mouseCursor: mouseCursor,
               onTap: onToggle,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
-                  vertical: 16.0,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        item.title,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: headerTextColor,
-                        ),
-                      ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    item.title,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: headerTextColor,
                     ),
-                    AnimatedRotation(
-                      turns: isOpen ? -0.5 : 0.0,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                      child: Icon(
-                        Icons.keyboard_arrow_down,
-                        color: headerTextColor,
-                      ),
+                  ).expanded(),
+                  AnimatedRotation(
+                    turns: isOpen ? -0.5 : 0.0,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    child: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: headerTextColor,
                     ),
-                  ],
-                ),
-              ),
+                  ),
+                ],
+              ).px(20).py(16),
             ),
           ),
 
@@ -225,16 +219,7 @@ class _BsAccordionItemWidget extends StatelessWidget {
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
             alignment: Alignment.topCenter,
-            child: SizedBox(
-              width: double.infinity,
-              child: isOpen
-                  ? Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: item
-                          .body, // Text styling is usually done when passing the widget
-                    )
-                  : const SizedBox.shrink(),
-            ),
+            child: (isOpen ? item.body.p(20) : const SizedBox.shrink()).w100(),
           ),
         ],
       ),

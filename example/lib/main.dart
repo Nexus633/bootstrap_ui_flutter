@@ -19,20 +19,18 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Bootstrap UI',
           debugShowCheckedModeBanner: false,
-          themeMode: currentMode, // Reagiert auf Systemeinstellungen!
+          themeMode: currentMode,
           theme: ThemeData(
             brightness: Brightness.light,
             scaffoldBackgroundColor: BsThemeData.lightTheme.bodyBg,
-            extensions: [
-              BsThemeData.lightTheme,
-            ], // Hier hängen wir dein UI-Kit ein
+            extensions: [BsThemeData.lightTheme],
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
             scaffoldBackgroundColor: BsThemeData.darkTheme.bodyBg,
-            extensions: [BsThemeData.darkTheme], // Und hier das Dark Theme
+            extensions: [BsThemeData.darkTheme],
           ),
-          home: const ShowcaseShell(), // ← nur das
+          home: const ShowcaseShell(),
         );
       },
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../tokens/breakpoints.dart';
 import '../../tokens/spacing.dart';
+import '../../utilities/size_extension.dart';
 
 // ─── BsCol Configuration ──────────────────────────────────────────────────────
 
@@ -172,9 +173,8 @@ class BsRow extends StatelessWidget {
         for (int i = 0; i < cols.length; i++) ...[
           if (i > 0) SizedBox(width: gutterX),
           // Expanded with flex = column count → proportional width
-          Expanded(
-            flex: cols[i].config.resolveFor(width) ?? _autoSpan(cols.length),
-            child: cols[i].child,
+          cols[i].child.expanded(
+            cols[i].config.resolveFor(width) ?? _autoSpan(cols.length),
           ),
         ],
       ],

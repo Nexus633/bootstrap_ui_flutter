@@ -1,5 +1,10 @@
 # Accordion
 
+## Vorschau
+
+![Vorschau](../../assets/Accordion.png)
+
+
 Das `BsAccordion` ist eine Komponente, die es ermöglicht, Inhalte platzsparend in ausklappbaren Bereichen zu organisieren.
 
 ## Verwendung

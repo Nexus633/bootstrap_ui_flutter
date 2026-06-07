@@ -1,5 +1,14 @@
 # Grid System
 
+## Preview
+
+| Grid Auto | Grid MD |
+|:---:|:---:|
+| <img src="../../assets/Grid-auto.png" width="380" alt="Grid Auto"> | <img src="../../assets/Grid-md.png" width="380" alt="Grid MD"> |
+| **Grid LG** | **Container Fluid & Gutter** |
+| <img src="../../assets/Grid-lg.png" width="380" alt="Grid LG"> | <img src="../../assets/Container-fluid-and-gutter.png" width="380" alt="Container Fluid & Gutter"> |
+
+
 The Bootstrap grid system is based on a 12-column layout and is fully responsive.
 
 ## Container
