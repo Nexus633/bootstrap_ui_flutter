@@ -171,12 +171,167 @@ class GridShowcase extends StatelessWidget {
               ),
             ),
 
+            _divider(context),
+
+            // ── Offsets ─────────────────────────────────────────────────────
+            _SectionHeader(
+              'Offsets',
+              'Move columns to the right using offset configs',
+            ),
+            BsContainer(
+              child: Column(
+                children: [
+                  BsRow(
+                    children: const [
+                      BsCol(
+                        config: BsColConfig.all(4),
+                        child: _ColBox('col-4'),
+                      ),
+                      BsCol(
+                        config: BsColConfig.all(4),
+                        offset: BsOffsetConfig.all(4),
+                        child: _ColBox('col-4 offset-4'),
+                      ),
+                    ],
+                  ).pb2(),
+                  BsRow(
+                    children: const [
+                      BsCol(
+                        config: BsColConfig.all(3),
+                        offset: BsOffsetConfig.all(3),
+                        child: _ColBox('col-3 offset-3'),
+                      ),
+                      BsCol(
+                        config: BsColConfig.all(3),
+                        offset: BsOffsetConfig.all(3),
+                        child: _ColBox('col-3 offset-3'),
+                      ),
+                    ],
+                  ).pb2(),
+                  BsRow(
+                    children: const [
+                      BsCol(
+                        config: BsColConfig.all(6),
+                        offset: BsOffsetConfig.all(3),
+                        child: _ColBox('col-6 offset-3'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            _divider(context),
+
+            // ── Horizontal Alignment (Justify) ──────────────────────────────
+            _SectionHeader(
+              'Horizontal Alignment (Justify)',
+              'Align columns horizontally: start, center, end, between, around',
+            ),
+            BsContainer(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('justify: start', style: _labelStyle(context)).pb1(),
+                  const BsRow(
+                    justify: BsRowJustify.start,
+                    children: [
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                    ],
+                  ).pb3(),
+                  Text('justify: center', style: _labelStyle(context)).pb1(),
+                  const BsRow(
+                    justify: BsRowJustify.center,
+                    children: [
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                    ],
+                  ).pb3(),
+                  Text('justify: end', style: _labelStyle(context)).pb1(),
+                  const BsRow(
+                    justify: BsRowJustify.end,
+                    children: [
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                    ],
+                  ).pb3(),
+                  Text('justify: between', style: _labelStyle(context)).pb1(),
+                  const BsRow(
+                    justify: BsRowJustify.between,
+                    children: [
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                    ],
+                  ).pb3(),
+                ],
+              ),
+            ),
+
+            _divider(context),
+
+            // ── Vertical Alignment (Align Items & Self) ──────────────────────
+            _SectionHeader(
+              'Vertical Alignment (Align Items & Align Self)',
+              'Align columns vertically within a row, or override per-column',
+            ),
+            BsContainer(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('alignItems: center', style: _labelStyle(context)).pb1(),
+                  Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: context.bs.border),
+                      borderRadius: BsRadius.md,
+                    ),
+                    child: const BsRow(
+                      alignItems: BsRowAlignItems.center,
+                      children: [
+                        BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                        BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                      ],
+                    ),
+                  ).pb3(),
+                  Text('alignSelf overrides', style: _labelStyle(context)).pb1(),
+                  Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: context.bs.border),
+                      borderRadius: BsRadius.md,
+                    ),
+                    child: const BsRow(
+                      alignItems: BsRowAlignItems.start,
+                      children: [
+                        BsCol(
+                          config: BsColConfig.all(4),
+                          alignSelf: BsColAlignSelf.center,
+                          child: _ColBox('align-self-center'),
+                        ),
+                        BsCol(
+                          config: BsColConfig.all(4),
+                          alignSelf: BsColAlignSelf.end,
+                          child: _ColBox('align-self-end'),
+                        ),
+                        BsCol(
+                          config: BsColConfig.all(4),
+                          child: _ColBox('align-self-auto (start)'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             const SizedBox(height: BsSpacing.s5),
           ],
         ).py4(),
       ),
     );
   }
+
 
   Widget _divider(BuildContext context) => Padding(
     padding: EdgeInsets.symmetric(vertical: BsSpacing.s4),

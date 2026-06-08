@@ -264,8 +264,8 @@ class CarouselShowcase extends StatelessWidget {
                               child: Container(
                                 color: const Color(0xFFF8F9FA),
                                 alignment: Alignment.center,
-                                child: const Icon(
-                                  Icons.insert_emoticon_rounded,
+                                child: const BsIcon(
+                                  BsIcons.emojiSmile,
                                   size: 64,
                                   color: Colors.grey,
                                 ),
@@ -279,8 +279,8 @@ class CarouselShowcase extends StatelessWidget {
                               child: Container(
                                 color: const Color(0xFFE9ECEF),
                                 alignment: Alignment.center,
-                                child: const Icon(
-                                  Icons.favorite_rounded,
+                                child: const BsIcon(
+                                  BsIcons.heartFill,
                                   size: 64,
                                   color: Colors.redAccent,
                                 ),

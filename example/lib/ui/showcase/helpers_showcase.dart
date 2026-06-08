@@ -128,7 +128,7 @@ class HelpersShowcase extends StatelessWidget {
                           child: Container(
                             color: Colors.grey[300],
                             child: const Center(
-                              child: Icon(Icons.image, size: 48),
+                              child: BsIcon(BsIcons.image, size: 48),
                             ),
                           ),
                         ),
@@ -146,7 +146,7 @@ class HelpersShowcase extends StatelessWidget {
                           child: Container(
                             color: Colors.grey[300],
                             child: const Center(
-                              child: Icon(Icons.image, size: 48),
+                              child: BsIcon(BsIcons.image, size: 48),
                             ),
                           ),
                         ),
@@ -188,12 +188,12 @@ class HelpersShowcase extends StatelessWidget {
                     children: [
                       BsIconLink(
                         label: const Text('Icon link after'),
-                        icon: const Icon(Icons.arrow_forward, size: 16),
+                        icon: const BsIcon(BsIcons.arrowRight, size: 16),
                         onPressed: () {},
                       ),
                       BsIconLink(
                         label: const Text('Icon link before'),
-                        icon: const Icon(Icons.download, size: 16),
+                        icon: const BsIcon(BsIcons.download, size: 16),
                         iconAfter: false,
                         onPressed: () {},
                       ),

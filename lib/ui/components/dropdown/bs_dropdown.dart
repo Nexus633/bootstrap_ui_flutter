@@ -57,6 +57,7 @@ class _BsDropdownMenuContext extends InheritedWidget {
 /// Manages the overlay context, placement direction, alignment, and auto-close
 /// behaviors.
 class BsDropdown extends StatefulWidget {
+  /// Creates a [BsDropdown] widget.
   const BsDropdown({
     super.key,
     this.label,
@@ -353,6 +354,7 @@ class _BsDropdownState extends State<BsDropdown> {
 ///
 /// Contains [BsDropdownItem], [BsDropdownHeader], [BsDropdownDivider], or [BsDropdownText].
 class BsDropdownMenu extends StatelessWidget {
+  /// Creates a [BsDropdownMenu].
   const BsDropdownMenu({
     super.key,
     required this.children,
@@ -503,6 +505,7 @@ class BsDropdownMenu extends StatelessWidget {
 
 /// A selectable action or link inside a [BsDropdownMenu].
 class BsDropdownItem extends StatefulWidget {
+  /// Creates a [BsDropdownItem].
   const BsDropdownItem({
     super.key,
     required this.child,
@@ -560,7 +563,7 @@ class _BsDropdownItemState extends State<BsDropdownItem> {
       }
     }
 
-    Widget content = Padding(
+    final Widget content = Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -628,6 +631,7 @@ class _BsDropdownItemState extends State<BsDropdownItem> {
 
 /// A header label inside a [BsDropdownMenu] to separate item groups.
 class BsDropdownHeader extends StatelessWidget {
+  /// Creates a [BsDropdownHeader].
   const BsDropdownHeader({
     super.key,
     required this.child,
@@ -664,6 +668,7 @@ class BsDropdownHeader extends StatelessWidget {
 
 /// A horizontal thin line separating items inside a [BsDropdownMenu].
 class BsDropdownDivider extends StatelessWidget {
+  /// Creates a [BsDropdownDivider].
   const BsDropdownDivider({super.key});
 
   @override
@@ -688,6 +693,7 @@ class BsDropdownDivider extends StatelessWidget {
 
 /// Plain descriptive text inside a [BsDropdownMenu].
 class BsDropdownText extends StatelessWidget {
+  /// Creates a [BsDropdownText].
   const BsDropdownText({
     super.key,
     required this.child,

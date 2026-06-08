@@ -44,6 +44,7 @@ Here is a quick overview of all documented topics in both languages:
 | 📝 **Forms** | [Forms](./en/components/forms.md) | [Forms](./de/components/forms.md) |
 | 🏁 **Grid System** | [Grid System](./en/components/grid.md) | [Grid System](./de/components/grid.md) |
 | 🔠 **Heading** | [Heading](./en/components/heading.md) | [Heading](./de/components/heading.md) |
+| ⭐ **Icon** | [Icon](./en/components/icon.md) | [Icon](./de/components/icon.md) |
 | 📷 **Image** | [Image](./en/components/image.md) | [Image](./de/components/image.md) |
 | 📊 **Table** | [Table](./en/components/table.md) | [Table](./de/components/table.md) |
 | 📋 **List Group** | [List Group](./en/components/list_group.md) | [Listengruppe](./de/components/list_group.md) |
@@ -56,6 +57,7 @@ Here is a quick overview of all documented topics in both languages:
 | :--- | :--- | :--- |
 | 🧱 **Helpers** | [Helpers Index](./en/helpers/index.md) | [Helpers Index](./de/helpers/index.md) |
 | ↔️ **Spacing Utility** | [Spacing Utility](./en/utilities/spacing.md) | [Abstands-Utilities](./de/utilities/spacing.md) |
+| 🔤 **Text Utilities** | [Text Utilities](./en/utilities/text.md) | [Text-Utilities](./de/utilities/text.md) |
 | ✨ **Other Utilities** | [Other Utilities](./en/utilities/others.md) | [Weitere Utilities](./de/utilities/others.md) |
 
 ---

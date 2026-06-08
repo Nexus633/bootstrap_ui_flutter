@@ -41,6 +41,31 @@ Text('Centered').center();
 Text('Left').alignStart();
 ```
 
+### Inline Vertical Alignment (Vertical Align)
+
+`BsVerticalAlignExtension` handles the vertical alignment of elements (e.g., icons, badges, or images) inside a text flow (`RichText` or `Text.rich`). These methods return a `WidgetSpan` and correspond to the Bootstrap `.align-*` classes.
+
+| Method | Description | Corresponds to Bootstrap Class |
+| :--- | :--- | :--- |
+| `.alignBaseline()` | Aligns the baseline of the element with the baseline of its parent. | `.align-baseline` |
+| `.alignTopInline()` | Aligns the top of the element with the top of the tallest element on the line. | `.align-top` |
+| `.alignMiddle()` | Centers the element vertically within the line. | `.align-middle` |
+| `.alignBottomInline()` | Aligns the bottom of the element with the bottom of the lowest element on the line. | `.align-bottom` |
+| `.alignTextTop()` | Aligns the top of the element with the top of the parent element's font. | `.align-text-top` |
+| `.alignTextBottom()` | Aligns the bottom of the element with the bottom of the parent element's font. | `.align-text-bottom` |
+
+```dart
+Text.rich(
+  TextSpan(
+    children: [
+      TextSpan(text: 'Text with '),
+      const Icon(Icons.star).alignMiddle(),
+      TextSpan(text: ' centered icon.'),
+    ],
+  ),
+)
+```
+
 ## Sizing
 
 `BsSizeExtension` handles dimensions and expansion.

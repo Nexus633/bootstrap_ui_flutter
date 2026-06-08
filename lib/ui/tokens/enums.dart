@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 /// Variant types for [BsButton].
 enum BsButtonVariant {
   /// The primary button variant.
@@ -537,3 +539,55 @@ enum BsNavAlignment {
   /// Fill all available space, expanding items to equal width.
   justified,
 }
+
+/// Horizontal alignment options for [BsRow] columns.
+enum BsRowJustify {
+  /// Align columns to the start (left) of the row.
+  start,
+
+  /// Center columns horizontally in the row.
+  center,
+
+  /// Align columns to the end (right) of the row.
+  end,
+
+  /// Distribute columns evenly; first column is at the start, last is at the end.
+  between,
+
+  /// Distribute columns evenly with equal space around them.
+  around,
+}
+
+/// Vertical alignment options for all columns inside a [BsRow].
+enum BsRowAlignItems {
+  /// Align columns to the top.
+  start,
+
+  /// Center columns vertically.
+  center,
+
+  /// Align columns to the bottom.
+  end,
+
+  /// Stretch columns to fill the row height.
+  stretch,
+}
+
+/// Vertical alignment options for an individual [BsCol] column, overriding the row's alignment.
+enum BsColAlignSelf {
+  /// Inherits alignment from the parent [BsRow].
+  auto,
+
+  /// Align this column to the top.
+  start,
+
+  /// Center this column vertically.
+  center,
+
+  /// Align this column to the bottom.
+  end,
+
+  /// Stretch this column to fill the row height.
+  stretch,
+}
+

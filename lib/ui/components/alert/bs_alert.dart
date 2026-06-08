@@ -150,7 +150,7 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final _AlertColors colors = _resolveColors(widget.variant);
 
-    Widget content = Container(
+    final Widget content = Container(
       decoration: BoxDecoration(
         color: colors.backgroundColor,
         borderRadius: BorderRadius.circular(8.0),

@@ -16,10 +16,53 @@ void main() {
 
   group('BsTextExtension', () {
     testWidgets('truncate() applies ellipsis and maxLines', (WidgetTester tester) async {
-      final text = Text('Very long text').truncate();
+      final text = const Text('Very long text').truncate();
       expect(text.overflow, TextOverflow.ellipsis);
       expect(text.maxLines, 1);
       expect(text.softWrap, false);
+    });
+
+    testWidgets('fs1 to fs6 apply correct font sizes', (WidgetTester tester) async {
+      expect(const Text('test').fs1().style?.fontSize, BsTypography.h1);
+      expect(const Text('test').fs2().style?.fontSize, BsTypography.h2);
+      expect(const Text('test').fs3().style?.fontSize, BsTypography.h3);
+      expect(const Text('test').fs4().style?.fontSize, BsTypography.h4);
+      expect(const Text('test').fs5().style?.fontSize, BsTypography.h5);
+      expect(const Text('test').fs6().style?.fontSize, BsTypography.h6);
+    });
+
+    testWidgets('fw weights apply correct FontWeights', (WidgetTester tester) async {
+      expect(const Text('test').fwBold().style?.fontWeight, BsTypography.weightBold);
+      expect(const Text('test').fwBolder().style?.fontWeight, FontWeight.w800);
+      expect(const Text('test').fwSemibold().style?.fontWeight, FontWeight.w600);
+      expect(const Text('test').fwMedium().style?.fontWeight, BsTypography.weightMedium);
+      expect(const Text('test').fwNormal().style?.fontWeight, BsTypography.weightNormal);
+      expect(const Text('test').fwLight().style?.fontWeight, BsTypography.weightLight);
+      expect(const Text('test').fwLighter().style?.fontWeight, FontWeight.w200);
+    });
+
+    testWidgets('fst styles apply correct FontStyles', (WidgetTester tester) async {
+      expect(const Text('test').fstItalic().style?.fontStyle, FontStyle.italic);
+      expect(const Text('test').fstNormal().style?.fontStyle, FontStyle.normal);
+    });
+
+    testWidgets('lh heights apply correct line heights', (WidgetTester tester) async {
+      expect(const Text('test').lh1().style?.height, 1.0);
+      expect(const Text('test').lhSm().style?.height, BsTypography.lineHeightSm);
+      expect(const Text('test').lhBase().style?.height, BsTypography.lineHeightBase);
+      expect(const Text('test').lhLg().style?.height, BsTypography.lineHeightLg);
+    });
+
+    testWidgets('text alignment applies correct TextAlign', (WidgetTester tester) async {
+      expect(const Text('test').textStart().textAlign, TextAlign.start);
+      expect(const Text('test').textCenter().textAlign, TextAlign.center);
+      expect(const Text('test').textEnd().textAlign, TextAlign.end);
+    });
+
+    testWidgets('text decoration applies correct TextDecoration', (WidgetTester tester) async {
+      expect(const Text('test').textDecorationUnderline().style?.decoration, TextDecoration.underline);
+      expect(const Text('test').textDecorationLineThrough().style?.decoration, TextDecoration.lineThrough);
+      expect(const Text('test').textDecorationNone().style?.decoration, TextDecoration.none);
     });
   });
 
@@ -127,6 +170,47 @@ void main() {
 
       expect(find.text('Link'), findsOneWidget);
       expect(find.byIcon(Icons.arrow_forward), findsOneWidget);
+    });
+  });
+
+  group('BsVerticalAlignExtension', () {
+    testWidgets('alignBaseline() returns WidgetSpan with baseline alignment', (WidgetTester tester) async {
+      final widget = const SizedBox();
+      final span = widget.alignBaseline();
+      expect(span.alignment, PlaceholderAlignment.baseline);
+      expect(span.baseline, TextBaseline.alphabetic);
+    });
+
+    testWidgets('alignTopInline() returns WidgetSpan with top alignment', (WidgetTester tester) async {
+      final widget = const SizedBox();
+      final span = widget.alignTopInline();
+      expect(span.alignment, PlaceholderAlignment.top);
+    });
+
+    testWidgets('alignMiddle() returns WidgetSpan with middle alignment', (WidgetTester tester) async {
+      final widget = const SizedBox();
+      final span = widget.alignMiddle();
+      expect(span.alignment, PlaceholderAlignment.middle);
+    });
+
+    testWidgets('alignBottomInline() returns WidgetSpan with bottom alignment', (WidgetTester tester) async {
+      final widget = const SizedBox();
+      final span = widget.alignBottomInline();
+      expect(span.alignment, PlaceholderAlignment.bottom);
+    });
+
+    testWidgets('alignTextTop() returns WidgetSpan with aboveBaseline alignment', (WidgetTester tester) async {
+      final widget = const SizedBox();
+      final span = widget.alignTextTop();
+      expect(span.alignment, PlaceholderAlignment.aboveBaseline);
+      expect(span.baseline, TextBaseline.alphabetic);
+    });
+
+    testWidgets('alignTextBottom() returns WidgetSpan with belowBaseline alignment', (WidgetTester tester) async {
+      final widget = const SizedBox();
+      final span = widget.alignTextBottom();
+      expect(span.alignment, PlaceholderAlignment.belowBaseline);
+      expect(span.baseline, TextBaseline.alphabetic);
     });
   });
 }

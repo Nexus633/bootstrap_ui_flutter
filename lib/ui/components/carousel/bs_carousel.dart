@@ -332,7 +332,7 @@ class _BsCarouselState extends State<BsCarousel> {
     // Determine control and indicator colors based on the theme & dark variant
     final Color controlsColor = widget.dark ? const Color(0xFF212529) : Colors.white;
 
-    Widget carouselBody = MouseRegion(
+    final Widget carouselBody = MouseRegion(
       onEnter: (_) {
         setState(() => _isHovering = true);
         if (widget.pauseOnHover) _stopAutoplay();
@@ -383,7 +383,7 @@ class _BsCarouselState extends State<BsCarousel> {
   Widget _buildSlidesContent() {
     if (widget.fade) {
       // Fade Transition Mode
-      Widget currentSlide = AnimatedSwitcher(
+      final Widget currentSlide = AnimatedSwitcher(
         duration: const Duration(milliseconds: 600),
         switchInCurve: Curves.easeInOut,
         switchOutCurve: Curves.easeInOut,

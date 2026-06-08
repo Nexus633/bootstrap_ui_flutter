@@ -5,9 +5,8 @@ import '../../tokens/spacing.dart';
 import '../../utilities/spacing_extension.dart';
 
 /// Scope shared down from [BsListGroup] to its children.
-class BsListGroupScope extends InheritedWidget {
-  const BsListGroupScope({
-    super.key,
+class _BsListGroupScope extends InheritedWidget {
+  const _BsListGroupScope({
     required this.flush,
     required this.numbered,
     required this.horizontal,
@@ -30,12 +29,12 @@ class BsListGroupScope extends InheritedWidget {
   final Color? borderColor;
   final BorderRadius? borderRadius;
 
-  static BsListGroupScope? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<BsListGroupScope>();
+  static _BsListGroupScope? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<_BsListGroupScope>();
   }
 
   @override
-  bool updateShouldNotify(BsListGroupScope oldWidget) {
+  bool updateShouldNotify(_BsListGroupScope oldWidget) {
     return flush != oldWidget.flush ||
         numbered != oldWidget.numbered ||
         horizontal != oldWidget.horizontal ||
@@ -54,6 +53,7 @@ class BsListGroupScope extends InheritedWidget {
 ///
 /// See: <https://getbootstrap.com/docs/5.3/components/list-group/>
 class BsListGroup extends StatelessWidget {
+  /// Creates a [BsListGroup].
   const BsListGroup({
     super.key,
     required this.children,
@@ -96,7 +96,7 @@ class BsListGroup extends StatelessWidget {
       final bool isLast = i == children.length - 1;
 
       items.add(
-        BsListGroupScope(
+        _BsListGroupScope(
           flush: flush,
           numbered: numbered,
           horizontal: horizontal,
@@ -133,6 +133,7 @@ class BsListGroup extends StatelessWidget {
 ///
 /// Typically placed as a child of [BsListGroup].
 class BsListGroupItem extends StatefulWidget {
+  /// Creates a [BsListGroupItem].
   const BsListGroupItem({
     super.key,
     required this.child,
@@ -171,7 +172,7 @@ class _BsListGroupItemState extends State<BsListGroupItem> {
   @override
   Widget build(BuildContext context) {
     final theme = context.bs;
-    final scope = BsListGroupScope.of(context);
+    final scope = _BsListGroupScope.of(context);
 
     final bool flush = scope?.flush ?? false;
     final bool numbered = scope?.numbered ?? false;

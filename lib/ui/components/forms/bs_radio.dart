@@ -8,6 +8,7 @@ import '../../utilities/spacing_extension.dart';
 ///
 /// Implements `.form-check` with type radio from Bootstrap 5.
 class BsRadio<T> extends StatefulWidget {
+  /// Creates a [BsRadio] selection control.
   const BsRadio({
     super.key,
     required this.value,
@@ -121,7 +122,7 @@ class _BsRadioState<T> extends State<BsRadio<T>> {
     }
 
     // Input Visual
-    Widget inputVisual = AnimatedContainer(
+    final Widget inputVisual = AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       width: 16.0,
       height: 16.0,
@@ -157,7 +158,7 @@ class _BsRadioState<T> extends State<BsRadio<T>> {
     );
 
     // Keyboard navigation
-    Widget inputWidget = Focus(
+    final Widget inputWidget = Focus(
       focusNode: _focusNode,
       onKeyEvent: (node, event) {
         if (event.logicalKey.keyLabel == 'Enter' ||
@@ -183,7 +184,7 @@ class _BsRadioState<T> extends State<BsRadio<T>> {
     }
 
     // Assembly
-    List<Widget> rowChildren = [];
+    final List<Widget> rowChildren = [];
     if (widget.reverse) {
       if (labelWidget != null) {
         rowChildren.add(widget.inline ? labelWidget : Expanded(child: labelWidget));

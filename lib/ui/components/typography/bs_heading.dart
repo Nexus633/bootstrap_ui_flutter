@@ -64,7 +64,7 @@ class BsHeading extends StatelessWidget {
       height: BsTypography.lineHeightHeadings,
     );
 
-    Widget heading = Text(text, style: style, textAlign: textAlign);
+    final Widget heading = Text(text, style: style, textAlign: textAlign);
 
     return removeMargin ? heading : heading.pb2();
   }

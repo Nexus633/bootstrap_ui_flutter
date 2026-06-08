@@ -15,7 +15,7 @@ void main() {
             return Center(
               child: ElevatedButton(
                 onPressed: () {
-                  showBsModal(
+                  showBsModal<void>(
                     context: context,
                     builder: builder,
                   );
@@ -85,7 +85,7 @@ void main() {
             body: Builder(
               builder: (context) => ElevatedButton(
                 onPressed: () {
-                  showBsModal(
+                  showBsModal<void>(
                     context: context,
                     backdrop: BsModalBackdrop.enabled,
                     builder: (context) => const BsModal(
@@ -119,7 +119,7 @@ void main() {
             body: Builder(
               builder: (context) => ElevatedButton(
                 onPressed: () {
-                  showBsModal(
+                  showBsModal<void>(
                     context: context,
                     backdrop: BsModalBackdrop.static,
                     builder: (context) => const BsModal(

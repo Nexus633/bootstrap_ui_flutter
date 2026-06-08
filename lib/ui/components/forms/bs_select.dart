@@ -180,7 +180,7 @@ class _BsSelectState<T> extends FormFieldState<T> {
         groupBorderRadius ?? widget.customBorderRadius ?? BorderRadius.all(r);
 
     // Container for Focus Ring
-    Widget selectWidget = AnimatedContainer(
+    final Widget selectWidget = AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       constraints: BoxConstraints(minHeight: minHeight),
       decoration: BoxDecoration(

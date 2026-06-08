@@ -67,7 +67,7 @@ class BreadcrumbShowcase extends StatelessWidget {
                   ),
                   const Text('Widget divider (Icon):').pb(8),
                   BsBreadcrumb(
-                    divider: const Icon(Icons.chevron_right, size: 16),
+                    divider: const BsIcon(BsIcons.chevronRight, size: 16),
                     items: [
                       BsBreadcrumbItem(label: const Text('Home'), onPressed: () {}),
                       BsBreadcrumbItem(label: const Text('Library'), active: true),

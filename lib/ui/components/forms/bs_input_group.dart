@@ -7,6 +7,7 @@ import '../../tokens/typography.dart';
 /// This allows children (like inputs, selects, and buttons) to adjust their
 /// border radii automatically.
 class BsInputGroupChildContext extends InheritedWidget {
+  /// Creates a [BsInputGroupChildContext] to share state with children.
   const BsInputGroupChildContext({
     super.key,
     required this.isFirst,
@@ -24,7 +25,9 @@ class BsInputGroupChildContext extends InheritedWidget {
   /// The size of the input group.
   final BsInputSize size;
 
+  /// Retrieves the nearest [BsInputGroupChildContext] from the context.
   static BsInputGroupChildContext? of(BuildContext context) {
+
     return context
         .dependOnInheritedWidgetOfExactType<BsInputGroupChildContext>();
   }

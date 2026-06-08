@@ -268,7 +268,7 @@ class _BsButtonState extends State<BsButton> {
       decorationColor: textColor,
     );
 
-    List<Widget> content = [];
+    final List<Widget> content = [];
 
     final bool isLeadingBadge =
         widget.badge != null && widget.badgePosition == BsBadgePosition.leading;

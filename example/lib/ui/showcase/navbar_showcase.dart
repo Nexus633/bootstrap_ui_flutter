@@ -355,7 +355,7 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     BsNavbarIconBrand(
-                      child: const Icon(Icons.flutter_dash_rounded),
+                      child: const BsIcon(BsIcons.bootstrap),
                       onPressed: () {},
                     ),
                     BsNavbarBrand(
@@ -451,8 +451,8 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
                                       AnimatedRotation(
                                         turns: isOpen ? 0.5 : 0.0,
                                         duration: const Duration(milliseconds: 150),
-                                        child: Icon(
-                                          Icons.keyboard_arrow_down,
+                                        child: BsIcon(
+                                          BsIcons.chevronDown,
                                           size: 16.0,
                                           color: theme.bodyText.withValues(alpha: isOpen ? 0.9 : 0.55),
                                         ),

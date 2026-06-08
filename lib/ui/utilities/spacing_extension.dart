@@ -103,66 +103,66 @@ extension BsSpacingExtension on Widget {
   // ─── Uniform Padding (Standard Values) ─────────────────────────────────────
 
   /// Applies uniform padding of [BsSpacing.s1] on all sides.
-  Widget p1() => Padding(padding: EdgeInsets.all(BsSpacing.s1), child: this);
+  Widget p1() => Padding(padding: const EdgeInsets.all(BsSpacing.s1), child: this);
 
   /// Applies uniform padding of [BsSpacing.s2] on all sides.
-  Widget p2() => Padding(padding: EdgeInsets.all(BsSpacing.s2), child: this);
+  Widget p2() => Padding(padding: const EdgeInsets.all(BsSpacing.s2), child: this);
 
   /// Applies uniform padding of [BsSpacing.s3] on all sides.
-  Widget p3() => Padding(padding: EdgeInsets.all(BsSpacing.s3), child: this);
+  Widget p3() => Padding(padding: const EdgeInsets.all(BsSpacing.s3), child: this);
 
   /// Applies uniform padding of [BsSpacing.s4] on all sides.
-  Widget p4() => Padding(padding: EdgeInsets.all(BsSpacing.s4), child: this);
+  Widget p4() => Padding(padding: const EdgeInsets.all(BsSpacing.s4), child: this);
 
   /// Applies uniform padding of [BsSpacing.s5] on all sides.
-  Widget p5() => Padding(padding: EdgeInsets.all(BsSpacing.s5), child: this);
+  Widget p5() => Padding(padding: const EdgeInsets.all(BsSpacing.s5), child: this);
 
   // ─── Uniform Margin (Standard Values) ──────────────────────────────────────
 
   /// Applies uniform margin of [BsSpacing.s1] on all sides.
-  Widget m1() => Padding(padding: EdgeInsets.all(BsSpacing.s1), child: this);
+  Widget m1() => Padding(padding: const EdgeInsets.all(BsSpacing.s1), child: this);
 
   /// Applies uniform margin of [BsSpacing.s2] on all sides.
-  Widget m2() => Padding(padding: EdgeInsets.all(BsSpacing.s2), child: this);
+  Widget m2() => Padding(padding: const EdgeInsets.all(BsSpacing.s2), child: this);
 
   /// Applies uniform margin of [BsSpacing.s3] on all sides.
-  Widget m3() => Padding(padding: EdgeInsets.all(BsSpacing.s3), child: this);
+  Widget m3() => Padding(padding: const EdgeInsets.all(BsSpacing.s3), child: this);
 
   /// Applies uniform margin of [BsSpacing.s4] on all sides.
-  Widget m4() => Padding(padding: EdgeInsets.all(BsSpacing.s4), child: this);
+  Widget m4() => Padding(padding: const EdgeInsets.all(BsSpacing.s4), child: this);
 
   /// Applies uniform margin of [BsSpacing.s5] on all sides.
-  Widget m5() => Padding(padding: EdgeInsets.all(BsSpacing.s5), child: this);
+  Widget m5() => Padding(padding: const EdgeInsets.all(BsSpacing.s5), child: this);
 
   // ─── Horizontal Padding (Standard Values) ──────────────────────────────────
 
   /// Applies horizontal padding (left and right) of [BsSpacing.s1].
   Widget px1() => Padding(
-    padding: EdgeInsets.symmetric(horizontal: BsSpacing.s1),
+    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s1),
     child: this,
   );
 
   /// Applies horizontal padding (left and right) of [BsSpacing.s2].
   Widget px2() => Padding(
-    padding: EdgeInsets.symmetric(horizontal: BsSpacing.s2),
+    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s2),
     child: this,
   );
 
   /// Applies horizontal padding (left and right) of [BsSpacing.s3].
   Widget px3() => Padding(
-    padding: EdgeInsets.symmetric(horizontal: BsSpacing.s3),
+    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s3),
     child: this,
   );
 
   /// Applies horizontal padding (left and right) of [BsSpacing.s4].
   Widget px4() => Padding(
-    padding: EdgeInsets.symmetric(horizontal: BsSpacing.s4),
+    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s4),
     child: this,
   );
 
   /// Applies horizontal padding (left and right) of [BsSpacing.s5].
   Widget px5() => Padding(
-    padding: EdgeInsets.symmetric(horizontal: BsSpacing.s5),
+    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s5),
     child: this,
   );
 
@@ -170,31 +170,31 @@ extension BsSpacingExtension on Widget {
 
   /// Applies horizontal margin (left and right) of [BsSpacing.s1].
   Widget mx1() => Padding(
-    padding: EdgeInsets.symmetric(horizontal: BsSpacing.s1),
+    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s1),
     child: this,
   );
 
   /// Applies horizontal margin (left and right) of [BsSpacing.s2].
   Widget mx2() => Padding(
-    padding: EdgeInsets.symmetric(horizontal: BsSpacing.s2),
+    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s2),
     child: this,
   );
 
   /// Applies horizontal margin (left and right) of [BsSpacing.s3].
   Widget mx3() => Padding(
-    padding: EdgeInsets.symmetric(horizontal: BsSpacing.s3),
+    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s3),
     child: this,
   );
 
   /// Applies horizontal margin (left and right) of [BsSpacing.s4].
   Widget mx4() => Padding(
-    padding: EdgeInsets.symmetric(horizontal: BsSpacing.s4),
+    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s4),
     child: this,
   );
 
   /// Applies horizontal margin (left and right) of [BsSpacing.s5].
   Widget mx5() => Padding(
-    padding: EdgeInsets.symmetric(horizontal: BsSpacing.s5),
+    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s5),
     child: this,
   );
 
@@ -202,31 +202,31 @@ extension BsSpacingExtension on Widget {
 
   /// Applies vertical padding (top and bottom) of [BsSpacing.s1].
   Widget py1() => Padding(
-    padding: EdgeInsets.symmetric(vertical: BsSpacing.s1),
+    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s1),
     child: this,
   );
 
   /// Applies vertical padding (top and bottom) of [BsSpacing.s2].
   Widget py2() => Padding(
-    padding: EdgeInsets.symmetric(vertical: BsSpacing.s2),
+    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s2),
     child: this,
   );
 
   /// Applies vertical padding (top and bottom) of [BsSpacing.s3].
   Widget py3() => Padding(
-    padding: EdgeInsets.symmetric(vertical: BsSpacing.s3),
+    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s3),
     child: this,
   );
 
   /// Applies vertical padding (top and bottom) of [BsSpacing.s4].
   Widget py4() => Padding(
-    padding: EdgeInsets.symmetric(vertical: BsSpacing.s4),
+    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s4),
     child: this,
   );
 
   /// Applies vertical padding (top and bottom) of [BsSpacing.s5].
   Widget py5() => Padding(
-    padding: EdgeInsets.symmetric(vertical: BsSpacing.s5),
+    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s5),
     child: this,
   );
 
@@ -234,31 +234,31 @@ extension BsSpacingExtension on Widget {
 
   /// Applies vertical margin (top and bottom) of [BsSpacing.s1].
   Widget my1() => Padding(
-    padding: EdgeInsets.symmetric(vertical: BsSpacing.s1),
+    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s1),
     child: this,
   );
 
   /// Applies vertical margin (top and bottom) of [BsSpacing.s2].
   Widget my2() => Padding(
-    padding: EdgeInsets.symmetric(vertical: BsSpacing.s2),
+    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s2),
     child: this,
   );
 
   /// Applies vertical margin (top and bottom) of [BsSpacing.s3].
   Widget my3() => Padding(
-    padding: EdgeInsets.symmetric(vertical: BsSpacing.s3),
+    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s3),
     child: this,
   );
 
   /// Applies vertical margin (top and bottom) of [BsSpacing.s4].
   Widget my4() => Padding(
-    padding: EdgeInsets.symmetric(vertical: BsSpacing.s4),
+    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s4),
     child: this,
   );
 
   /// Applies vertical margin (top and bottom) of [BsSpacing.s5].
   Widget my5() => Padding(
-    padding: EdgeInsets.symmetric(vertical: BsSpacing.s5),
+    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s5),
     child: this,
   );
 
@@ -266,31 +266,31 @@ extension BsSpacingExtension on Widget {
 
   /// Applies top padding of [BsSpacing.s1].
   Widget pt1() => Padding(
-    padding: EdgeInsets.only(top: BsSpacing.s1),
+    padding: const EdgeInsets.only(top: BsSpacing.s1),
     child: this,
   );
 
   /// Applies top padding of [BsSpacing.s2].
   Widget pt2() => Padding(
-    padding: EdgeInsets.only(top: BsSpacing.s2),
+    padding: const EdgeInsets.only(top: BsSpacing.s2),
     child: this,
   );
 
   /// Applies top padding of [BsSpacing.s3].
   Widget pt3() => Padding(
-    padding: EdgeInsets.only(top: BsSpacing.s3),
+    padding: const EdgeInsets.only(top: BsSpacing.s3),
     child: this,
   );
 
   /// Applies top padding of [BsSpacing.s4].
   Widget pt4() => Padding(
-    padding: EdgeInsets.only(top: BsSpacing.s4),
+    padding: const EdgeInsets.only(top: BsSpacing.s4),
     child: this,
   );
 
   /// Applies top padding of [BsSpacing.s5].
   Widget pt5() => Padding(
-    padding: EdgeInsets.only(top: BsSpacing.s5),
+    padding: const EdgeInsets.only(top: BsSpacing.s5),
     child: this,
   );
 
@@ -298,31 +298,31 @@ extension BsSpacingExtension on Widget {
 
   /// Applies top margin of [BsSpacing.s1].
   Widget mt1() => Padding(
-    padding: EdgeInsets.only(top: BsSpacing.s1),
+    padding: const EdgeInsets.only(top: BsSpacing.s1),
     child: this,
   );
 
   /// Applies top margin of [BsSpacing.s2].
   Widget mt2() => Padding(
-    padding: EdgeInsets.only(top: BsSpacing.s2),
+    padding: const EdgeInsets.only(top: BsSpacing.s2),
     child: this,
   );
 
   /// Applies top margin of [BsSpacing.s3].
   Widget mt3() => Padding(
-    padding: EdgeInsets.only(top: BsSpacing.s3),
+    padding: const EdgeInsets.only(top: BsSpacing.s3),
     child: this,
   );
 
   /// Applies top margin of [BsSpacing.s4].
   Widget mt4() => Padding(
-    padding: EdgeInsets.only(top: BsSpacing.s4),
+    padding: const EdgeInsets.only(top: BsSpacing.s4),
     child: this,
   );
 
   /// Applies top margin of [BsSpacing.s5].
   Widget mt5() => Padding(
-    padding: EdgeInsets.only(top: BsSpacing.s5),
+    padding: const EdgeInsets.only(top: BsSpacing.s5),
     child: this,
   );
 
@@ -330,31 +330,31 @@ extension BsSpacingExtension on Widget {
 
   /// Applies bottom padding of [BsSpacing.s1].
   Widget pb1() => Padding(
-    padding: EdgeInsets.only(bottom: BsSpacing.s1),
+    padding: const EdgeInsets.only(bottom: BsSpacing.s1),
     child: this,
   );
 
   /// Applies bottom padding of [BsSpacing.s2].
   Widget pb2() => Padding(
-    padding: EdgeInsets.only(bottom: BsSpacing.s2),
+    padding: const EdgeInsets.only(bottom: BsSpacing.s2),
     child: this,
   );
 
   /// Applies bottom padding of [BsSpacing.s3].
   Widget pb3() => Padding(
-    padding: EdgeInsets.only(bottom: BsSpacing.s3),
+    padding: const EdgeInsets.only(bottom: BsSpacing.s3),
     child: this,
   );
 
   /// Applies bottom padding of [BsSpacing.s4].
   Widget pb4() => Padding(
-    padding: EdgeInsets.only(bottom: BsSpacing.s4),
+    padding: const EdgeInsets.only(bottom: BsSpacing.s4),
     child: this,
   );
 
   /// Applies bottom padding of [BsSpacing.s5].
   Widget pb5() => Padding(
-    padding: EdgeInsets.only(bottom: BsSpacing.s5),
+    padding: const EdgeInsets.only(bottom: BsSpacing.s5),
     child: this,
   );
 
@@ -362,31 +362,31 @@ extension BsSpacingExtension on Widget {
 
   /// Applies bottom margin of [BsSpacing.s1].
   Widget mb1() => Padding(
-    padding: EdgeInsets.only(bottom: BsSpacing.s1),
+    padding: const EdgeInsets.only(bottom: BsSpacing.s1),
     child: this,
   );
 
   /// Applies bottom margin of [BsSpacing.s2].
   Widget mb2() => Padding(
-    padding: EdgeInsets.only(bottom: BsSpacing.s2),
+    padding: const EdgeInsets.only(bottom: BsSpacing.s2),
     child: this,
   );
 
   /// Applies bottom margin of [BsSpacing.s3].
   Widget mb3() => Padding(
-    padding: EdgeInsets.only(bottom: BsSpacing.s3),
+    padding: const EdgeInsets.only(bottom: BsSpacing.s3),
     child: this,
   );
 
   /// Applies bottom margin of [BsSpacing.s4].
   Widget mb4() => Padding(
-    padding: EdgeInsets.only(bottom: BsSpacing.s4),
+    padding: const EdgeInsets.only(bottom: BsSpacing.s4),
     child: this,
   );
 
   /// Applies bottom margin of [BsSpacing.s5].
   Widget mb5() => Padding(
-    padding: EdgeInsets.only(bottom: BsSpacing.s5),
+    padding: const EdgeInsets.only(bottom: BsSpacing.s5),
     child: this,
   );
 
@@ -394,31 +394,31 @@ extension BsSpacingExtension on Widget {
 
   /// Applies start (left) padding of [BsSpacing.s1].
   Widget ps1() => Padding(
-    padding: EdgeInsets.only(left: BsSpacing.s1),
+    padding: const EdgeInsets.only(left: BsSpacing.s1),
     child: this,
   );
 
   /// Applies start (left) padding of [BsSpacing.s2].
   Widget ps2() => Padding(
-    padding: EdgeInsets.only(left: BsSpacing.s2),
+    padding: const EdgeInsets.only(left: BsSpacing.s2),
     child: this,
   );
 
   /// Applies start (left) padding of [BsSpacing.s3].
   Widget ps3() => Padding(
-    padding: EdgeInsets.only(left: BsSpacing.s3),
+    padding: const EdgeInsets.only(left: BsSpacing.s3),
     child: this,
   );
 
   /// Applies start (left) padding of [BsSpacing.s4].
   Widget ps4() => Padding(
-    padding: EdgeInsets.only(left: BsSpacing.s4),
+    padding: const EdgeInsets.only(left: BsSpacing.s4),
     child: this,
   );
 
   /// Applies start (left) padding of [BsSpacing.s5].
   Widget ps5() => Padding(
-    padding: EdgeInsets.only(left: BsSpacing.s5),
+    padding: const EdgeInsets.only(left: BsSpacing.s5),
     child: this,
   );
 
@@ -426,31 +426,31 @@ extension BsSpacingExtension on Widget {
 
   /// Applies start (left) margin of [BsSpacing.s1].
   Widget ms1() => Padding(
-    padding: EdgeInsets.only(left: BsSpacing.s1),
+    padding: const EdgeInsets.only(left: BsSpacing.s1),
     child: this,
   );
 
   /// Applies start (left) margin of [BsSpacing.s2].
   Widget ms2() => Padding(
-    padding: EdgeInsets.only(left: BsSpacing.s2),
+    padding: const EdgeInsets.only(left: BsSpacing.s2),
     child: this,
   );
 
   /// Applies start (left) margin of [BsSpacing.s3].
   Widget ms3() => Padding(
-    padding: EdgeInsets.only(left: BsSpacing.s3),
+    padding: const EdgeInsets.only(left: BsSpacing.s3),
     child: this,
   );
 
   /// Applies start (left) margin of [BsSpacing.s4].
   Widget ms4() => Padding(
-    padding: EdgeInsets.only(left: BsSpacing.s4),
+    padding: const EdgeInsets.only(left: BsSpacing.s4),
     child: this,
   );
 
   /// Applies start (left) margin of [BsSpacing.s5].
   Widget ms5() => Padding(
-    padding: EdgeInsets.only(left: BsSpacing.s5),
+    padding: const EdgeInsets.only(left: BsSpacing.s5),
     child: this,
   );
 
@@ -458,31 +458,31 @@ extension BsSpacingExtension on Widget {
 
   /// Applies end (right) padding of [BsSpacing.s1].
   Widget pe1() => Padding(
-    padding: EdgeInsets.only(right: BsSpacing.s1),
+    padding: const EdgeInsets.only(right: BsSpacing.s1),
     child: this,
   );
 
   /// Applies end (right) padding of [BsSpacing.s2].
   Widget pe2() => Padding(
-    padding: EdgeInsets.only(right: BsSpacing.s2),
+    padding: const EdgeInsets.only(right: BsSpacing.s2),
     child: this,
   );
 
   /// Applies end (right) padding of [BsSpacing.s3].
   Widget pe3() => Padding(
-    padding: EdgeInsets.only(right: BsSpacing.s3),
+    padding: const EdgeInsets.only(right: BsSpacing.s3),
     child: this,
   );
 
   /// Applies end (right) padding of [BsSpacing.s4].
   Widget pe4() => Padding(
-    padding: EdgeInsets.only(right: BsSpacing.s4),
+    padding: const EdgeInsets.only(right: BsSpacing.s4),
     child: this,
   );
 
   /// Applies end (right) padding of [BsSpacing.s5].
   Widget pe5() => Padding(
-    padding: EdgeInsets.only(right: BsSpacing.s5),
+    padding: const EdgeInsets.only(right: BsSpacing.s5),
     child: this,
   );
 
@@ -490,31 +490,31 @@ extension BsSpacingExtension on Widget {
 
   /// Applies end (right) margin of [BsSpacing.s1].
   Widget me1() => Padding(
-    padding: EdgeInsets.only(right: BsSpacing.s1),
+    padding: const EdgeInsets.only(right: BsSpacing.s1),
     child: this,
   );
 
   /// Applies end (right) margin of [BsSpacing.s2].
   Widget me2() => Padding(
-    padding: EdgeInsets.only(right: BsSpacing.s2),
+    padding: const EdgeInsets.only(right: BsSpacing.s2),
     child: this,
   );
 
   /// Applies end (right) margin of [BsSpacing.s3].
   Widget me3() => Padding(
-    padding: EdgeInsets.only(right: BsSpacing.s3),
+    padding: const EdgeInsets.only(right: BsSpacing.s3),
     child: this,
   );
 
   /// Applies end (right) margin of [BsSpacing.s4].
   Widget me4() => Padding(
-    padding: EdgeInsets.only(right: BsSpacing.s4),
+    padding: const EdgeInsets.only(right: BsSpacing.s4),
     child: this,
   );
 
   /// Applies end (right) margin of [BsSpacing.s5].
   Widget me5() => Padding(
-    padding: EdgeInsets.only(right: BsSpacing.s5),
+    padding: const EdgeInsets.only(right: BsSpacing.s5),
     child: this,
   );
 }

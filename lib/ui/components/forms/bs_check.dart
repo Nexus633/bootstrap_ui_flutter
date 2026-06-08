@@ -216,7 +216,7 @@ class _BsCheckboxState extends FormFieldState<bool> {
     }
 
     // Wrap input with focus node detector for keyboard navigation
-    Widget inputWidget = Focus(
+    final Widget inputWidget = Focus(
       focusNode: _focusNode,
       onKeyEvent: (node, event) {
         if (event.logicalKey.keyLabel == 'Enter' ||
@@ -242,7 +242,7 @@ class _BsCheckboxState extends FormFieldState<bool> {
     }
 
     // ─── Assembly ──────────────────────────────────────────────────────────
-    List<Widget> rowChildren = [];
+    final List<Widget> rowChildren = [];
     if (widget.reverse) {
       if (labelWidget != null) {
         rowChildren.add(widget.inline ? labelWidget : Expanded(child: labelWidget));
@@ -261,7 +261,7 @@ class _BsCheckboxState extends FormFieldState<bool> {
       }
     }
 
-    Widget content = MouseRegion(
+    final Widget content = MouseRegion(
       cursor: widget.disabled
           ? SystemMouseCursors.forbidden
           : SystemMouseCursors.click,

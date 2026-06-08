@@ -75,7 +75,7 @@ class _BsCloseButtonState extends State<BsCloseButton> {
       opacity = 0.75;
     }
 
-    Widget buttonIcon = Opacity(
+    final Widget buttonIcon = Opacity(
       opacity: opacity,
       child: Padding(
         padding: widget.padding,

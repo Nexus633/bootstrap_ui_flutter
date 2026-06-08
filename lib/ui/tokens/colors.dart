@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 
 /// Bootstrap 5.3 color palette — exact values from _variables.scss.

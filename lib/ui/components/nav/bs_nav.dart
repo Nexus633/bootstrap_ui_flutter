@@ -35,6 +35,7 @@ class _BsNavScope extends InheritedWidget {
 ///
 /// See: <https://getbootstrap.com/docs/5.3/components/navs-tabs/>
 class BsNav extends StatelessWidget {
+  /// Creates a [BsNav] container.
   const BsNav({
     super.key,
     required this.children,
@@ -153,6 +154,7 @@ class BsNav extends StatelessWidget {
 
 /// An individual navigation link inside a [BsNav] (`BsNavLink`).
 class BsNavLink extends StatefulWidget {
+  /// Creates a [BsNavLink] widget.
   const BsNavLink({
     super.key,
     this.label,
@@ -326,7 +328,7 @@ class _BsNavLinkState extends State<BsNavLink> {
   }
 
   TextStyle _resolveTextStyle(BsNavVariant variant, BsThemeData theme) {
-    final double baseSize = 16.0;
+    const double baseSize = 16.0;
     if (variant == BsNavVariant.underline) {
       return TextStyle(
         fontSize: baseSize,
@@ -482,6 +484,7 @@ class _BsNavLinkState extends State<BsNavLink> {
 /// Coordinates with a tab indicator to show the pane at [activeIndex].
 /// Supports an optional fade animation when switching tabs.
 class BsTabContent extends StatelessWidget {
+  /// Creates a [BsTabContent] layout.
   const BsTabContent({
     super.key,
     required this.children,
@@ -524,6 +527,7 @@ class BsTabContent extends StatelessWidget {
 
 /// An individual content section inside a [BsTabContent] (`BsTabPane`).
 class BsTabPane extends StatelessWidget {
+  /// Creates a [BsTabPane] widget.
   const BsTabPane({super.key, required this.child});
 
   /// The content to display inside this tab pane.

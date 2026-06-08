@@ -56,21 +56,21 @@ class ThemeShowcase extends StatelessWidget {
                 children: [
                   _buildToggleItem(
                     label: 'System',
-                    icon: Icons.brightness_auto,
+                    icon: BsIcons.circleHalf,
                     mode: ThemeMode.system,
                     isActive: currentMode == ThemeMode.system,
                     theme: bsTheme,
                   ),
                   _buildToggleItem(
                     label: 'Light',
-                    icon: Icons.light_mode,
+                    icon: BsIcons.sunFill,
                     mode: ThemeMode.light,
                     isActive: currentMode == ThemeMode.light,
                     theme: bsTheme,
                   ),
                   _buildToggleItem(
                     label: 'Dark',
-                    icon: Icons.dark_mode,
+                    icon: BsIcons.moonFill,
                     mode: ThemeMode.dark,
                     isActive: currentMode == ThemeMode.dark,
                     theme: bsTheme,
@@ -120,7 +120,7 @@ class ThemeShowcase extends StatelessWidget {
             const BsButton(
               label: 'Primary Action',
               variant: BsButtonVariant.primary,
-              icon: Icons.send,
+              icon: BsIcons.sendFill,
               badge: BsBadge(label: 'New', variant: BsBadgeVariant.warning),
               badgePosition: BsBadgePosition.topRight,
             ),
@@ -130,7 +130,7 @@ class ThemeShowcase extends StatelessWidget {
             // Test Alert
             BsAlert(
               variant: BsAlertVariant.success,
-              icon: Icons.check_circle,
+              icon: BsIcons.checkCircleFill,
               dismissible: true,
               child: const Text('The theme has been successfully loaded!'),
             ),
@@ -139,7 +139,7 @@ class ThemeShowcase extends StatelessWidget {
 
             BsAlert(
               variant: BsAlertVariant.dark,
-              icon: Icons.dark_mode,
+              icon: BsIcons.moonFill,
               child: const Text(
                 'This dark alert blends perfectly into the UI.',
               ),
@@ -171,7 +171,7 @@ class ThemeShowcase extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Icon(
+            BsIcon(
               icon,
               size: 20,
               color: isActive ? Colors.white : theme.bodyText,

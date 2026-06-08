@@ -13,7 +13,7 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
 
   Future<void> _simulateLoading() async {
     setState(() => _isLoading = true);
-    await Future.delayed(const Duration(seconds: 2));
+    await Future<void>.delayed(const Duration(seconds: 2));
     setState(() => _isLoading = false);
   }
 
@@ -39,7 +39,9 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _sectionTitle('Solid Variants'),
-            _description('Corresponds to: btn btn-primary, btn-secondary, etc.'),
+            _description(
+              'Corresponds to: btn btn-primary, btn-secondary, etc.',
+            ),
             _Wrap(
               children: [
                 BsButton(
@@ -169,22 +171,22 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                 BsButton(
                   label: 'Save',
                   variant: BsButtonVariant.primary,
-                  icon: Icons.save,
-                  iconVariant:
-                      BsIconVariant.light, // Example of icon variant
+                  icon: BsIcons.save,
+                  iconVariant: BsIconVariant.dark,
+                  // Example of icon variant
                   iconColor: Colors.yellow, // Example of icon color
                   onPressed: () {},
                 ),
                 BsButton(
                   label: 'Delete',
                   variant: BsButtonVariant.danger,
-                  icon: Icons.delete,
+                  icon: BsIcons.trash,
                   onPressed: () {},
                 ),
                 BsButton(
                   label: 'Info',
                   variant: BsButtonVariant.info,
-                  icon: Icons.info,
+                  icon: BsIcons.info,
                   onPressed: () {},
                 ),
               ],
@@ -255,7 +257,9 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
             ).pt2(),
             _divider(bsTheme.border),
             _sectionTitle('Close Buttons'),
-            _description('Corresponds to: btn-close. Supports default, disabled, white overrides (on dark backgrounds), and custom colors.'),
+            _description(
+              'Corresponds to: btn-close. Supports default, disabled, white overrides (on dark backgrounds), and custom colors.',
+            ),
             _Wrap(
               children: [
                 BsCloseButton(
@@ -265,22 +269,16 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                     );
                   },
                 ),
-                const BsCloseButton(
-                  disabled: true,
-                ),
+                const BsCloseButton(disabled: true),
                 Container(
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     color: const Color(0xFF212529),
                     borderRadius: BorderRadius.circular(4.0),
                   ),
-                  child: const BsCloseButton(
-                    white: true,
-                  ),
+                  child: const BsCloseButton(white: true),
                 ),
-                const BsCloseButton(
-                  color: Colors.blue,
-                ),
+                const BsCloseButton(color: Colors.blue),
               ],
             ).pt2(),
           ],

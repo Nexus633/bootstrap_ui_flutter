@@ -10,6 +10,7 @@ import '../button/bs_close_button.dart';
 ///
 /// See: <https://getbootstrap.com/docs/5.3/components/modal/>
 class BsModal extends StatelessWidget {
+  /// Creates a [BsModal] layout.
   const BsModal({
     super.key,
     this.header,
@@ -155,6 +156,7 @@ class BsModal extends StatelessWidget {
 
 /// A Bootstrap-style modal header (`BsModalHeader`).
 class BsModalHeader extends StatelessWidget {
+  /// Creates a [BsModalHeader] container.
   const BsModalHeader({
     super.key,
     required this.child,
@@ -210,6 +212,7 @@ class BsModalHeader extends StatelessWidget {
 
 /// A Bootstrap-style modal body (`BsModalBody`).
 class BsModalBody extends StatelessWidget {
+  /// Creates a [BsModalBody] container.
   const BsModalBody({
     super.key,
     required this.child,
@@ -240,6 +243,7 @@ class BsModalBody extends StatelessWidget {
 
 /// A Bootstrap-style modal footer (`BsModalFooter`).
 class BsModalFooter extends StatelessWidget {
+  /// Creates a [BsModalFooter] container.
   const BsModalFooter({
     super.key,
     required this.children,

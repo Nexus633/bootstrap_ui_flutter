@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 
 /// Bootstrap 5 Typography-System.
@@ -32,7 +34,7 @@ abstract class BsTypography {
   // ─── Line Heights ─────────────────────────────────────────────────────────
   static const double lineHeightBase = 1.5; // --bs-body-line-height
   static const double lineHeightSm = 1.25; // --bs-line-height-sm
-  static const double lineHeightLg = 1.5; // --bs-line-height-lg
+  static const double lineHeightLg = 2.0; // --bs-line-height-lg
   // --bs-heading-line-height
   static const double lineHeightHeadings = 1.2;
 

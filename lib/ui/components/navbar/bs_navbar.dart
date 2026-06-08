@@ -63,6 +63,7 @@ class _BsNavbarScope extends InheritedWidget {
 ///
 /// See: <https://getbootstrap.com/docs/5.3/components/navbar/>
 class BsNavbar extends StatefulWidget {
+  /// Creates a [BsNavbar] container.
   const BsNavbar({
     super.key,
     this.brand,
@@ -207,6 +208,7 @@ class _BsNavbarState extends State<BsNavbar> {
 
 /// A branding wrapper component for the brand/logo in the navbar (`BsNavbarBrand`).
 class BsNavbarBrand extends StatelessWidget {
+  /// Creates a [BsNavbarBrand] widget.
   const BsNavbarBrand({
     super.key,
     required this.child,
@@ -275,6 +277,7 @@ class BsNavbarBrand extends StatelessWidget {
 /// Typically displays a small logo or icon in the navbar.
 /// Can be positioned next to a [BsNavbarBrand] inside a layout row.
 class BsNavbarIconBrand extends StatelessWidget {
+  /// Creates a [BsNavbarIconBrand] widget.
   const BsNavbarIconBrand({
     super.key,
     required this.child,
@@ -359,6 +362,7 @@ class BsNavbarIconBrand extends StatelessWidget {
 
 /// A responsive toggler button for collapsing/expanding navbar content (`BsNavbarToggler`).
 class BsNavbarToggler extends StatelessWidget {
+  /// Creates a [BsNavbarToggler] widget.
   const BsNavbarToggler({
     super.key,
     this.onPressed,
@@ -419,6 +423,7 @@ class BsNavbarToggler extends StatelessWidget {
 ///
 /// Integrates seamlessly with [BsCollapse] to animate opening/closing on small screens.
 class BsNavbarCollapse extends StatelessWidget {
+  /// Creates a [BsNavbarCollapse] widget.
   const BsNavbarCollapse({
     super.key,
     required this.children,
@@ -494,6 +499,7 @@ class BsNavbarCollapse extends StatelessWidget {
 ///
 /// Changes layout dynamically between Row (desktop) and Column (mobile).
 class BsNavbarNav extends StatelessWidget {
+  /// Creates a [BsNavbarNav] widget.
   const BsNavbarNav({
     super.key,
     required this.children,
@@ -529,6 +535,7 @@ class BsNavbarNav extends StatelessWidget {
 
 /// A standard navbar text link component (`BsNavbarLink`).
 class BsNavbarLink extends StatefulWidget {
+  /// Creates a [BsNavbarLink] widget.
   const BsNavbarLink({
     super.key,
     required this.label,
@@ -632,6 +639,7 @@ class _BsNavbarLinkState extends State<BsNavbarLink> {
 
 /// Standard secondary text inside a navbar (`BsNavbarText`).
 class BsNavbarText extends StatelessWidget {
+  /// Creates a [BsNavbarText] widget.
   const BsNavbarText({
     super.key,
     required this.child,
@@ -668,6 +676,7 @@ class BsNavbarText extends StatelessWidget {
 /// Behaves as a [Spacer] when the navbar is expanded (desktop Row layout),
 /// and collapses to [SizedBox.shrink] when the navbar is collapsed (mobile Column layout).
 class BsNavbarSpacer extends StatelessWidget {
+  /// Creates a [BsNavbarSpacer] widget.
   const BsNavbarSpacer({super.key});
 
   @override

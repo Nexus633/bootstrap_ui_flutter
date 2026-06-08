@@ -185,7 +185,7 @@ class ModalShowcase extends StatelessWidget {
   // ─── Modal Launchers ────────────────────────────────────────────────────────
 
   void _showDemoModal(BuildContext context) {
-    showBsModal(
+    showBsModal<void>(
       context: context,
       builder: (context) => BsModal(
         header: const BsModalHeader(
@@ -218,7 +218,7 @@ class ModalShowcase extends StatelessWidget {
   }
 
   void _showCenteredModal(BuildContext context) {
-    showBsModal(
+    showBsModal<void>(
       context: context,
       centered: true,
       builder: (context) => BsModal(
@@ -243,7 +243,7 @@ class ModalShowcase extends StatelessWidget {
   }
 
   void _showStaticModal(BuildContext context) {
-    showBsModal(
+    showBsModal<void>(
       context: context,
       backdrop: BsModalBackdrop.static,
       builder: (context) => BsModal(
@@ -270,7 +270,7 @@ class ModalShowcase extends StatelessWidget {
     bool rememberMe = false;
     String selectedRole = 'user';
 
-    showBsModal(
+    showBsModal<void>(
       context: context,
       builder: (context) {
         return StatefulBuilder(
@@ -364,7 +364,7 @@ class ModalShowcase extends StatelessWidget {
   }
 
   void _showScrollableModal(BuildContext context) {
-    showBsModal(
+    showBsModal<void>(
       context: context,
       builder: (context) => BsModal(
         scrollable: true,
@@ -397,7 +397,7 @@ class ModalShowcase extends StatelessWidget {
 
   void _showSizedModal(BuildContext context, BsModalSize size) {
     final sizeName = size.toString().split('.').last.toUpperCase();
-    showBsModal(
+    showBsModal<void>(
       context: context,
       builder: (context) => BsModal(
         size: size,

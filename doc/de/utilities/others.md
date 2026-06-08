@@ -41,6 +41,31 @@ Text('Zentriert').center();
 Text('Links').alignStart();
 ```
 
+### Inline Vertikale Ausrichtung (Vertical Align)
+
+`BsVerticalAlignExtension` kümmert sich um die vertikale Ausrichtung von Elementen (z. B. Icons, Badges oder Bildern) innerhalb eines Textflusses (`RichText` oder `Text.rich`). Diese Methoden geben ein `WidgetSpan` zurück und entsprechen den Bootstrap-Klassen `.align-*`.
+
+| Methode | Beschreibung | Entspricht Bootstrap-Klasse |
+| :--- | :--- | :--- |
+| `.alignBaseline()` | Richtet die Grundlinie des Elements an der des Elternteils aus. | `.align-baseline` |
+| `.alignTopInline()` | Richtet das Element am oberen Ende der Zeile aus. | `.align-top` |
+| `.alignMiddle()` | Zentriert das Element vertikal in der Zeile. | `.align-middle` |
+| `.alignBottomInline()` | Richtet das Element am unteren Ende der Zeile aus. | `.align-bottom` |
+| `.alignTextTop()` | Richtet das Element an der Oberkante der Schriftart aus. | `.align-text-top` |
+| `.alignTextBottom()` | Richtet das Element an der Unterkante der Schriftart aus. | `.align-text-bottom` |
+
+```dart
+Text.rich(
+  TextSpan(
+    children: [
+      TextSpan(text: 'Text mit '),
+      const Icon(Icons.star).alignMiddle(),
+      TextSpan(text: ' zentriertem Icon.'),
+    ],
+  ),
+)
+```
+
 ## Größenanpassung (Sizing)
 
 `BsSizeExtension` kümmert sich um Dimensionen und Flexibilität.

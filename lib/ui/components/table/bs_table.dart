@@ -222,7 +222,7 @@ class _BsTableState extends State<BsTable> {
     }
 
     // 4. Assemble
-    Widget tableWidget = Table(
+    final Widget tableWidget = Table(
       columnWidths: widget.columnWidths,
       defaultColumnWidth: widget.isResponsive
           ? const IntrinsicColumnWidth()
@@ -314,7 +314,7 @@ class _BsTableState extends State<BsTable> {
     );
 
     Color? bgColor = rowColors.bgColor;
-    Color? textColor = rowColors.textColor;
+    final Color? textColor = rowColors.textColor;
     final Color borderColor =
         rowColors.borderColor ?? tableColors.borderColor ?? theme.border;
 
@@ -521,7 +521,7 @@ class _BsTableCellWrapper extends StatelessWidget {
     // Resolve Cell-Specific Colors
     final cellColors = _TableColors.fromVariant(theme, variant);
     Color? bgColor = cellColors.bgColor;
-    Color? textColor =
+    final Color? textColor =
         cellColors.textColor ?? parentTextColor ?? tableColors.textColor;
 
     if (active) {

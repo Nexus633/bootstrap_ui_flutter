@@ -8,7 +8,7 @@ class UtilitiesShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: BsContainer.fluid(
-        child: Column(
+        child: BsVStack(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
@@ -24,7 +24,7 @@ class UtilitiesShowcase extends StatelessWidget {
               title: 'Spacing',
               description:
                   'Padding (p*) and Margin (m*) utilities with levels 1-5.',
-              child: Column(
+              child: BsVStack(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('Padding levels:').pb(8),
@@ -114,13 +114,12 @@ class UtilitiesShowcase extends StatelessWidget {
             _Section(
               title: 'Sizing',
               description: 'Width and height utilities (w-*, h-*, mw-*, mh-*).',
-              child: Column(
+              child: BsVStack(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('Width 50% vs 100% of parent:').pb(8),
                   Container(
                     width: double.infinity,
-                    height: 100,
                     color: Colors.grey[200],
                     child: Stack(
                       children: [
@@ -135,7 +134,7 @@ class UtilitiesShowcase extends StatelessWidget {
                         ).w50(),
                       ],
                     ),
-                  ).pb(16),
+                  ).h(100).pb(16),
                   const Text('Height 50px fixed:').pb(8),
                   Container(
                     color: Colors.orange[200],
@@ -154,7 +153,7 @@ class UtilitiesShowcase extends StatelessWidget {
             _Section(
               title: 'Alignment',
               description: 'Positioning and alignment utilities.',
-              child: Column(
+              child: BsVStack(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('Center:').pb(8),
@@ -168,11 +167,66 @@ class UtilitiesShowcase extends StatelessWidget {
                     ).center(),
                   ).pb(16),
                   const Text('Align Start/End:').pb(8),
-                  Row(
+                  BsRow(
                     children: [
-                      const Text('Start').alignStart().expanded(),
-                      const Text('End').alignEnd().expanded(),
+                      BsCol(
+                        config: const BsColConfig.all(6),
+                        child: const Text('Start').alignStart(),
+                      ),
+                      BsCol(
+                        config: const BsColConfig.all(6),
+                        child: const Text('End').alignEnd(),
+                      ),
                     ],
+                  ),
+                  const Text(
+                    'Vertical Align (Inline in RichText):',
+                  ).pt(16).pb(8),
+                  Text.rich(
+                    TextSpan(
+                      style: TextStyle(
+                        color: context.bs.bodyText,
+                        fontSize: 16,
+                      ),
+                      children: [
+                        const TextSpan(text: 'baseline: '),
+                        Container(
+                          width: 12,
+                          height: 12,
+                          color: Colors.blue,
+                        ).alignBaseline(),
+                        const TextSpan(text: ' | top: '),
+                        Container(
+                          width: 12,
+                          height: 12,
+                          color: Colors.green,
+                        ).alignTopInline(),
+                        const TextSpan(text: ' | middle: '),
+                        Container(
+                          width: 12,
+                          height: 12,
+                          color: Colors.red,
+                        ).alignMiddle(),
+                        const TextSpan(text: ' | bottom: '),
+                        Container(
+                          width: 12,
+                          height: 12,
+                          color: Colors.orange,
+                        ).alignBottomInline(),
+                        const TextSpan(text: ' | text-top: '),
+                        Container(
+                          width: 12,
+                          height: 12,
+                          color: Colors.purple,
+                        ).alignTextTop(),
+                        const TextSpan(text: ' | text-bottom: '),
+                        Container(
+                          width: 12,
+                          height: 12,
+                          color: Colors.teal,
+                        ).alignTextBottom(),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -182,7 +236,7 @@ class UtilitiesShowcase extends StatelessWidget {
             _Section(
               title: 'Display',
               description: 'Visibility utilities.',
-              child: Column(
+              child: BsVStack(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
@@ -192,6 +246,90 @@ class UtilitiesShowcase extends StatelessWidget {
                   const Text(
                     '(There is a hidden text widget between these lines)',
                   ).pt(4),
+                ],
+              ),
+            ),
+
+            // Text Utilities
+            _Section(
+              title: 'Text Utilities',
+              description:
+                  'Font size, font weight, style, line height, alignment, and decoration utilities.',
+              child: BsVStack(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Font Sizes (fs-1 to fs-6):').pb(8),
+                  BsVStack(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Font Size 1 (40px)').fs1().pb(4),
+                      const Text('Font Size 2 (32px)').fs2().pb(4),
+                      const Text('Font Size 3 (28px)').fs3().pb(4),
+                      const Text('Font Size 4 (24px)').fs4().pb(4),
+                      const Text('Font Size 5 (20px)').fs5().pb(4),
+                      const Text('Font Size 6 (16px)').fs6().pb(16),
+                    ],
+                  ),
+                  const Text('Font Weights:').pb(8),
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 8,
+                    children: [
+                      const Text('Light (300)').fwLight(),
+                      const Text('Normal (400)').fwNormal(),
+                      const Text('Medium (500)').fwMedium(),
+                      const Text('Semibold (600)').fwSemibold(),
+                      const Text('Bold (700)').fwBold(),
+                      const Text('Bolder (800)').fwBolder(),
+                    ],
+                  ).pb(16),
+                  const Text('Font Styles & Decorations:').pb(8),
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 8,
+                    children: [
+                      const Text('Italic text').fstItalic(),
+                      const Text('Underlined text').textDecorationUnderline(),
+                      const Text(
+                        'Line-through text',
+                      ).textDecorationLineThrough(),
+                    ],
+                  ).pb(16),
+                  const Text('Line Heights:').pb(8),
+                  BsVStack(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'lh-1: Tight line height (1.0). Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                      ).lh1().pb(8),
+                      const Text(
+                        'lh-sm: Small line height (1.25). Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                      ).lhSm().pb(8),
+                      const Text(
+                        'lh-base: Base line height (1.5). Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                      ).lhBase().pb(8),
+                      const Text(
+                        'lh-lg: Large line height (2.0). Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                      ).lhLg().pb(16),
+                    ],
+                  ),
+                  const Text('Text Alignment:').pb(8),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: context.bs.bodyBg,
+                      border: Border.all(color: context.bs.border),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: BsVStack(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Text('Text Start').textStart().pb(4),
+                        const Text('Text Center').textCenter().pb(4),
+                        const Text('Text End').textEnd(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -211,7 +349,7 @@ class _Section extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return BsVStack(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(

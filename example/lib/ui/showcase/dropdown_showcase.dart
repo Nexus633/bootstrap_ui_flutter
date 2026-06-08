@@ -17,24 +17,24 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
       children: [
         BsDropdownHeader(child: Text('$name Menu')),
         BsDropdownItem(
-          icon: const Icon(Icons.star_rounded),
+          icon: const BsIcon(BsIcons.star),
           onPressed: () => setState(() => _selectedAction = '$name: Action 1 clicked'),
           child: const Text('Action 1'),
         ),
         BsDropdownItem(
-          icon: const Icon(Icons.settings_rounded),
+          icon: const BsIcon(BsIcons.gear),
           onPressed: () => setState(() => _selectedAction = '$name: Action 2 clicked'),
           child: const Text('Action 2'),
         ),
         const BsDropdownDivider(),
         BsDropdownItem(
-          icon: const Icon(Icons.block_rounded),
+          icon: const BsIcon(BsIcons.slashCircle),
           disabled: true,
           onPressed: () => setState(() => _selectedAction = '$name: Disabled clicked (should not happen)'),
           child: const Text('Disabled Option'),
         ),
         BsDropdownItem(
-          icon: const Icon(Icons.logout_rounded),
+          icon: const BsIcon(BsIcons.boxArrowRight),
           active: true,
           onPressed: () => setState(() => _selectedAction = '$name: Active Action clicked'),
           child: const Text('Active Action'),
@@ -88,7 +88,7 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.info_outline_rounded, color: context.bs.primary),
+                  BsIcon(BsIcons.infoCircle, color: context.bs.primary),
                   const SizedBox(width: 8.0),
                   const Text(
                     'Last Action: ',
@@ -289,7 +289,7 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
                       children: [
                         const BsDropdownHeader(child: Text('Forced Dark Scheme')),
                         BsDropdownItem(
-                          icon: const Icon(Icons.brightness_2_rounded),
+                          icon: const BsIcon(BsIcons.moon),
                           onPressed: () => setState(() => _selectedAction = 'Dark Menu: Night option selected'),
                           child: const Text('Night Mode Option'),
                         ),
@@ -306,7 +306,7 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
                       children: [
                         const BsDropdownHeader(child: Text('Custom Purple Style')),
                         BsDropdownItem(
-                          icon: const Icon(Icons.flash_on_rounded),
+                          icon: const BsIcon(BsIcons.lightning),
                           onPressed: () => setState(() => _selectedAction = 'Purple Menu: Turbo option clicked'),
                           child: const Text('Turbo Mode'),
                         ),
