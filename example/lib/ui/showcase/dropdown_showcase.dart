@@ -9,7 +9,6 @@ class DropdownShowcase extends StatefulWidget {
 }
 
 class _DropdownShowcaseState extends State<DropdownShowcase> {
-  // Demo states
   String _selectedAction = 'No action clicked yet';
 
   BsDropdownMenu _buildMenu(String name) {
@@ -30,7 +29,7 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
         BsDropdownItem(
           icon: const BsIcon(BsIcons.slashCircle),
           disabled: true,
-          onPressed: () => setState(() => _selectedAction = '$name: Disabled clicked (should not happen)'),
+          onPressed: () => setState(() => _selectedAction = '$name: Disabled clicked'),
           child: const Text('Disabled Option'),
         ),
         BsDropdownItem(
@@ -45,51 +44,69 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.bs;
+
     return SingleChildScrollView(
       child: BsContainer.fluid(
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ── Header Banner ──────────────────────────────────────────────────
+            // Header Card with beautiful Gradient
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(24.0),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF0F2027), Color(0xFF203A43), Color(0xFF2C5364)],
+                gradient: LinearGradient(
+                  colors: [theme.primary, theme.info],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primary.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     'Dropdowns',
-                    style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
-                  ).pb(8),
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    ),
+                  ).pb2(),
                   Text(
                     'Toggle contextual overlays for displaying lists of links and more. Compatible with Bootstrap 5.3 specifications.',
-                    style: BsTypography.body.copyWith(color: Colors.white70),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.4,
+                    ),
                   ),
                 ],
-              ),
-            ).pb(24),
+              ).p4(),
+            ).mb(32),
 
-            // ── Live Info Bar ────────────────────────────────────────────────
+            // Live Info Bar
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: context.bs.bodyBgSecondary,
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(color: context.bs.border),
+                color: theme.bodyBgSecondary,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: theme.border),
               ),
               child: Row(
                 children: [
-                  BsIcon(BsIcons.infoCircle, color: context.bs.primary),
-                  const SizedBox(width: 8.0),
+                  BsIcon(BsIcons.infoCircle, color: theme.primary),
+                  const SizedBox(width: 8),
                   const Text(
                     'Last Action: ',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -97,19 +114,19 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
                   Text(
                     _selectedAction,
                     style: TextStyle(
-                      color: context.bs.primary,
+                      color: theme.primary,
                       fontFamily: 'monospace',
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
               ),
-            ).pb(24),
+            ).mb(32),
 
-            // ── Section 1: Standard Button Dropdowns ────────────────────────
+            // 1. Standard Button Dropdowns
             _Section(
               title: 'Standard Button Dropdowns',
-              description: 'Toggles wrapped directly around standard Bootstrap buttons. Clicking the button opens the menu. Arrow carets are enabled by default but can be disabled.',
+              description: 'Toggles wrapped directly around standard Bootstrap buttons. Arrow carets are enabled by default.',
               child: Wrap(
                 spacing: 12,
                 runSpacing: 12,
@@ -140,19 +157,14 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
                     toggleVariant: BsButtonVariant.info,
                     menu: _buildMenu('Info'),
                   ),
-                  BsDropdown(
-                    label: 'Warning',
-                    toggleVariant: BsButtonVariant.warning,
-                    menu: _buildMenu('Warning'),
-                  ),
                 ],
               ),
             ),
 
-            // ── Section 2: Split Button Dropdowns ───────────────────────────
+            // 2. Split Button Dropdowns
             _Section(
               title: 'Split Button Dropdowns',
-              description: 'Double button layouts where the primary button triggers an action and the caret button toggles the dropdown.',
+              description: 'Double button layouts where the primary button triggers an action and the caret toggles the dropdown.',
               child: Wrap(
                 spacing: 16,
                 runSpacing: 16,
@@ -201,7 +213,7 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
               ),
             ),
 
-            // ── Section 3: Directions and Alignments ────────────────────────
+            // 3. Directions & Alignments
             _Section(
               title: 'Directions & Alignments',
               description: 'Position the menu above (Dropup), to the left (Dropstart), to the right (Dropend), or align it to the end.',
@@ -237,7 +249,7 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
               ),
             ),
 
-            // ── Section 4: Auto Close Behaviors ─────────────────────────────
+            // 4. Auto Close Behaviors
             _Section(
               title: 'Auto Close Behaviors',
               description: 'Control whether the dropdown closes when clicking inside the menu or outside.',
@@ -273,7 +285,7 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
               ),
             ),
 
-            // ── Section 5: Customized Dropdown Menus ───────────────────────
+            // 5. Customized Dropdown Menus
             _Section(
               title: 'Custom Styles & Overrides',
               description: 'Force dark theme styling, use custom backgrounds/gradients, or add headers and informational texts.',
@@ -302,7 +314,7 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
                     label: 'Custom Color Menu',
                     toggleVariant: BsButtonVariant.warning,
                     menu: BsDropdownMenu(
-                      color: const Color(0xFF6f42c1), // Deep Bootstrap Purple
+                      color: const Color(0xFF6F42C1), // Deep Bootstrap Purple
                       children: [
                         const BsDropdownHeader(child: Text('Custom Purple Style')),
                         BsDropdownItem(
@@ -328,11 +340,7 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
 }
 
 class _Section extends StatelessWidget {
-  const _Section({
-    required this.title,
-    this.description,
-    required this.child,
-  });
+  const _Section({required this.title, this.description, required this.child});
 
   final String title;
   final String? description;
@@ -345,17 +353,23 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
-        ).pb(8),
-        if (description != null)
-          Text(description!).pb(16),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+        ).pb(4),
+        if (description != null) Text(description!).pb(16),
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            border: Border.all(color: context.bs.border),
-            borderRadius: BorderRadius.circular(8),
             color: context.bs.bodyBg,
+            border: Border.all(color: context.bs.border),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
           child: child,
         ).pb(32),

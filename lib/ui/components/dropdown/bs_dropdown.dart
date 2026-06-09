@@ -373,8 +373,8 @@ class BsDropdownMenu extends StatelessWidget {
   /// or auto-detects from the context if null (default).
   final bool? dark;
 
-  /// A semantic variant (reusing [BsCardVariant]) to style the background and text color.
-  final BsCardVariant? variant;
+  /// A semantic variant (reusing [BsVariant]) to style the background and text color.
+  final BsVariant? variant;
 
   /// Custom background color override. If provided, overrides variant and dark properties.
   final Color? color;
@@ -408,35 +408,35 @@ class BsDropdownMenu extends StatelessWidget {
       dividerCol = textCol.withValues(alpha: 0.15);
     } else if (variant != null) {
       switch (variant!) {
-        case BsCardVariant.primary:
+        case BsVariant.primary:
           bg = bsTheme.primary;
           textCol = BsColors.onPrimary;
           break;
-        case BsCardVariant.secondary:
+        case BsVariant.secondary:
           bg = bsTheme.secondary;
           textCol = BsColors.onSecondary;
           break;
-        case BsCardVariant.success:
+        case BsVariant.success:
           bg = bsTheme.success;
           textCol = BsColors.onSuccess;
           break;
-        case BsCardVariant.danger:
+        case BsVariant.danger:
           bg = bsTheme.danger;
           textCol = BsColors.onDanger;
           break;
-        case BsCardVariant.warning:
+        case BsVariant.warning:
           bg = bsTheme.warning;
           textCol = BsColors.onWarning;
           break;
-        case BsCardVariant.info:
+        case BsVariant.info:
           bg = bsTheme.info;
           textCol = BsColors.onInfo;
           break;
-        case BsCardVariant.light:
+        case BsVariant.light:
           bg = bsTheme.light;
           textCol = bsTheme.onLight;
           break;
-        case BsCardVariant.dark:
+        case BsVariant.dark:
           bg = bsTheme.dark;
           textCol = bsTheme.onDark;
           break;

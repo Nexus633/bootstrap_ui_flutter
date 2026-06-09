@@ -1,5 +1,5 @@
-import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 
 class ThemeShowcase extends StatelessWidget {
   const ThemeShowcase({
@@ -13,144 +13,149 @@ class ThemeShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Access the current theme!
-    final bsTheme = context.bs;
+    final theme = context.bs;
 
-    return Scaffold(
-      // The background color is automatically set by the theme,
-      // but we can also explicitly use bsTheme.bodyBg.
-      backgroundColor: bsTheme.bodyBg,
-      appBar: AppBar(
-        title: const Text('Theme Settings'),
-        backgroundColor: bsTheme.bodyBg,
-        foregroundColor: bsTheme.bodyText,
-        elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(color: bsTheme.border, height: 1.0),
-        ),
-      ),
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
+      child: BsContainer.fluid(
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ─── Appearance ──────────────────────────────────────────────────
-            Text(
-              'Appearance',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: bsTheme.bodyText,
+            // Header Card with beautiful Gradient
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [theme.primary, theme.info],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primary.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Themes',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    ),
+                  ).pb2(),
+                  Text(
+                    'Bootstrap-style themes allow you to build applications that respond instantly to system, dark, and light configuration modes.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ).p4(),
+            ).mb(32),
+
+            // 1. Appearance Mode
+            _Section(
+              title: 'Appearance Mode Settings',
+              description: 'Select between Light, Dark or System theme preference presets.',
+              child: Container(
+                decoration: BoxDecoration(
+                  color: theme.bodyBgSecondary,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: theme.border),
+                ),
+                child: Row(
+                  children: [
+                    _buildToggleItem(
+                      label: 'System Default',
+                      icon: BsIcons.circleHalf,
+                      mode: ThemeMode.system,
+                      isActive: currentMode == ThemeMode.system,
+                      theme: theme,
+                    ),
+                    _buildToggleItem(
+                      label: 'Light Mode',
+                      icon: BsIcons.sunFill,
+                      mode: ThemeMode.light,
+                      isActive: currentMode == ThemeMode.light,
+                      theme: theme,
+                    ),
+                    _buildToggleItem(
+                      label: 'Dark Mode',
+                      icon: BsIcons.moonFill,
+                      mode: ThemeMode.dark,
+                      isActive: currentMode == ThemeMode.dark,
+                      theme: theme,
+                    ),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 16),
 
-            // An elegant toggle to switch between modes
-            Container(
-              decoration: BoxDecoration(
-                color: bsTheme.light, // Uses the light color as background
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(color: bsTheme.border),
-              ),
-              child: Row(
+            // 2. Color Swatches
+            _Section(
+              title: 'Bootstrap Semantic Palette',
+              description: 'Main accent palette theme tokens matching theme configurations.',
+              child: Wrap(
+                spacing: 24,
+                runSpacing: 16,
                 children: [
-                  _buildToggleItem(
-                    label: 'System',
-                    icon: BsIcons.circleHalf,
-                    mode: ThemeMode.system,
-                    isActive: currentMode == ThemeMode.system,
-                    theme: bsTheme,
-                  ),
-                  _buildToggleItem(
-                    label: 'Light',
-                    icon: BsIcons.sunFill,
-                    mode: ThemeMode.light,
-                    isActive: currentMode == ThemeMode.light,
-                    theme: bsTheme,
-                  ),
-                  _buildToggleItem(
-                    label: 'Dark',
-                    icon: BsIcons.moonFill,
-                    mode: ThemeMode.dark,
-                    isActive: currentMode == ThemeMode.dark,
-                    theme: bsTheme,
-                  ),
+                  _ColorSwatch(name: 'Primary', color: theme.primary),
+                  _ColorSwatch(name: 'Secondary', color: theme.secondary),
+                  _ColorSwatch(name: 'Success', color: theme.success),
+                  _ColorSwatch(name: 'Danger', color: theme.danger),
+                  _ColorSwatch(name: 'Warning', color: theme.warning),
+                  _ColorSwatch(name: 'Info', color: theme.info),
+                  _ColorSwatch(name: 'Light', color: theme.light),
+                  _ColorSwatch(name: 'Dark', color: theme.dark),
                 ],
               ),
             ),
 
-            const SizedBox(height: 48),
+            // 3. Live Component testing
+            _Section(
+              title: 'Theme Integration Test',
+              description: 'Verify badge layouts, alerts, and button states against currently loaded colors.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const BsButton(
+                    label: 'Primary Action Button',
+                    variant: BsButtonVariant.primary,
+                    icon: BsIcons.sendFill,
+                    badge: BsBadge(label: 'Launch', variant: BsVariant.warning),
+                    badgePosition: BsBadgePosition.topRight,
+                  ).pb4(),
 
-            // ─── Color palette for verification ───────────────────────────────────
-            Text(
-              'Semantic Colors',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: bsTheme.bodyText,
-              ),
-            ),
-            const SizedBox(height: 16),
-            Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: [
-                _ColorSwatch(name: 'Primary', color: bsTheme.primary),
-                _ColorSwatch(name: 'Success', color: bsTheme.success),
-                _ColorSwatch(name: 'Warning', color: bsTheme.warning),
-                _ColorSwatch(name: 'Danger', color: bsTheme.danger),
-                _ColorSwatch(name: 'Info', color: bsTheme.info),
-              ],
-            ),
+                  const BsAlert(
+                    variant: BsVariant.success,
+                    icon: BsIcons.checkCircleFill,
+                    dismissible: true,
+                    child: Text('Live Theme Update: The color configurations was applied successfully!'),
+                  ).pb3(),
 
-            const SizedBox(height: 48),
-
-            // ─── Live component test ─────────────────────────────────────
-            Text(
-              'Live Components',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: bsTheme.bodyText,
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // Test Button
-            const BsButton(
-              label: 'Primary Action',
-              variant: BsButtonVariant.primary,
-              icon: BsIcons.sendFill,
-              badge: BsBadge(label: 'New', variant: BsBadgeVariant.warning),
-              badgePosition: BsBadgePosition.topRight,
-            ),
-
-            const SizedBox(height: 24),
-
-            // Test Alert
-            BsAlert(
-              variant: BsAlertVariant.success,
-              icon: BsIcons.checkCircleFill,
-              dismissible: true,
-              child: const Text('The theme has been successfully loaded!'),
-            ),
-
-            const SizedBox(height: 16),
-
-            BsAlert(
-              variant: BsAlertVariant.dark,
-              icon: BsIcons.moonFill,
-              child: const Text(
-                'This dark alert blends perfectly into the UI.',
+                  const BsAlert(
+                    variant: BsVariant.dark,
+                    icon: BsIcons.moonFill,
+                    child: Text('Live Dark Theme Test: Checking background blending offsets.'),
+                  ),
+                ],
               ),
             ),
           ],
-        ).p(24),
+        ),
       ),
     );
   }
-
-  // ─── Helper widgets for the showcase ─────────────────────────────────────────
 
   Widget _buildToggleItem({
     required String label,
@@ -165,9 +170,7 @@ class ThemeShowcase extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: isActive ? theme.primary : Colors.transparent,
-          borderRadius: BorderRadius.circular(
-            7.0,
-          ), // 1px smaller than the outer frame
+          borderRadius: BorderRadius.circular(11),
         ),
         child: Column(
           children: [
@@ -176,7 +179,7 @@ class ThemeShowcase extends StatelessWidget {
               size: 20,
               color: isActive ? Colors.white : theme.bodyText,
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 6),
             Text(
               label,
               style: TextStyle(
@@ -186,13 +189,12 @@ class ThemeShowcase extends StatelessWidget {
               ),
             ),
           ],
-        ).py(12),
+        ).py(16),
       ),
     ).expanded();
   }
 }
 
-// Small widget to draw color swatches
 class _ColorSwatch extends StatelessWidget {
   const _ColorSwatch({required this.name, required this.color});
 
@@ -201,19 +203,66 @@ class _ColorSwatch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.bs;
     return Column(
       children: [
         Container(
-          width: 48,
-          height: 48,
+          width: 56,
+          height: 56,
           decoration: BoxDecoration(
             color: color,
             shape: BoxShape.circle,
-            border: Border.all(color: context.bs.border, width: 1),
+            border: Border.all(color: theme.border, width: 1.5),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.05),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
         ),
         const SizedBox(height: 8),
-        Text(name, style: TextStyle(fontSize: 12, color: context.bs.bodyText)),
+        Text(name, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: theme.bodyText)),
+      ],
+    );
+  }
+}
+
+class _Section extends StatelessWidget {
+  const _Section({required this.title, this.description, required this.child});
+
+  final String title;
+  final String? description;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+        ).pb(4),
+        if (description != null) Text(description!).pb(16),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: context.bs.bodyBg,
+            border: Border.all(color: context.bs.border),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: child,
+        ).pb(32),
       ],
     );
   }

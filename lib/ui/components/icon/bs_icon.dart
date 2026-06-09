@@ -41,7 +41,7 @@ class BsIcon extends StatelessWidget {
   /// The Bootstrap icon color variant to use.
   ///
   /// If [color] is also provided, [color] takes precedence.
-  final BsIconVariant? variant;
+  final BsVariant? variant;
 
   /// The semantic label for the icon, used for accessibility.
   final String? semanticLabel;
@@ -55,14 +55,14 @@ class BsIcon extends StatelessWidget {
     if (resolvedColor == null && variant != null) {
       final bs = context.bs;
       resolvedColor = switch (variant!) {
-        BsIconVariant.primary => bs.primary,
-        BsIconVariant.secondary => bs.secondary,
-        BsIconVariant.success => bs.success,
-        BsIconVariant.danger => bs.danger,
-        BsIconVariant.warning => bs.warning,
-        BsIconVariant.info => bs.info,
-        BsIconVariant.light => bs.light,
-        BsIconVariant.dark => bs.dark,
+        BsVariant.primary => bs.primary,
+        BsVariant.secondary => bs.secondary,
+        BsVariant.success => bs.success,
+        BsVariant.danger => bs.danger,
+        BsVariant.warning => bs.warning,
+        BsVariant.info => bs.info,
+        BsVariant.light => bs.light,
+        BsVariant.dark => bs.dark,
       };
     }
 

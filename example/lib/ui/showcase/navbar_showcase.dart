@@ -1,5 +1,5 @@
-import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 
 class NavbarShowcase extends StatefulWidget {
   const NavbarShowcase({super.key});
@@ -15,42 +15,62 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
   Widget build(BuildContext context) {
     final theme = context.bs;
 
-    return Scaffold(
-      backgroundColor: theme.bodyBg,
-      appBar: AppBar(
-        backgroundColor: theme.bodyBg,
-        foregroundColor: theme.bodyText,
-        title: const Text('Navbars'),
-        elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(color: theme.border, height: 1.0),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: BsContainer(
-          padding: const EdgeInsets.all(0),
-          type: BsContainerType.fluid,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ─── Introduction ──────────────────────────────────────────────
-              const Text(
-                'Navbars are responsive navigation headers that support branding, links, forms, and color schemes. They automatically collapse on smaller screens and expand on larger ones based on the configured breakpoint.',
-                style: TextStyle(color: Colors.grey, fontSize: 16),
-              ).mb4().px2(),
+    return SingleChildScrollView(
+      child: BsContainer.fluid(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header Card with beautiful Gradient
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [theme.primary, theme.info],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primary.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Navbars',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    ),
+                  ).pb2(),
+                  Text(
+                    'Responsive navigation headers that support branding, navigation links, forms, and custom color schemas with built-in dark/light mode toggles.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ).p4(),
+            ).mb(32),
 
-              // ─── 1. Default Light Navbar ───────────────────────────────────
-              _sectionTitle('Default Light Navbar').px2(),
-              const Text(
-                'A standard light navbar with navigation links, branding, and an inline search form. It expands horizontally at the lg (992px) breakpoint.',
-                style: TextStyle(color: Colors.grey),
-              ).mb3().px2(),
-
-              BsNavbar(
+            // 1. Default Light Navbar
+            _Section(
+              title: 'Default Light Navbar',
+              description: 'A standard light navbar with navigation links, branding, and an inline search form. Expands at md breakpoint.',
+              child: BsNavbar(
                 expand: BsNavbarExpand.md,
                 brand: BsNavbarBrand(
-                  child: const Text('Navbar'),
+                  child: const Text('BrandLogo'),
                   onPressed: () {},
                 ),
                 collapse: BsNavbarCollapse(
@@ -65,25 +85,22 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
                         BsNavbarLink(
                           label: 'Features',
                           active: _activeLink == 'Features',
-                          onPressed: () =>
-                              setState(() => _activeLink = 'Features'),
+                          onPressed: () => setState(() => _activeLink = 'Features'),
                         ),
                         BsNavbarLink(
                           label: 'Pricing',
                           active: _activeLink == 'Pricing',
-                          onPressed: () =>
-                              setState(() => _activeLink = 'Pricing'),
+                          onPressed: () => setState(() => _activeLink = 'Pricing'),
                         ),
                         const BsNavbarLink(label: 'Disabled', disabled: true),
                       ],
                     ),
                     const BsNavbarSpacer(),
-                    // Inline search form using BsInput and BsButton (gap-2)
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(
-                          width: 180,
+                          width: 150,
                           child: BsInput(
                             placeholder: 'Search',
                             size: BsInputSize.sm,
@@ -100,209 +117,110 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
                     ),
                   ],
                 ),
-              ).mb4(),
+              ),
+            ),
 
-              // ─── 2. Color Schemes (Bootstrap 5.3) ──────────────────────────
-              _sectionTitle('Color Schemes').px2(),
-              const Text(
-                "Navbar’s color schemes are now powered by theme-level dark mode since v5.3.0. You can set them using the dark property (which maps to data-bs-theme=\"dark\") alongside background utilities or custom background colors.",
-                style: TextStyle(color: Colors.grey),
-              ).mb3().px2(),
+            // 2. Color Schemes
+            _Section(
+              title: 'Color Schemes',
+              description: 'Power navbars with different theme backgrounds like dark, primary, or custom colors.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Dark Navbar:').fwBold().fs6().pb2(),
+                  BsNavbar(
+                    dark: true,
+                    expand: BsNavbarExpand.lg,
+                    background: const Color(0xFF212529),
+                    brand: BsNavbarBrand(
+                      child: const Text('DarkBrand'),
+                      onPressed: () {},
+                    ),
+                    collapse: BsNavbarCollapse(
+                      children: [
+                        BsNavbarNav(
+                          children: [
+                            BsNavbarLink(
+                              label: 'Dashboard',
+                              active: true,
+                              onPressed: () {},
+                            ),
+                            BsNavbarLink(
+                              label: 'Settings',
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ).pb4(),
 
-              // Example 1: Dark Navbar (bg-dark)
-              const Text(
-                'Dark navbar with a dark background:',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ).mb2().px2(),
-              BsNavbar(
-                dark: false,
+                  const Text('Primary Color Background (theme.primary):').fwBold().fs6().pb2(),
+                  BsNavbar(
+                    dark: true,
+                    expand: BsNavbarExpand.lg,
+                    background: theme.primary,
+                    brand: BsNavbarBrand(
+                      child: const Text('PrimaryBrand'),
+                      onPressed: () {},
+                    ),
+                    collapse: BsNavbarCollapse(
+                      children: [
+                        BsNavbarNav(
+                          children: [
+                            BsNavbarLink(
+                              label: 'Services',
+                              active: true,
+                              onPressed: () {},
+                            ),
+                            BsNavbarLink(
+                              label: 'Projects',
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ).pb4(),
+
+                  const Text('Custom Soft Blue Background (#e3f2fd):').fwBold().fs6().pb2(),
+                  BsNavbar(
+                    expand: BsNavbarExpand.lg,
+                    background: const Color(0xFFE3F2FD),
+                    brand: BsNavbarBrand(
+                      child: const Text('SoftBlueBrand'),
+                      onPressed: () {},
+                    ),
+                    collapse: BsNavbarCollapse(
+                      children: [
+                        BsNavbarNav(
+                          children: [
+                            BsNavbarLink(
+                              label: 'About Us',
+                              active: true,
+                              onPressed: () {},
+                            ),
+                            BsNavbarLink(
+                              label: 'Careers',
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // 3. Link Colors & Customization
+            _Section(
+              title: 'Link Colors & Customization',
+              description: 'Override individual link and branding colors using variant presets or custom colors.',
+              child: BsNavbar(
                 expand: BsNavbarExpand.lg,
                 brand: BsNavbarBrand(
-                  child: const Text('Navbar'),
-                  onPressed: () {},
-                ),
-                collapse: BsNavbarCollapse(
-                  children: [
-                    BsNavbarNav(
-                      children: [
-                        BsNavbarLink(
-                          label: 'Home',
-                          active: _activeLink == 'HomeDark',
-                          onPressed: () =>
-                              setState(() => _activeLink = 'HomeDark'),
-                        ),
-                        BsNavbarLink(
-                          label: 'Features',
-                          active: _activeLink == 'FeaturesDark',
-                          onPressed: () =>
-                              setState(() => _activeLink = 'FeaturesDark'),
-                        ),
-                        BsNavbarLink(
-                          label: 'Pricing',
-                          active: _activeLink == 'PricingDark',
-                          onPressed: () =>
-                              setState(() => _activeLink = 'PricingDark'),
-                        ),
-                        const BsNavbarLink(label: 'Disabled', disabled: true),
-                      ],
-                    ),
-                    const BsNavbarSpacer(),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(
-                          width: 180,
-                          child: BsInput(
-                            placeholder: 'Search',
-                            size: BsInputSize.sm,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        BsButton(
-                          label: 'Search',
-                          variant: BsButtonVariant.outlineSuccess,
-                          size: BsButtonSize.sm,
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ).mb4(),
-
-              // Example 2: Primary Navbar (bg-primary)
-              const Text(
-                'Primary navbar with a blue background (using theme.primary):',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ).mb2().px2(),
-              BsNavbar(
-                dark: true,
-                expand: BsNavbarExpand.lg,
-                background: theme.primary,
-                brand: BsNavbarBrand(
-                  child: const Text('Navbar'),
-                  onPressed: () {},
-                ),
-                collapse: BsNavbarCollapse(
-                  children: [
-                    BsNavbarNav(
-                      children: [
-                        BsNavbarLink(
-                          label: 'Home',
-                          active: _activeLink == 'HomePrimary',
-                          onPressed: () =>
-                              setState(() => _activeLink = 'HomePrimary'),
-                        ),
-                        BsNavbarLink(
-                          label: 'Features',
-                          active: _activeLink == 'FeaturesPrimary',
-                          onPressed: () =>
-                              setState(() => _activeLink = 'FeaturesPrimary'),
-                        ),
-                        BsNavbarLink(
-                          label: 'Pricing',
-                          active: _activeLink == 'PricingPrimary',
-                          onPressed: () =>
-                              setState(() => _activeLink = 'PricingPrimary'),
-                        ),
-                        const BsNavbarLink(label: 'Disabled', disabled: true),
-                      ],
-                    ),
-                    const BsNavbarSpacer(),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(
-                          width: 180,
-                          child: BsInput(
-                            placeholder: 'Search',
-                            size: BsInputSize.sm,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        BsButton(
-                          label: 'Search',
-                          variant: BsButtonVariant.light,
-                          size: BsButtonSize.sm,
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ).mb4(),
-
-              // Example 3: Custom Light Navbar (background-color: #e3f2fd)
-              const Text(
-                'Navbar with a custom light background color (#e3f2fd):',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ).mb2().px2(),
-              BsNavbar(
-                expand: BsNavbarExpand.lg,
-                background: const Color(0xFFE3F2FD),
-                brand: BsNavbarBrand(
-                  child: const Text('Navbar'),
-                  onPressed: () {},
-                ),
-                collapse: BsNavbarCollapse(
-                  children: [
-                    BsNavbarNav(
-                      children: [
-                        BsNavbarLink(
-                          label: 'Home',
-                          active: _activeLink == 'HomeCustom',
-                          onPressed: () =>
-                              setState(() => _activeLink = 'HomeCustom'),
-                        ),
-                        BsNavbarLink(
-                          label: 'Features',
-                          active: _activeLink == 'FeaturesCustom',
-                          onPressed: () =>
-                              setState(() => _activeLink = 'FeaturesCustom'),
-                        ),
-                        BsNavbarLink(
-                          label: 'Pricing',
-                          active: _activeLink == 'PricingCustom',
-                          onPressed: () =>
-                              setState(() => _activeLink = 'PricingCustom'),
-                        ),
-                        const BsNavbarLink(label: 'Disabled', disabled: true),
-                      ],
-                    ),
-                    const BsNavbarSpacer(),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(
-                          width: 180,
-                          child: BsInput(
-                            placeholder: 'Search',
-                            size: BsInputSize.sm,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        BsButton(
-                          label: 'Search',
-                          variant: BsButtonVariant.outlinePrimary,
-                          size: BsButtonSize.sm,
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ).mb4(),
-
-              // Example 4: Link Colors & Brand Customization (variant and color)
-              _sectionTitle('Link Colors & Brand Customization').px2(),
-              const Text(
-                'Customize individual links and branding colors using the variant and color properties. Active and hover states dynamically adapt to these colors.',
-                style: TextStyle(color: Colors.grey),
-              ).mb3().px2(),
-              BsNavbar(
-                expand: BsNavbarExpand.lg,
-                brand: BsNavbarBrand(
-                  variant: BsNavbarLinkVariant.danger,
+                  variant: BsVariant.danger,
                   child: const Text('Danger Brand'),
                   onPressed: () {},
                 ),
@@ -312,20 +230,16 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
                       children: [
                         BsNavbarLink(
                           label: 'Primary Link',
-                          variant: BsNavbarLinkVariant.primary,
+                          variant: BsVariant.primary,
                           active: true,
                         ),
                         BsNavbarLink(
                           label: 'Secondary Link',
-                          variant: BsNavbarLinkVariant.secondary,
+                          variant: BsVariant.secondary,
                         ),
                         const BsNavbarLink(
                           label: 'Success Link',
-                          variant: BsNavbarLinkVariant.success,
-                        ),
-                        const BsNavbarLink(
-                          label: 'Warning Link',
-                          variant: BsNavbarLinkVariant.warning,
+                          variant: BsVariant.success,
                         ),
                         const BsNavbarLink(
                           label: 'Custom Pink',
@@ -335,87 +249,73 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
                     ),
                   ],
                 ),
-              ).mb4(),
+              ),
+            ),
 
-              // Example 5: Icon & Image Branding
-              _sectionTitle('Icon & Image Branding').px2(),
-              const Text(
-                'Show icons next to brand names using BsNavbarIconBrand, or display logo images directly from a URL using the BsNavbarIconBrand.network constructor.',
-                style: TextStyle(color: Colors.grey),
-              ).mb3().px2(),
-
-              // Showcase 5.1: Icon Brand + Text Brand
-              const Text(
-                'Icon Brand next to a Text Brand:',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ).mb2().px2(),
-              BsNavbar(
-                expand: BsNavbarExpand.lg,
-                brand: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    BsNavbarIconBrand(
-                      child: const BsIcon(BsIcons.bootstrap),
-                      onPressed: () {},
-                    ),
-                    BsNavbarBrand(
-                      child: const Text('Flutter Bootstrap'),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                collapse: BsNavbarCollapse(
-                  children: [
-                    BsNavbarNav(
+            // 4. Icon & Image Branding
+            _Section(
+              title: 'Icon & Image Branding',
+              description: 'Embed logos or graphical elements directly inside the brand headers.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Icon Branding:').fwBold().fs6().pb2(),
+                  BsNavbar(
+                    expand: BsNavbarExpand.lg,
+                    brand: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        BsNavbarLink(
-                          label: 'Home',
-                          active: true,
+                        BsNavbarIconBrand(
+                          child: const BsIcon(BsIcons.bootstrap),
+                          onPressed: () {},
+                        ),
+                        BsNavbarBrand(
+                          child: const Text('Bootstrap UI'),
                           onPressed: () {},
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ).mb3(),
-
-              // Showcase 5.2: Network Image Brand
-              const Text(
-                'Image Brand from Network URL:',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ).mb2().px2(),
-              BsNavbar(
-                expand: BsNavbarExpand.lg,
-                brand: BsNavbarIconBrand.network(
-                  'https://storage.googleapis.com/cms-storage-bucket/0dbfcc77d22115a337ae.svg', // Flutter Logo URL
-                  size: 24,
-                  onPressed: () {},
-                ),
-                collapse: BsNavbarCollapse(
-                  children: [
-                    BsNavbarNav(
+                    collapse: BsNavbarCollapse(
                       children: [
-                        BsNavbarLink(
-                          label: 'Docs',
-                          active: true,
-                          onPressed: () {},
+                        BsNavbarNav(
+                          children: [
+                            BsNavbarLink(label: 'Home', active: true, onPressed: () {}),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ).mb4(),
+                  ).pb4(),
 
-              // Example 6: Navbar with Dropdown
-              _sectionTitle('Navbar with Dropdown').px2(),
-              const Text(
-                'Integrate BsDropdown widgets within the navbar. They can be styled as simple text triggers to match the rest of the navbar links.',
-                style: TextStyle(color: Colors.grey),
-              ).mb3().px2(),
-              BsNavbar(
+                  const Text('Network Image Logo Brand:').fwBold().fs6().pb2(),
+                  BsNavbar(
+                    expand: BsNavbarExpand.lg,
+                    brand: BsNavbarIconBrand.network(
+                      'https://storage.googleapis.com/cms-storage-bucket/0dbfcc77d22115a337ae.svg', // Flutter Logo
+                      size: 24,
+                      onPressed: () {},
+                    ),
+                    collapse: BsNavbarCollapse(
+                      children: [
+                        BsNavbarNav(
+                          children: [
+                            BsNavbarLink(label: 'SDK Documentation', active: true, onPressed: () {}),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // 5. Dropdown Navigation
+            _Section(
+              title: 'Navbar with Dropdown',
+              description: 'Integrate dropdown overlay menus inside responsive headers.',
+              child: BsNavbar(
                 expand: BsNavbarExpand.lg,
                 brand: BsNavbarBrand(
-                  child: const Text('NavbarDropdown'),
+                  child: const Text('DropdownNav'),
                   onPressed: () {},
                 ),
                 collapse: BsNavbarCollapse(
@@ -429,7 +329,7 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
                         ),
                         BsDropdown(
                           toggleBuilder: (context, toggleMenu, isOpen) {
-                            final theme = context.bs;
+                            final themeData = context.bs;
                             return MouseRegion(
                               cursor: SystemMouseCursors.click,
                               child: GestureDetector(
@@ -440,9 +340,9 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                        'Dropdown',
+                                        'Explore Menu',
                                         style: TextStyle(
-                                          color: theme.bodyText.withValues(alpha: isOpen ? 0.9 : 0.55),
+                                          color: themeData.bodyText.withValues(alpha: isOpen ? 0.9 : 0.55),
                                           fontSize: 16.0,
                                           fontWeight: isOpen ? FontWeight.w500 : FontWeight.normal,
                                         ),
@@ -454,7 +354,7 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
                                         child: BsIcon(
                                           BsIcons.chevronDown,
                                           size: 16.0,
-                                          color: theme.bodyText.withValues(alpha: isOpen ? 0.9 : 0.55),
+                                          color: themeData.bodyText.withValues(alpha: isOpen ? 0.9 : 0.55),
                                         ),
                                       ),
                                     ],
@@ -466,16 +366,16 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
                           menu: BsDropdownMenu(
                             children: [
                               BsDropdownItem(
-                                child: const Text('Action 1'),
+                                child: const Text('Developer API'),
                                 onPressed: () {},
                               ),
                               BsDropdownItem(
-                                child: const Text('Action 2'),
+                                child: const Text('Release Notes'),
                                 onPressed: () {},
                               ),
                               const BsDropdownDivider(),
                               BsDropdownItem(
-                                child: const Text('Separated Link'),
+                                child: const Text('Terms of Use'),
                                 onPressed: () {},
                               ),
                             ],
@@ -485,19 +385,50 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
                     ),
                   ],
                 ),
-              ).mb4(),
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
       ),
-
     );
   }
+}
 
-  Widget _sectionTitle(String text) {
-    return Text(
-      text,
-      style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-    ).mb2();
+class _Section extends StatelessWidget {
+  const _Section({required this.title, this.description, required this.child});
+
+  final String title;
+  final String? description;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+        ).pb(4),
+        if (description != null) Text(description!).pb(16),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: context.bs.bodyBg,
+            border: Border.all(color: context.bs.border),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: child,
+        ).pb(32),
+      ],
+    );
   }
 }

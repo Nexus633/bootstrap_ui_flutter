@@ -8,76 +8,87 @@ class ModalShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.bs;
 
-    return Scaffold(
-      backgroundColor: theme.bodyBg,
-      appBar: AppBar(
-        backgroundColor: theme.bodyBg,
-        foregroundColor: theme.bodyText,
-        title: const Text('Modals'),
-        elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(color: theme.border, height: 1.0),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: BsContainer(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ─── Introduction ──────────────────────────────────────────────
-              const Text(
-                'Modals are streamlined, but flexible, dialog prompts. They support a variety of use cases from user notifications to complex forms and sizes.',
-                style: TextStyle(color: Colors.grey, fontSize: 16),
-              ).mb4(),
-
-              BsRow(
-                gutterX: BsSpacing.s4,
-                gutterY: BsSpacing.s4,
+    return SingleChildScrollView(
+      child: BsContainer.fluid(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header Card with beautiful Gradient
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [theme.primary, theme.info],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primary.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // ─── COLUMN 1: Basic Examples ──────────────────────────────
+                  const Text(
+                    'Modals',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    ),
+                  ).pb2(),
+                  Text(
+                    'Modals are streamlined, but flexible, dialog prompts with the minimum required functionality and smart defaults.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ).p4(),
+            ).mb(32),
+
+            // 1. Basic Examples
+            _Section(
+              title: 'Modal Launchers',
+              description: 'Launch different modal styles with animations, backdrop configurations, and forms.',
+              child: BsRow(
+                children: [
                   BsCol(
-                    config: const BsColConfig(md: 6, xs: 12),
+                    config: const BsColConfig(xs: 12, md: 8, lg: 6),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _sectionTitle('Modal Components'),
-                        const SizedBox(height: 8),
-                        const Text(
-                          'Click the buttons below to launch different modal types. Each modal demonstrates a specific Bootstrap 5 configuration.',
-                          style: TextStyle(color: Colors.grey),
-                        ).mb3(),
-
-                        // 1. Standard Modal
                         _buildLauncher(
                           context,
                           label: 'Launch Demo Modal',
-                          description: 'Standard modal dialog centered at the top of the viewport with default medium sizing and backdrop dismiss enabled.',
+                          description: 'Standard modal dialog centered at the top of the viewport with default backdrop dismiss enabled.',
                           onPressed: () => _showDemoModal(context),
                         ),
-
-                        // 2. Vertically Centered
                         _buildLauncher(
                           context,
-                          label: 'Vertically Centered Modal',
+                          label: 'Launch Centered Modal',
                           description: 'Aligns the modal dialog exactly in the vertical and horizontal center of the viewport.',
                           onPressed: () => _showCenteredModal(context),
                         ),
-
-                        // 3. Static Backdrop
                         _buildLauncher(
                           context,
-                          label: 'Static Backdrop Modal',
-                          description: 'When backdrop is set to static, the modal will not close when clicking outside it. Instead, it triggers a pulse/shake animation.',
+                          label: 'Launch Static Backdrop Modal',
+                          description: 'Will not close when clicking outside. Instead, it triggers a pulse/shake animation.',
                           onPressed: () => _showStaticModal(context),
                           variant: BsButtonVariant.secondary,
                         ),
-
-                        // 4. Form Modal
                         _buildLauncher(
                           context,
-                          label: 'Form Modal',
+                          label: 'Launch Sign In Modal',
                           description: 'Demonstrates combining multiple Bootstrap form controls (inputs, checkboxes, radios) inside a modal dialog.',
                           onPressed: () => _showFormModal(context),
                           variant: BsButtonVariant.info,
@@ -85,30 +96,28 @@ class ModalShowcase extends StatelessWidget {
                       ],
                     ),
                   ),
+                ],
+              ),
+            ),
 
-                  // ─── COLUMN 2: Sizes & Scroll ──────────────────────────────
+            // 2. Sizes & Scroll Behavior
+            _Section(
+              title: 'Sizes & Scroll Behavior',
+              description: 'Control layout boundaries, fullscreens, and internal scroll mechanics.',
+              child: BsRow(
+                children: [
                   BsCol(
-                    config: const BsColConfig(md: 6, xs: 12),
+                    config: const BsColConfig(xs: 12, md: 8, lg: 6),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _sectionTitle('Sizes & Scrolling'),
-                        const SizedBox(height: 8),
-                        const Text(
-                          'Control modal sizing and scroll behavior. Modals can scroll their entire body or container, and fit different screen requirements.',
-                          style: TextStyle(color: Colors.grey),
-                        ).mb3(),
-
-                        // 4. Scrollable Modal
                         _buildLauncher(
                           context,
-                          label: 'Scrollable Modal',
-                          description: 'When the modal content is too long, the body scrolls independently while the header and footer remain fixed.',
+                          label: 'Launch Scrollable Modal',
+                          description: 'Header and footer stay fixed in place while the body scrolls independently for long content.',
                           onPressed: () => _showScrollableModal(context),
                         ),
-
-                        // 5. Sizes
-                        _sectionSubTitle('Modal Sizes'),
+                        const Text('Modal Size Configurations:').fwBold().fs6().pb2(),
                         Wrap(
                           spacing: 8,
                           runSpacing: 8,
@@ -134,31 +143,17 @@ class ModalShowcase extends StatelessWidget {
                               onPressed: () => _showSizedModal(context, BsModalSize.fullscreen),
                             ),
                           ],
-                        ).mb3(),
+                        ),
                       ],
                     ),
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
-  }
-
-  Widget _sectionTitle(String text) {
-    return Text(
-      text,
-      style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-    );
-  }
-
-  Widget _sectionSubTitle(String text) {
-    return Text(
-      text,
-      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-    ).mb2();
   }
 
   Widget _buildLauncher(
@@ -168,10 +163,20 @@ class ModalShowcase extends StatelessWidget {
     required VoidCallback onPressed,
     BsButtonVariant variant = BsButtonVariant.primary,
   }) {
-    return BsCard(
-      body: BsCardBody(
+    final theme = context.bs;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: theme.bodyBgSecondary,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: theme.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(description).mb3(),
+          Text(description, style: TextStyle(color: theme.bodyTextSecondary, fontSize: 13)).pb3(),
           BsButton(
             label: label,
             variant: variant,
@@ -179,7 +184,7 @@ class ModalShowcase extends StatelessWidget {
           ),
         ],
       ),
-    ).mb3();
+    );
   }
 
   // ─── Modal Launchers ────────────────────────────────────────────────────────
@@ -245,7 +250,7 @@ class ModalShowcase extends StatelessWidget {
   void _showStaticModal(BuildContext context) {
     showBsModal<void>(
       context: context,
-      backdrop: BsModalBackdrop.static,
+      backdrop: BsBackdrop.static,
       builder: (context) => BsModal(
         header: const BsModalHeader(
           child: Text('Static Backdrop'),
@@ -417,6 +422,45 @@ class ModalShowcase extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _Section extends StatelessWidget {
+  const _Section({required this.title, this.description, required this.child});
+
+  final String title;
+  final String? description;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+        ).pb(4),
+        if (description != null) Text(description!).pb(16),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: context.bs.bodyBg,
+            border: Border.all(color: context.bs.border),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: child,
+        ).pb(32),
+      ],
     );
   }
 }

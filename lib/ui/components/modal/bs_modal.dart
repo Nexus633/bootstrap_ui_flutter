@@ -302,7 +302,7 @@ class _BsModalBackdropWrapper extends StatefulWidget {
 
   final Widget child;
   final Animation<double> animation;
-  final BsModalBackdrop backdrop;
+  final BsBackdrop backdrop;
   final bool showBackdrop;
   final Alignment alignment;
   final bool keyboard;
@@ -345,9 +345,9 @@ class _BsModalBackdropWrapperState extends State<_BsModalBackdropWrapper> with S
   }
 
   void _handleBackdropTap() {
-    if (widget.backdrop == BsModalBackdrop.enabled) {
+    if (widget.backdrop == BsBackdrop.enabled) {
       Navigator.of(context).pop();
-    } else if (widget.backdrop == BsModalBackdrop.static) {
+    } else if (widget.backdrop == BsBackdrop.static) {
       _triggerPulse();
     }
   }
@@ -418,11 +418,11 @@ class _BsModalBackdropWrapperState extends State<_BsModalBackdropWrapper> with S
 Future<T?> showBsModal<T>({
   required BuildContext context,
   required WidgetBuilder builder,
-  BsModalBackdrop backdrop = BsModalBackdrop.enabled,
+  BsBackdrop backdrop = BsBackdrop.enabled,
   bool keyboard = true,
   bool centered = false,
 }) {
-  final showBackdrop = backdrop != BsModalBackdrop.disabled;
+  final showBackdrop = backdrop != BsBackdrop.disabled;
   final alignment = centered ? Alignment.center : Alignment.topCenter;
 
   return showGeneralDialog<T>(

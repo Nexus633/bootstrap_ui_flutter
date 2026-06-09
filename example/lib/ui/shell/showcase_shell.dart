@@ -23,6 +23,11 @@ import '../showcase/modal_showcase.dart';
 import '../showcase/navbar_showcase.dart';
 import '../showcase/nav_showcase.dart';
 import '../showcase/icon_showcase.dart';
+import '../showcase/offcanvas_showcase.dart';
+import '../showcase/pagination_showcase.dart';
+import '../showcase/placeholder_showcase.dart';
+import '../showcase/popover_showcase.dart';
+import '../showcase/progress_showcase.dart';
 import '../../main.dart';
 
 // ─── Navigation Item Model ────────────────────────────────────────────────────
@@ -188,6 +193,36 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
     ),
     _NavItem(
       group: 'Components',
+      label: 'Offcanvas',
+      icon: BsIcons.layoutSidebar,
+      page: const OffcanvasShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Pagination',
+      icon: BsIcons.listOl,
+      page: const PaginationShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Placeholder',
+      icon: BsIcons.threeDots,
+      page: const PlaceholderShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Popover',
+      icon: BsIcons.chatSquareText,
+      page: const PopoverShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Progress',
+      icon: BsIcons.barChart,
+      page: const ProgressShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
       label: 'Navbar',
       icon: BsIcons.segmentedNav,
       page: const NavbarShowcase(),
@@ -222,6 +257,7 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // ── Sidebar ──────────────────────────────────────────────────────────
           _Sidebar(

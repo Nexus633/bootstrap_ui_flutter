@@ -23,6 +23,24 @@ Text('Small text').fs6();
 
 ---
 
+### 1b. Display Headings
+Corresponds to the Bootstrap classes `.display-1` to `.display-6`. These have a lighter weight (300) and a line height of 1.2.
+
+| Method | Font Size | Equivalent |
+| :--- | :--- | :--- |
+| `.display1()` | 80.0 px | Display 1 |
+| `.display2()` | 72.0 px | Display 2 |
+| `.display3()` | 64.0 px | Display 3 |
+| `.display4()` | 56.0 px | Display 4 |
+| `.display5()` | 48.0 px | Display 5 |
+| `.display6()` | 40.0 px | Display 6 |
+
+```dart
+Text('Very large display').display1();
+```
+
+---
+
 ### 2. Font Weight
 Corresponds to the Bootstrap classes `.fw-*`.
 
@@ -116,6 +134,37 @@ Text('This is a very long text that will be truncated...').truncate();
 
 ---
 
+### 8. Text Casing
+Corresponds to the Bootstrap classes `.text-lowercase`, `.text-uppercase`, and `.text-capitalize`.
+
+| Method | Description |
+| :--- | :--- |
+| `.textLowercase()` | Transforms text to lowercase. |
+| `.textUppercase()` | Transforms text to uppercase. |
+| `.textCapitalize()` | Capitalizes the first letter of each word. |
+
+```dart
+Text('hello world').textUppercase(); // HELLO WORLD
+Text('HELLO WORLD').textLowercase(); // hello world
+Text('hello world').textCapitalize(); // Hello World
+```
+
+---
+
+### 9. Text Wrapping
+Corresponds to the Bootstrap classes `.text-wrap` and `.text-nowrap`.
+
+| Method | Description |
+| :--- | :--- |
+| `.textWrap()` | Wraps the text automatically. |
+| `.textNowrap()` | Prevents text wrapping. |
+
+```dart
+Text('Long text...').textNowrap();
+```
+
+---
+
 ## Usage Examples
 
 You can combine multiple styles using method chaining:
@@ -126,5 +175,6 @@ Text('Bootstrap in Flutter')
     .fwBold()
     .fstItalic()
     .textCenter()
+    .textUppercase()
     .textDecorationUnderline();
 ```

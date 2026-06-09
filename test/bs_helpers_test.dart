@@ -31,6 +31,38 @@ void main() {
       expect(const Text('test').fs6().style?.fontSize, BsTypography.h6);
     });
 
+    testWidgets('display1 to display6 apply correct font sizes, weights, and line heights', (WidgetTester tester) async {
+      final t1 = const Text('test').display1();
+      expect(t1.style?.fontSize, BsTypography.display1);
+      expect(t1.style?.fontWeight, BsTypography.weightDisplay);
+      expect(t1.style?.height, BsTypography.lineHeightDisplay);
+
+      final t2 = const Text('test').display2();
+      expect(t2.style?.fontSize, BsTypography.display2);
+      expect(t2.style?.fontWeight, BsTypography.weightDisplay);
+      expect(t2.style?.height, BsTypography.lineHeightDisplay);
+
+      final t3 = const Text('test').display3();
+      expect(t3.style?.fontSize, BsTypography.display3);
+      expect(t3.style?.fontWeight, BsTypography.weightDisplay);
+      expect(t3.style?.height, BsTypography.lineHeightDisplay);
+
+      final t4 = const Text('test').display4();
+      expect(t4.style?.fontSize, BsTypography.display4);
+      expect(t4.style?.fontWeight, BsTypography.weightDisplay);
+      expect(t4.style?.height, BsTypography.lineHeightDisplay);
+
+      final t5 = const Text('test').display5();
+      expect(t5.style?.fontSize, BsTypography.display5);
+      expect(t5.style?.fontWeight, BsTypography.weightDisplay);
+      expect(t5.style?.height, BsTypography.lineHeightDisplay);
+
+      final t6 = const Text('test').display6();
+      expect(t6.style?.fontSize, BsTypography.display6);
+      expect(t6.style?.fontWeight, BsTypography.weightDisplay);
+      expect(t6.style?.height, BsTypography.lineHeightDisplay);
+    });
+
     testWidgets('fw weights apply correct FontWeights', (WidgetTester tester) async {
       expect(const Text('test').fwBold().style?.fontWeight, BsTypography.weightBold);
       expect(const Text('test').fwBolder().style?.fontWeight, FontWeight.w800);

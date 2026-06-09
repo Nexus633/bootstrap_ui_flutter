@@ -12,7 +12,7 @@ class BsBadge extends StatelessWidget {
   const BsBadge({
     super.key,
     required this.label,
-    this.variant = BsBadgeVariant.primary,
+    this.variant = BsVariant.primary,
     this.isPill = false,
   });
 
@@ -20,7 +20,7 @@ class BsBadge extends StatelessWidget {
   final String label;
 
   /// The color variant of the badge.
-  final BsBadgeVariant variant;
+  final BsVariant variant;
 
   /// Whether the badge should have a pill-like shape (fully rounded).
   final bool isPill;
@@ -42,7 +42,7 @@ class BsBadge extends StatelessWidget {
         borderRadius: radius,
         // Optional: A light border for the light badge
         border:
-            variant == BsBadgeVariant.light
+            variant == BsVariant.light
                 ? Border.all(color: bsTheme.border, width: 1.0)
                 : null,
       ),
@@ -60,37 +60,37 @@ class BsBadge extends StatelessWidget {
 
   // ─── Color Logic ───────────────────────────────────────────────────────────
 
-  _BadgeStyle _resolveStyle(BsBadgeVariant variant, BsThemeData bs) {
+  _BadgeStyle _resolveStyle(BsVariant variant, BsThemeData bs) {
     return switch (variant) {
-      BsBadgeVariant.primary => _BadgeStyle(
+      BsVariant.primary => _BadgeStyle(
         backgroundColor: bs.primary, // Now accesses the Dark/Light Mode value!
         textColor: BsColors.onPrimary,
       ),
-      BsBadgeVariant.secondary => _BadgeStyle(
+      BsVariant.secondary => _BadgeStyle(
         backgroundColor: bs.secondary,
         textColor: BsColors.onSecondary,
       ),
-      BsBadgeVariant.success => _BadgeStyle(
+      BsVariant.success => _BadgeStyle(
         backgroundColor: bs.success,
         textColor: BsColors.onSuccess,
       ),
-      BsBadgeVariant.danger => _BadgeStyle(
+      BsVariant.danger => _BadgeStyle(
         backgroundColor: bs.danger,
         textColor: BsColors.onDanger,
       ),
-      BsBadgeVariant.warning => _BadgeStyle(
+      BsVariant.warning => _BadgeStyle(
         backgroundColor: bs.warning,
         textColor: BsColors.onWarning,
       ),
-      BsBadgeVariant.info => _BadgeStyle(
+      BsVariant.info => _BadgeStyle(
         backgroundColor: bs.info,
         textColor: BsColors.onInfo,
       ),
-      BsBadgeVariant.light => _BadgeStyle(
+      BsVariant.light => _BadgeStyle(
         backgroundColor: bs.light,
         textColor: bs.onLight,
       ),
-      BsBadgeVariant.dark => _BadgeStyle(
+      BsVariant.dark => _BadgeStyle(
         backgroundColor: bs.dark,
         textColor: bs.onDark,
       ),

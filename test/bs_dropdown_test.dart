@@ -389,7 +389,7 @@ void main() {
           BsDropdown(
             toggle: const Text('Toggle'),
             menu: BsDropdownMenu(
-              variant: BsCardVariant.success,
+              variant: BsVariant.success,
               children: [
                 BsDropdownItem(
                   child: const Text('Item 1'),
@@ -548,3 +548,4 @@ void main() {
     });
   });
 }
+

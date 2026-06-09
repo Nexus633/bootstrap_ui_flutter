@@ -3,21 +3,27 @@ import '../tokens/typography.dart';
 
 /// Extension on [Text] to provide Bootstrap-like text utilities.
 extension BsTextExtension on Text {
-  /// Helper to create a copy of the Text widget with a modified TextStyle.
-  Text _copyWithStyle(TextStyle Function(TextStyle? existing) updateStyle) {
+  /// Helper to copy a [Text] widget with optional overrides.
+  Text _copyWith({
+    TextStyle? style,
+    TextAlign? textAlign,
+    bool? softWrap,
+    TextOverflow? overflow,
+    int? maxLines,
+  }) {
     if (data != null) {
       return Text(
         data!,
         key: key,
-        style: updateStyle(style),
+        style: style ?? this.style,
         strutStyle: strutStyle,
-        textAlign: textAlign,
+        textAlign: textAlign ?? this.textAlign,
         textDirection: textDirection,
         locale: locale,
-        softWrap: softWrap,
-        overflow: overflow,
+        softWrap: softWrap ?? this.softWrap,
+        overflow: overflow ?? this.overflow,
         textScaler: textScaler,
-        maxLines: maxLines,
+        maxLines: maxLines ?? this.maxLines,
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
@@ -27,15 +33,15 @@ extension BsTextExtension on Text {
       return Text.rich(
         textSpan!,
         key: key,
-        style: updateStyle(style),
+        style: style ?? this.style,
         strutStyle: strutStyle,
-        textAlign: textAlign,
+        textAlign: textAlign ?? this.textAlign,
         textDirection: textDirection,
         locale: locale,
-        softWrap: softWrap,
-        overflow: overflow,
+        softWrap: softWrap ?? this.softWrap,
+        overflow: overflow ?? this.overflow,
         textScaler: textScaler,
-        maxLines: maxLines,
+        maxLines: maxLines ?? this.maxLines,
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
@@ -45,46 +51,35 @@ extension BsTextExtension on Text {
     return this;
   }
 
+  /// Helper to create a copy of the Text widget with a different text string.
+  Text _copyWithText(String newData) {
+    return Text(
+      newData,
+      key: key,
+      style: style,
+      strutStyle: strutStyle,
+      textAlign: textAlign,
+      textDirection: textDirection,
+      locale: locale,
+      softWrap: softWrap,
+      overflow: overflow,
+      textScaler: textScaler,
+      maxLines: maxLines,
+      semanticsLabel: semanticsLabel,
+      textWidthBasis: textWidthBasis,
+      textHeightBehavior: textHeightBehavior,
+      selectionColor: selectionColor,
+    );
+  }
+
+  /// Helper to create a copy of the Text widget with a modified TextStyle.
+  Text _copyWithStyle(TextStyle Function(TextStyle? existing) updateStyle) {
+    return _copyWith(style: updateStyle(style));
+  }
+
   /// Helper to create a copy of the Text widget with a modified TextAlign.
   Text _copyWithTextAlign(TextAlign align) {
-    if (data != null) {
-      return Text(
-        data!,
-        key: key,
-        style: style,
-        strutStyle: strutStyle,
-        textAlign: align,
-        textDirection: textDirection,
-        locale: locale,
-        softWrap: softWrap,
-        overflow: overflow,
-        textScaler: textScaler,
-        maxLines: maxLines,
-        semanticsLabel: semanticsLabel,
-        textWidthBasis: textWidthBasis,
-        textHeightBehavior: textHeightBehavior,
-        selectionColor: selectionColor,
-      );
-    } else if (textSpan != null) {
-      return Text.rich(
-        textSpan!,
-        key: key,
-        style: style,
-        strutStyle: strutStyle,
-        textAlign: align,
-        textDirection: textDirection,
-        locale: locale,
-        softWrap: softWrap,
-        overflow: overflow,
-        textScaler: textScaler,
-        maxLines: maxLines,
-        semanticsLabel: semanticsLabel,
-        textWidthBasis: textWidthBasis,
-        textHeightBehavior: textHeightBehavior,
-        selectionColor: selectionColor,
-      );
-    }
-    return this;
+    return _copyWith(textAlign: align);
   }
 
   /// Truncates the text with an ellipsis if it exceeds one line.
@@ -96,45 +91,54 @@ extension BsTextExtension on Text {
   /// Text('Very long text...').truncate()
   /// ```
   Text truncate() {
-    if (data != null) {
-      return Text(
-        data!,
-        key: key,
-        style: style,
-        strutStyle: strutStyle,
-        textAlign: textAlign,
-        textDirection: textDirection,
-        locale: locale,
-        softWrap: false,
-        overflow: TextOverflow.ellipsis,
-        textScaler: textScaler,
-        maxLines: 1,
-        semanticsLabel: semanticsLabel,
-        textWidthBasis: textWidthBasis,
-        textHeightBehavior: textHeightBehavior,
-        selectionColor: selectionColor,
-      );
-    } else if (textSpan != null) {
-      return Text.rich(
-        textSpan!,
-        key: key,
-        style: style,
-        strutStyle: strutStyle,
-        textAlign: textAlign,
-        textDirection: textDirection,
-        locale: locale,
-        softWrap: false,
-        overflow: TextOverflow.ellipsis,
-        textScaler: textScaler,
-        maxLines: 1,
-        semanticsLabel: semanticsLabel,
-        textWidthBasis: textWidthBasis,
-        textHeightBehavior: textHeightBehavior,
-        selectionColor: selectionColor,
-      );
-    }
-    return this;
+    return _copyWith(
+      softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 1,
+    );
   }
+
+  /// Sets the typography style to display-1 (80px, w300, line-height 1.2).
+  Text display1() => _copyWithStyle((s) => (s ?? const TextStyle()).copyWith(
+        fontSize: BsTypography.display1,
+        fontWeight: BsTypography.weightDisplay,
+        height: BsTypography.lineHeightDisplay,
+      ));
+
+  /// Sets the typography style to display-2 (72px, w300, line-height 1.2).
+  Text display2() => _copyWithStyle((s) => (s ?? const TextStyle()).copyWith(
+        fontSize: BsTypography.display2,
+        fontWeight: BsTypography.weightDisplay,
+        height: BsTypography.lineHeightDisplay,
+      ));
+
+  /// Sets the typography style to display-3 (64px, w300, line-height 1.2).
+  Text display3() => _copyWithStyle((s) => (s ?? const TextStyle()).copyWith(
+        fontSize: BsTypography.display3,
+        fontWeight: BsTypography.weightDisplay,
+        height: BsTypography.lineHeightDisplay,
+      ));
+
+  /// Sets the typography style to display-4 (56px, w300, line-height 1.2).
+  Text display4() => _copyWithStyle((s) => (s ?? const TextStyle()).copyWith(
+        fontSize: BsTypography.display4,
+        fontWeight: BsTypography.weightDisplay,
+        height: BsTypography.lineHeightDisplay,
+      ));
+
+  /// Sets the typography style to display-5 (48px, w300, line-height 1.2).
+  Text display5() => _copyWithStyle((s) => (s ?? const TextStyle()).copyWith(
+        fontSize: BsTypography.display5,
+        fontWeight: BsTypography.weightDisplay,
+        height: BsTypography.lineHeightDisplay,
+      ));
+
+  /// Sets the typography style to display-6 (40px, w300, line-height 1.2).
+  Text display6() => _copyWithStyle((s) => (s ?? const TextStyle()).copyWith(
+        fontSize: BsTypography.display6,
+        fontWeight: BsTypography.weightDisplay,
+        height: BsTypography.lineHeightDisplay,
+      ));
 
   /// Sets the font size to fs-1 (40px, equivalent to h1).
   Text fs1() => _copyWithStyle((s) => (s ?? const TextStyle()).copyWith(fontSize: BsTypography.h1));
@@ -210,4 +214,53 @@ extension BsTextExtension on Text {
 
   /// Removes text decoration (equivalent to text-decoration-none).
   Text textDecorationNone() => _copyWithStyle((s) => (s ?? const TextStyle()).copyWith(decoration: TextDecoration.none));
+
+  /// Transforms text to lowercase.
+  ///
+  /// Matches Bootstrap's `.text-lowercase` class.
+  Text textLowercase() {
+    if (data != null) {
+      return _copyWithText(data!.toLowerCase());
+    }
+    return this;
+  }
+
+  /// Transforms text to uppercase.
+  ///
+  /// Matches Bootstrap's `.text-uppercase` class.
+  Text textUppercase() {
+    if (data != null) {
+      return _copyWithText(data!.toUpperCase());
+    }
+    return this;
+  }
+
+  /// Capitalizes the first letter of each word in the text.
+  ///
+  /// Matches Bootstrap's `.text-capitalize` class.
+  Text textCapitalize() {
+    if (data != null && data!.isNotEmpty) {
+      final words = data!.split(' ');
+      final capitalizedWords = words.map((w) {
+        if (w.isEmpty) return '';
+        return w[0].toUpperCase() + w.substring(1).toLowerCase();
+      });
+      return _copyWithText(capitalizedWords.join(' '));
+    }
+    return this;
+  }
+
+  /// Wraps text automatically.
+  ///
+  /// Matches Bootstrap's `.text-wrap` class.
+  Text textWrap() {
+    return _copyWith(softWrap: true);
+  }
+
+  /// Prevents text wrapping.
+  ///
+  /// Matches Bootstrap's `.text-nowrap` class.
+  Text textNowrap() {
+    return _copyWith(softWrap: false);
+  }
 }

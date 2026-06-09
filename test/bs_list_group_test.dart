@@ -133,7 +133,7 @@ void main() {
           const BsListGroup(
             children: [
               BsListGroupItem(
-                variant: BsListGroupItemVariant.success,
+                variant: BsVariant.success,
                 child: Text('Success'),
               ),
             ],
@@ -149,3 +149,4 @@ void main() {
     });
   });
 }
+

@@ -517,4 +517,73 @@ extension BsSpacingExtension on Widget {
     padding: const EdgeInsets.only(right: BsSpacing.s5),
     child: this,
   );
+
+  // ─── Level 0 Padding (Standard Values) ─────────────────────────────────────
+
+  /// Applies zero padding on all sides.
+  Widget p0() => Padding(padding: EdgeInsets.zero, child: this);
+
+  /// Applies zero horizontal padding (left and right).
+  Widget px0() => Padding(padding: const EdgeInsets.symmetric(horizontal: 0.0), child: this);
+
+  /// Applies zero vertical padding (top and bottom).
+  Widget py0() => Padding(padding: const EdgeInsets.symmetric(vertical: 0.0), child: this);
+
+  /// Applies zero padding to the top side.
+  Widget pt0() => Padding(padding: const EdgeInsets.only(top: 0.0), child: this);
+
+  /// Applies zero padding to the bottom side.
+  Widget pb0() => Padding(padding: const EdgeInsets.only(bottom: 0.0), child: this);
+
+  /// Applies zero padding to the start side.
+  Widget ps0() => Padding(padding: const EdgeInsets.only(left: 0.0), child: this);
+
+  /// Applies zero padding to the end side.
+  Widget pe0() => Padding(padding: const EdgeInsets.only(right: 0.0), child: this);
+
+  // ─── Level 0 Margin (Standard Values) ──────────────────────────────────────
+
+  /// Applies zero margin on all sides.
+  Widget m0() => Padding(padding: EdgeInsets.zero, child: this);
+
+  /// Applies zero horizontal margin (left and right).
+  Widget mx0() => Padding(padding: const EdgeInsets.symmetric(horizontal: 0.0), child: this);
+
+  /// Applies zero vertical margin (top and bottom).
+  Widget my0() => Padding(padding: const EdgeInsets.symmetric(vertical: 0.0), child: this);
+
+  /// Applies zero margin to the top side.
+  Widget mt0() => Padding(padding: const EdgeInsets.only(top: 0.0), child: this);
+
+  /// Applies zero margin to the bottom side.
+  Widget mb0() => Padding(padding: const EdgeInsets.only(bottom: 0.0), child: this);
+
+  /// Applies zero margin to the start side.
+  Widget ms0() => Padding(padding: const EdgeInsets.only(left: 0.0), child: this);
+
+  /// Applies zero margin to the end side.
+  Widget me0() => Padding(padding: const EdgeInsets.only(right: 0.0), child: this);
+
+  // ─── Auto Margin Utilities ──────────────────────────────────────────────────
+
+  /// Centers the widget horizontally and vertically, matching `m-auto`.
+  Widget mAuto() => Center(child: this);
+
+  /// Centers the widget horizontally within its parent, matching `mx-auto`.
+  Widget mxAuto() => Align(alignment: Alignment.center, child: this);
+
+  /// Centers the widget vertically within its parent, matching `my-auto`.
+  Widget myAuto() => Align(alignment: Alignment.center, child: this);
+
+  /// Aligns the widget to the end (right) of its parent, matching `ms-auto` in horizontal layout.
+  Widget msAuto() => Align(alignment: AlignmentDirectional.centerEnd, child: this);
+
+  /// Aligns the widget to the start (left) of its parent, matching `me-auto` in horizontal layout.
+  Widget meAuto() => Align(alignment: AlignmentDirectional.centerStart, child: this);
+
+  /// Aligns the widget to the bottom of its parent, matching `mt-auto` in vertical layout.
+  Widget mtAuto() => Align(alignment: Alignment.bottomCenter, child: this);
+
+  /// Aligns the widget to the top of its parent, matching `mb-auto` in vertical layout.
+  Widget mbAuto() => Align(alignment: Alignment.topCenter, child: this);
 }

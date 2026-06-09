@@ -3,7 +3,7 @@ import '../tokens/bootstrap_theme.dart';
 
 /// A Bootstrap-style link component.
 ///
-/// Links are used for navigation and can be colored with Bootstrap's 
+/// Links are used for navigation and can be colored with Bootstrap's
 /// semantic color variants.
 ///
 /// See: <https://getbootstrap.com/docs/5.3/helpers/colored-links/>
@@ -40,8 +40,8 @@ class _BsLinkState extends State<BsLink> {
   Widget build(BuildContext context) {
     final bsTheme = context.bs;
     final baseColor = widget.color ?? bsTheme.linkColor;
-    final hoverColor = widget.color != null 
-        ? widget.color!.withValues(alpha: 0.8) 
+    final hoverColor = widget.color != null
+        ? widget.color!.withValues(alpha: 0.8)
         : bsTheme.linkHoverColor;
 
     return MouseRegion(
@@ -53,7 +53,9 @@ class _BsLinkState extends State<BsLink> {
         child: DefaultTextStyle.merge(
           style: TextStyle(
             color: _isHovered ? hoverColor : baseColor,
-            decoration: widget.underline || _isHovered ? TextDecoration.underline : TextDecoration.none,
+            decoration: widget.underline || _isHovered
+                ? TextDecoration.underline
+                : TextDecoration.none,
             decorationColor: _isHovered ? hoverColor : baseColor,
           ),
           child: widget.label,
@@ -65,7 +67,7 @@ class _BsLinkState extends State<BsLink> {
 
 /// A Bootstrap-style icon link component.
 ///
-/// Combines an icon with a text link, often used for "Read more" or 
+/// Combines an icon with a text link, often used for "Read more" or
 /// action-oriented navigation.
 ///
 /// See: <https://getbootstrap.com/docs/5.3/helpers/icon-link/>
@@ -108,15 +110,9 @@ class BsIconLink extends StatelessWidget {
       label: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (!iconAfter) ...[
-            icon,
-            SizedBox(width: gap),
-          ],
+          if (!iconAfter) ...[icon, SizedBox(width: gap)],
           label,
-          if (iconAfter) ...[
-            SizedBox(width: gap),
-            icon,
-          ],
+          if (iconAfter) ...[SizedBox(width: gap), icon],
         ],
       ),
     );

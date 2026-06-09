@@ -61,7 +61,7 @@ class BsTable extends StatefulWidget {
   });
 
   /// The table's base variant (contextual class).
-  final BsTableVariant? variant;
+  final BsVariant? variant;
 
   /// Whether the table rows should be zebra-striped.
   final bool striped;
@@ -297,7 +297,7 @@ class _BsTableState extends State<BsTable> {
     required BsTableRow row,
     required int index,
     required _TableColors tableColors,
-    BsTableVariant? sectionVariant,
+    BsVariant? sectionVariant,
     BsTableVerticalAlign? sectionAlign,
     bool isHead = false,
     bool isFoot = false,
@@ -408,7 +408,7 @@ class BsTableHead {
   const BsTableHead({this.variant, this.verticalAlign, required this.rows});
 
   /// The variant for the entire head section.
-  final BsTableVariant? variant;
+  final BsVariant? variant;
 
   /// The default vertical alignment for cells in the head.
   final BsTableVerticalAlign? verticalAlign;
@@ -423,7 +423,7 @@ class BsTableFoot {
   const BsTableFoot({this.variant, this.verticalAlign, required this.rows});
 
   /// The variant for the entire foot section.
-  final BsTableVariant? variant;
+  final BsVariant? variant;
 
   /// The default vertical alignment for cells in the foot.
   final BsTableVerticalAlign? verticalAlign;
@@ -443,7 +443,7 @@ class BsTableRow {
   });
 
   /// The variant for this specific row.
-  final BsTableVariant? variant;
+  final BsVariant? variant;
 
   /// The vertical alignment for cells in this row.
   final BsTableVerticalAlign? verticalAlign;
@@ -476,7 +476,7 @@ class BsTableCell {
   });
 
   /// The variant for this specific cell.
-  final BsTableVariant? variant;
+  final BsVariant? variant;
 
   /// The vertical alignment for this cell.
   final BsTableVerticalAlign? verticalAlign;
@@ -507,7 +507,7 @@ class _BsTableCellWrapper extends StatelessWidget {
 
   final bool isHeader;
   final bool small;
-  final BsTableVariant? variant;
+  final BsVariant? variant;
   final bool active;
   final bool isStriped;
   final Color? parentTextColor;
@@ -566,53 +566,53 @@ class _TableColors {
   final Color? textColor;
   final Color? borderColor;
 
-  static _TableColors fromVariant(BsThemeData theme, BsTableVariant? variant) {
+  static _TableColors fromVariant(BsThemeData theme, BsVariant? variant) {
     if (variant == null) return const _TableColors();
 
     switch (variant) {
-      case BsTableVariant.primary:
+      case BsVariant.primary:
         return _TableColors(
           bgColor: theme.primaryBgSubtle,
           textColor: theme.primaryTextEmphasis,
           borderColor: theme.primaryBorderSubtle,
         );
-      case BsTableVariant.secondary:
+      case BsVariant.secondary:
         return _TableColors(
           bgColor: theme.secondaryBgSubtle,
           textColor: theme.secondaryTextEmphasis,
           borderColor: theme.secondaryBorderSubtle,
         );
-      case BsTableVariant.success:
+      case BsVariant.success:
         return _TableColors(
           bgColor: theme.successBgSubtle,
           textColor: theme.successTextEmphasis,
           borderColor: theme.successBorderSubtle,
         );
-      case BsTableVariant.danger:
+      case BsVariant.danger:
         return _TableColors(
           bgColor: theme.dangerBgSubtle,
           textColor: theme.dangerTextEmphasis,
           borderColor: theme.dangerBorderSubtle,
         );
-      case BsTableVariant.warning:
+      case BsVariant.warning:
         return _TableColors(
           bgColor: theme.warningBgSubtle,
           textColor: theme.warningTextEmphasis,
           borderColor: theme.warningBorderSubtle,
         );
-      case BsTableVariant.info:
+      case BsVariant.info:
         return _TableColors(
           bgColor: theme.infoBgSubtle,
           textColor: theme.infoTextEmphasis,
           borderColor: theme.infoBorderSubtle,
         );
-      case BsTableVariant.light:
+      case BsVariant.light:
         return _TableColors(
           bgColor: theme.light,
           textColor: theme.bodyText,
           borderColor: theme.border,
         );
-      case BsTableVariant.dark:
+      case BsVariant.dark:
         return _TableColors(
           bgColor: theme.dark,
           textColor: Colors.white,
@@ -621,19 +621,19 @@ class _TableColors {
     }
   }
 
-  static Color stripedBg(BsThemeData theme, BsTableVariant? variant) {
+  static Color stripedBg(BsThemeData theme, BsVariant? variant) {
     if (variant == null) return theme.emphasisColor.withValues(alpha: 0.05);
     final colors = fromVariant(theme, variant);
     return (colors.textColor ?? theme.emphasisColor).withValues(alpha: 0.05);
   }
 
-  static Color hoverBg(BsThemeData theme, BsTableVariant? variant) {
+  static Color hoverBg(BsThemeData theme, BsVariant? variant) {
     if (variant == null) return theme.emphasisColor.withValues(alpha: 0.075);
     final colors = fromVariant(theme, variant);
     return (colors.textColor ?? theme.emphasisColor).withValues(alpha: 0.075);
   }
 
-  static Color activeBg(BsThemeData theme, BsTableVariant? variant) {
+  static Color activeBg(BsThemeData theme, BsVariant? variant) {
     if (variant == null) return theme.emphasisColor.withValues(alpha: 0.1);
     final colors = fromVariant(theme, variant);
     return (colors.textColor ?? theme.emphasisColor).withValues(alpha: 0.1);

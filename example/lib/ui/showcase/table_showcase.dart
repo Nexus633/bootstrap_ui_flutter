@@ -6,50 +6,154 @@ class TableShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.bs;
+
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Tables',
-            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'Documentation and examples for opt-in styling of tables (given their prevalent use in ubiquitous widgets like calendars and date pickers).',
-          ),
-          const SizedBox(height: 32),
+      child: BsContainer.fluid(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header Card with beautiful Gradient
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [theme.primary, theme.info],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primary.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Tables',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    ),
+                  ).pb2(),
+                  Text(
+                    'Styling for tables to display tabular data cleanly, with support for striped rows/columns, hover states, border styles, variants, vertical alignment, and responsiveness.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ).p4(),
+            ).mb(32),
 
-          _section('Basic Example', _basicTable()),
-          _section('Striped Rows', _stripedTable()),
-          _section('Striped Columns', _stripedColumnsTable()),
-          _section('Hoverable Rows', _hoverTable()),
-          _section('Active Tables', _activeTable()),
-          _section('Bordered Tables', _borderedTable()),
-          _section('Borderless Tables', _borderlessTable()),
-          _section('Small Tables', _smallTable()),
-          _section('Table Variants', _variantsTable()),
-          _section('Table Group Dividers', _groupDividerTable()),
-          _section('Vertical Alignment', _alignmentTable()),
-          _section('Captions', _captionTable()),
-          _section('Responsive Table', _responsiveTable()),
-        ],
-      ).p(16),
-    );
-  }
+            // 1. Basic Example
+            _Section(
+              title: 'Basic Example',
+              description: 'A clean default table style with a distinct header row.',
+              child: _basicTable(),
+            ),
 
-  Widget _section(String title, Widget child) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            // 2. Striped Rows & Columns
+            _Section(
+              title: 'Striped Rows & Columns',
+              description: 'Add zebra-striping to table rows or columns using the striped / stripedColumns flags.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Striped Rows').fwBold().fs6().pb2(),
+                  _stripedTable().pb4(),
+                  const Text('Striped Columns').fwBold().fs6().pb2(),
+                  _stripedColumnsTable(),
+                ],
+              ),
+            ),
+
+            // 3. Hoverable & Active states
+            _Section(
+              title: 'Hoverable & Active',
+              description: 'Enable hover highlights on rows or specify active rows/cells.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Hoverable Rows').fwBold().fs6().pb2(),
+                  _hoverTable().pb4(),
+                  const Text('Active Rows/Cells').fwBold().fs6().pb2(),
+                  _activeTable(),
+                ],
+              ),
+            ),
+
+            // 4. Borders
+            _Section(
+              title: 'Borders Styling',
+              description: 'Manage borders to create bordered or completely borderless tables.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Bordered Table').fwBold().fs6().pb2(),
+                  _borderedTable().pb4(),
+                  const Text('Borderless Table').fwBold().fs6().pb2(),
+                  _borderlessTable(),
+                ],
+              ),
+            ),
+
+            // 5. Sizing & Group Dividers
+            _Section(
+              title: 'Sizing & Group Dividers',
+              description: 'Make tables smaller with compact padding, or separate head and body with thicker group borders.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Small Table').fwBold().fs6().pb2(),
+                  _smallTable().pb4(),
+                  const Text('Group Divider Table').fwBold().fs6().pb2(),
+                  _groupDividerTable(),
+                ],
+              ),
+            ),
+
+            // 6. Table Variants
+            _Section(
+              title: 'Table Variants',
+              description: 'Apply theme contextual background and border colors directly to tables.',
+              child: _variantsTable(),
+            ),
+
+            // 7. Alignment & Captions
+            _Section(
+              title: 'Alignment & Captions',
+              description: 'Align cell content vertically (middle, top, bottom) or add explanatory captions.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Vertical Alignment (Middle vs Bottom)').fwBold().fs6().pb2(),
+                  _alignmentTable().pb4(),
+                  const Text('Table Captions').fwBold().fs6().pb2(),
+                  _captionTable(),
+                ],
+              ),
+            ),
+
+            // 8. Responsive Tables
+            _Section(
+              title: 'Responsive Table',
+              description: 'Wrap your table inside a responsive container to allow horizontal scrolling on small viewports.',
+              child: _responsiveTable(),
+            ),
+          ],
         ),
-        const SizedBox(height: 16),
-        child,
-        const SizedBox(height: 48),
-      ],
+      ),
     );
   }
 
@@ -114,21 +218,21 @@ class TableShowcase extends StatelessWidget {
         BsTableRow(
           active: true,
           children: [
-            BsTableCell(child: Text('Active')),
+            BsTableCell(child: Text('Active Row')),
             BsTableCell(child: Text('Cell')),
             BsTableCell(child: Text('Cell')),
           ],
         ),
         BsTableRow(
           children: [
-            BsTableCell(child: Text('Default')),
+            BsTableCell(child: Text('Default Row')),
             BsTableCell(child: Text('Cell')),
             BsTableCell(child: Text('Cell')),
           ],
         ),
         BsTableRow(
           children: [
-            BsTableCell(child: Text('Default')),
+            BsTableCell(child: Text('Default Row')),
             BsTableCell.header(active: true, child: Text('Active Header Cell')),
             BsTableCell(child: Text('Cell')),
           ],
@@ -152,7 +256,7 @@ class TableShowcase extends StatelessWidget {
   Widget _variantsTable() {
     return Column(
       children: [
-        for (final variant in BsTableVariant.values)
+        for (final variant in BsVariant.values)
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: BsTable(
@@ -161,7 +265,7 @@ class TableShowcase extends StatelessWidget {
                 BsTableRow(
                   children: [
                     BsTableCell(child: Text(variant.name.toUpperCase())),
-                    const BsTableCell(child: Text('Cell')),
+                    const BsTableCell(child: Text('Variant cell background')),
                     const BsTableCell(child: Text('Cell')),
                   ],
                 ),
@@ -285,5 +389,44 @@ class TableShowcase extends StatelessWidget {
         ],
       ),
     ];
+  }
+}
+
+class _Section extends StatelessWidget {
+  const _Section({required this.title, this.description, required this.child});
+
+  final String title;
+  final String? description;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+        ).pb(4),
+        if (description != null) Text(description!).pb(16),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: context.bs.bodyBg,
+            border: Border.all(color: context.bs.border),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: child,
+        ).pb(32),
+      ],
+    );
   }
 }

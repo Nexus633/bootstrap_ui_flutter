@@ -18,14 +18,14 @@ void main() {
 
     testWidgets('renders different variants', (WidgetTester tester) async {
       await tester.pumpWidget(
-        wrap(const BsBadge(label: 'Primary', variant: BsBadgeVariant.primary)),
+        wrap(const BsBadge(label: 'Primary', variant: BsVariant.primary)),
       );
       final container = tester.widget<Container>(find.byType(Container));
       final decoration = container.decoration as BoxDecoration;
       expect(decoration.color, BsColors.primary);
 
       await tester.pumpWidget(
-        wrap(const BsBadge(label: 'Danger', variant: BsBadgeVariant.danger)),
+        wrap(const BsBadge(label: 'Danger', variant: BsVariant.danger)),
       );
       final container2 = tester.widget<Container>(find.byType(Container));
       final decoration2 = container2.decoration as BoxDecoration;
@@ -40,3 +40,4 @@ void main() {
     });
   });
 }
+

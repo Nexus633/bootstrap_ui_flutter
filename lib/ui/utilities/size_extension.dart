@@ -75,4 +75,64 @@ extension BsSizeExtension on Widget {
         flex: flex,
         child: this,
       );
+
+  /// Sets width to 100vw (100% of viewport width).
+  Widget vw100(BuildContext context) => SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: this,
+      );
+
+  /// Sets height to 100vh (100% of viewport height).
+  Widget vh100(BuildContext context) => SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: this,
+      );
+
+  /// Sets width to 50vw (50% of viewport width).
+  Widget vw50(BuildContext context) => SizedBox(
+        width: MediaQuery.of(context).size.width * 0.5,
+        child: this,
+      );
+
+  /// Sets height to 50vh (50% of viewport height).
+  Widget vh50(BuildContext context) => SizedBox(
+        height: MediaQuery.of(context).size.height * 0.5,
+        child: this,
+      );
+
+  /// Sets min-width to 100vw (100% of viewport width).
+  Widget minVw100(BuildContext context) => ConstrainedBox(
+        constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width),
+        child: this,
+      );
+
+  /// Sets min-height to 100vh (100% of viewport height).
+  Widget minVh100(BuildContext context) => ConstrainedBox(
+        constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+        child: this,
+      );
+
+  /// Sets min-width to 50vw (50% of viewport width).
+  Widget minVw50(BuildContext context) => ConstrainedBox(
+        constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * 0.5),
+        child: this,
+      );
+
+  /// Sets min-height to 50vh (50% of viewport height).
+  Widget minVh50(BuildContext context) => ConstrainedBox(
+        constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height * 0.5),
+        child: this,
+      );
+
+  /// Sets min-width to 100% of parent.
+  Widget minW100() => ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: double.infinity),
+        child: this,
+      );
+
+  /// Sets min-height to 100% of parent.
+  Widget minH100() => ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: double.infinity),
+        child: this,
+      );
 }

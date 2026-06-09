@@ -6,24 +6,60 @@ class HeadingShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.bs;
+
     return SingleChildScrollView(
       child: BsContainer.fluid(
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Headings',
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-            ).pb(16),
-            const Text(
-              'All HTML headings, <h1> through <h6>, are available. BsHeading is designed to match Bootstrap\'s default typography hierarchy, line height, font weights, and spacing.',
-            ).pb(24),
+            // Header Card with beautiful Gradient
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [theme.primary, theme.info],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primary.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Headings',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    ),
+                  ).pb2(),
+                  Text(
+                    'All HTML headings, h1 through h6, are available. BsHeading is designed to match Bootstrap\'s default typography hierarchy, line height, font weights, and spacing.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ).p4(),
+            ).mb(32),
 
-            // Standard Headings
+            // 1. Standard Headings
             _Section(
               title: 'Bootstrap Headings',
-              description:
-                  'Standard headings from h1 to h6. By default, headings include a bottom margin of 0.5rem (8px).',
+              description: 'Standard headings from h1 to h6. By default, headings include a bottom margin of 0.5rem (8px).',
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -37,11 +73,10 @@ class HeadingShowcase extends StatelessWidget {
               ),
             ),
 
-            // Customization Options
+            // 2. Customization Options
             _Section(
-              title: 'Customization',
-              description:
-                  'Modify headings with alignment, colors, or remove the default bottom margin.',
+              title: 'Heading Customization',
+              description: 'Modify headings with alignment, colors, or remove the default bottom margin.',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -50,13 +85,13 @@ class HeadingShowcase extends StatelessWidget {
                     level: BsHeadingLevel.h2,
                     textAlign: TextAlign.center,
                   ),
-                  const Divider().py2(),
+                  const Divider().py3(),
                   BsHeading(
                     'Danger Colored Heading',
                     level: BsHeadingLevel.h3,
-                    color: context.bs.danger,
+                    color: theme.danger,
                   ),
-                  const Divider().py2(),
+                  const Divider().py3(),
                   Row(
                     children: [
                       const BsHeading(
@@ -65,9 +100,11 @@ class HeadingShowcase extends StatelessWidget {
                         removeMargin: true,
                         color: Colors.blue,
                       ).pe3(),
-                      Text(
-                        '(Aligned horizontally because margin is removed)',
-                        style: TextStyle(color: context.bs.bodyTextSecondary),
+                      Expanded(
+                        child: Text(
+                          '(Aligned horizontally because margin is removed)',
+                          style: TextStyle(color: theme.bodyTextSecondary),
+                        ),
                       ),
                     ],
                   ),
@@ -95,15 +132,23 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-        ).pb(8),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+        ).pb(4),
         if (description != null) Text(description!).pb(16),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
+            color: context.bs.bodyBg,
             border: Border.all(color: context.bs.border),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
           child: child,
         ).pb(32),

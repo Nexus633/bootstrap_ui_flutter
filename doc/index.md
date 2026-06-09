@@ -50,6 +50,12 @@ Here is a quick overview of all documented topics in both languages:
 | 📋 **List Group** | [List Group](./en/components/list_group.md) | [Listengruppe](./de/components/list_group.md) |
 | 💬 **Modal** | [Modal](./en/components/modal.md) | [Modaldialoge](./de/components/modal.md) |
 | 🗺️ **Navbar** | [Navbar](./en/components/navbar.md) | [Navigationsleiste](./de/components/navbar.md) |
+| 🧭 **Navs & Tabs** | [Navs & Tabs](./en/components/nav.md) | [Navigations-Tabs](./de/components/nav.md) |
+| 🚪 **Offcanvas** | [Offcanvas](./en/components/offcanvas.md) | [Offcanvas](./de/components/offcanvas.md) |
+| 🔢 **Pagination** | [Pagination](./en/components/pagination.md) | [Seitennummerierung](./de/components/pagination.md) |
+| 🧱 **Placeholder** | [Placeholder](./en/components/placeholder.md) | [Platzhalter](./de/components/placeholder.md) |
+| 💬 **Popover** | [Popover](./en/components/popover.md) | [Popover](./de/components/popover.md) |
+| 📊 **Progress** | [Progress](./en/components/progress.md) | [Fortschrittsbalken](./de/components/progress.md) |
 
 ### 🛠️ Helpers & Utilities / Hilfen & Werkzeuge
 
@@ -58,6 +64,7 @@ Here is a quick overview of all documented topics in both languages:
 | 🧱 **Helpers** | [Helpers Index](./en/helpers/index.md) | [Helpers Index](./de/helpers/index.md) |
 | ↔️ **Spacing Utility** | [Spacing Utility](./en/utilities/spacing.md) | [Abstands-Utilities](./de/utilities/spacing.md) |
 | 🔤 **Text Utilities** | [Text Utilities](./en/utilities/text.md) | [Text-Utilities](./de/utilities/text.md) |
+| ⬜ **Borders & Rounded** | [Borders & Rounded](./en/utilities/borders.md) | [Rahmen & Eckenrundung](./de/utilities/borders.md) |
 | ✨ **Other Utilities** | [Other Utilities](./en/utilities/others.md) | [Weitere Utilities](./de/utilities/others.md) |
 
 ---

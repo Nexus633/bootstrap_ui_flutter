@@ -201,7 +201,7 @@ void main() {
           tester,
           BsNavbar(
             brand: const BsNavbarBrand(
-              variant: BsNavbarLinkVariant.danger,
+              variant: BsVariant.danger,
               child: Text('CustomBrand'),
             ),
             collapse: const BsNavbarCollapse(
@@ -424,3 +424,4 @@ class _MockHttpClientResponse extends Stream<List<int>> implements HttpClientRes
     );
   }
 }
+

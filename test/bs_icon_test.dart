@@ -28,13 +28,13 @@ void main() {
 
     testWidgets('resolves theme variant colors correctly', (WidgetTester tester) async {
       await tester.pumpWidget(
-        wrap(const BsIcon(BsIcons.alarm, variant: BsIconVariant.primary)),
+        wrap(const BsIcon(BsIcons.alarm, variant: BsVariant.primary)),
       );
       final iconWidget = tester.widget<Icon>(find.byType(Icon));
       expect(iconWidget.color, BsColors.primary);
 
       await tester.pumpWidget(
-        wrap(const BsIcon(BsIcons.alarm, variant: BsIconVariant.danger)),
+        wrap(const BsIcon(BsIcons.alarm, variant: BsVariant.danger)),
       );
       final iconWidgetDanger = tester.widget<Icon>(find.byType(Icon));
       expect(iconWidgetDanger.color, BsColors.danger);
@@ -42,10 +42,11 @@ void main() {
 
     testWidgets('custom color takes precedence over variant', (WidgetTester tester) async {
       await tester.pumpWidget(
-        wrap(const BsIcon(BsIcons.alarm, color: Colors.blue, variant: BsIconVariant.primary)),
+        wrap(const BsIcon(BsIcons.alarm, color: Colors.blue, variant: BsVariant.primary)),
       );
       final iconWidget = tester.widget<Icon>(find.byType(Icon));
       expect(iconWidget.color, Colors.blue);
     });
   });
 }
+

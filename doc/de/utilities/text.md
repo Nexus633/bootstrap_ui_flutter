@@ -23,6 +23,24 @@ Text('Kleiner Text').fs6();
 
 ---
 
+### 1b. Display-Überschriften (Display Headings)
+Entspricht den Bootstrap-Klassen `.display-1` bis `.display-6`. Diese haben ein geringeres Gewicht (300) und eine Zeilenhöhe von 1.2.
+
+| Methode | Schriftgröße | Entspricht |
+| :--- | :--- | :--- |
+| `.display1()` | 80.0 px | Display 1 |
+| `.display2()` | 72.0 px | Display 2 |
+| `.display3()` | 64.0 px | Display 3 |
+| `.display4()` | 56.0 px | Display 4 |
+| `.display5()` | 48.0 px | Display 5 |
+| `.display6()` | 40.0 px | Display 6 |
+
+```dart
+Text('Sehr große Anzeige').display1();
+```
+
+---
+
 ### 2. Schriftgewichte (Font Weight)
 Entspricht den Bootstrap-Klassen `.fw-*`.
 
@@ -116,6 +134,37 @@ Text('Dies ist ein sehr langer Text, der gekürzt wird...').truncate();
 
 ---
 
+### 8. Textkürzung & Transformationen (Casing)
+Entspricht den Bootstrap-Klassen `.text-lowercase`, `.text-uppercase` und `.text-capitalize`.
+
+| Methode | Beschreibung |
+| :--- | :--- |
+| `.textLowercase()` | Transformiert den Text in Kleinbuchstaben. |
+| `.textUppercase()` | Transformiert den Text in Großbuchstaben. |
+| `.textCapitalize()` | Transformiert den ersten Buchstaben jedes Wortes in einen Großbuchstaben. |
+
+```dart
+Text('hallo welt').textUppercase(); // HALLO WELT
+Text('HALLO WELT').textLowercase(); // hallo welt
+Text('hallo welt').textCapitalize(); // Hallo Welt
+```
+
+---
+
+### 9. Text-Wrapping
+Entspricht den Bootstrap-Klassen `.text-wrap` und `.text-nowrap`.
+
+| Methode | Beschreibung |
+| :--- | :--- |
+| `.textWrap()` | Ermöglicht den automatischen Zeilenumbruch des Textes. |
+| `.textNowrap()` | Verhindert den automatischen Zeilenumbruch des Textes (Kein Umbruch). |
+
+```dart
+Text('Langer Text...').textNowrap();
+```
+
+---
+
 ## Verwendungsbeispiele
 
 Durch Kaskadierung (Chaining) können mehrere Stile kombiniert werden:
@@ -126,5 +175,6 @@ Text('Bootstrap in Flutter')
     .fwBold()
     .fstItalic()
     .textCenter()
+    .textUppercase()
     .textDecorationUnderline();
 ```

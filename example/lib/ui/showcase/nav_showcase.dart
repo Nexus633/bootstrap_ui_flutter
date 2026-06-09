@@ -1,5 +1,5 @@
-import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 
 class NavShowcase extends StatefulWidget {
   const NavShowcase({super.key});
@@ -18,120 +18,145 @@ class _NavShowcaseState extends State<NavShowcase> {
   Widget build(BuildContext context) {
     final theme = context.bs;
 
-    return Scaffold(
-      backgroundColor: theme.bodyBg,
-      appBar: AppBar(
-        title: const Text('Navs and Tabs Showcase'),
-        backgroundColor: theme.bodyBg,
-        foregroundColor: theme.bodyText,
-        elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(color: theme.border, height: 1.0),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: BsContainer(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ─── Plain Navigation Links ──────────────────────────────────────
-              _sectionTitle('Plain Nav Links', theme),
-              const Text(
-                'Base navigation component with simple text links. Supports active and disabled states.',
-                style: TextStyle(color: Colors.grey),
-              ).mb3(),
-              BsNav(
-                variant: BsNavVariant.plain,
-                children: [
-                  BsNavLink(label: 'Active', active: true, onPressed: () {}),
-                  BsNavLink(label: 'Link', onPressed: () {}),
-                  BsNavLink(label: 'Link', onPressed: () {}),
-                  const BsNavLink(label: 'Disabled', disabled: true),
-                ],
-              ).mb5(),
-
-              // ─── Custom Colored Links ────────────────────────────────────────
-              _sectionTitle('Custom Colored Links', theme),
-              const Text(
-                'Optionally customize text colors for both normal and active states using custom color parameters.',
-                style: TextStyle(color: Colors.grey),
-              ).mb3(),
-              BsNav(
-                variant: BsNavVariant.plain,
-                children: [
-                  BsNavLink(
-                    label: 'Green Link',
-                    active: true,
-                    color: Colors.green,
-                    activeColor: Colors.green,
-                    onPressed: () {},
-                  ),
-                  BsNavLink(
-                    label: 'Orange Link',
-                    color: Colors.orange,
-                    activeColor: Colors.orange,
-                    onPressed: () {},
-                  ),
-                  BsNavLink(
-                    label: 'Red Link',
-                    color: Colors.red,
-                    activeColor: Colors.red,
-                    onPressed: () {},
+    return SingleChildScrollView(
+      child: BsContainer.fluid(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header Card with beautiful Gradient
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [theme.primary, theme.info],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primary.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
                   ),
                 ],
-              ).mb5(),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Navs & Tabs',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    ),
+                  ).pb2(),
+                  Text(
+                    'Flexible and highly customizable navigation components. Build tabbed interfaces, pills, inline lists, or vertically stacked sidebar menus.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ).p4(),
+            ).mb(32),
 
-              // ─── Alignment Options ───────────────────────────────────────────
-              _sectionTitle('Horizontal Alignment', theme),
-              const Text(
-                'Align navigation links to the center, end, or expand them to fill the width (fill / justified).',
-                style: TextStyle(color: Colors.grey),
-              ).mb3(),
-              const Text(
-                'Centered (BsNavAlignment.center):',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ).mb2(),
-              BsNav(
-                alignment: BsNavAlignment.center,
+            // 1. Plain Nav Links
+            _Section(
+              title: 'Plain Nav Links & Colors',
+              description: 'Standard navigation without tabs, featuring active, hover, disabled and custom color overrides.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BsNavLink(label: 'Active', active: true, onPressed: () {}),
-                  BsNavLink(label: 'Link', onPressed: () {}),
-                  BsNavLink(label: 'Link', onPressed: () {}),
-                ],
-              ).mb3(),
-              const Text(
-                'Right aligned (BsNavAlignment.end):',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ).mb2(),
-              BsNav(
-                alignment: BsNavAlignment.end,
-                children: [
-                  BsNavLink(label: 'Active', active: true, onPressed: () {}),
-                  BsNavLink(label: 'Link', onPressed: () {}),
-                  BsNavLink(label: 'Link', onPressed: () {}),
-                ],
-              ).mb3(),
-              const Text(
-                'Justified equal width (BsNavAlignment.justified):',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ).mb2(),
-              BsNav(
-                alignment: BsNavAlignment.justified,
-                children: [
-                  BsNavLink(label: 'Home', active: true, onPressed: () {}),
-                  BsNavLink(label: 'Profile Info', onPressed: () {}),
-                  BsNavLink(label: 'Settings', onPressed: () {}),
-                ],
-              ).mb5(),
+                  BsNav(
+                    variant: BsNavVariant.plain,
+                    children: [
+                      BsNavLink(label: 'Active link', active: true, onPressed: () {}),
+                      BsNavLink(label: 'Standard Link', onPressed: () {}),
+                      BsNavLink(label: 'Another Link', onPressed: () {}),
+                      const BsNavLink(label: 'Disabled Link', disabled: true),
+                    ],
+                  ).pb4(),
 
-              // ─── Tabs Navigation (Functional) ────────────────────────────────
-              _sectionTitle('Tabs & Content Panes', theme),
-              const Text(
-                'Classic tabbed interface with bottom borders. Combined with BsTabContent and BsTabPane to switch views.',
-                style: TextStyle(color: Colors.grey),
-              ).mb3(),
-              BsCard(
+                  const Text('Custom Color Overrides:').fwBold().fs6().pb2(),
+                  BsNav(
+                    variant: BsNavVariant.plain,
+                    children: [
+                      BsNavLink(
+                        label: 'Green Link',
+                        active: true,
+                        color: Colors.green,
+                        activeColor: Colors.green,
+                        onPressed: () {},
+                      ),
+                      BsNavLink(
+                        label: 'Orange Link',
+                        color: Colors.orange,
+                        activeColor: Colors.orange,
+                        onPressed: () {},
+                      ),
+                      BsNavLink(
+                        label: 'Red Link',
+                        color: Colors.red,
+                        activeColor: Colors.red,
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            // 2. Alignment
+            _Section(
+              title: 'Horizontal Alignment',
+              description: 'Align nav items horizontally using center, end, or justified styles.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Alignment: Center').fwBold().fs6().pb2(),
+                  BsNav(
+                    alignment: BsNavAlignment.center,
+                    children: [
+                      BsNavLink(label: 'Active', active: true, onPressed: () {}),
+                      BsNavLink(label: 'Link', onPressed: () {}),
+                      BsNavLink(label: 'Link', onPressed: () {}),
+                    ],
+                  ).pb4(),
+
+                  const Text('Alignment: End (Right Aligned)').fwBold().fs6().pb2(),
+                  BsNav(
+                    alignment: BsNavAlignment.end,
+                    children: [
+                      BsNavLink(label: 'Active', active: true, onPressed: () {}),
+                      BsNavLink(label: 'Link', onPressed: () {}),
+                      BsNavLink(label: 'Link', onPressed: () {}),
+                    ],
+                  ).pb4(),
+
+                  const Text('Alignment: Justified (Equal Width)').fwBold().fs6().pb2(),
+                  BsNav(
+                    alignment: BsNavAlignment.justified,
+                    children: [
+                      BsNavLink(label: 'Home Tab', active: true, onPressed: () {}),
+                      BsNavLink(label: 'Profile Settings', onPressed: () {}),
+                      BsNavLink(label: 'System Billing', onPressed: () {}),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            // 3. Tabs Navigation
+            _Section(
+              title: 'Tabs & Content Panes',
+              description: 'Tab-based layout mapping each active tab item to its corresponding content pane.',
+              child: BsCard(
                 children: [
                   BsNav(
                     variant: BsNavVariant.tabs,
@@ -155,18 +180,18 @@ class _NavShowcaseState extends State<NavShowcase> {
                   ).p3(),
                   BsCardBody(
                     child: SizedBox(
-                      height: 120,
+                      height: 80,
                       child: BsTabContent(
                         activeIndex: _activeTab1,
                         children: const [
                           BsTabPane(
                             child: Text(
-                              'Home Content: Welcome to the Bootstrap-styled home tab!',
+                              'Home Content: Welcome to the Bootstrap-styled home tab pane details!',
                             ),
                           ),
                           BsTabPane(
                             child: Text(
-                              'Profile Content: Manage your user settings and personal profile details.',
+                              'Profile Content: Manage your user profile and settings in this section.',
                             ),
                           ),
                           BsTabPane(
@@ -179,152 +204,142 @@ class _NavShowcaseState extends State<NavShowcase> {
                     ),
                   ),
                 ],
-              ).mb5(),
+              ),
+            ),
 
-              // ─── Pills Navigation ────────────────────────────────────────────
-              _sectionTitle('Pills Navigation', theme),
-              const Text(
-                'Pill-style navigation displaying active links with solid background highlights.',
-                style: TextStyle(color: Colors.grey),
-              ).mb3(),
-              BsNav(
-                variant: BsNavVariant.pills,
+            // 4. Pills Navigation
+            _Section(
+              title: 'Pill Navigation',
+              description: 'Round badges/pills layout displaying active states with solid primary highlights.',
+              child: Column(
                 children: [
-                  BsNavLink(
-                    label: 'Home',
-                    active: _activePill == 0,
-                    onPressed: () => setState(() => _activePill = 0),
-                  ),
-                  BsNavLink(
-                    label: 'Profile',
-                    active: _activePill == 1,
-                    onPressed: () => setState(() => _activePill = 1),
-                  ),
-                  BsNavLink(
-                    label: 'Messages',
-                    active: _activePill == 2,
-                    onPressed: () => setState(() => _activePill = 2),
-                  ),
-                  const BsNavLink(label: 'Disabled', disabled: true),
-                ],
-              ).mb3(),
-              BsCard(
-                body: BsCardBody(
-                  child: SizedBox(
-                    height: 40,
-                    child: BsTabContent(
-                      activeIndex: _activePill,
-                      children: const [
-                        BsTabPane(child: Text('Home Pane Content (Pill)')),
-                        BsTabPane(child: Text('Profile Pane Content (Pill)')),
-                        BsTabPane(child: Text('Messages Pane Content (Pill)')),
-                      ],
+                  BsNav(
+                    variant: BsNavVariant.pills,
+                    children: [
+                      BsNavLink(
+                        label: 'Overview',
+                        active: _activePill == 0,
+                        onPressed: () => setState(() => _activePill = 0),
+                      ),
+                      BsNavLink(
+                        label: 'Reports',
+                        active: _activePill == 1,
+                        onPressed: () => setState(() => _activePill = 1),
+                      ),
+                      BsNavLink(
+                        label: 'Messages',
+                        active: _activePill == 2,
+                        onPressed: () => setState(() => _activePill = 2),
+                      ),
+                    ],
+                  ).pb3(),
+                  BsCard(
+                    body: BsCardBody(
+                      child: SizedBox(
+                        height: 50,
+                        child: BsTabContent(
+                          activeIndex: _activePill,
+                          children: const [
+                            BsTabPane(child: Text('Summary of account activity.')),
+                            BsTabPane(child: Text('Download financial statistics reports.')),
+                            BsTabPane(child: Text('Your inbox messages will display here.')),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ).mb5(),
-
-              // ─── Underline Navigation ────────────────────────────────────────
-              _sectionTitle('Underline Navigation', theme),
-              const Text(
-                'Modern navigation variant featuring a clean bottom-line indicator for the active item.',
-                style: TextStyle(color: Colors.grey),
-              ).mb3(),
-              BsNav(
-                variant: BsNavVariant.underline,
-                children: [
-                  BsNavLink(
-                    label: 'Dashboard',
-                    active: _activeUnderline == 0,
-                    onPressed: () => setState(() => _activeUnderline = 0),
-                  ),
-                  BsNavLink(
-                    label: 'Analytics',
-                    active: _activeUnderline == 1,
-                    onPressed: () => setState(() => _activeUnderline = 1),
-                  ),
-                  BsNavLink(
-                    label: 'Reports',
-                    active: _activeUnderline == 2,
-                    onPressed: () => setState(() => _activeUnderline = 2),
-                  ),
                 ],
-              ).mb3(),
-              BsCard(
-                body: BsCardBody(
-                  child: SizedBox(
-                    height: 40,
-                    child: BsTabContent(
-                      activeIndex: _activeUnderline,
-                      children: const [
-                        BsTabPane(child: Text('Dashboard Section Details')),
-                        BsTabPane(child: Text('Live Analytics Visualizers')),
-                        BsTabPane(child: Text('Exportable Financial Reports')),
-                      ],
+              ),
+            ),
+
+            // 5. Underline Navigation
+            _Section(
+              title: 'Underline Navigation',
+              description: 'Clean modern tab layout featuring a bottom border-underline for active tabs.',
+              child: Column(
+                children: [
+                  BsNav(
+                    variant: BsNavVariant.underline,
+                    children: [
+                      BsNavLink(
+                        label: 'General',
+                        active: _activeUnderline == 0,
+                        onPressed: () => setState(() => _activeUnderline = 0),
+                      ),
+                      BsNavLink(
+                        label: 'Security',
+                        active: _activeUnderline == 1,
+                        onPressed: () => setState(() => _activeUnderline = 1),
+                      ),
+                      BsNavLink(
+                        label: 'Integrations',
+                        active: _activeUnderline == 2,
+                        onPressed: () => setState(() => _activeUnderline = 2),
+                      ),
+                    ],
+                  ).pb3(),
+                  BsCard(
+                    body: BsCardBody(
+                      child: SizedBox(
+                        height: 50,
+                        child: BsTabContent(
+                          activeIndex: _activeUnderline,
+                          children: const [
+                            BsTabPane(child: Text('General app configuration settings.')),
+                            BsTabPane(child: Text('Manage passwords, 2FA tokens and sessions.')),
+                            BsTabPane(child: Text('Webhook links and developer API integrations.')),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ).mb5(),
+                ],
+              ),
+            ),
 
-              // ─── Vertical Tabs (Flex Column) ────────────────────────────────
-              _sectionTitle('Vertical Stacked Tabs', theme),
-              const Text(
-                'Align navigation elements vertically using the vertical: true layout. Perfect for sidebar layouts.',
-                style: TextStyle(color: Colors.grey),
-              ).mb3(),
-              BsRow(
+            // 6. Vertical Stacked
+            _Section(
+              title: 'Vertical Stacked Tabs',
+              description: 'Utilize vertical layout configurations to structure side-aligned navigations.',
+              child: BsRow(
+                gutterX: BsSpacing.s4,
                 children: [
                   BsCol(
-                    config: const BsColConfig(xs: 12, md: 2),
+                    config: const BsColConfig(xs: 12, md: 3),
                     child: BsNav(
-                      variant: BsNavVariant.plain,
+                      variant: BsNavVariant.pills,
                       vertical: true,
                       children: [
                         BsNavLink(
                           label: 'Overview',
                           active: _activeVerticalTab == 0,
-                          onPressed: () =>
-                              setState(() => _activeVerticalTab = 0),
+                          onPressed: () => setState(() => _activeVerticalTab = 0),
                         ),
                         BsNavLink(
-                          label: 'Security',
+                          label: 'Credentials',
                           active: _activeVerticalTab == 1,
-                          onPressed: () =>
-                              setState(() => _activeVerticalTab = 1),
+                          onPressed: () => setState(() => _activeVerticalTab = 1),
                         ),
                         BsNavLink(
-                          label: 'Billing',
+                          label: 'Invoices',
                           active: _activeVerticalTab == 2,
-                          onPressed: () =>
-                              setState(() => _activeVerticalTab = 2),
+                          onPressed: () => setState(() => _activeVerticalTab = 2),
                         ),
                       ],
-                    ).mb3(),
+                    ).pb3(),
                   ),
                   BsCol(
-                    config: const BsColConfig(xs: 12, md: 10),
+                    config: const BsColConfig(xs: 12, md: 9),
                     child: BsCard(
                       body: BsCardBody(
                         child: SizedBox(
-                          height: 120,
+                          height: 100,
                           child: BsTabContent(
                             activeIndex: _activeVerticalTab,
                             children: const [
-                              BsTabPane(
-                                child: Text(
-                                  'Overview Sidebar Pane: Summary of dashboard modules.',
-                                ),
-                              ),
-                              BsTabPane(
-                                child: Text(
-                                  'Security Sidebar Pane: Manage system credentials, two-factor authentication, and tokens.',
-                                ),
-                              ),
-                              BsTabPane(
-                                child: Text(
-                                  'Billing Sidebar Pane: Invoices list, subscription status, and payment configurations.',
-                                ),
-                              ),
+                              BsTabPane(child: Text('Overview: Main dashboard indicators.')),
+                              BsTabPane(child: Text('Credentials: Edit passwords, user keys, and tokens.')),
+                              BsTabPane(child: Text('Invoices: Review monthly subscription bills and transactions.')),
                             ],
                           ),
                         ),
@@ -332,22 +347,50 @@ class _NavShowcaseState extends State<NavShowcase> {
                     ),
                   ),
                 ],
-              ).mb5(),
-            ],
-          ).py(24),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
+}
 
-  Widget _sectionTitle(String text, BsThemeData theme) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 22,
-        fontWeight: FontWeight.bold,
-        color: theme.bodyText,
-      ),
-    ).mb2();
+class _Section extends StatelessWidget {
+  const _Section({required this.title, this.description, required this.child});
+
+  final String title;
+  final String? description;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+        ).pb(4),
+        if (description != null) Text(description!).pb(16),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: context.bs.bodyBg,
+            border: Border.all(color: context.bs.border),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: child,
+        ).pb(32),
+      ],
+    );
   }
 }

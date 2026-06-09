@@ -52,7 +52,7 @@ class BsButton extends StatefulWidget {
   final Color? iconColor;
 
   /// Variant color for the icon.
-  final BsIconVariant? iconVariant;
+  final BsVariant? iconVariant;
 
   /// Whether the button should take up the full width of its parent.
   final bool fullWidth;
@@ -338,16 +338,16 @@ class _BsButtonState extends State<BsButton> {
     );
   }
 
-  Color _resolveVariantColor(BsIconVariant variant, BsThemeData bs) {
+  Color _resolveVariantColor(BsVariant variant, BsThemeData bs) {
     return switch (variant) {
-      BsIconVariant.primary => bs.primary,
-      BsIconVariant.secondary => bs.secondary,
-      BsIconVariant.success => bs.success,
-      BsIconVariant.danger => bs.danger,
-      BsIconVariant.warning => bs.warning,
-      BsIconVariant.info => bs.info,
-      BsIconVariant.light => bs.light,
-      BsIconVariant.dark => bs.dark,
+      BsVariant.primary => bs.primary,
+      BsVariant.secondary => bs.secondary,
+      BsVariant.success => bs.success,
+      BsVariant.danger => bs.danger,
+      BsVariant.warning => bs.warning,
+      BsVariant.info => bs.info,
+      BsVariant.light => bs.light,
+      BsVariant.dark => bs.dark,
     };
   }
 

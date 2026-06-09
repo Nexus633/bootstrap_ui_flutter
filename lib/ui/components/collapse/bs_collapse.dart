@@ -90,7 +90,11 @@ class _BsCollapseState extends State<BsCollapse> with SingleTickerProviderStateM
       sizeFactor: _animation,
       axis: widget.horizontal ? Axis.horizontal : Axis.vertical,
       alignment: widget.horizontal ? Alignment.centerLeft : Alignment.topCenter,
-      child: widget.child,
+      child: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        scrollDirection: widget.horizontal ? Axis.horizontal : Axis.vertical,
+        child: widget.child,
+      ),
     );
   }
 }

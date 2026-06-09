@@ -51,58 +51,44 @@ enum BsButtonVariant {
   link,
 }
 
-/// Color variants for icons.
-enum BsIconVariant {
-  /// Primary icon color.
+/// Unified color variant types matching Bootstrap's theme colors.
+enum BsVariant {
+  /// Primary theme color variant.
   primary,
 
-  /// Secondary icon color.
+  /// Secondary theme color variant.
   secondary,
 
-  /// Success icon color.
+  /// Success theme color variant.
   success,
 
-  /// Danger icon color.
+  /// Danger theme color variant.
   danger,
 
-  /// Warning icon color.
+  /// Warning theme color variant.
   warning,
 
-  /// Info icon color.
+  /// Info theme color variant.
   info,
 
-  /// Light icon color.
+  /// Light theme color variant.
   light,
 
-  /// Dark icon color.
+  /// Dark theme color variant.
   dark,
 }
 
-/// Variant types for [BsAlert].
-enum BsAlertVariant {
-  /// Primary alert variant.
-  primary,
+/// Defines the backdrop behavior of Bootstrap components (like modals or offcanvases).
+enum BsBackdrop {
+  /// The backdrop is active and clicking it closes the component.
+  enabled,
 
-  /// Secondary alert variant.
-  secondary,
+  /// The backdrop is active but clicking it doesn't close the component,
+  /// instead triggering a shake/pulse animation.
+  static,
 
-  /// Success alert variant.
-  success,
-
-  /// Danger alert variant.
-  danger,
-
-  /// Warning alert variant.
-  warning,
-
-  /// Info alert variant.
-  info,
-
-  /// Light alert variant.
-  light,
-
-  /// Dark alert variant.
-  dark,
+  /// No backdrop is shown and clicking outside does nothing.
+  disabled,
 }
 
 /// Animation types for showing/hiding [BsAlert].
@@ -124,33 +110,6 @@ enum BsAlertAnimation {
 
   /// Slide from right.
   slideRight,
-}
-
-/// Variant types for [BsBadge].
-enum BsBadgeVariant {
-  /// Primary badge variant.
-  primary,
-
-  /// Secondary badge variant.
-  secondary,
-
-  /// Success badge variant.
-  success,
-
-  /// Danger badge variant.
-  danger,
-
-  /// Warning badge variant.
-  warning,
-
-  /// Info badge variant.
-  info,
-
-  /// Light badge variant.
-  light,
-
-  /// Dark badge variant.
-  dark,
 }
 
 /// Types of [BsContainer].
@@ -189,6 +148,18 @@ enum BsButtonSize {
   lg,
 }
 
+/// Standard size variants for Bootstrap components.
+enum BsSize {
+  /// Small size (`-sm`).
+  sm,
+
+  /// Medium / default size.
+  md,
+
+  /// Large size (`-lg`).
+  lg,
+}
+
 /// Position options for badges when used as overlays.
 enum BsBadgePosition {
   /// Positioned at the start of the content.
@@ -208,33 +179,6 @@ enum BsBadgePosition {
 
   /// Positioned at the bottom right corner.
   bottomRight,
-}
-
-/// Variant types for [BsTable].
-enum BsTableVariant {
-  /// Primary table variant.
-  primary,
-
-  /// Secondary table variant.
-  secondary,
-
-  /// Success table variant.
-  success,
-
-  /// Danger table variant.
-  danger,
-
-  /// Warning table variant.
-  warning,
-
-  /// Info table variant.
-  info,
-
-  /// Light table variant.
-  light,
-
-  /// Dark table variant.
-  dark,
 }
 
 /// Vertical alignment options for [BsTable] cells.
@@ -315,33 +259,6 @@ enum BsHeadingLevel {
   h6,
 }
 
-/// Color variants for [BsCard].
-enum BsCardVariant {
-  /// Primary variant.
-  primary,
-
-  /// Secondary variant.
-  secondary,
-
-  /// Success variant.
-  success,
-
-  /// Danger variant.
-  danger,
-
-  /// Warning variant.
-  warning,
-
-  /// Info variant.
-  info,
-
-  /// Light variant.
-  light,
-
-  /// Dark variant.
-  dark,
-}
-
 /// Image positions for [BsCard].
 enum BsCardImagePosition {
   /// Image at the top of the card.
@@ -399,45 +316,6 @@ enum BsDropdownAutoClose {
   none,
 }
 
-/// Color variants for [BsListGroupItem].
-enum BsListGroupItemVariant {
-  /// Primary variant.
-  primary,
-
-  /// Secondary variant.
-  secondary,
-
-  /// Success variant.
-  success,
-
-  /// Danger variant.
-  danger,
-
-  /// Warning variant.
-  warning,
-
-  /// Info variant.
-  info,
-
-  /// Light variant.
-  light,
-
-  /// Dark variant.
-  dark,
-}
-
-/// Defines the backdrop behavior of a Bootstrap modal.
-enum BsModalBackdrop {
-  /// The backdrop is active and clicking it closes the modal.
-  enabled,
-
-  /// The backdrop is active but clicking it doesn't close the modal, instead triggering a shake/pulse animation.
-  static,
-
-  /// No backdrop is shown and clicking outside does nothing.
-  disabled,
-}
-
 /// Defines the size variants of a Bootstrap modal.
 enum BsModalSize {
   /// Small modal (max-width: 300px).
@@ -478,33 +356,6 @@ enum BsNavbarExpand {
 
   /// Never expand the navbar (always collapsed with toggler).
   never,
-}
-
-/// Defines the color variant of a navbar link or brand.
-enum BsNavbarLinkVariant {
-  /// The primary brand/link color variant.
-  primary,
-
-  /// The secondary brand/link color variant.
-  secondary,
-
-  /// The success brand/link color variant.
-  success,
-
-  /// The danger brand/link color variant.
-  danger,
-
-  /// The warning brand/link color variant.
-  warning,
-
-  /// The info brand/link color variant.
-  info,
-
-  /// The light brand/link color variant.
-  light,
-
-  /// The dark brand/link color variant.
-  dark,
 }
 
 /// The variant style of the [BsNav] component.
@@ -589,5 +440,56 @@ enum BsColAlignSelf {
 
   /// Stretch this column to fill the row height.
   stretch,
+}
+
+/// Placement of the offcanvas panel relative to the viewport.
+enum BsOffcanvasPlacement {
+  /// Slide in from the left edge of the viewport.
+  start,
+
+  /// Slide in from the right edge of the viewport.
+  end,
+
+  /// Slide in from the top edge of the viewport.
+  top,
+
+  /// Slide in from the bottom edge of the viewport.
+  bottom,
+}
+
+/// Alignment options for [BsPagination].
+enum BsPaginationAlignment {
+  /// Align pagination to the left/start.
+  start,
+
+  /// Center-align pagination.
+  center,
+
+  /// Align pagination to the right/end.
+  end,
+}
+
+/// Placement options for [BsPopover].
+enum BsPopoverPlacement {
+  /// Position popover above the target.
+  top,
+
+  /// Position popover below the target.
+  bottom,
+
+  /// Position popover to the left of the target (start in LTR).
+  start,
+
+  /// Position popover to the right of the target (end in LTR).
+  end,
+}
+
+/// Trigger actions that open a [BsPopover].
+enum BsPopoverTrigger {
+  /// Opens on click, closes when clicking again or outside.
+  click,
+
+  /// Opens on hover, closes on mouse exit.
+  hover,
 }
 

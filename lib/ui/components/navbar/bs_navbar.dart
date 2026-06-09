@@ -6,25 +6,25 @@ import '../collapse/bs_collapse.dart';
 
 
 /// Helper function to resolve the Color of a variant using the active theme.
-Color? _resolveVariantColor(BuildContext context, BsNavbarLinkVariant? variant) {
+Color? _resolveVariantColor(BuildContext context, BsVariant? variant) {
   if (variant == null) return null;
   final theme = context.bs;
   switch (variant) {
-    case BsNavbarLinkVariant.primary:
+    case BsVariant.primary:
       return theme.primary;
-    case BsNavbarLinkVariant.secondary:
+    case BsVariant.secondary:
       return theme.secondary;
-    case BsNavbarLinkVariant.success:
+    case BsVariant.success:
       return theme.success;
-    case BsNavbarLinkVariant.danger:
+    case BsVariant.danger:
       return theme.danger;
-    case BsNavbarLinkVariant.warning:
+    case BsVariant.warning:
       return theme.warning;
-    case BsNavbarLinkVariant.info:
+    case BsVariant.info:
       return theme.info;
-    case BsNavbarLinkVariant.light:
+    case BsVariant.light:
       return theme.light;
-    case BsNavbarLinkVariant.dark:
+    case BsVariant.dark:
       return theme.dark;
   }
 }
@@ -224,7 +224,7 @@ class BsNavbarBrand extends StatelessWidget {
   final VoidCallback? onPressed;
 
   /// The color variant for the brand text.
-  final BsNavbarLinkVariant? variant;
+  final BsVariant? variant;
 
   /// Custom color for the brand text.
   final Color? color;
@@ -559,7 +559,7 @@ class BsNavbarLink extends StatefulWidget {
   final bool disabled;
 
   /// The color variant for the link text.
-  final BsNavbarLinkVariant? variant;
+  final BsVariant? variant;
 
   /// Custom color for the link text.
   final Color? color;

@@ -87,7 +87,7 @@ void main() {
                 onPressed: () {
                   showBsModal<void>(
                     context: context,
-                    backdrop: BsModalBackdrop.enabled,
+                    backdrop: BsBackdrop.enabled,
                     builder: (context) => const BsModal(
                       body: BsModalBody(child: Text('Body')),
                     ),
@@ -121,7 +121,7 @@ void main() {
                 onPressed: () {
                   showBsModal<void>(
                     context: context,
-                    backdrop: BsModalBackdrop.static,
+                    backdrop: BsBackdrop.static,
                     builder: (context) => const BsModal(
                       body: BsModalBody(child: Text('Body')),
                     ),
@@ -167,3 +167,4 @@ void main() {
     });
   });
 }
+
