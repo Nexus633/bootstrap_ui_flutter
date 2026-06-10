@@ -493,3 +493,36 @@ enum BsPopoverTrigger {
   hover,
 }
 
+/// The visual type of the spinner.
+enum BsSpinnerType {
+  /// A spinning circle with a cutout.
+  border,
+
+  /// A pulsing dot that grows and fades out.
+  grow,
+}
+
+/// The size of the spinner.
+enum BsSpinnerSize {
+  /// Standard size (32x32).
+  md,
+
+  /// Small size (16x16), typically used in buttons.
+  sm,
+}
+
+/// Generic placement options for overlay components like tooltips and popovers.
+enum BsPlacement {
+  /// Placed above the target.
+  top,
+
+  /// Placed below the target.
+  bottom,
+
+  /// Placed to the left of the target (in LTR).
+  start,
+
+  /// Placed to the right of the target (in LTR).
+  end,
+}
+

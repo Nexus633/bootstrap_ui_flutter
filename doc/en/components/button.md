@@ -18,6 +18,18 @@ BsButton(
 )
 ```
 
+## Custom Colors
+
+If you need a button color outside the standard variants, you can pass a custom `Color` directly. The text color is automatically adjusted for contrast based on the background color's luminance.
+
+```dart
+BsButton(
+  label: 'Brand Color',
+  color: Colors.purple,
+  onPressed: () {},
+)
+```
+
 ## Properties
 
 | Property | Type | Default | Description |

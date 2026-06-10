@@ -1,6 +1,6 @@
 name: bootstrap_ui_flutter
 description: A Flutter implementation of Bootstrap – colors, typography, spacing, grid, and components.
-version: 0.1.4
+version: 0.5.0
 homepage: https://github.com/Nexus633/bootstrap_ui_flutter
 
 environment:

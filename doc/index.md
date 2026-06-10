@@ -56,6 +56,10 @@ Here is a quick overview of all documented topics in both languages:
 | 🧱 **Placeholder** | [Placeholder](./en/components/placeholder.md) | [Platzhalter](./de/components/placeholder.md) |
 | 💬 **Popover** | [Popover](./en/components/popover.md) | [Popover](./de/components/popover.md) |
 | 📊 **Progress** | [Progress](./en/components/progress.md) | [Fortschrittsbalken](./de/components/progress.md) |
+| 👁️ **Scrollspy** | [Scrollspy](./en/components/scrollspy.md) | [Scrollspy](./de/components/scrollspy.md) |
+| 🔄 **Spinners** | [Spinners](./en/components/spinners.md) | [Ladeindikatoren](./de/components/spinners.md) |
+| 🍞 **Toasts** | [Toasts](./en/components/toasts.md) | [Toasts](./de/components/toasts.md) |
+| ℹ️ **Tooltips** | [Tooltips](./en/components/tooltips.md) | [Tooltips](./de/components/tooltips.md) |
 
 ### 🛠️ Helpers & Utilities / Hilfen & Werkzeuge
 

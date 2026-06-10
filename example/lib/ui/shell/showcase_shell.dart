@@ -28,6 +28,10 @@ import '../showcase/pagination_showcase.dart';
 import '../showcase/placeholder_showcase.dart';
 import '../showcase/popover_showcase.dart';
 import '../showcase/progress_showcase.dart';
+import '../showcase/scrollspy_showcase.dart';
+import '../showcase/spinner_showcase.dart';
+import '../showcase/toast_showcase.dart';
+import '../showcase/tooltip_showcase.dart';
 import '../../main.dart';
 
 // ─── Navigation Item Model ────────────────────────────────────────────────────
@@ -232,6 +236,30 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
       label: 'Navs & Tabs',
       icon: BsIcons.compass,
       page: const NavShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Scrollspy',
+      icon: BsIcons.eye,
+      page: const ScrollspyShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Spinners',
+      icon: BsIcons.arrowRepeat,
+      page: const SpinnerShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Toasts',
+      icon: BsIcons.appIndicator,
+      page: const ToastShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Tooltips',
+      icon: BsIcons.infoCircle,
+      page: const TooltipShowcase(),
     ),
 
     // ── Helpers ──────────────────────────────────────────────────────────────

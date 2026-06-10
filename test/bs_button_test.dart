@@ -29,7 +29,7 @@ void main() {
         wrap(const BsButton(label: 'Loading', isLoading: true)),
       );
 
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.byType(BsSpinner), findsOneWidget);
     });
 
     testWidgets('disabled when onPressed is null', (WidgetTester tester) async {

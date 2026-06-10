@@ -109,6 +109,21 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
               ),
             ),
 
+            // 2.5 Custom Color
+            _Section(
+              title: 'Custom Color',
+              description: 'Override the standard variant by passing a custom color. Text color adjusts automatically based on background luminance.',
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  BsButton(label: 'Custom Purple', color: Colors.purple, onPressed: () {}),
+                  BsButton(label: 'Custom Yellow', color: Colors.yellow, onPressed: () {}),
+                  BsButton(label: 'Custom Cyan', color: Colors.cyan, onPressed: () {}),
+                ],
+              ),
+            ),
+
             // 3. Sizes
             _Section(
               title: 'Button Sizes',
