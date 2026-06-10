@@ -55,3 +55,52 @@ Definiert die Spaltenanzahl pro Breakpoint (Mobile-first).
 | `lg` | >= 992px |
 | `xl` | >= 1200px |
 | `xxl` | >= 1400px |
+
+## Offsets (Spalten verschieben)
+
+Mit `BsOffsetConfig` können Spalten responsiv um eine bestimmte Anzahl von Rastern (1 bis 11) nach rechts verschoben werden (mobile-first):
+
+```dart
+BsCol(
+  config: BsColConfig.all(4),
+  offset: BsOffsetConfig(xs: 0, md: 4), // Verschiebt ab md um 4 Spaltenbreiten nach rechts
+  child: MyWidget(),
+)
+```
+
+## Ausrichtung (Alignment)
+
+### Horizontale Ausrichtung (`justify`)
+Über das `justify` Property in `BsRow` kann der freie Platz in einer Zeile horizontal verteilt werden (entspricht `.justify-content-*` in Bootstrap):
+
+* `BsRowJustify.start` (Standard)
+* `BsRowJustify.center`
+* `BsRowJustify.end`
+* `BsRowJustify.between`
+* `BsRowJustify.around`
+
+```dart
+BsRow(
+  justify: BsRowJustify.center,
+  children: [ ... ],
+)
+```
+
+### Vertikale Ausrichtung (`alignItems` & `alignSelf`)
+Die vertikale Ausrichtung kann auf Zeilenebene (`BsRow.alignItems`) oder individuell pro Spalte überschrieben werden (`BsCol.alignSelf`):
+
+* Werte für `alignItems`: `stretch` (Standard), `start`, `center`, `end`.
+* Werte für `alignSelf`: `auto` (erbt von Row), `start`, `center`, `end`, `stretch`.
+
+```dart
+BsRow(
+  alignItems: BsRowAlignItems.center, // Vertikal zentriert alle Spalten
+  children: [
+    BsCol(child: Text('Zentriert')),
+    BsCol(
+      alignSelf: BsColAlignSelf.end, // Überschreibt für diese Spalte (unten ausgerichtet)
+      child: Text('Unten'),
+    ),
+  ],
+)
+```

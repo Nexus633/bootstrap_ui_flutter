@@ -57,6 +57,7 @@ class _BsDropdownMenuContext extends InheritedWidget {
 /// Manages the overlay context, placement direction, alignment, and auto-close
 /// behaviors.
 class BsDropdown extends StatefulWidget {
+  /// Creates a [BsDropdown] widget.
   const BsDropdown({
     super.key,
     this.label,
@@ -314,14 +315,17 @@ class _BsDropdownState extends State<BsDropdown> {
     }
 
     if (widget.toggle != null) {
-      return GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: widget.disabled ? null : _toggleMenu,
-        child: CompositedTransformTarget(
-          link: _layerLink,
-          child: AbsorbPointer(
-            absorbing: !widget.disabled,
-            child: widget.toggle!,
+      return MouseRegion(
+        cursor: widget.disabled ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: widget.disabled ? null : _toggleMenu,
+          child: CompositedTransformTarget(
+            link: _layerLink,
+            child: AbsorbPointer(
+              absorbing: !widget.disabled,
+              child: widget.toggle!,
+            ),
           ),
         ),
       );
@@ -350,6 +354,7 @@ class _BsDropdownState extends State<BsDropdown> {
 ///
 /// Contains [BsDropdownItem], [BsDropdownHeader], [BsDropdownDivider], or [BsDropdownText].
 class BsDropdownMenu extends StatelessWidget {
+  /// Creates a [BsDropdownMenu].
   const BsDropdownMenu({
     super.key,
     required this.children,
@@ -368,8 +373,8 @@ class BsDropdownMenu extends StatelessWidget {
   /// or auto-detects from the context if null (default).
   final bool? dark;
 
-  /// A semantic variant (reusing [BsCardVariant]) to style the background and text color.
-  final BsCardVariant? variant;
+  /// A semantic variant (reusing [BsVariant]) to style the background and text color.
+  final BsVariant? variant;
 
   /// Custom background color override. If provided, overrides variant and dark properties.
   final Color? color;
@@ -403,35 +408,35 @@ class BsDropdownMenu extends StatelessWidget {
       dividerCol = textCol.withValues(alpha: 0.15);
     } else if (variant != null) {
       switch (variant!) {
-        case BsCardVariant.primary:
+        case BsVariant.primary:
           bg = bsTheme.primary;
           textCol = BsColors.onPrimary;
           break;
-        case BsCardVariant.secondary:
+        case BsVariant.secondary:
           bg = bsTheme.secondary;
           textCol = BsColors.onSecondary;
           break;
-        case BsCardVariant.success:
+        case BsVariant.success:
           bg = bsTheme.success;
           textCol = BsColors.onSuccess;
           break;
-        case BsCardVariant.danger:
+        case BsVariant.danger:
           bg = bsTheme.danger;
           textCol = BsColors.onDanger;
           break;
-        case BsCardVariant.warning:
+        case BsVariant.warning:
           bg = bsTheme.warning;
           textCol = BsColors.onWarning;
           break;
-        case BsCardVariant.info:
+        case BsVariant.info:
           bg = bsTheme.info;
           textCol = BsColors.onInfo;
           break;
-        case BsCardVariant.light:
+        case BsVariant.light:
           bg = bsTheme.light;
           textCol = bsTheme.onLight;
           break;
-        case BsCardVariant.dark:
+        case BsVariant.dark:
           bg = bsTheme.dark;
           textCol = bsTheme.onDark;
           break;
@@ -500,6 +505,7 @@ class BsDropdownMenu extends StatelessWidget {
 
 /// A selectable action or link inside a [BsDropdownMenu].
 class BsDropdownItem extends StatefulWidget {
+  /// Creates a [BsDropdownItem].
   const BsDropdownItem({
     super.key,
     required this.child,
@@ -557,7 +563,7 @@ class _BsDropdownItemState extends State<BsDropdownItem> {
       }
     }
 
-    Widget content = Padding(
+    final Widget content = Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -625,6 +631,7 @@ class _BsDropdownItemState extends State<BsDropdownItem> {
 
 /// A header label inside a [BsDropdownMenu] to separate item groups.
 class BsDropdownHeader extends StatelessWidget {
+  /// Creates a [BsDropdownHeader].
   const BsDropdownHeader({
     super.key,
     required this.child,
@@ -661,6 +668,7 @@ class BsDropdownHeader extends StatelessWidget {
 
 /// A horizontal thin line separating items inside a [BsDropdownMenu].
 class BsDropdownDivider extends StatelessWidget {
+  /// Creates a [BsDropdownDivider].
   const BsDropdownDivider({super.key});
 
   @override
@@ -685,6 +693,7 @@ class BsDropdownDivider extends StatelessWidget {
 
 /// Plain descriptive text inside a [BsDropdownMenu].
 class BsDropdownText extends StatelessWidget {
+  /// Creates a [BsDropdownText].
   const BsDropdownText({
     super.key,
     required this.child,

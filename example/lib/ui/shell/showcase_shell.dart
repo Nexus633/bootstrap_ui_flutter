@@ -18,6 +18,20 @@ import '../showcase/card_showcase.dart';
 import '../showcase/carousel_showcase.dart';
 import '../showcase/collapse_showcase.dart';
 import '../showcase/dropdown_showcase.dart';
+import '../showcase/list_group_showcase.dart';
+import '../showcase/modal_showcase.dart';
+import '../showcase/navbar_showcase.dart';
+import '../showcase/nav_showcase.dart';
+import '../showcase/icon_showcase.dart';
+import '../showcase/offcanvas_showcase.dart';
+import '../showcase/pagination_showcase.dart';
+import '../showcase/placeholder_showcase.dart';
+import '../showcase/popover_showcase.dart';
+import '../showcase/progress_showcase.dart';
+import '../showcase/scrollspy_showcase.dart';
+import '../showcase/spinner_showcase.dart';
+import '../showcase/toast_showcase.dart';
+import '../showcase/tooltip_showcase.dart';
 import '../../main.dart';
 
 // ─── Navigation Item Model ────────────────────────────────────────────────────
@@ -58,13 +72,13 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
     _NavItem(
       group: 'Layout',
       label: 'Grid System',
-      icon: Icons.grid_view_rounded,
+      icon: BsIcons.grid3x3GapFill,
       page: GridShowcase(),
     ),
     _NavItem(
       group: 'Layout',
       label: 'Themes',
-      icon: Icons.palette_rounded,
+      icon: BsIcons.paletteFill,
       page: ValueListenableBuilder<ThemeMode>(
         valueListenable: themeNotifier,
         builder: (context, mode, _) {
@@ -82,93 +96,177 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
     _NavItem(
       group: 'Components',
       label: 'Accordion',
-      icon: Icons.expand_more_rounded,
+      icon: BsIcons.chevronDown,
       page: AccordionShowcase(),
     ),
     _NavItem(
       group: 'Components',
       label: 'Alert',
-      icon: Icons.info_rounded,
+      icon: BsIcons.exclamationOctagonFill,
       page: AlertShowcase(),
     ),
     _NavItem(
       group: 'Components',
       label: 'Badge',
-      icon: Icons.badge_rounded,
+      icon: BsIcons.bookmarkFill,
       page: BadgeShowcase(),
     ),
     _NavItem(
       group: 'Components',
       label: 'Breadcrumb',
-      icon: Icons.linear_scale_rounded,
+      icon: BsIcons.slashSquareFill,
       page: BreadcrumbShowcase(),
     ),
     _NavItem(
       group: 'Components',
       label: 'Buttons',
-      icon: Icons.smart_button_rounded,
+      icon: BsIcons.playCircleFill,
       page: ButtonShowcase(),
     ),
     _NavItem(
       group: 'Components',
       label: 'Card',
-      icon: Icons.credit_card_rounded,
+      icon: BsIcons.cardText,
       page: const CardShowcase(),
     ),
     _NavItem(
       group: 'Components',
       label: 'Carousel',
-      icon: Icons.view_carousel_rounded,
+      icon: BsIcons.images,
       page: const CarouselShowcase(),
     ),
     _NavItem(
       group: 'Components',
       label: 'Collapse',
-      icon: Icons.unfold_less_rounded,
+      icon: BsIcons.arrowsAngleContract,
       page: const CollapseShowcase(),
     ),
     _NavItem(
       group: 'Components',
       label: 'Dropdown',
-      icon: Icons.arrow_drop_down_circle_rounded,
+      icon: BsIcons.menuButtonWideFill,
       page: const DropdownShowcase(),
     ),
     _NavItem(
       group: 'Components',
       label: 'Figure',
-      icon: Icons.add_photo_alternate_rounded,
+      icon: BsIcons.imageFill,
       page: FigureShowcase(),
     ),
     _NavItem(
       group: 'Components',
       label: 'Forms',
-      icon: Icons.edit_document,
+      icon: BsIcons.inputCursorText,
       page: FormShowcase(),
     ),
     _NavItem(
       group: 'Components',
       label: 'Headings',
-      icon: Icons.title_rounded,
+      icon: BsIcons.typeH1,
       page: const HeadingShowcase(),
     ),
     _NavItem(
       group: 'Components',
+      label: 'Icons',
+      icon: BsIcons.starFill,
+      page: const IconShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
       label: 'Image',
-      icon: Icons.image_rounded,
+      icon: BsIcons.image,
       page: ImageShowcase(),
     ),
     _NavItem(
       group: 'Components',
       label: 'Table',
-      icon: Icons.table_chart_rounded,
+      icon: BsIcons.table,
       page: TableShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'List Group',
+      icon: BsIcons.listUl,
+      page: const ListGroupShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Modal',
+      icon: BsIcons.window,
+      page: const ModalShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Offcanvas',
+      icon: BsIcons.layoutSidebar,
+      page: const OffcanvasShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Pagination',
+      icon: BsIcons.listOl,
+      page: const PaginationShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Placeholder',
+      icon: BsIcons.threeDots,
+      page: const PlaceholderShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Popover',
+      icon: BsIcons.chatSquareText,
+      page: const PopoverShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Progress',
+      icon: BsIcons.barChart,
+      page: const ProgressShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Navbar',
+      icon: BsIcons.segmentedNav,
+      page: const NavbarShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Navs & Tabs',
+      icon: BsIcons.compass,
+      page: const NavShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Scrollspy',
+      icon: BsIcons.eye,
+      page: const ScrollspyShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Spinners',
+      icon: BsIcons.arrowRepeat,
+      page: const SpinnerShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Toasts',
+      icon: BsIcons.appIndicator,
+      page: const ToastShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
+      label: 'Tooltips',
+      icon: BsIcons.infoCircle,
+      page: const TooltipShowcase(),
     ),
 
     // ── Helpers ──────────────────────────────────────────────────────────────
     _NavItem(
       group: 'Helpers',
       label: 'Helpers',
-      icon: Icons.help_outline_rounded,
+      icon: BsIcons.questionCircle,
       page: HelpersShowcase(),
     ),
 
@@ -176,7 +274,7 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
     _NavItem(
       group: 'Utilities',
       label: 'Utilities',
-      icon: Icons.build_rounded,
+      icon: BsIcons.wrench,
       page: UtilitiesShowcase(),
     ),
   ];
@@ -187,6 +285,7 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // ── Sidebar ──────────────────────────────────────────────────────────
           _Sidebar(
@@ -285,7 +384,7 @@ class _SidebarHeader extends StatelessWidget {
             color: context.bs.primary,
             borderRadius: BsRadius.md,
           ),
-          child: const Icon(Icons.bolt_rounded, color: Colors.white, size: 20),
+          child: const BsIcon(BsIcons.bootstrap, color: Colors.white, size: 20),
         ),
         const SizedBox(width: BsSpacing.s2),
         Column(
@@ -377,7 +476,7 @@ class _NavTile extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(
+                BsIcon(
                   item.icon,
                   size: 16,
                   color: isSelected ? bs.primary : const Color(0xFFadb5bd),

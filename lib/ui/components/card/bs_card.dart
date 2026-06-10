@@ -75,12 +75,12 @@ class BsCard extends StatelessWidget {
   /// The background and text color variant.
   ///
   /// Maps to Bootstrap's `.text-bg-*` classes. Overrides default card styling.
-  final BsCardVariant? variant;
+  final BsVariant? variant;
 
   /// The border color variant.
   ///
   /// Maps to Bootstrap's `.border-*` classes. Only affects the card border.
-  final BsCardVariant? borderVariant;
+  final BsVariant? borderVariant;
 
   /// A custom background color for the card.
   ///
@@ -113,8 +113,8 @@ class BsCard extends StatelessWidget {
     BsCardImagePosition? imagePosition,
     int? imageFlex,
     int? contentFlex,
-    BsCardVariant? variant,
-    BsCardVariant? borderVariant,
+    BsVariant? variant,
+    BsVariant? borderVariant,
     Color? color,
     Color? borderColor,
     BorderRadius? borderRadius,
@@ -152,14 +152,14 @@ class BsCard extends StatelessWidget {
     Color resolvedBorderColor = borderColor ?? bsTheme.borderTranslucent;
     if (borderVariant != null && borderColor == null) {
       resolvedBorderColor = switch (borderVariant!) {
-        BsCardVariant.primary => bsTheme.primary,
-        BsCardVariant.secondary => bsTheme.secondary,
-        BsCardVariant.success => bsTheme.success,
-        BsCardVariant.danger => bsTheme.danger,
-        BsCardVariant.warning => bsTheme.warning,
-        BsCardVariant.info => bsTheme.info,
-        BsCardVariant.light => bsTheme.light,
-        BsCardVariant.dark => bsTheme.dark,
+        BsVariant.primary => bsTheme.primary,
+        BsVariant.secondary => bsTheme.secondary,
+        BsVariant.success => bsTheme.success,
+        BsVariant.danger => bsTheme.danger,
+        BsVariant.warning => bsTheme.warning,
+        BsVariant.info => bsTheme.info,
+        BsVariant.light => bsTheme.light,
+        BsVariant.dark => bsTheme.dark,
       };
     }
 
@@ -169,25 +169,25 @@ class BsCard extends StatelessWidget {
 
     if (variant != null && color == null) {
       resolvedBgColor = switch (variant!) {
-        BsCardVariant.primary => bsTheme.primary,
-        BsCardVariant.secondary => bsTheme.secondary,
-        BsCardVariant.success => bsTheme.success,
-        BsCardVariant.danger => bsTheme.danger,
-        BsCardVariant.warning => bsTheme.warning,
-        BsCardVariant.info => bsTheme.info,
-        BsCardVariant.light => bsTheme.light,
-        BsCardVariant.dark => bsTheme.dark,
+        BsVariant.primary => bsTheme.primary,
+        BsVariant.secondary => bsTheme.secondary,
+        BsVariant.success => bsTheme.success,
+        BsVariant.danger => bsTheme.danger,
+        BsVariant.warning => bsTheme.warning,
+        BsVariant.info => bsTheme.info,
+        BsVariant.light => bsTheme.light,
+        BsVariant.dark => bsTheme.dark,
       };
 
       resolvedTextColor = switch (variant!) {
-        BsCardVariant.primary => BsColors.onPrimary,
-        BsCardVariant.secondary => BsColors.onSecondary,
-        BsCardVariant.success => BsColors.onSuccess,
-        BsCardVariant.danger => BsColors.onDanger,
-        BsCardVariant.warning => BsColors.onWarning,
-        BsCardVariant.info => BsColors.onInfo,
-        BsCardVariant.light => bsTheme.onLight,
-        BsCardVariant.dark => bsTheme.onDark,
+        BsVariant.primary => BsColors.onPrimary,
+        BsVariant.secondary => BsColors.onSecondary,
+        BsVariant.success => BsColors.onSuccess,
+        BsVariant.danger => BsColors.onDanger,
+        BsVariant.warning => BsColors.onWarning,
+        BsVariant.info => BsColors.onInfo,
+        BsVariant.light => bsTheme.onLight,
+        BsVariant.dark => bsTheme.onDark,
       };
     } else {
       resolvedBgColor = color ?? bsTheme.bodyBg;

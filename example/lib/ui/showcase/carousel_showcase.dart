@@ -6,18 +6,55 @@ class CarouselShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.bs;
+
     return SingleChildScrollView(
       child: BsContainer.fluid(
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Carousel',
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-            ).pb(16),
-            const Text(
-              'A slideshow component for cycling through elements—like a carousel of images or slides of custom content—complete with controls, indicators, captions, and touch support.',
-            ).pb(24),
+            // Header Card with beautiful Gradient
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [theme.primary, theme.info],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primary.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Carousel',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    ),
+                  ).pb2(),
+                  Text(
+                    'A slideshow component for cycling through elements—like a carousel of images or slides of custom content—complete with controls, indicators, and captions.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ).p4(),
+            ).mb(32),
 
             // 1. Basic Carousel (Slides Only)
             _Section(
@@ -45,12 +82,6 @@ class CarouselShowcase extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          BsCarouselItem(
-                            child: Image.network(
-                              'https://picsum.photos/id/29/800/400',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -61,7 +92,7 @@ class CarouselShowcase extends StatelessWidget {
 
             // 2. With Controls & Indicators
             _Section(
-              title: 'With Controls and Indicators',
+              title: 'Controls & Indicators',
               description: 'Navigate through slides using side arrows or bottom dash indicators.',
               child: BsRow(
                 children: [
@@ -82,12 +113,6 @@ class CarouselShowcase extends StatelessWidget {
                           BsCarouselItem(
                             child: Image.network(
                               'https://picsum.photos/id/48/800/400',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          BsCarouselItem(
-                            child: Image.network(
-                              'https://picsum.photos/id/54/800/400',
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -162,7 +187,7 @@ class CarouselShowcase extends StatelessWidget {
                         items: [
                           BsCarouselItem(
                             caption: const BsCarouselCaption(
-                              title: Text('Fade slide 1'),
+                              title: Text('Fade Slide 1'),
                             ),
                             child: Image.network(
                               'https://picsum.photos/id/119/800/400',
@@ -173,7 +198,7 @@ class CarouselShowcase extends StatelessWidget {
                           ),
                           BsCarouselItem(
                             caption: const BsCarouselCaption(
-                              title: Text('Fade slide 2'),
+                              title: Text('Fade Slide 2'),
                             ),
                             child: Image.network(
                               'https://picsum.photos/id/122/800/400',
@@ -190,56 +215,10 @@ class CarouselShowcase extends StatelessWidget {
               ),
             ),
 
-            // 5. Individual Slide Intervals
-            _Section(
-              title: 'Individual Intervals',
-              description: 'Demonstration of slides having different custom autoplay durations (e.g. 2s for slide 1, 6s for slide 2).',
-              child: BsRow(
-                children: [
-                  BsCol(
-                    config: const BsColConfig(xs: 12, lg: 8),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: BsCarousel(
-                        controls: true,
-                        indicators: true,
-                        items: [
-                          BsCarouselItem(
-                            interval: const Duration(seconds: 2),
-                            caption: const BsCarouselCaption(
-                              title: Text('Short Slide (2 seconds)'),
-                            ),
-                            child: Image.network(
-                              'https://picsum.photos/id/141/800/400',
-                              fit: BoxFit.cover,
-                              color: Colors.black.withValues(alpha: 0.3),
-                              colorBlendMode: BlendMode.darken,
-                            ),
-                          ),
-                          BsCarouselItem(
-                            interval: const Duration(seconds: 6),
-                            caption: const BsCarouselCaption(
-                              title: Text('Long Slide (6 seconds)'),
-                            ),
-                            child: Image.network(
-                              'https://picsum.photos/id/145/800/400',
-                              fit: BoxFit.cover,
-                              color: Colors.black.withValues(alpha: 0.3),
-                              colorBlendMode: BlendMode.darken,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // 6. Dark Variant
+            // 5. Dark Variant
             _Section(
               title: 'Dark Variant',
-              description: 'Use dark controls, indicators, and text colors (.carousel-dark) for light background slides.',
+              description: 'Use dark controls and indicators for light-colored background slides.',
               child: BsRow(
                 children: [
                   BsCol(
@@ -248,7 +227,7 @@ class CarouselShowcase extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: context.bs.border),
+                          border: Border.all(color: theme.border),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: BsCarousel(
@@ -264,8 +243,8 @@ class CarouselShowcase extends StatelessWidget {
                               child: Container(
                                 color: const Color(0xFFF8F9FA),
                                 alignment: Alignment.center,
-                                child: const Icon(
-                                  Icons.insert_emoticon_rounded,
+                                child: const BsIcon(
+                                  BsIcons.emojiSmile,
                                   size: 64,
                                   color: Colors.grey,
                                 ),
@@ -279,8 +258,8 @@ class CarouselShowcase extends StatelessWidget {
                               child: Container(
                                 color: const Color(0xFFE9ECEF),
                                 alignment: Alignment.center,
-                                child: const Icon(
-                                  Icons.favorite_rounded,
+                                child: const BsIcon(
+                                  BsIcons.heartFill,
                                   size: 64,
                                   color: Colors.redAccent,
                                 ),
@@ -302,11 +281,7 @@ class CarouselShowcase extends StatelessWidget {
 }
 
 class _Section extends StatelessWidget {
-  const _Section({
-    required this.title,
-    this.description,
-    required this.child,
-  });
+  const _Section({required this.title, this.description, required this.child});
 
   final String title;
   final String? description;
@@ -319,16 +294,23 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-        ).pb(8),
-        if (description != null)
-          Text(description!).pb(16),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+        ).pb(4),
+        if (description != null) Text(description!).pb(16),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
+            color: context.bs.bodyBg,
             border: Border.all(color: context.bs.border),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
           child: child,
         ).pb(32),

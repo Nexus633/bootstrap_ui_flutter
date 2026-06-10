@@ -1,401 +1,279 @@
-import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 
 class BadgeShowcase extends StatelessWidget {
   const BadgeShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Get theme
-    final bsTheme = context.bs;
+    final theme = context.bs;
 
-    return Scaffold(
-      backgroundColor: bsTheme.bodyBg, // Adjust Scaffold background
-      appBar: AppBar(
-        title: const Text('Badge Showcase'),
-        backgroundColor: bsTheme.bodyBg,
-        foregroundColor: bsTheme.bodyText, // Adjust text & back button
-        elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(color: bsTheme.border, height: 1.0),
-        ),
-      ),
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
+      child: BsContainer.fluid(
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Standard Badges',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: bsTheme.bodyText,
+            // Header Card with beautiful Gradient
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [theme.primary, theme.info],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primary.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Badges',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    ),
+                  ).pb2(),
+                  Text(
+                    'Documentation and examples for badges, our small count and labeling component. Scaled to match the size of the immediate parent element.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ).p4(),
+            ).mb(32),
+
+            // 1. Standard Badges
+            _Section(
+              title: 'Standard Badges',
+              description: 'Contextual badges with semantic colors and counts.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Wrap(
+                    spacing: 8.0,
+                    runSpacing: 8.0,
+                    children: const [
+                      BsBadge(label: 'Primary', variant: BsVariant.primary),
+                      BsBadge(label: 'Secondary', variant: BsVariant.secondary),
+                      BsBadge(label: 'Success', variant: BsVariant.success),
+                      BsBadge(label: 'Danger', variant: BsVariant.danger),
+                      BsBadge(label: 'Warning', variant: BsVariant.warning),
+                      BsBadge(label: 'Info', variant: BsVariant.info),
+                      BsBadge(label: 'Light', variant: BsVariant.light),
+                      BsBadge(label: 'Dark', variant: BsVariant.dark),
+                    ],
+                  ).pb3(),
+                  Wrap(
+                    spacing: 8.0,
+                    runSpacing: 8.0,
+                    children: const [
+                      BsBadge(label: '8', variant: BsVariant.primary),
+                      BsBadge(label: '12', variant: BsVariant.secondary),
+                      BsBadge(label: '8', variant: BsVariant.success),
+                      BsBadge(label: '5', variant: BsVariant.danger),
+                      BsBadge(label: '6', variant: BsVariant.warning),
+                      BsBadge(label: '1', variant: BsVariant.info),
+                      BsBadge(label: '0', variant: BsVariant.light),
+                      BsBadge(label: '99', variant: BsVariant.dark),
+                    ],
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 16),
 
-            Wrap(
-              spacing: 8.0,
-              runSpacing: 8.0,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Row(
-                      spacing: 8.0,
-                      children: [
-                        BsBadge(
-                          label: 'Primary',
-                          variant: BsBadgeVariant.primary,
-                        ),
-                        BsBadge(
-                          label: 'Secondary',
-                          variant: BsBadgeVariant.secondary,
-                        ),
-                        BsBadge(
-                          label: 'Success',
-                          variant: BsBadgeVariant.success,
-                        ),
-                        BsBadge(
-                          label: 'Danger',
-                          variant: BsBadgeVariant.danger,
-                        ),
-                        BsBadge(
-                          label: 'Warning',
-                          variant: BsBadgeVariant.warning,
-                        ),
-                        BsBadge(label: 'Info', variant: BsBadgeVariant.info),
-                        BsBadge(label: 'Light', variant: BsBadgeVariant.light),
-                        BsBadge(label: 'Dark', variant: BsBadgeVariant.dark),
-                      ],
-                    ),
-                    SizedBox(height: 8),
-                    Row(
-                      spacing: 8.0,
-                      children: [
-                        BsBadge(label: '8', variant: BsBadgeVariant.primary),
-                        BsBadge(label: '12', variant: BsBadgeVariant.secondary),
-                        BsBadge(label: '8', variant: BsBadgeVariant.success),
-                        BsBadge(label: '5', variant: BsBadgeVariant.danger),
-                        BsBadge(label: '6', variant: BsBadgeVariant.warning),
-                        BsBadge(label: '1', variant: BsBadgeVariant.info),
-                        BsBadge(label: '0', variant: BsBadgeVariant.light),
-                        BsBadge(label: '99', variant: BsBadgeVariant.dark),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 48),
-
-            Text(
-              'Pill Badges (.rounded-pill)',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: bsTheme.bodyText,
+            // 2. Pill Badges
+            _Section(
+              title: 'Pill Badges',
+              description: 'Use the isPill property to make badges more rounded (with a larger border-radius).',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Wrap(
+                    spacing: 8.0,
+                    runSpacing: 8.0,
+                    children: const [
+                      BsBadge(label: 'Primary', variant: BsVariant.primary, isPill: true),
+                      BsBadge(label: 'Secondary', variant: BsVariant.secondary, isPill: true),
+                      BsBadge(label: 'Success', variant: BsVariant.success, isPill: true),
+                      BsBadge(label: 'Danger', variant: BsVariant.danger, isPill: true),
+                      BsBadge(label: 'Warning', variant: BsVariant.warning, isPill: true),
+                      BsBadge(label: 'Info', variant: BsVariant.info, isPill: true),
+                      BsBadge(label: 'Light', variant: BsVariant.light, isPill: true),
+                      BsBadge(label: 'Dark', variant: BsVariant.dark, isPill: true),
+                    ],
+                  ).pb3(),
+                  Wrap(
+                    spacing: 8.0,
+                    runSpacing: 8.0,
+                    children: const [
+                      BsBadge(label: '8', variant: BsVariant.primary, isPill: true),
+                      BsBadge(label: '12', variant: BsVariant.secondary, isPill: true),
+                      BsBadge(label: '8', variant: BsVariant.success, isPill: true),
+                      BsBadge(label: '5', variant: BsVariant.danger, isPill: true),
+                      BsBadge(label: '6', variant: BsVariant.warning, isPill: true),
+                      BsBadge(label: '1', variant: BsVariant.info, isPill: true),
+                      BsBadge(label: '0', variant: BsVariant.light, isPill: true),
+                      BsBadge(label: '99', variant: BsVariant.dark, isPill: true),
+                    ],
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 16),
 
-            Wrap(
-              spacing: 8.0,
-              runSpacing: 8.0,
-              children: const [
-                Row(
-                  spacing: 8.0,
-                  children: [
-                    BsBadge(
-                      label: 'Primary',
-                      variant: BsBadgeVariant.primary,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: 'Secondary',
-                      variant: BsBadgeVariant.secondary,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: 'Success',
-                      variant: BsBadgeVariant.success,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: 'Danger',
-                      variant: BsBadgeVariant.danger,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: 'Warning',
-                      variant: BsBadgeVariant.warning,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: 'Info',
-                      variant: BsBadgeVariant.info,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: 'Light',
-                      variant: BsBadgeVariant.light,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: 'Dark',
-                      variant: BsBadgeVariant.dark,
-                      isPill: true,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 8),
-                Row(
-                  spacing: 8.0,
-                  children: [
-                    BsBadge(
-                      label: '8',
-                      variant: BsBadgeVariant.primary,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: '12',
-                      variant: BsBadgeVariant.secondary,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: '8',
-                      variant: BsBadgeVariant.success,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: '5',
-                      variant: BsBadgeVariant.danger,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: '6',
-                      variant: BsBadgeVariant.warning,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: '1',
-                      variant: BsBadgeVariant.info,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: '0',
-                      variant: BsBadgeVariant.light,
-                      isPill: true,
-                    ),
-                    BsBadge(
-                      label: '99',
-                      variant: BsBadgeVariant.dark,
-                      isPill: true,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 48),
-
-            Text(
-              'Typographic Integration',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: bsTheme.bodyText,
+            // 3. Typographic Integration
+            _Section(
+              title: 'Typographic Integration',
+              description: 'Badges scale to match the size of their parent text element.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Text('Example Heading 1').fs1().fwBold(),
+                      const SizedBox(width: 12),
+                      const BsBadge(label: 'New', variant: BsVariant.primary),
+                    ],
+                  ).pb3(),
+                  Row(
+                    children: [
+                      const Text('Example Heading 3').fs3().fwBold(),
+                      const SizedBox(width: 10),
+                      const BsBadge(label: 'New', variant: BsVariant.secondary),
+                    ],
+                  ).pb3(),
+                  Row(
+                    children: [
+                      const Text('Notifications').fs5().fwSemibold(),
+                      const SizedBox(width: 8),
+                      const BsBadge(label: '9+', variant: BsVariant.danger),
+                    ],
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 16),
 
-            Row(
-              children: [
-                Text(
-                  'Notifications',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: bsTheme.bodyText,
+            // 4. Buttons with Badges (Pill & Standard)
+            _Section(
+              title: 'Buttons with Badges',
+              description: 'Badges can be positioned inside buttons at various locations (topRight, leading, trailing, etc.).',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Pill Badges in Buttons:').fwBold().fs5().pb3(),
+                  Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+                    children: [
+                      BsButton(
+                        label: 'Inbox',
+                        variant: BsButtonVariant.primary,
+                        badge: const BsBadge(label: '4', variant: BsVariant.light, isPill: true),
+                        badgePosition: BsBadgePosition.trailing,
+                        onPressed: () {},
+                      ),
+                      BsButton(
+                        label: 'Notifications',
+                        variant: BsButtonVariant.secondary,
+                        badge: const BsBadge(label: '99+', variant: BsVariant.danger, isPill: true),
+                        badgePosition: BsBadgePosition.topRight,
+                        onPressed: () {},
+                      ),
+                      BsButton(
+                        label: 'Tasks',
+                        variant: BsButtonVariant.success,
+                        badge: const BsBadge(label: 'Done', variant: BsVariant.light, isPill: true),
+                        badgePosition: BsBadgePosition.leading,
+                        onPressed: () {},
+                      ),
+                      BsButton(
+                        label: 'Warnings',
+                        variant: BsButtonVariant.warning,
+                        badge: const BsBadge(label: '3', variant: BsVariant.danger, isPill: true),
+                        badgePosition: BsBadgePosition.topLeft,
+                        onPressed: () {},
+                      ),
+                    ],
+                  ).pb4(),
+                  const Text('Standard Badges in Buttons:').fwBold().fs5().pb3(),
+                  Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+                    children: [
+                      BsButton(
+                        label: 'Inbox',
+                        variant: BsButtonVariant.outlinePrimary,
+                        badge: const BsBadge(label: '4', variant: BsVariant.primary),
+                        badgePosition: BsBadgePosition.trailing,
+                        onPressed: () {},
+                      ),
+                      BsButton(
+                        label: 'Errors',
+                        variant: BsButtonVariant.danger,
+                        badge: const BsBadge(label: 'Alert', variant: BsVariant.light),
+                        badgePosition: BsBadgePosition.topRight,
+                        onPressed: () {},
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(width: 8),
-                const BsBadge(label: 'New', variant: BsBadgeVariant.danger),
-              ],
-            ),
-
-            const SizedBox(height: 48),
-
-            Text(
-              'Buttons with Badges (Pill)',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: bsTheme.bodyText,
+                ],
               ),
-            ),
-            const SizedBox(height: 16),
-
-            Row(
-              spacing: 16.0,
-              children: [
-                BsButton(
-                  label: 'TopLeft',
-                  variant: BsButtonVariant.warning,
-                  badge: const BsBadge(
-                    label: '3',
-                    variant: BsBadgeVariant.light,
-                    isPill: true,
-                  ),
-                  badgePosition: BsBadgePosition.topLeft,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'TopRight',
-                  variant: BsButtonVariant.danger,
-                  badge: const BsBadge(
-                    label: '3',
-                    variant: BsBadgeVariant.warning,
-                    isPill: true,
-                  ),
-                  badgePosition: BsBadgePosition.topRight,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'BottomLeft',
-                  variant: BsButtonVariant.primary,
-                  badge: const BsBadge(
-                    label: '3',
-                    variant: BsBadgeVariant.success,
-                    isPill: true,
-                  ),
-                  badgePosition: BsBadgePosition.bottomLeft,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'BottomRight',
-                  variant: BsButtonVariant.secondary,
-                  badge: const BsBadge(
-                    label: '3',
-                    variant: BsBadgeVariant.info,
-                    isPill: true,
-                  ),
-                  badgePosition: BsBadgePosition.bottomRight,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Leading',
-                  variant: BsButtonVariant.info,
-                  badge: const BsBadge(
-                    label: '3',
-                    variant: BsBadgeVariant.warning,
-                    isPill: true,
-                  ),
-                  badgePosition: BsBadgePosition.leading,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Trailing',
-                  variant: BsButtonVariant.success,
-                  badge: const BsBadge(
-                    label: '3',
-                    variant: BsBadgeVariant.danger,
-                    isPill: true,
-                  ),
-                  badgePosition: BsBadgePosition.trailing,
-                  onPressed: () {},
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 48),
-
-            Text(
-              'Buttons with Badges (Standard)',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: bsTheme.bodyText,
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            Row(
-              spacing: 16.0,
-              children: [
-                BsButton(
-                  label: 'TopLeft',
-                  variant: BsButtonVariant.warning,
-                  badge: const BsBadge(
-                    label: '3',
-                    variant: BsBadgeVariant.light,
-                    isPill: false,
-                  ),
-                  badgePosition: BsBadgePosition.topLeft,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'TopRight',
-                  variant: BsButtonVariant.danger,
-                  badge: const BsBadge(
-                    label: '3',
-                    variant: BsBadgeVariant.warning,
-                    isPill: false,
-                  ),
-                  badgePosition: BsBadgePosition.topRight,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'BottomLeft',
-                  variant: BsButtonVariant.primary,
-                  badge: const BsBadge(
-                    label: '3',
-                    variant: BsBadgeVariant.success,
-                    isPill: false,
-                  ),
-                  badgePosition: BsBadgePosition.bottomLeft,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'BottomRight',
-                  variant: BsButtonVariant.secondary,
-                  badge: const BsBadge(
-                    label: '3',
-                    variant: BsBadgeVariant.info,
-                    isPill: false,
-                  ),
-                  badgePosition: BsBadgePosition.bottomRight,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Leading',
-                  variant: BsButtonVariant.info,
-                  badge: const BsBadge(
-                    label: '3',
-                    variant: BsBadgeVariant.warning,
-                    isPill: false,
-                  ),
-                  badgePosition: BsBadgePosition.leading,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Trailing',
-                  variant: BsButtonVariant.success,
-                  badge: const BsBadge(
-                    label: '3',
-                    variant: BsBadgeVariant.danger,
-                    isPill: false,
-                  ),
-                  badgePosition: BsBadgePosition.trailing,
-                  onPressed: () {},
-                ),
-              ],
             ),
           ],
-        ).p(24),
+        ),
       ),
+    );
+  }
+}
+
+class _Section extends StatelessWidget {
+  const _Section({required this.title, this.description, required this.child});
+
+  final String title;
+  final String? description;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+        ).pb(4),
+        if (description != null) Text(description!).pb(16),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: context.bs.bodyBg,
+            border: Border.all(color: context.bs.border),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: child,
+        ).pb(32),
+      ],
     );
   }
 }

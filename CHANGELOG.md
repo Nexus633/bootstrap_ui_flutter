@@ -1,3 +1,29 @@
+## 0.5.0 (Beta Release)
+ * **New Components**:
+   - `BsListGroup` (Flexible and powerful list groups, items, and action states)
+   - `BsModal` (Dialog prompts with headers, footers, sizes, and backdrop options)
+   - `BsNav` & `BsTab` (Navigation menus, pills, underlines, and tabbed content panes)
+   - `BsNavbar` (Responsive navigation header with togglers and collapsible branding)
+   - `BsOffcanvas` (Hidden sidebars for navigation or contextual content)
+   - `BsPagination` (Page navigation with active and disabled states)
+   - `BsPlaceholder` (Loading skeletons mimicking layout components)
+   - `BsPopover` (Advanced tooltips with title, body, and customizable placement)
+   - `BsProgress` & `BsProgressBar` (Progress indicators with labels, stripes, and animation)
+   - `BsScrollspy` (Automatically update navigation based on scroll position)
+   - `BsSpinner` (Loading indicators with border, grow, sizes, and colors)
+   - `BsToast` & `BsToastManager` (Lightweight push notifications with multi-alignment stack logic and automatic dismiss)
+   - `BsTooltip` (Custom tooltips with auto-flip logic and variants)
+ * **New Utilities & Extensions**:
+   - Added massive improvements to typography and layout utility extensions (e.g. `BsTextExtension`, `BsBorderExtension`, `BsSizeExtension`).
+ * **Component Updates**:
+   - `BsButton`: Added `color` property for custom color overrides with automatic smart contrast calculation for text colors.
+   - `BsTooltip`: Added `variant` and `color` property for customized tooltip styles.
+ * **Showcase Updates**:
+   - Redesigned all component showcases to use a beautiful, unified gradient header for a premium look and feel.
+   - Re-organized showcase code to be cleaner and more consistent.
+ * **Documentation**: Added comprehensive English and German documentation files for all new components (List Group, Modal, Nav, Navbar, Offcanvas, Pagination, Placeholder, Popover, Progress, Scrollspy, Spinners, Toasts, Tooltips).
+ * **Status**: Officially promoting the library to BETA.
+
 ## 0.1.4
  * **New Components**:
    - `BsCloseButton` (Dismiss buttons for modals/alerts)

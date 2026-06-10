@@ -90,7 +90,7 @@ void main() {
       await tester.pumpWidget(
         wrap(
           const BsCard(
-            variant: BsCardVariant.danger,
+            variant: BsVariant.danger,
             body: BsCardBody(child: Text('Danger Card')),
           ),
         ),
@@ -113,7 +113,7 @@ void main() {
       await tester.pumpWidget(
         wrap(
           const BsCard(
-            variant: BsCardVariant.dark,
+            variant: BsVariant.dark,
             body: BsCardBody(child: Text('Dark Card Light Theme')),
           ),
         ),
@@ -131,7 +131,7 @@ void main() {
           theme: ThemeData(extensions: [BsThemeData.darkTheme]),
           home: const Scaffold(
             body: BsCard(
-              variant: BsCardVariant.dark,
+              variant: BsVariant.dark,
               body: BsCardBody(child: Text('Dark Card Dark Theme')),
             ),
           ),
@@ -157,7 +157,7 @@ void main() {
       await tester.pumpWidget(
         wrap(
           const BsCard(
-            borderVariant: BsCardVariant.success,
+            borderVariant: BsVariant.success,
             body: BsCardBody(child: Text('Success Border Card')),
           ),
         ),
@@ -286,3 +286,4 @@ void main() {
     });
   });
 }
+

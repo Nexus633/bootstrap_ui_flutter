@@ -82,7 +82,7 @@ void main() {
     testWidgets('applies variant colors', (WidgetTester tester) async {
       await tester.pumpWidget(buildTestableWidget(
         const BsTable(
-          variant: BsTableVariant.primary,
+          variant: BsVariant.primary,
           children: [
             BsTableRow(
               children: [
@@ -141,3 +141,4 @@ void main() {
     });
   });
 }
+

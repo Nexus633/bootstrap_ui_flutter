@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 /// Bootstrap 5 Breakpoints — exactly from the documentation.
 /// Source: https://getbootstrap.com/docs/5.3/layout/breakpoints/
 ///

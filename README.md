@@ -55,7 +55,7 @@ Add `bootstrap_ui_flutter` to your `pubspec.yaml` dependencies:
 
 ```yaml
 dependencies:
-  bootstrap_ui_flutter: ^0.1.3
+  bootstrap_ui_flutter: ^0.5.0
 ```
 
 Run in your terminal:

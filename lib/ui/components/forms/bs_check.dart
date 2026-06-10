@@ -216,7 +216,7 @@ class _BsCheckboxState extends FormFieldState<bool> {
     }
 
     // Wrap input with focus node detector for keyboard navigation
-    Widget inputWidget = Focus(
+    final Widget inputWidget = Focus(
       focusNode: _focusNode,
       onKeyEvent: (node, event) {
         if (event.logicalKey.keyLabel == 'Enter' ||
@@ -242,10 +242,10 @@ class _BsCheckboxState extends FormFieldState<bool> {
     }
 
     // ─── Assembly ──────────────────────────────────────────────────────────
-    List<Widget> rowChildren = [];
+    final List<Widget> rowChildren = [];
     if (widget.reverse) {
       if (labelWidget != null) {
-        rowChildren.add(Expanded(child: labelWidget));
+        rowChildren.add(widget.inline ? labelWidget : Expanded(child: labelWidget));
         rowChildren.add(
           const SizedBox(width: 8.0),
         ); // .5rem margin-left for reverse
@@ -257,11 +257,11 @@ class _BsCheckboxState extends FormFieldState<bool> {
         rowChildren.add(
           const SizedBox(width: 8.0),
         ); // .5rem margin-right for normal
-        rowChildren.add(Expanded(child: labelWidget));
+        rowChildren.add(widget.inline ? labelWidget : Expanded(child: labelWidget));
       }
     }
 
-    Widget content = MouseRegion(
+    final Widget content = MouseRegion(
       cursor: widget.disabled
           ? SystemMouseCursors.forbidden
           : SystemMouseCursors.click,

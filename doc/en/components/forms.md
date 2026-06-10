@@ -69,7 +69,20 @@ BsCheckbox(
 )
 ```
 
-### 4. `BsRange` (Sliders)
+### 4. `BsRadio` (Radios)
+
+A component for standard radio buttons matching Bootstrap's check/radio controls.
+
+```dart
+BsRadio<String>(
+  value: 'one',
+  groupValue: selectedValue,
+  onChanged: (val) => setState(() => selectedValue = val),
+  label: const Text('Option One'),
+)
+```
+
+### 5. `BsRange` (Sliders)
 
 A custom styled range slider matching `.form-range`.
 
@@ -82,7 +95,7 @@ BsRange(
 )
 ```
 
-### 5. `BsInputGroup` (Input Groups)
+### 6. `BsInputGroup` (Input Groups)
 
 Combine inputs with addons or buttons seamlessly. The `BsInputGroup` acts as a Flex container that communicates with its children (`BsInput`, `BsSelect`, `BsButton`, `BsInputGroupText`) to automatically adjust border radii, preventing double-thick borders between elements.
 

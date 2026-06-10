@@ -50,7 +50,7 @@ class BsContainer extends StatelessWidget {
               padding != null
                   ? child.padding(padding!)
                   : child.px(12),
-        ).center();
+        ).alignTop();
       },
     );
   }

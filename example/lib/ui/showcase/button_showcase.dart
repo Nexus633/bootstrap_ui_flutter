@@ -1,5 +1,5 @@
-import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 
 class ButtonShowcase extends StatefulWidget {
   const ButtonShowcase({super.key});
@@ -13,317 +13,331 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
 
   Future<void> _simulateLoading() async {
     setState(() => _isLoading = true);
-    await Future.delayed(const Duration(seconds: 2));
+    await Future<void>.delayed(const Duration(seconds: 2));
     setState(() => _isLoading = false);
   }
 
   @override
   Widget build(BuildContext context) {
-    // Get theme
-    final bsTheme = context.bs;
+    final theme = context.bs;
 
-    return Scaffold(
-      backgroundColor: bsTheme.bodyBg, // Dynamic background
-      appBar: AppBar(
-        backgroundColor: bsTheme.bodyBg,
-        foregroundColor: bsTheme.bodyText,
-        title: const Text('Buttons'),
-        elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(color: bsTheme.border, height: 1.0),
-        ),
-      ),
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
+      child: BsContainer.fluid(
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _sectionTitle('Solid Variants'),
-            _description('Corresponds to: btn btn-primary, btn-secondary, etc.'),
-            _Wrap(
-              children: [
-                BsButton(
-                  label: 'Primary',
-                  variant: BsButtonVariant.primary,
-                  onPressed: () {},
+            // Header Card with beautiful Gradient
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [theme.primary, theme.info],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                BsButton(
-                  label: 'Secondary',
-                  variant: BsButtonVariant.secondary,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Success',
-                  variant: BsButtonVariant.success,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Danger',
-                  variant: BsButtonVariant.danger,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Warning',
-                  variant: BsButtonVariant.warning,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Info',
-                  variant: BsButtonVariant.info,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Light',
-                  variant: BsButtonVariant.light,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Dark',
-                  variant: BsButtonVariant.dark,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Link',
-                  variant: BsButtonVariant.link,
-                  onPressed: () {},
-                ),
-              ],
-            ).pt2(),
-
-            _divider(bsTheme.border),
-            _sectionTitle('Outline Variants'),
-            _description('Corresponds to: btn btn-outline-primary, etc.'),
-            _Wrap(
-              children: [
-                BsButton(
-                  label: 'Primary',
-                  variant: BsButtonVariant.outlinePrimary,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Secondary',
-                  variant: BsButtonVariant.outlineSecondary,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Success',
-                  variant: BsButtonVariant.outlineSuccess,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Danger',
-                  variant: BsButtonVariant.outlineDanger,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Warning',
-                  variant: BsButtonVariant.outlineWarning,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Info',
-                  variant: BsButtonVariant.outlineInfo,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Dark',
-                  variant: BsButtonVariant.outlineDark,
-                  onPressed: () {},
-                ),
-              ],
-            ).pt2(),
-
-            _divider(bsTheme.border),
-            _sectionTitle('Sizes'),
-            _description('Corresponds to: btn-sm, (default), btn-lg'),
-            _Wrap(
-              children: [
-                BsButton(
-                  label: 'Small',
-                  variant: BsButtonVariant.primary,
-                  size: BsButtonSize.sm,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Medium',
-                  variant: BsButtonVariant.primary,
-                  size: BsButtonSize.md,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Large',
-                  variant: BsButtonVariant.primary,
-                  size: BsButtonSize.lg,
-                  onPressed: () {},
-                ),
-              ],
-            ).pt2(),
-
-            _divider(bsTheme.border),
-            _sectionTitle('With Icon'),
-            _description(
-              'Corresponds to: <button><i class="bi bi-..."></i> Label</button>',
-            ),
-            _Wrap(
-              children: [
-                BsButton(
-                  label: 'Save',
-                  variant: BsButtonVariant.primary,
-                  icon: Icons.save,
-                  iconVariant:
-                      BsIconVariant.light, // Example of icon variant
-                  iconColor: Colors.yellow, // Example of icon color
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Delete',
-                  variant: BsButtonVariant.danger,
-                  icon: Icons.delete,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Info',
-                  variant: BsButtonVariant.info,
-                  icon: Icons.info,
-                  onPressed: () {},
-                ),
-              ],
-            ).pt2(),
-
-            _divider(bsTheme.border),
-            _sectionTitle('States'),
-            _description('Disabled (onPressed: null) and Loading'),
-            _Wrap(
-              children: [
-                const BsButton(
-                  label: 'Disabled',
-                  variant: BsButtonVariant.primary,
-                ),
-                const BsButton(
-                  label: 'Disabled',
-                  variant: BsButtonVariant.outlinePrimary,
-                ),
-                BsButton(
-                  label: 'Loading...',
-                  variant: BsButtonVariant.primary,
-                  isLoading: _isLoading,
-                  onPressed: _simulateLoading,
-                ),
-              ],
-            ).pt2(),
-
-            _divider(bsTheme.border),
-            _sectionTitle('Full Width (d-grid)'),
-            _description(
-              'Corresponds to: <div class="d-grid"> → Button takes full width',
-            ),
-            BsButton(
-              label: 'Full Width Button',
-              variant: BsButtonVariant.primary,
-              fullWidth: true,
-              onPressed: () {},
-            ).pt2(),
-            BsButton(
-              label: 'Full Width Outline',
-              variant: BsButtonVariant.outlinePrimary,
-              fullWidth: true,
-              onPressed: () {},
-            ).pt2(),
-
-            _divider(bsTheme.border),
-            _sectionTitle('Button Groups'),
-            _description('Corresponds to: btn-group '),
-            BsButtonGroup(
-              groupSize: BsButtonSize.md,
-              children: [
-                BsButton(
-                  label: 'Left',
-                  variant: BsButtonVariant.primary,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Middle',
-                  variant: BsButtonVariant.warning,
-                  onPressed: () {},
-                ),
-                BsButton(
-                  label: 'Right',
-                  variant: BsButtonVariant.danger,
-                  onPressed: () {},
-                ),
-              ],
-            ).pt2(),
-            _divider(bsTheme.border),
-            _sectionTitle('Close Buttons'),
-            _description('Corresponds to: btn-close. Supports default, disabled, white overrides (on dark backgrounds), and custom colors.'),
-            _Wrap(
-              children: [
-                BsCloseButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Close button clicked!')),
-                    );
-                  },
-                ),
-                const BsCloseButton(
-                  disabled: true,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF212529),
-                    borderRadius: BorderRadius.circular(4.0),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primary.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
                   ),
-                  child: const BsCloseButton(
-                    white: true,
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Buttons',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    ),
+                  ).pb2(),
+                  Text(
+                    'Use Bootstrap\'s custom button styles for actions in forms, dialogs, and more. Support for multiple sizes, states, outline variants, and grouping.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.4,
+                    ),
                   ),
-                ),
-                const BsCloseButton(
-                  color: Colors.blue,
-                ),
-              ],
-            ).pt2(),
+                ],
+              ).p4(),
+            ).mb(32),
+
+            // 1. Solid Variants
+            _Section(
+              title: 'Solid Buttons',
+              description: 'Standard button variants using key semantic background colors.',
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  BsButton(label: 'Primary', variant: BsButtonVariant.primary, onPressed: () {}),
+                  BsButton(label: 'Secondary', variant: BsButtonVariant.secondary, onPressed: () {}),
+                  BsButton(label: 'Success', variant: BsButtonVariant.success, onPressed: () {}),
+                  BsButton(label: 'Danger', variant: BsButtonVariant.danger, onPressed: () {}),
+                  BsButton(label: 'Warning', variant: BsButtonVariant.warning, onPressed: () {}),
+                  BsButton(label: 'Info', variant: BsButtonVariant.info, onPressed: () {}),
+                  BsButton(label: 'Light', variant: BsButtonVariant.light, onPressed: () {}),
+                  BsButton(label: 'Dark', variant: BsButtonVariant.dark, onPressed: () {}),
+                  BsButton(label: 'Link', variant: BsButtonVariant.link, onPressed: () {}),
+                ],
+              ),
+            ),
+
+            // 2. Outline Variants
+            _Section(
+              title: 'Outline Buttons',
+              description: 'In need of a button, but not the hefty background colors they bring? Replace with outline properties.',
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  BsButton(label: 'Primary', variant: BsButtonVariant.outlinePrimary, onPressed: () {}),
+                  BsButton(label: 'Secondary', variant: BsButtonVariant.outlineSecondary, onPressed: () {}),
+                  BsButton(label: 'Success', variant: BsButtonVariant.outlineSuccess, onPressed: () {}),
+                  BsButton(label: 'Danger', variant: BsButtonVariant.outlineDanger, onPressed: () {}),
+                  BsButton(label: 'Warning', variant: BsButtonVariant.outlineWarning, onPressed: () {}),
+                  BsButton(label: 'Info', variant: BsButtonVariant.outlineInfo, onPressed: () {}),
+                  BsButton(label: 'Dark', variant: BsButtonVariant.outlineDark, onPressed: () {}),
+                ],
+              ),
+            ),
+
+            // 2.5 Custom Color
+            _Section(
+              title: 'Custom Color',
+              description: 'Override the standard variant by passing a custom color. Text color adjusts automatically based on background luminance.',
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  BsButton(label: 'Custom Purple', color: Colors.purple, onPressed: () {}),
+                  BsButton(label: 'Custom Yellow', color: Colors.yellow, onPressed: () {}),
+                  BsButton(label: 'Custom Cyan', color: Colors.cyan, onPressed: () {}),
+                ],
+              ),
+            ),
+
+            // 3. Sizes
+            _Section(
+              title: 'Button Sizes',
+              description: 'Fancy larger or smaller buttons? Customize with sm or lg size options.',
+              child: Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  BsButton(
+                    label: 'Small Button',
+                    variant: BsButtonVariant.primary,
+                    size: BsButtonSize.sm,
+                    onPressed: () {},
+                  ),
+                  BsButton(
+                    label: 'Medium Button',
+                    variant: BsButtonVariant.primary,
+                    size: BsButtonSize.md,
+                    onPressed: () {},
+                  ),
+                  BsButton(
+                    label: 'Large Button',
+                    variant: BsButtonVariant.primary,
+                    size: BsButtonSize.lg,
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+
+            // 4. Icons & States
+            _Section(
+              title: 'Icons & States',
+              description: 'Support for pre-configured leading icons, loading indicators, and disabled states.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Leading Icons:').fwBold().fs6().pb2(),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      BsButton(
+                        label: 'Save',
+                        variant: BsButtonVariant.primary,
+                        icon: BsIcons.save,
+                        onPressed: () {},
+                      ),
+                      BsButton(
+                        label: 'Delete',
+                        variant: BsButtonVariant.danger,
+                        icon: BsIcons.trash,
+                        onPressed: () {},
+                      ),
+                      BsButton(
+                        label: 'Info Info',
+                        variant: BsButtonVariant.info,
+                        icon: BsIcons.info,
+                        onPressed: () {},
+                      ),
+                    ],
+                  ).pb4(),
+
+                  const Text('Button States (Disabled & Loading):').fwBold().fs6().pb2(),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      const BsButton(
+                        label: 'Disabled Solid',
+                        variant: BsButtonVariant.primary,
+                      ),
+                      const BsButton(
+                        label: 'Disabled Outline',
+                        variant: BsButtonVariant.outlinePrimary,
+                      ),
+                      BsButton(
+                        label: 'Click to Load',
+                        variant: BsButtonVariant.primary,
+                        isLoading: _isLoading,
+                        onPressed: _simulateLoading,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            // 5. Full Width & Grouping
+            _Section(
+              title: 'Block Buttons & Groups',
+              description: 'Create responsive stacks of buttons with block styles and unified button groups.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Block Buttons (Full Width):').fwBold().fs6().pb2(),
+                  BsButton(
+                    label: 'Block Primary Button',
+                    variant: BsButtonVariant.primary,
+                    fullWidth: true,
+                    onPressed: () {},
+                  ).pb2(),
+                  BsButton(
+                    label: 'Block Outline Button',
+                    variant: BsButtonVariant.outlineSecondary,
+                    fullWidth: true,
+                    onPressed: () {},
+                  ).pb4(),
+
+                  const Text('Button Groups:').fwBold().fs6().pb2(),
+                  BsButtonGroup(
+                    groupSize: BsButtonSize.md,
+                    children: [
+                      BsButton(label: 'Left Option', variant: BsButtonVariant.outlinePrimary, onPressed: () {}),
+                      BsButton(label: 'Middle Option', variant: BsButtonVariant.outlinePrimary, onPressed: () {}),
+                      BsButton(label: 'Right Option', variant: BsButtonVariant.outlinePrimary, onPressed: () {}),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            // 6. Close Buttons
+            _Section(
+              title: 'Close Buttons',
+              description: 'A generic close button for dismissing content like modals and alerts.',
+              child: Wrap(
+                spacing: 16,
+                runSpacing: 16,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Column(
+                    children: [
+                      BsCloseButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Close button clicked!')),
+                          );
+                        },
+                      ).pb2(),
+                      const Text('Default', style: TextStyle(fontSize: 12)),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      const BsCloseButton(disabled: true).pb2(),
+                      const Text('Disabled', style: TextStyle(fontSize: 12)),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF212529),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const BsCloseButton(white: true),
+                      ).pb2(),
+                      const Text('White (Dark Bg)', style: TextStyle(fontSize: 12)),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      const BsCloseButton(color: Colors.blue).pb2(),
+                      const Text('Custom Color', style: TextStyle(fontSize: 12)),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
-        ).p3(),
+        ),
       ),
     );
   }
-
-  // ─── Helpers ────────────────────────────────────────────────────────────────
-
-  Widget _sectionTitle(String text) => Text(
-    text,
-    style: BsTypography.body.copyWith(
-      fontSize: BsTypography.h5,
-      fontWeight: BsTypography.weightBold,
-      color: context.bs.bodyText,
-    ),
-  );
-
-  Widget _description(String text) => Text(
-    text,
-    style: BsTypography.body.copyWith(
-      color: context.bs.bodyTextSecondary,
-      fontSize: BsTypography.fontSizeSm,
-    ),
-  );
-
-  Widget _divider(Color borderColor) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s4),
-    child: Divider(color: borderColor),
-  );
 }
 
-class _Wrap extends StatelessWidget {
-  const _Wrap({required this.children});
-  final List<Widget> children;
+class _Section extends StatelessWidget {
+  const _Section({required this.title, this.description, required this.child});
+
+  final String title;
+  final String? description;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: BsSpacing.s2,
-      runSpacing: BsSpacing.s2,
-      children: children,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+        ).pb(4),
+        if (description != null) Text(description!).pb(16),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: context.bs.bodyBg,
+            border: Border.all(color: context.bs.border),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: child,
+        ).pb(32),
+      ],
     );
   }
 }

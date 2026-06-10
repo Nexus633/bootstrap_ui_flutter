@@ -15,7 +15,7 @@ class BsAlert extends StatefulWidget {
   const BsAlert({
     super.key,
     required this.child,
-    this.variant = BsAlertVariant.primary,
+    this.variant = BsVariant.primary,
     this.icon,
     this.iconColor,
     this.iconVariant,
@@ -31,7 +31,7 @@ class BsAlert extends StatefulWidget {
   final Widget child;
 
   /// The color variant of the alert.
-  final BsAlertVariant variant;
+  final BsVariant variant;
 
   /// An optional icon to the left of the text.
   final IconData? icon;
@@ -40,7 +40,7 @@ class BsAlert extends StatefulWidget {
   final Color? iconColor;
 
   /// Variant color for the icon.
-  final BsIconVariant? iconVariant;
+  final BsVariant? iconVariant;
 
   /// Shows an "X" (close icon) on the right side.
   final bool dismissible;
@@ -150,7 +150,7 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final _AlertColors colors = _resolveColors(widget.variant);
 
-    Widget content = Container(
+    final Widget content = Container(
       decoration: BoxDecoration(
         color: colors.backgroundColor,
         borderRadius: BorderRadius.circular(8.0),
@@ -211,53 +211,53 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
     if (widget.iconVariant != null) {
       final bs = context.bs;
       return switch (widget.iconVariant!) {
-        BsIconVariant.primary => bs.primary,
-        BsIconVariant.secondary => bs.secondary,
-        BsIconVariant.success => bs.success,
-        BsIconVariant.danger => bs.danger,
-        BsIconVariant.warning => bs.warning,
-        BsIconVariant.info => bs.info,
-        BsIconVariant.light => bs.light,
-        BsIconVariant.dark => bs.dark,
+        BsVariant.primary => bs.primary,
+        BsVariant.secondary => bs.secondary,
+        BsVariant.success => bs.success,
+        BsVariant.danger => bs.danger,
+        BsVariant.warning => bs.warning,
+        BsVariant.info => bs.info,
+        BsVariant.light => bs.light,
+        BsVariant.dark => bs.dark,
       };
     }
     return widget.iconColor ?? fallback;
   }
 
-  _AlertColors _resolveColors(BsAlertVariant variant) {
+  _AlertColors _resolveColors(BsVariant variant) {
     final bs = context.bs;
 
     final Color textColor = switch (variant) {
-      BsAlertVariant.primary => bs.primaryTextEmphasis,
-      BsAlertVariant.secondary => bs.secondaryTextEmphasis,
-      BsAlertVariant.success => bs.successTextEmphasis,
-      BsAlertVariant.danger => bs.dangerTextEmphasis,
-      BsAlertVariant.warning => bs.warningTextEmphasis,
-      BsAlertVariant.info => bs.infoTextEmphasis,
-      BsAlertVariant.light => bs.lightTextEmphasis,
-      BsAlertVariant.dark => bs.darkTextEmphasis,
+      BsVariant.primary => bs.primaryTextEmphasis,
+      BsVariant.secondary => bs.secondaryTextEmphasis,
+      BsVariant.success => bs.successTextEmphasis,
+      BsVariant.danger => bs.dangerTextEmphasis,
+      BsVariant.warning => bs.warningTextEmphasis,
+      BsVariant.info => bs.infoTextEmphasis,
+      BsVariant.light => bs.lightTextEmphasis,
+      BsVariant.dark => bs.darkTextEmphasis,
     };
 
     final Color bgColor = switch (variant) {
-      BsAlertVariant.primary => bs.primaryBgSubtle,
-      BsAlertVariant.secondary => bs.secondaryBgSubtle,
-      BsAlertVariant.success => bs.successBgSubtle,
-      BsAlertVariant.danger => bs.dangerBgSubtle,
-      BsAlertVariant.warning => bs.warningBgSubtle,
-      BsAlertVariant.info => bs.infoBgSubtle,
-      BsAlertVariant.light => bs.lightBgSubtle,
-      BsAlertVariant.dark => bs.darkBgSubtle,
+      BsVariant.primary => bs.primaryBgSubtle,
+      BsVariant.secondary => bs.secondaryBgSubtle,
+      BsVariant.success => bs.successBgSubtle,
+      BsVariant.danger => bs.dangerBgSubtle,
+      BsVariant.warning => bs.warningBgSubtle,
+      BsVariant.info => bs.infoBgSubtle,
+      BsVariant.light => bs.lightBgSubtle,
+      BsVariant.dark => bs.darkBgSubtle,
     };
 
     final Color borderColor = switch (variant) {
-      BsAlertVariant.primary => bs.primaryBorderSubtle,
-      BsAlertVariant.secondary => bs.secondaryBorderSubtle,
-      BsAlertVariant.success => bs.successBorderSubtle,
-      BsAlertVariant.danger => bs.dangerBorderSubtle,
-      BsAlertVariant.warning => bs.warningBorderSubtle,
-      BsAlertVariant.info => bs.infoBorderSubtle,
-      BsAlertVariant.light => bs.lightBorderSubtle,
-      BsAlertVariant.dark => bs.darkBorderSubtle,
+      BsVariant.primary => bs.primaryBorderSubtle,
+      BsVariant.secondary => bs.secondaryBorderSubtle,
+      BsVariant.success => bs.successBorderSubtle,
+      BsVariant.danger => bs.dangerBorderSubtle,
+      BsVariant.warning => bs.warningBorderSubtle,
+      BsVariant.info => bs.infoBorderSubtle,
+      BsVariant.light => bs.lightBorderSubtle,
+      BsVariant.dark => bs.darkBorderSubtle,
     };
 
     return _AlertColors(

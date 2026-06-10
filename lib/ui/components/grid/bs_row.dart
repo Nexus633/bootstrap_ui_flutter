@@ -1,55 +1,115 @@
 import 'package:flutter/material.dart';
 import '../../tokens/breakpoints.dart';
+import '../../tokens/enums.dart';
 import '../../tokens/spacing.dart';
-import '../../utilities/size_extension.dart';
 
-// ─── BsCol Configuration ──────────────────────────────────────────────────────
+// ─── BsOffsetConfig ──────────────────────────────────────────────────────────
+
+/// Defines how many columns to offset a column by — per breakpoint.
+///
+/// Follows a mobile-first approach where configurations inherit from smaller breakpoints.
+class BsOffsetConfig {
+  /// Creates a [BsOffsetConfig] with optional offsets for each breakpoint.
+  const BsOffsetConfig({
+    this.xs,
+    this.sm,
+    this.md,
+    this.lg,
+    this.xl,
+    this.xxl,
+  });
+
+  /// Shortcut: applies the same column offset across all breakpoints.
+  const BsOffsetConfig.all(int offset)
+      : xs = offset,
+        sm = offset,
+        md = offset,
+        lg = offset,
+        xl = offset,
+        xxl = offset;
+
+  /// Offset span for extra small screens (< 576px).
+  final int? xs;
+
+  /// Offset span for small screens (>= 576px).
+  final int? sm;
+
+  /// Offset span for medium screens (>= 768px).
+  final int? md;
+
+  /// Offset span for large screens (>= 992px).
+  final int? lg;
+
+  /// Offset span for extra large screens (>= 1200px).
+  final int? xl;
+
+  /// Offset span for extra extra large screens (>= 1400px).
+  final int? xxl;
+
+  /// Resolves the active offset for a given layout width.
+  ///
+  /// Uses a mobile-first approach where larger matching breakpoints take precedence.
+  int resolveFor(double width) {
+    int result = xs ?? 0;
+    if (width >= BsBreakpoints.sm && sm != null) result = sm!;
+    if (width >= BsBreakpoints.md && md != null) result = md!;
+    if (width >= BsBreakpoints.lg && lg != null) result = lg!;
+    if (width >= BsBreakpoints.xl && xl != null) result = xl!;
+    if (width >= BsBreakpoints.xxl && xxl != null) result = xxl!;
+    return result;
+  }
+}
+
+// ─── BsColConfig ──────────────────────────────────────────────────────────────
 
 /// Defines how many of the 12 columns a column occupies — per breakpoint.
-/// null = inherits from the smaller breakpoint (Bootstrap behavior: mobile first).
+///
+/// If null for a breakpoint, it inherits from the next smaller configured breakpoint
+/// (mobile-first behavior). If all are null, it resolves to auto-width.
 class BsColConfig {
   /// Creates a [BsColConfig] with optional spans for each breakpoint.
   const BsColConfig({
-    this.xs, // < 576px  (Standard / mobile)
-    this.sm, // >= 576px
-    this.md, // >= 768px
-    this.lg, // >= 992px
-    this.xl, // >= 1200px
-    this.xxl, // >= 1400px
+    this.xs,
+    this.sm,
+    this.md,
+    this.lg,
+    this.xl,
+    this.xxl,
   });
 
-  /// Shortcut: same column span on all breakpoints.
+  /// Shortcut: applies the same column span across all breakpoints.
   const BsColConfig.all(int span)
-    : xs = span,
-      sm = span,
-      md = span,
-      lg = span,
-      xl = span,
-      xxl = span;
+      : xs = span,
+        sm = span,
+        md = span,
+        lg = span,
+        xl = span,
+        xxl = span;
 
-  /// Span for extra small screens (< 576px).
+  /// Column span for extra small screens (< 576px).
   final int? xs;
 
-  /// Span for small screens (>= 576px).
+  /// Column span for small screens (>= 576px).
   final int? sm;
 
-  /// Span for medium screens (>= 768px).
+  /// Column span for medium screens (>= 768px).
   final int? md;
 
-  /// Span for large screens (>= 992px).
+  /// Column span for large screens (>= 992px).
   final int? lg;
 
-  /// Span for extra large screens (>= 1200px).
+  /// Column span for extra large screens (>= 1200px).
   final int? xl;
 
-  /// Span for extra extra large screens (>= 1400px).
+  /// Column span for extra extra large screens (>= 1400px).
   final int? xxl;
 
-  /// Returns the active column count for a given width.
-  /// Mobile-first: takes the largest matching breakpoint.
-  /// Returns null if no configuration is set → "auto" (evenly distributed).
+  /// Resolves the active column span for a given layout width.
+  ///
+  /// Uses a mobile-first approach where larger matching breakpoints take precedence.
+  /// Returns null if no explicit span is configured (indicates auto-width).
   int? resolveFor(double width) {
-    int? result = xs; // Base value (mobile first)
+    int? result = xs;
     if (width >= BsBreakpoints.sm && sm != null) result = sm;
     if (width >= BsBreakpoints.md && md != null) result = md;
     if (width >= BsBreakpoints.lg && lg != null) result = lg;
@@ -63,69 +123,96 @@ class BsColConfig {
 
 /// A column in the Bootstrap 12-column grid.
 ///
-/// MUST always be used inside a [BsRow].
+/// MUST always be placed as a direct child of a [BsRow].
 class BsCol extends StatelessWidget {
   /// Creates a [BsCol] widget.
   const BsCol({
     super.key,
     required this.child,
     this.config = const BsColConfig(),
+    this.offset = const BsOffsetConfig(),
+    this.alignSelf = BsColAlignSelf.auto,
   });
 
   /// The content of the column.
   final Widget child;
 
-  /// Responsive column configuration.
+  /// Responsive column span configuration.
   final BsColConfig config;
+
+  /// Responsive offset configuration.
+  final BsOffsetConfig offset;
+
+  /// Self-alignment override for this specific column.
+  final BsColAlignSelf alignSelf;
 
   @override
   Widget build(BuildContext context) {
-    // BsCol does not render itself directly —
-    // BsRow reads the config and wraps in Expanded/SizedBox.
-    // Nevertheless, we need a build() since BsCol is a Widget.
+    // BsCol is parsed by BsRow and wrapped dynamically.
     return child;
   }
 }
 
 // ─── BsRow ────────────────────────────────────────────────────────────────────
 
-/// Bootstrap's .row in Flutter — the heart of the 12-column grid.
+/// Bootstrap's .row layout in Flutter — the heart of the 12-column grid.
+///
+/// Manages responsive wrapping, columns alignment, and gutters.
 class BsRow extends StatelessWidget {
   /// Creates a [BsRow] widget with the given [children].
-  BsRow({
+  const BsRow({
     super.key,
     required this.children,
-    this.gutterX = BsSpacing.s3, // Bootstrap g-* default
+    this.gutterX = BsSpacing.s3,
     this.gutterY = BsSpacing.s3,
-  }) : assert(children.isNotEmpty, 'BsRow requires at least one child widget.');
+    this.justify = BsRowJustify.start,
+    this.alignItems = BsRowAlignItems.stretch,
+  });
 
-  /// Only [BsCol] widgets are allowed.
+  /// The columns of this row. Must be a list of [BsCol] widgets.
   final List<BsCol> children;
 
-  /// Horizontal distance between columns (Bootstrap: gutter-x).
+  /// Horizontal space between columns. Defaults to [BsSpacing.s3] (16px).
   final double gutterX;
 
-  /// Vertical distance between rows (Bootstrap: gutter-y).
+  /// Vertical space between wrapped rows. Defaults to [BsSpacing.s3] (16px).
   final double gutterY;
+
+  /// Horizontal alignment of columns within the row. Defaults to [BsRowJustify.start].
+  final BsRowJustify justify;
+
+  /// Vertical alignment of columns within the row. Defaults to [BsRowAlignItems.start].
+  final BsRowAlignItems alignItems;
 
   @override
   Widget build(BuildContext context) {
+    if (children.isEmpty) return const SizedBox.shrink();
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final double rowWidth = constraints.maxWidth;
+        final bool hasBoundedHeight = constraints.hasBoundedHeight;
 
-        // ── Step 1: Divide columns into rows ───────────────────────────
-        // Bootstrap breaks automatically when col-sum > 12.
-        // We replicate the same logic.
-        final List<List<BsCol>> rows = _buildRows(rowWidth);
+        // Step 1: Group columns into physical rows according to 12-column spans and offsets.
+        final List<List<BsCol>> physicalRows = _buildRows(rowWidth);
 
-        // ── Step 2: Render rows ─────────────────────────────────────────
+        // Step 2: Render each physical row with spacing.
+        // If the parent has bounded height and we only have 1 row, force it to fill the height
+        // so that vertical alignment (alignItems, alignSelf) works correctly.
+        if (hasBoundedHeight && physicalRows.length == 1) {
+          return SizedBox(
+            height: constraints.maxHeight,
+            child: _buildSingleRow(physicalRows.first, rowWidth, forceMaxHeight: true),
+          );
+        }
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            for (int rowIndex = 0; rowIndex < rows.length; rowIndex++) ...[
-              if (rowIndex > 0) SizedBox(height: gutterY),
-              _buildSingleRow(rows[rowIndex], rowWidth),
+            for (int i = 0; i < physicalRows.length; i++) ...[
+              if (i > 0) SizedBox(height: gutterY),
+              _buildSingleRow(physicalRows[i], rowWidth, forceMaxHeight: false),
             ],
           ],
         );
@@ -133,51 +220,157 @@ class BsRow extends StatelessWidget {
     );
   }
 
-  // ─── Row Division ────────────────────────────────────────────────────
+  // ─── Row Partitioning ────────────────────────────────────────────────
 
-  /// Divides the children into rows — exactly like Bootstrap's flexbox wrapping.
   List<List<BsCol>> _buildRows(double width) {
     final List<List<BsCol>> rows = [];
     List<BsCol> currentRow = [];
     int currentSpan = 0;
 
     for (final col in children) {
-      final int span =
-          col.config.resolveFor(width) ?? _autoSpan(children.length);
+      final int span = col.config.resolveFor(width) ?? _autoSpan(children.length);
+      final int offset = col.offset.resolveFor(width);
 
-      // Would this column exceed 12? → new row.
-      if (currentSpan + span > 12 && currentRow.isNotEmpty) {
+      // Wrap to next line if the current item (span + offset) exceeds remaining space.
+      if (currentSpan + span + offset > 12 && currentRow.isNotEmpty) {
         rows.add(currentRow);
         currentRow = [];
         currentSpan = 0;
       }
 
       currentRow.add(col);
-      currentSpan += span;
+      currentSpan += span + offset;
     }
 
     if (currentRow.isNotEmpty) rows.add(currentRow);
     return rows;
   }
 
-  /// Fallback if no config is set: distribute evenly.
-  /// Like Bootstrap's .col (without number).
   int _autoSpan(int totalChildren) => (12 / totalChildren).round();
 
-  // ─── Render Single Row ───────────────────────────────────────────────
+  // ─── Single Row Renderer ─────────────────────────────────────────────
 
-  Widget _buildSingleRow(List<BsCol> cols, double width) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (int i = 0; i < cols.length; i++) ...[
-          if (i > 0) SizedBox(width: gutterX),
-          // Expanded with flex = column count → proportional width
-          cols[i].child.expanded(
-            cols[i].config.resolveFor(width) ?? _autoSpan(cols.length),
+  Widget _buildSingleRow(List<BsCol> cols, double width, {required bool forceMaxHeight}) {
+    final List<Widget> lineWidgets = [];
+    final bool useFixedGutters = justify == BsRowJustify.start ||
+        justify == BsRowJustify.center ||
+        justify == BsRowJustify.end;
+
+    for (int i = 0; i < cols.length; i++) {
+      final col = cols[i];
+      final int? explicitSpan = col.config.resolveFor(width);
+      final int offset = col.offset.resolveFor(width);
+
+      // 1. Handle Offset Spacer
+      if (offset > 0) {
+        if (lineWidgets.isNotEmpty && useFixedGutters) {
+          lineWidgets.add(SizedBox(width: gutterX));
+        }
+        final double offsetW = (offset / 12) * (width + gutterX);
+        lineWidgets.add(SizedBox(width: offsetW));
+      } else {
+        if (lineWidgets.isNotEmpty && useFixedGutters) {
+          lineWidgets.add(SizedBox(width: gutterX));
+        }
+      }
+
+      // Determine effective vertical alignment for this column
+      final BsColAlignSelf effectiveAlign = col.alignSelf == BsColAlignSelf.auto
+          ? _mapRowAlignToColAlign(alignItems)
+          : col.alignSelf;
+
+      Widget colChild = col.child;
+      colChild = _wrapWithAlignSelf(colChild, effectiveAlign);
+
+      // 3. Render Column with width
+      if (explicitSpan != null) {
+        final double colW = (explicitSpan / 12) * (width + gutterX) - gutterX;
+        lineWidgets.add(
+          SizedBox(
+            width: colW.clamp(0.0, double.infinity),
+            child: colChild,
           ),
-        ],
-      ],
+        );
+      } else {
+        // Auto Column
+        lineWidgets.add(
+          Expanded(
+            child: colChild,
+          ),
+        );
+      }
+    }
+
+    final rowWidget = Row(
+      mainAxisAlignment: _mapJustify(justify),
+      crossAxisAlignment: CrossAxisAlignment.stretch, // Always stretch columns vertically to equal height
+      children: lineWidgets,
     );
+
+    if (forceMaxHeight) {
+      return rowWidget;
+    }
+
+    return IntrinsicHeight(child: rowWidget);
+  }
+
+  MainAxisAlignment _mapJustify(BsRowJustify justify) {
+    switch (justify) {
+      case BsRowJustify.start:
+        return MainAxisAlignment.start;
+      case BsRowJustify.center:
+        return MainAxisAlignment.center;
+      case BsRowJustify.end:
+        return MainAxisAlignment.end;
+      case BsRowJustify.between:
+        return MainAxisAlignment.spaceBetween;
+      case BsRowJustify.around:
+        return MainAxisAlignment.spaceAround;
+    }
+  }
+
+  BsColAlignSelf _mapRowAlignToColAlign(BsRowAlignItems align) {
+    switch (align) {
+      case BsRowAlignItems.start:
+        return BsColAlignSelf.start;
+      case BsRowAlignItems.center:
+        return BsColAlignSelf.center;
+      case BsRowAlignItems.end:
+        return BsColAlignSelf.end;
+      case BsRowAlignItems.stretch:
+        return BsColAlignSelf.stretch;
+    }
+  }
+
+  Widget _wrapWithAlignSelf(Widget child, BsColAlignSelf alignSelf) {
+    switch (alignSelf) {
+      case BsColAlignSelf.auto:
+      case BsColAlignSelf.stretch:
+        return child;
+      case BsColAlignSelf.start:
+        return Align(
+          alignment: Alignment.topCenter,
+          child: SizedBox(
+            width: double.infinity,
+            child: child,
+          ),
+        );
+      case BsColAlignSelf.center:
+        return Align(
+          alignment: Alignment.center,
+          child: SizedBox(
+            width: double.infinity,
+            child: child,
+          ),
+        );
+      case BsColAlignSelf.end:
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: SizedBox(
+            width: double.infinity,
+            child: child,
+          ),
+        );
+    }
   }
 }

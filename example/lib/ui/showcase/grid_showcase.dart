@@ -1,265 +1,262 @@
-import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 
-/// Shows the BsContainer + BsRow + BsCol grid system.
-/// Resize the window to see responsive behavior.
 class GridShowcase extends StatelessWidget {
   const GridShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final bs = context.bs;
-    return Scaffold(
-      backgroundColor: bs.bodyBg,
-      appBar: AppBar(
-        backgroundColor: bs.bodyBg,
-        title: Text('Grid System', style: TextStyle(color: bs.bodyText)),
-      ),
-      body: SingleChildScrollView(
+    final theme = context.bs;
+
+    return SingleChildScrollView(
+      child: BsContainer.fluid(
+        padding: const EdgeInsets.all(24),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ── col (auto, uniform) ─────────────────────────────────────────
-            _SectionHeader(
-              'col (auto)',
-              'All equally wide — like Bootstrap\'s .col',
-            ),
-            BsContainer(
-              child: BsRow(
-                children: [
-                  BsCol(child: _ColBox('col')),
-                  BsCol(child: _ColBox('col')),
-                  BsCol(child: _ColBox('col')),
-                ],
-              ),
-            ),
-
-            _divider(context),
-
-            // ── col-6 col-6 ────────────────────────────────────────────────
-            _SectionHeader('col-6 / col-6', '12 columns divided by 2'),
-            BsContainer(
-              child: BsRow(
-                children: [
-                  BsCol(config: BsColConfig.all(6), child: _ColBox('col-6')),
-                  BsCol(config: BsColConfig.all(6), child: _ColBox('col-6')),
-                ],
-              ),
-            ),
-
-            _divider(context),
-
-            // ── col-4 col-8 ────────────────────────────────────────────────
-            _SectionHeader('col-4 / col-8', 'Sidebar + Main area'),
-            BsContainer(
-              child: BsRow(
-                children: [
-                  BsCol(
-                    config: BsColConfig.all(4),
-                    child: _ColBox('col-4\nSidebar'),
-                  ),
-                  BsCol(
-                    config: BsColConfig.all(8),
-                    child: _ColBox('col-8\nContent'),
+            // Header Card with beautiful Gradient
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [theme.primary, theme.info],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primary.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
                   ),
                 ],
               ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Grid System',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    ),
+                  ).pb2(),
+                  Text(
+                    'Use our powerful mobile-first flexbox grid to build layouts of all shapes and sizes thanks to a twelve-column system, six default responsive tiers, and Sass variables.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ).p4(),
+            ).mb(32),
+
+            // 1. Equal Width Columns
+            _Section(
+              title: 'Equal-Width Columns (col)',
+              description: 'Columns share the available width equally, automatically wrapping if necessary.',
+              child: BsRow(
+                children: [
+                  BsCol(child: const _ColBox('col-auto')),
+                  BsCol(child: const _ColBox('col-auto')),
+                  BsCol(child: const _ColBox('col-auto')),
+                ],
+              ),
             ),
 
-            _divider(context),
-
-            // ── Responsive: col-12 col-md-6 col-lg-4 ───────────────────────
-            _SectionHeader(
-              'col-12 col-md-6 col-lg-4',
-              'Mobile: 1 column → Tablet: 2 → Desktop: 3',
+            // 2. Fixed Width / 12 Column
+            _Section(
+              title: 'Explicit Widths (col-6 / col-4 / col-8)',
+              description: 'Assign explicit column spans from 1 to 12. Columns will wrap if total span exceeds 12.',
+              child: Column(
+                children: [
+                  BsRow(
+                    children: [
+                      BsCol(config: BsColConfig.all(6), child: const _ColBox('col-6')),
+                      BsCol(config: BsColConfig.all(6), child: const _ColBox('col-6')),
+                    ],
+                  ).pb3(),
+                  BsRow(
+                    children: [
+                      BsCol(config: BsColConfig.all(4), child: const _ColBox('col-4')),
+                      BsCol(config: BsColConfig.all(8), child: const _ColBox('col-8')),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            BsContainer(
+
+            // 3. Responsive Tiers
+            _Section(
+              title: 'Responsive Layout (col-12 col-md-6 col-lg-4)',
+              description: 'Resize the app window to watch columns scale and wrap reactively (Mobile: 12 → Tablet: 6 → Desktop: 4).',
               child: BsRow(
                 gutterY: BsSpacing.s2,
                 children: List.generate(
                   6,
                   (i) => BsCol(
                     config: const BsColConfig(xs: 12, md: 6, lg: 4),
-                    child: _ColBox('col-12\ncol-md-6\ncol-lg-4'),
+                    child: _ColBox('Card #${i + 1}\n(xs: 12, md: 6, lg: 4)'),
                   ),
                 ),
               ),
             ),
 
-            _divider(context),
-
-            // ── Automatic line break > 12 ───────────────────────────────────
-            _SectionHeader(
-              'Automatic line break',
-              'col-8 + col-6 → second line because 8+6 > 12',
-            ),
-            BsContainer(
-              child: BsRow(
-                children: [
-                  BsCol(config: BsColConfig.all(8), child: _ColBox('col-8')),
-                  BsCol(
-                    config: BsColConfig.all(6),
-                    child: _ColBox('col-6\n→ new line'),
-                  ),
-                ],
-              ),
-            ),
-
-            _divider(context),
-
-            // ── Container Fluid ─────────────────────────────────────────────
-            _SectionHeader(
-              'container-fluid',
-              'Always full width — no max-width',
-            ),
-            BsContainer.fluid(
-              child: BsRow(
-                children: [
-                  BsCol(
-                    config: BsColConfig.all(3),
-                    child: _ColBox('col-3', fluid: true),
-                  ),
-                  BsCol(
-                    config: BsColConfig.all(3),
-                    child: _ColBox('col-3', fluid: true),
-                  ),
-                  BsCol(
-                    config: BsColConfig.all(3),
-                    child: _ColBox('col-3', fluid: true),
-                  ),
-                  BsCol(
-                    config: BsColConfig.all(3),
-                    child: _ColBox('col-3', fluid: true),
-                  ),
-                ],
-              ),
-            ),
-
-            _divider(context),
-
-            // ── Gutter Variations ───────────────────────────────────────────
-            _SectionHeader(
-              'Gutter (g-*)',
-              'g-1 = 4px, g-3 = 16px (default), g-5 = 48px',
-            ),
-            BsContainer(
+            // 4. Offsets
+            _Section(
+              title: 'Offsets',
+              description: 'Move columns to the right using offset configuration spans.',
               child: Column(
                 children: [
-                  Text('g-1 (4px)', style: _labelStyle(context)).pb1(),
                   BsRow(
-                    gutterX: BsSpacing.s1,
-                    gutterY: BsSpacing.s1,
-                    children: [
-                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
-                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
-                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                    children: const [
+                      BsCol(
+                        config: BsColConfig.all(4),
+                        child: _ColBox('col-4'),
+                      ),
+                      BsCol(
+                        config: BsColConfig.all(4),
+                        offset: BsOffsetConfig.all(4),
+                        child: _ColBox('col-4 offset-4'),
+                      ),
                     ],
-                  ),
-                  const SizedBox(height: BsSpacing.s3),
-                  Text('g-3 / default (16px)', style: _labelStyle(context))
-                      .pb1(),
+                  ).pb3(),
                   BsRow(
-                    // gutterX: BsSpacing.s3,
-                    // gutterY: BsSpacing.s3,
-                    children: [
-                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
-                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
-                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                    children: const [
+                      BsCol(
+                        config: BsColConfig.all(3),
+                        offset: BsOffsetConfig.all(3),
+                        child: _ColBox('col-3 offset-3'),
+                      ),
+                      BsCol(
+                        config: BsColConfig.all(3),
+                        offset: BsOffsetConfig.all(3),
+                        child: _ColBox('col-3 offset-3'),
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
 
-            const SizedBox(height: BsSpacing.s5),
+            // 5. Alignment
+            _Section(
+              title: 'Alignment & Justify',
+              description: 'Support for vertical alignment (align-items, align-self) and horizontal alignment (justify-content).',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('justify: center (Horizontal):').fwBold().fs6().pb2(),
+                  const BsRow(
+                    justify: BsRowJustify.center,
+                    children: [
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                      BsCol(config: BsColConfig.all(4), child: _ColBox('col-4')),
+                    ],
+                  ).pb4(),
+
+                  const Text('alignItems: center (Vertical):').fwBold().fs6().pb2(),
+                  Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: theme.border),
+                      borderRadius: BorderRadius.circular(8),
+                      color: theme.bodyBgSecondary,
+                    ),
+                    child: const BsRow(
+                      alignItems: BsRowAlignItems.center,
+                      children: [
+                        BsCol(config: BsColConfig.all(4), child: _ColBox('col-4', highlighted: true)),
+                        BsCol(config: BsColConfig.all(4), child: _ColBox('col-4', highlighted: true)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
-        ).py4(),
+        ),
       ),
     );
   }
-
-  Widget _divider(BuildContext context) => Padding(
-    padding: EdgeInsets.symmetric(vertical: BsSpacing.s4),
-    child: Divider(color: context.bs.border),
-  );
-
-  TextStyle _labelStyle(BuildContext context) => BsTypography.body.copyWith(
-    fontSize: BsTypography.fontSizeSm,
-    color: context.bs.bodyTextSecondary,
-  );
 }
 
-// ─── Section Header ───────────────────────────────────────────────────────────
+class _Section extends StatelessWidget {
+  const _Section({required this.title, this.description, required this.child});
 
-class _SectionHeader extends StatelessWidget {
-  const _SectionHeader(this.title, this.description);
   final String title;
-  final String description;
+  final String? description;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        BsSpacing.s3,
-        0,
-        BsSpacing.s3,
-        BsSpacing.s2,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: BsTypography.body.copyWith(
-              fontSize: BsTypography.h5,
-              fontWeight: BsTypography.weightBold,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+        ).pb(4),
+        if (description != null) Text(description!).pb(16),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: context.bs.bodyBg,
+            border: Border.all(color: context.bs.border),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
-          Text(
-            description,
-            style: BsTypography.body.copyWith(
-              fontSize: BsTypography.fontSizeSm,
-              color: context.bs.bodyTextSecondary,
-            ),
-          ),
-        ],
-      ),
+          child: child,
+        ).pb(32),
+      ],
     );
   }
 }
 
-// ─── Demo Box ─────────────────────────────────────────────────────────────────
-
-/// Visualizes a column — like Bootstrap's blue demo boxes in the documentation.
 class _ColBox extends StatelessWidget {
-  const _ColBox(this.label, {this.fluid = false});
+  const _ColBox(this.label, {this.highlighted = false});
   final String label;
-  final bool fluid;
+  final bool highlighted;
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.bs;
+    final primaryColor = highlighted ? theme.success : theme.primary;
+
     return Container(
       padding: const EdgeInsets.symmetric(
-        vertical: BsSpacing.s2,
-        horizontal: BsSpacing.s1,
+        vertical: 12,
+        horizontal: 8,
       ),
       decoration: BoxDecoration(
-        color: fluid
-            ? BsColors.success.withValues(alpha: 0.15)
-            : BsColors.primary.withValues(alpha: 0.15),
+        color: primaryColor.withValues(alpha: 0.1),
         border: Border.all(
-          color: fluid ? BsColors.success : BsColors.primary,
-          width: 1,
+          color: primaryColor,
+          width: 1.5,
         ),
-        borderRadius: BsRadius.md,
+        borderRadius: BorderRadius.circular(6),
       ),
-      child: Text(
-        label,
-        textAlign: TextAlign.center,
-        style: BsTypography.body.copyWith(
-          fontSize: BsTypography.fontSizeSm,
-          color: fluid ? BsColors.success : BsColors.primary,
-          fontWeight: BsTypography.weightMedium,
+      child: Center(
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 13,
+            color: primaryColor,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

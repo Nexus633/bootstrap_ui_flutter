@@ -35,19 +35,42 @@ Container(color: Colors.red, child: Text('Alarm'))
 
 ## Verfügbare Methoden
 
-### Standard-Stufen (1-5)
+### Standard-Stufen (0-5)
 
-Diese Methoden verwenden die vordefinierten `BsSpacing`-Tokens:
+Diese Methoden verwenden die vordefinierten `BsSpacing`-Tokens (inklusive Level 0 für den Wert 0.0):
 
 | Typ | Padding-Methoden | Margin-Methoden | Bootstrap-Äquivalent |
 | :--- | :--- | :--- | :--- |
-| **Gleichmäßig** | `.p1()` bis `.p5()` | `.m1()` bis `.m5()` | `p-*` / `m-*` |
-| **Horizontal** | `.px1()` bis `.px5()` | `.mx1()` bis `.mx5()` | `px-*` / `mx-*` |
-| **Vertikal** | `.py1()` bis `.py5()` | `.my1()` bis `.my5()` | `py-*` / `my-*` |
-| **Oben (Top)** | `.pt1()` bis `.pt5()` | `.mt1()` bis `.mt5()` | `pt-*` / `mt-*` |
-| **Unten (Bottom)** | `.pb1()` bis `.pb5()` | `.mb1()` bis `.mb5()` | `pb-*` / `mb-*` |
-| **Anfang (Start)** | `.ps1()` bis `.ps5()` | `.ms1()` bis `.ms5()` | `ps-*` / `ms-*` |
-| **Ende (End)** | `.pe1()` bis `.pe5()` | `.me1()` bis `.me5()` | `pe-*` / `me-*` |
+| **Gleichmäßig** | `.p0()` bis `.p5()` | `.m0()` bis `.m5()` | `p-*` / `m-*` |
+| **Horizontal** | `.px0()` bis `.px5()` | `.mx0()` bis `.mx5()` | `px-*` / `mx-*` |
+| **Vertikal** | `.py0()` bis `.py5()` | `.my0()` bis `.my5()` | `py-*` / `my-*` |
+| **Oben (Top)** | `.pt0()` bis `.pt5()` | `.mt0()` bis `.mt5()` | `pt-*` / `mt-*` |
+| **Unten (Bottom)** | `.pb0()` bis `.pb5()` | `.mb0()` bis `.mb5()` | `pb-*` / `mb-*` |
+| **Anfang (Start)** | `.ps0()` bis `.ps5()` | `.ms0()` bis `.ms5()` | `ps-*` / `ms-*` |
+| **Ende (End)** | `.pe0()` bis `.pe5()` | `.me0()` bis `.me5()` | `pe-*` / `me-*` |
+
+---
+
+### Automatische Außenabstände (Auto Margins)
+
+Entspricht den Bootstrap-Klassen `.m-auto`, `.mx-auto` etc. Diese eignen sich hervorragend, um Widgets in übergeordneten Flexbox- oder Stack-Layouts auszurichten.
+
+| Methode | Beschreibung | Entspricht |
+| :--- | :--- | :--- |
+| `.mAuto()` | Zentriert das Widget horizontal und vertikal. | `m-auto` |
+| `.mxAuto()` | Zentriert das Widget horizontal. | `mx-auto` |
+| `.myAuto()` | Zentriert das Widget vertikal. | `my-auto` |
+| `.msAuto()` | Richtet das Widget am Ende (rechts) aus (Auto-Margin Start). | `ms-auto` |
+| `.meAuto()` | Richtet das Widget am Anfang (links) aus (Auto-Margin End). | `me-auto` |
+| `.mtAuto()` | Richtet das Widget unten aus. | `mt-auto` |
+| `.mbAuto()` | Richtet das Widget oben aus. | `mb-auto` |
+
+```dart
+// Schiebt das Widget im Row-Layout nach ganz rechts
+Text('Rechtsbündig').msAuto();
+```
+
+---
 
 ### Benutzerdefinierte Werte
 

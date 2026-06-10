@@ -6,23 +6,60 @@ class CardShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.bs;
+
     return SingleChildScrollView(
       child: BsContainer.fluid(
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Cards',
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-            ).pb(16),
-            const Text(
-              'Bootstrap’s cards provide a flexible and extensible content container with multiple layout, image, header, footer, and color variant options.',
-            ).pb(24),
+            // Header Card with beautiful Gradient
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [theme.primary, theme.info],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primary.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Cards',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    ),
+                  ).pb2(),
+                  Text(
+                    'A flexible and extensible content container. Supports header, footer, background variants, border colors, images, and multiple layout alignment orientations.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ).p4(),
+            ).mb(32),
 
-            // 1. Basic Card inside a Row/Col
+            // 1. Basic Card
             _Section(
               title: 'Basic Card',
-              description: 'A simple card with title, subtitle, content, and an action button, laid out inside a grid.',
+              description: 'A simple card with title, subtitle, content body, and action button.',
               child: BsRow(
                 children: [
                   BsCol(
@@ -32,8 +69,9 @@ class CardShowcase extends StatelessWidget {
                         children: [
                           const BsCardTitle('Card Title'),
                           const BsCardSubtitle('Card Subtitle'),
-                          const Text(
+                          Text(
                             'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
+                            style: TextStyle(color: theme.bodyTextSecondary),
                           ).pb3(),
                           BsButton(
                             label: 'Go somewhere',
@@ -51,33 +89,31 @@ class CardShowcase extends StatelessWidget {
             // 2. Header and Footer
             _Section(
               title: 'Header and Footer',
-              description: 'Cards with optional header and footer styled with theme contrast.',
+              description: 'Add header or footer sections to divide card information flow.',
               child: BsRow(
                 children: [
                   BsCol(
                     config: const BsColConfig(xs: 12, md: 8, lg: 6),
                     child: BsCard(
                       header: const BsCardHeader(
-                        child: Text(
-                          'Featured',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
+                        child: Text('Featured News', style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
                       body: BsCardBody(
                         children: [
-                          const BsCardTitle('Special title treatment'),
-                          const Text(
+                          const BsCardTitle('Special Title Treatment'),
+                          Text(
                             'With supporting text below as a natural lead-in to additional content.',
+                            style: TextStyle(color: theme.bodyTextSecondary),
                           ).pb3(),
                           BsButton(
-                            label: 'Go somewhere',
+                            label: 'Read Article',
                             variant: BsButtonVariant.primary,
                             onPressed: () {},
                           ),
                         ],
                       ),
                       footer: const BsCardFooter(
-                        child: Text('2 days ago'),
+                        child: Text('Updated 2 hours ago'),
                       ),
                     ),
                   ),
@@ -87,9 +123,11 @@ class CardShowcase extends StatelessWidget {
 
             // 3. Image top / bottom
             _Section(
-              title: 'Images (Top and Bottom)',
-              description: 'Images automatically adapt and clip to the card\'s border radius.',
+              title: 'Top & Bottom Images',
+              description: 'Card images automatically clip and align with boundaries and border radiuses.',
               child: BsRow(
+                gutterX: BsSpacing.s3,
+                gutterY: BsSpacing.s3,
                 children: [
                   BsCol(
                     config: const BsColConfig(xs: 12, md: 6, lg: 4),
@@ -130,7 +168,7 @@ class CardShowcase extends StatelessWidget {
             // 4. Horizontal Card
             _Section(
               title: 'Horizontal Layout',
-              description: 'A card layout where the image is on the left or right, stretching to match height.',
+              description: 'Position images next to card body contents (left or right).',
               child: BsRow(
                 children: [
                   BsCol(
@@ -163,7 +201,7 @@ class CardShowcase extends StatelessWidget {
             // 5. Image Overlay
             _Section(
               title: 'Image Overlays',
-              description: 'Overlay text and content on top of a background image.',
+              description: 'Place overlay content directly on top of background images.',
               child: BsRow(
                 children: [
                   BsCol(
@@ -174,19 +212,16 @@ class CardShowcase extends StatelessWidget {
                         image: Image.network(
                           'https://picsum.photos/id/45/600/400',
                           fit: BoxFit.cover,
-                          color: Colors.black.withValues(alpha: 0.4),
+                          color: Colors.black.withValues(alpha: 0.45),
                           colorBlendMode: BlendMode.darken,
                         ),
                         imagePosition: BsCardImagePosition.overlay,
                         body: const BsCardBody(
                           children: [
                             Spacer(),
-                            BsCardTitle(
-                              'Card title overlay',
-                              color: Colors.white,
-                            ),
+                            BsCardTitle('Card Title Overlay', color: Colors.white),
                             Text(
-                              'This is a wider card with supporting text below as a natural lead-in to additional content.',
+                              'This is a wider card with supporting text below as a natural lead-in.',
                               style: TextStyle(color: Colors.white70),
                             ),
                           ],
@@ -201,14 +236,15 @@ class CardShowcase extends StatelessWidget {
             // 6. Color Variants
             _Section(
               title: 'Color & Border Variants',
-              description: 'Use background variants for colored cards, or border variants for highlighted borders.',
+              description: 'Style cards using accent theme backgrounds and custom borders.',
               child: BsRow(
-                children: [
-                  // Primary Variant
+                gutterX: BsSpacing.s3,
+                gutterY: BsSpacing.s3,
+                children: const [
                   BsCol(
-                    config: const BsColConfig(xs: 12, md: 4),
-                    child: const BsCard(
-                      variant: BsCardVariant.primary,
+                    config: BsColConfig(xs: 12, md: 4),
+                    child: BsCard(
+                      variant: BsVariant.primary,
                       body: BsCardBody(
                         children: [
                           BsCardTitle('Primary Card'),
@@ -217,11 +253,10 @@ class CardShowcase extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Dark Variant
                   BsCol(
-                    config: const BsColConfig(xs: 12, md: 4),
-                    child: const BsCard(
-                      variant: BsCardVariant.dark,
+                    config: BsColConfig(xs: 12, md: 4),
+                    child: BsCard(
+                      variant: BsVariant.dark,
                       body: BsCardBody(
                         children: [
                           BsCardTitle('Dark Card'),
@@ -230,11 +265,10 @@ class CardShowcase extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Danger Border Variant
                   BsCol(
-                    config: const BsColConfig(xs: 12, md: 4),
-                    child: const BsCard(
-                      borderVariant: BsCardVariant.danger,
+                    config: BsColConfig(xs: 12, md: 4),
+                    child: BsCard(
+                      borderVariant: BsVariant.danger,
                       body: BsCardBody(
                         children: [
                           BsCardTitle('Danger Border Card'),
@@ -250,16 +284,14 @@ class CardShowcase extends StatelessWidget {
             // 7. Card Groups
             _Section(
               title: 'Card Groups',
-              description: 'Use card groups to render cards as a single, attached element with equal width and height columns.',
+              description: 'Attached list of cards forming a single, unified container layout.',
               child: const BsCardGroup(
                 children: [
                   BsCard(
                     body: BsCardBody(
                       children: [
                         BsCardTitle('Card 1'),
-                        Text(
-                          'This is a wider card with supporting text below as a natural lead-in to additional content.',
-                        ),
+                        Text('This is a wider card with supporting text below.'),
                       ],
                     ),
                   ),
@@ -267,9 +299,7 @@ class CardShowcase extends StatelessWidget {
                     body: BsCardBody(
                       children: [
                         BsCardTitle('Card 2'),
-                        Text(
-                          'This card has supporting text below as a natural lead-in to additional content.',
-                        ),
+                        Text('This card has supporting text below as a lead-in.'),
                       ],
                     ),
                   ),
@@ -277,9 +307,7 @@ class CardShowcase extends StatelessWidget {
                     body: BsCardBody(
                       children: [
                         BsCardTitle('Card 3'),
-                        Text(
-                          'This is a wider card with supporting text below as a natural lead-in to additional content.',
-                        ),
+                        Text('This is a wider card with supporting text below.'),
                       ],
                     ),
                   ),
@@ -294,11 +322,7 @@ class CardShowcase extends StatelessWidget {
 }
 
 class _Section extends StatelessWidget {
-  const _Section({
-    required this.title,
-    this.description,
-    required this.child,
-  });
+  const _Section({required this.title, this.description, required this.child});
 
   final String title;
   final String? description;
@@ -311,16 +335,23 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-        ).pb(8),
-        if (description != null)
-          Text(description!).pb(16),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+        ).pb(4),
+        if (description != null) Text(description!).pb(16),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
+            color: context.bs.bodyBg,
             border: Border.all(color: context.bs.border),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
           child: child,
         ).pb(32),

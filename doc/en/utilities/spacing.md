@@ -35,19 +35,42 @@ Container(color: Colors.red, child: Text('Alert'))
 
 ## Available Methods
 
-### Standard Levels (1-5)
+### Standard Levels (0-5)
 
-These methods use the predefined `BsSpacing` tokens:
+These methods use the predefined `BsSpacing` tokens (including level 0 for 0.0 value):
 
 | Type | Padding Methods | Margin Methods | Bootstrap Equivalent |
 | :--- | :--- | :--- | :--- |
-| **Uniform** | `.p1()` to `.p5()` | `.m1()` to `.m5()` | `p-*` / `m-*` |
-| **Horizontal** | `.px1()` to `.px5()` | `.mx1()` to `.mx5()` | `px-*` / `mx-*` |
-| **Vertical** | `.py1()` to `.py5()` | `.my1()` to `.my5()` | `py-*` / `my-*` |
-| **Top** | `.pt1()` to `.pt5()` | `.mt1()` to `.mt5()` | `pt-*` / `mt-*` |
-| **Bottom** | `.pb1()` to `.pb5()` | `.mb1()` to `.mb5()` | `pb-*` / `mb-*` |
-| **Start (Left)** | `.ps1()` to `.ps5()` | `.ms1()` to `.ms5()` | `ps-*` / `ms-*` |
-| **End (Right)** | `.pe1()` to `.pe5()` | `.me1()` to `.me5()` | `pe-*` / `me-*` |
+| **Uniform** | `.p0()` to `.p5()` | `.m0()` to `.m5()` | `p-*` / `m-*` |
+| **Horizontal** | `.px0()` to `.px5()` | `.mx0()` to `.mx5()` | `px-*` / `mx-*` |
+| **Vertical** | `.py0()` to `.py5()` | `.my0()` to `.my5()` | `py-*` / `my-*` |
+| **Top** | `.pt0()` to `.pt5()` | `.mt0()` to `.mt5()` | `pt-*` / `mt-*` |
+| **Bottom** | `.pb0()` to `.pb5()` | `.mb0()` to `.mb5()` | `pb-*` / `mb-*` |
+| **Start (Left)** | `.ps0()` to `.ps5()` | `.ms0()` to `.ms5()` | `ps-*` / `ms-*` |
+| **End (Right)** | `.pe0()` to `.pe5()` | `.me0()` to `.me5()` | `pe-*` / `me-*` |
+
+---
+
+### Auto Margins
+
+Corresponds to the Bootstrap classes `.m-auto`, `.mx-auto`, etc. These are perfect for aligning widgets inside parent Flexbox (Row, Column) or Stack layouts.
+
+| Method | Description | Equivalent |
+| :--- | :--- | :--- |
+| `.mAuto()` | Centers the widget horizontally and vertically. | `m-auto` |
+| `.mxAuto()` | Centers the widget horizontally. | `mx-auto` |
+| `.myAuto()` | Centers the widget vertically. | `my-auto` |
+| `.msAuto()` | Aligns the widget to the end (right) of parent (Auto-Margin Start). | `ms-auto` |
+| `.meAuto()` | Aligns the widget to the start (left) of parent (Auto-Margin End). | `me-auto` |
+| `.mtAuto()` | Aligns the widget to the bottom of parent. | `mt-auto` |
+| `.mbAuto()` | Aligns the widget to the top of parent. | `mb-auto` |
+
+```dart
+// Pushes the widget to the far right inside a Row layout
+Text('Aligned Right').msAuto();
+```
+
+---
 
 ### Custom Values
 

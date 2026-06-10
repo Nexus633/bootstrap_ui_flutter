@@ -296,7 +296,7 @@ class _BsInputState extends FormFieldState<String> {
     );
 
     // Container for Focus Ring and Visual Bounds
-    Widget inputWidget = AnimatedContainer(
+    final Widget inputWidget = AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       constraints: BoxConstraints(minHeight: minHeight),
       decoration: BoxDecoration(
