@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 
-class HeadingShowcase extends StatelessWidget {
-  const HeadingShowcase({super.key});
+class TypographyShowcase extends StatelessWidget {
+  const TypographyShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class HeadingShowcase extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Headings',
+                    'Typography',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w800,
@@ -45,7 +45,7 @@ class HeadingShowcase extends StatelessWidget {
                     ),
                   ).pb2(),
                   Text(
-                    'All HTML headings, h1 through h6, are available. BsHeading is designed to match Bootstrap\'s default typography hierarchy, line height, font weights, and spacing.',
+                    'Documentation and examples for Bootstrap typography, including headings, blockquotes, inline code, and more.',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white.withValues(alpha: 0.9),
@@ -59,7 +59,8 @@ class HeadingShowcase extends StatelessWidget {
             // 1. Standard Headings
             _Section(
               title: 'Bootstrap Headings',
-              description: 'Standard headings from h1 to h6. By default, headings include a bottom margin of 0.5rem (8px).',
+              description:
+                  'Standard headings from h1 to h6. By default, headings include a bottom margin of 0.5rem (8px).',
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -76,11 +77,12 @@ class HeadingShowcase extends StatelessWidget {
             // 2. Customization Options
             _Section(
               title: 'Heading Customization',
-              description: 'Modify headings with alignment, colors, or remove the default bottom margin.',
+              description:
+                  'Modify headings with alignment, colors, or remove the default bottom margin.',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const BsHeading(
+                  BsHeading(
                     'Centered Heading',
                     level: BsHeadingLevel.h2,
                     textAlign: TextAlign.center,
@@ -111,6 +113,61 @@ class HeadingShowcase extends StatelessWidget {
                 ],
               ),
             ),
+
+            // 3. Blockquote
+            _Section(
+              title: 'Blockquotes',
+              description:
+                  'For quoting blocks of content from another source within your document. Use BsBlockquote to quote content and add a footer citation.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const BsBlockquote(
+                    child: Text(
+                      'A well-known quote, contained in a blockquote element.',
+                    ),
+                  ).pb3(),
+                  const BsBlockquote(
+                    footer: Text('Someone famous in Source Title'),
+                    child: Text(
+                      'A well-known quote, contained in a blockquote element.',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // 4. Inline Code
+            _Section(
+              title: 'Inline Code',
+              description: 'Wrap inline snippets of code with BsCode.',
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  const Text('For example, '),
+                  const BsCode('<section>'),
+                  const Text(' should be wrapped as inline.'),
+                ],
+              ),
+            ),
+
+            // 5. User Input (KBD)
+            _Section(
+              title: 'User Input',
+              description:
+                  'Use BsKbd to indicate input that is typically entered via keyboard.',
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  const Text('To switch directories, type '),
+                  const BsKbd('cd'),
+                  const Text(' followed by the name of the directory.'),
+                  const SizedBox(width: 8),
+                  const Text('To edit settings, press '),
+                  const BsKbd('ctrl + ,'),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -132,7 +189,11 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.5,
+          ),
         ).pb(4),
         if (description != null) Text(description!).pb(16),
         Container(

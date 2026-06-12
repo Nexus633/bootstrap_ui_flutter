@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../tokens/spacing.dart';
+import '../../tokens/transitions.dart';
 
 /// An InheritedWidget to share carousel-specific state down to captions or other children.
 class _BsCarouselScope extends InheritedWidget {
@@ -308,7 +309,7 @@ class _BsCarouselState extends State<BsCarousel> {
       // In a normal PageView, animate smoothly
       _pageController.animateToPage(
         index,
-        duration: const Duration(milliseconds: 600),
+        duration: BsTransitions.carouselDuration,
         curve: Curves.easeInOut,
       );
     }
@@ -384,7 +385,7 @@ class _BsCarouselState extends State<BsCarousel> {
     if (widget.fade) {
       // Fade Transition Mode
       final Widget currentSlide = AnimatedSwitcher(
-        duration: const Duration(milliseconds: 600),
+        duration: BsTransitions.carouselDuration,
         switchInCurve: Curves.easeInOut,
         switchOutCurve: Curves.easeInOut,
         transitionBuilder: (child, animation) {
@@ -441,7 +442,7 @@ class _BsCarouselState extends State<BsCarousel> {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
+                duration: BsTransitions.modalDuration,
                 curve: Curves.easeInOut,
                 // Premium micro-animation: width stretches when active (similar to modern web sliders)
                 width: isActive ? 30.0 : 16.0,
@@ -505,7 +506,7 @@ class _CarouselControlButtonState extends State<_CarouselControlButton> {
         onTap: widget.onTap,
         behavior: HitTestBehavior.opaque,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
+          duration: BsTransitions.baseDuration,
           width: 60,
           height: double.infinity,
           // Premium: subtle hover background gradient
@@ -522,10 +523,10 @@ class _CarouselControlButtonState extends State<_CarouselControlButton> {
           alignment: Alignment.center,
           child: AnimatedScale(
             scale: _isHovered ? 1.15 : 1.0,
-            duration: const Duration(milliseconds: 150),
+            duration: BsTransitions.fadeDuration,
             child: AnimatedOpacity(
               opacity: _isHovered ? 0.9 : 0.5,
-              duration: const Duration(milliseconds: 150),
+              duration: BsTransitions.fadeDuration,
               child: Icon(
                 widget.icon,
                 color: widget.color,

@@ -103,11 +103,17 @@ class BsInputGroup extends StatelessWidget {
 ///
 /// Implements `.input-group-text` from Bootstrap 5.
 class BsInputGroupText extends StatelessWidget {
-  /// Creates a [BsInputGroupText].
-  const BsInputGroupText(this.text, {super.key});
+  /// Creates a [BsInputGroupText] displaying a string.
+  const BsInputGroupText(this.text, {super.key}) : child = null;
+
+  /// Creates a [BsInputGroupText] containing an arbitrary widget (like a Checkbox).
+  const BsInputGroupText.widget({super.key, required this.child}) : text = null;
 
   /// The text to display.
-  final String text;
+  final String? text;
+
+  /// The widget to display.
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -161,10 +167,10 @@ class BsInputGroupText extends StatelessWidget {
         border: Border.all(color: theme.border, width: 1.0),
         borderRadius: borderRadius,
       ),
-      child: Text(
-        text,
+      child: child ?? (text != null ? Text(
+        text!,
         style: TextStyle(color: theme.bodyText, fontSize: fontSize),
-      ),
+      ) : const SizedBox.shrink()),
     );
   }
 }

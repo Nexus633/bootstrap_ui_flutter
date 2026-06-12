@@ -2,39 +2,71 @@ import 'package:flutter/material.dart';
 
 /// Extension on [Widget] to provide alignment utilities.
 extension BsAlignmentExtension on Widget {
+  // ─── Breakpoint Helper ─────────────────────────────────────────────────────
+
+  Widget _apply(double? breakpoint, Widget Function(Widget) wrap) {
+    if (breakpoint == null) return wrap(this);
+    return Builder(
+      builder: (context) {
+        if (MediaQuery.sizeOf(context).width >= breakpoint) {
+          return wrap(this);
+        }
+        return this;
+      },
+    );
+  }
+
   /// Aligns the widget within its parent using the given [alignment].
-  Widget align(AlignmentGeometry alignment) => Align(
-        alignment: alignment,
-        child: this,
+  Widget align(AlignmentGeometry alignment, [double? breakpoint]) => _apply(
+        breakpoint,
+        (w) => Align(
+          alignment: alignment,
+          child: w,
+        ),
       );
 
   /// Centers the widget within its parent.
-  Widget center() => Center(
-        child: this,
+  Widget center([double? breakpoint]) => _apply(
+        breakpoint,
+        (w) => Center(
+          child: w,
+        ),
       );
 
   /// Aligns the widget to the start (left) of its parent.
-  Widget alignStart() => Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: this,
+  Widget alignStart([double? breakpoint]) => _apply(
+        breakpoint,
+        (w) => Align(
+          alignment: AlignmentDirectional.centerStart,
+          child: w,
+        ),
       );
 
   /// Aligns the widget to the end (right) of its parent.
-  Widget alignEnd() => Align(
-        alignment: AlignmentDirectional.centerEnd,
-        child: this,
+  Widget alignEnd([double? breakpoint]) => _apply(
+        breakpoint,
+        (w) => Align(
+          alignment: AlignmentDirectional.centerEnd,
+          child: w,
+        ),
       );
 
   /// Aligns the widget to the top center of its parent.
-  Widget alignTop() => Align(
-        alignment: Alignment.topCenter,
-        child: this,
+  Widget alignTop([double? breakpoint]) => _apply(
+        breakpoint,
+        (w) => Align(
+          alignment: Alignment.topCenter,
+          child: w,
+        ),
       );
 
   /// Aligns the widget to the bottom center of its parent.
-  Widget alignBottom() => Align(
-        alignment: Alignment.bottomCenter,
-        child: this,
+  Widget alignBottom([double? breakpoint]) => _apply(
+        breakpoint,
+        (w) => Align(
+          alignment: Alignment.bottomCenter,
+          child: w,
+        ),
       );
 }
 

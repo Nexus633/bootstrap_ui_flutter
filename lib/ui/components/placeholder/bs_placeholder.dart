@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/transitions.dart';
 
 // ─── BsPlaceholderAnimation ──────────────────────────────────────────────────
 
@@ -55,7 +56,7 @@ class BsPlaceholderContainer extends StatefulWidget {
     super.key,
     required this.child,
     this.animation = BsPlaceholderAnimation.glow,
-    this.duration = const Duration(milliseconds: 2000),
+    this.duration = BsTransitions.placeholderDuration,
   });
 
   /// The child subtree that contains [BsPlaceholder] widgets.

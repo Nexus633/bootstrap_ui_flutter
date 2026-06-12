@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/colors.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
 import '../../tokens/spacing.dart';
 import '../../tokens/typography.dart';
+import '../../tokens/z_index.dart';
 
 // ─── Inherited Contexts ───────────────────────────────────────────────────────
 
@@ -468,29 +471,25 @@ class BsDropdownMenu extends StatelessWidget {
           maxWidth: maxWidth,
         ),
         child: IntrinsicWidth(
-          child: Container(
-            padding: padding,
-            decoration: BoxDecoration(
-              color: bg,
-              borderRadius: BorderRadius.circular(6.0),
-              border: Border.all(color: borderCol, width: 1.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.15),
-                  blurRadius: 10.0,
-                  spreadRadius: 0.0,
-                  offset: const Offset(0.0, 5.0),
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(5.0),
-              child: SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: children,
+          child: Semantics(
+            sortKey: const OrdinalSortKey(BsZIndex.dropdown * 1.0),
+            child: Container(
+              padding: padding,
+              decoration: BoxDecoration(
+                color: bg,
+                borderRadius: BorderRadius.circular(6.0),
+                border: Border.all(color: borderCol, width: 1.0),
+                boxShadow: BsShadows.regular,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5.0),
+                child: SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: children,
+                  ),
                 ),
               ),
             ),

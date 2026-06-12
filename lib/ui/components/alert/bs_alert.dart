@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/transitions.dart';
 import '../../utilities/size_extension.dart';
 import '../../utilities/spacing_extension.dart';
 import '../button/bs_close_button.dart';
@@ -22,8 +23,8 @@ class BsAlert extends StatefulWidget {
     this.dismissible = false,
     this.onClose,
     this.animation = BsAlertAnimation.fade,
-    this.animationInDuration = const Duration(milliseconds: 200),
-    this.animationOutDuration = const Duration(milliseconds: 200),
+    this.animationInDuration = BsTransitions.baseDuration,
+    this.animationOutDuration = BsTransitions.baseDuration,
     this.autoCloseDuration,
   });
 

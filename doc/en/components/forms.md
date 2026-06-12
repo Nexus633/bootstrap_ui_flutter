@@ -106,11 +106,38 @@ BsInputGroup(
     BsInput(placeholder: 'Username').expanded(), // The input itself
   ],
 )
+
+// Addons can also be widgets, such as checkboxes:
+BsInputGroup(
+  children: [
+    BsInputGroupText.widget(child: BsCheckbox(initialValue: true)),
+    BsInput(placeholder: 'Checkbox within group...').expanded(),
+  ],
+)
+```
+
+### 7. Floating Labels (`.form-floating`)
+
+Create beautifully simple form labels that float over your input fields using the `floatingLabel` parameter on `BsInput` or `BsSelect`.
+
+```dart
+BsInput(
+  floatingLabel: 'Email address',
+  placeholder: 'name@example.com',
+)
+
+BsSelect<String>(
+  floatingLabel: 'Works with selects',
+  placeholder: const Text('Open this select menu'),
+  items: const [
+    DropdownMenuItem(value: '1', child: Text('One')),
+  ],
+)
 ```
 
 ## Validation & State
 
-All inputs support a `validationState` property for explicit state management (e.g., when validating via an external API without using a Flutter `Form`).
+All inputs support a `validationState` property for explicit state management (e.g., when validating via an external API without using a Flutter `Form`). Furthermore, inputs natively display Bootstrap's custom `BsShadows.focusRing` (in red or green) when focused in a validated state.
 
 ```dart
 BsInput(
@@ -118,4 +145,20 @@ BsInput(
 )
 ```
 
-If used inside a `Form`, simply use the `validator` property. The component will automatically switch to the `invalid` state and display a `BsFormFeedback` widget in red if the validator returns an error string.
+### The `.was-validated` approach (`BsValidatedForm`)
+
+In traditional Bootstrap, applying the `.was-validated` class to a `<form>` triggers valid (green) or invalid (red) feedback for all nested fields based on their HTML5 validation state.
+To replicate this exact behavior in Flutter, wrap your `Form` in a `BsValidatedForm` widget:
+
+```dart
+BsValidatedForm(
+  wasValidated: _hasSubmitted, // Set to true when the user submits the form
+  child: Form(
+    key: _formKey,
+    child: BsInput(
+      validator: (val) => val == null || val.isEmpty ? 'Error' : null,
+    ),
+  ),
+)
+```
+When `wasValidated` is `true`, any field without a validator error will automatically render in the green, valid state.

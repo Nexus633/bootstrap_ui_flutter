@@ -3,6 +3,7 @@ import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
 import '../../utilities/spacing_extension.dart';
 import 'bs_feedback.dart';
+import 'bs_validated_form.dart';
 
 /// A Bootstrap-style range slider component.
 ///
@@ -81,11 +82,17 @@ class _BsRangeState extends FormFieldState<double> {
   Widget _buildField() {
     final theme = context.bs;
     final double currentValue = value ?? widget.min;
+    
+    final bool wasValidated = BsValidatedForm.of(context);
 
     // Resolve Validation State
     BsValidationState currentState = widget.validationState ?? BsValidationState.none;
-    if (widget.validationState == null && hasError) {
-      currentState = BsValidationState.invalid;
+    if (widget.validationState == null) {
+      if (hasError) {
+        currentState = BsValidationState.invalid;
+      } else if (wasValidated) {
+        currentState = BsValidationState.valid;
+      }
     }
     
     final bool isInvalid = currentState == BsValidationState.invalid;

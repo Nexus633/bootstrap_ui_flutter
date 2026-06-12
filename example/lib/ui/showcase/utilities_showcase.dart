@@ -59,7 +59,8 @@ class UtilitiesShowcase extends StatelessWidget {
             // 1. Borders & Rounded Section (NEW!)
             _Section(
               title: 'Borders & Rounded Utilities',
-              description: 'Manage borders, side-specific borders, border colors, and border-radius corners.',
+              description:
+                  'Manage borders, side-specific borders, border colors, and border-radius corners.',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -70,51 +71,82 @@ class UtilitiesShowcase extends StatelessWidget {
                     children: [
                       _BorderBox(
                         label: 'Full Border',
-                        child: SizedBox(width: 80, height: 60).border(color: theme.emphasisColor.withValues(alpha: 0.3)),
+                        child: SizedBox(width: 80, height: 60).border(
+                          color: theme.emphasisColor.withValues(alpha: 0.3),
+                        ),
                       ),
                       _BorderBox(
                         label: 'Border Top',
-                        child: SizedBox(width: 80, height: 60).borderTop(color: theme.emphasisColor.withValues(alpha: 0.3), width: 3.0),
+                        child: SizedBox(width: 80, height: 60).borderTop(
+                          color: theme.emphasisColor.withValues(alpha: 0.3),
+                          width: 3.0,
+                        ),
                       ),
                       _BorderBox(
                         label: 'Border Bottom',
-                        child: SizedBox(width: 80, height: 60).borderBottom(color: theme.emphasisColor.withValues(alpha: 0.3), width: 3.0),
+                        child: SizedBox(width: 80, height: 60).borderBottom(
+                          color: theme.emphasisColor.withValues(alpha: 0.3),
+                          width: 3.0,
+                        ),
                       ),
                       _BorderBox(
                         label: 'Border Start',
-                        child: SizedBox(width: 80, height: 60).borderStart(color: theme.emphasisColor.withValues(alpha: 0.3), width: 3.0),
+                        child: SizedBox(width: 80, height: 60).borderStart(
+                          color: theme.emphasisColor.withValues(alpha: 0.3),
+                          width: 3.0,
+                        ),
                       ),
                       _BorderBox(
                         label: 'Border End',
-                        child: SizedBox(width: 80, height: 60).borderEnd(color: theme.emphasisColor.withValues(alpha: 0.3), width: 3.0),
+                        child: SizedBox(width: 80, height: 60).borderEnd(
+                          color: theme.emphasisColor.withValues(alpha: 0.3),
+                          width: 3.0,
+                        ),
                       ),
                     ],
                   ).pb4(),
 
-                  const Text('Border Colors (borderVariant):').fwBold().fs5().pb3(),
+                  const Text(
+                    'Border Colors (borderVariant):',
+                  ).fwBold().fs5().pb3(),
                   Wrap(
                     spacing: 16,
                     runSpacing: 16,
                     children: [
                       _BorderBox(
                         label: 'Primary',
-                        child: const SizedBox(width: 80, height: 60).borderVariant(context, BsVariant.primary, width: 2.0),
+                        child: const SizedBox(
+                          width: 80,
+                          height: 60,
+                        ).borderVariant(context, BsVariant.primary, width: 2.0),
                       ),
                       _BorderBox(
                         label: 'Success',
-                        child: const SizedBox(width: 80, height: 60).borderVariant(context, BsVariant.success, width: 2.0),
+                        child: const SizedBox(
+                          width: 80,
+                          height: 60,
+                        ).borderVariant(context, BsVariant.success, width: 2.0),
                       ),
                       _BorderBox(
                         label: 'Danger',
-                        child: const SizedBox(width: 80, height: 60).borderVariant(context, BsVariant.danger, width: 2.0),
+                        child: const SizedBox(
+                          width: 80,
+                          height: 60,
+                        ).borderVariant(context, BsVariant.danger, width: 2.0),
                       ),
                       _BorderBox(
                         label: 'Warning',
-                        child: const SizedBox(width: 80, height: 60).borderVariant(context, BsVariant.warning, width: 2.0),
+                        child: const SizedBox(
+                          width: 80,
+                          height: 60,
+                        ).borderVariant(context, BsVariant.warning, width: 2.0),
                       ),
                       _BorderBox(
                         label: 'Dark',
-                        child: const SizedBox(width: 80, height: 60).borderVariant(context, BsVariant.dark, width: 2.0),
+                        child: const SizedBox(
+                          width: 80,
+                          height: 60,
+                        ).borderVariant(context, BsVariant.dark, width: 2.0),
                       ),
                     ],
                   ).pb4(),
@@ -126,23 +158,43 @@ class UtilitiesShowcase extends StatelessWidget {
                     children: [
                       _BorderBox(
                         label: 'rounded-1 (4px)',
-                        child: Container(width: 80, height: 60, color: theme.primary).rounded1(),
+                        child: Container(
+                          width: 80,
+                          height: 60,
+                          color: theme.primary,
+                        ).rounded1(),
                       ),
                       _BorderBox(
                         label: 'rounded-3 (8px)',
-                        child: Container(width: 80, height: 60, color: theme.primary).rounded3(),
+                        child: Container(
+                          width: 80,
+                          height: 60,
+                          color: theme.primary,
+                        ).rounded3(),
                       ),
                       _BorderBox(
                         label: 'rounded-5 (32px)',
-                        child: Container(width: 80, height: 60, color: theme.primary).rounded5(),
+                        child: Container(
+                          width: 80,
+                          height: 60,
+                          color: theme.primary,
+                        ).rounded5(),
                       ),
                       _BorderBox(
                         label: 'rounded-pill',
-                        child: Container(width: 100, height: 50, color: theme.primary).roundedPill(),
+                        child: Container(
+                          width: 100,
+                          height: 50,
+                          color: theme.primary,
+                        ).roundedPill(),
                       ),
                       _BorderBox(
                         label: 'rounded-circle',
-                        child: Container(width: 60, height: 60, color: theme.primary).roundedCircle(),
+                        child: Container(
+                          width: 60,
+                          height: 60,
+                          color: theme.primary,
+                        ).roundedCircle(),
                       ),
                     ],
                   ),
@@ -153,43 +205,72 @@ class UtilitiesShowcase extends StatelessWidget {
             // 2. Spacing Section
             _Section(
               title: 'Spacing Utilities',
-              description: 'Padding (p*) and Margin (m*) utilities. Level 0-5 and auto margins.',
+              description:
+                  'Padding (p*) and Margin (m*) utilities. Level 0-5 and auto margins.',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Padding Levels (Outer container padding):').fwBold().fs5().pb3(),
+                  const Text(
+                    'Padding Levels (Outer container padding):',
+                  ).fwBold().fs5().pb3(),
                   Wrap(
                     spacing: 16,
                     runSpacing: 16,
                     children: [
                       _SpacingBox(
                         label: 'p0',
-                        paddingWidget: Container(color: theme.primary, width: 30, height: 30).p0(),
+                        paddingWidget: Container(
+                          color: theme.primary,
+                          width: 30,
+                          height: 30,
+                        ).p0(),
                       ),
                       _SpacingBox(
                         label: 'p1',
-                        paddingWidget: Container(color: theme.primary, width: 30, height: 30).p1(),
+                        paddingWidget: Container(
+                          color: theme.primary,
+                          width: 30,
+                          height: 30,
+                        ).p1(),
                       ),
                       _SpacingBox(
                         label: 'p2',
-                        paddingWidget: Container(color: theme.primary, width: 30, height: 30).p2(),
+                        paddingWidget: Container(
+                          color: theme.primary,
+                          width: 30,
+                          height: 30,
+                        ).p2(),
                       ),
                       _SpacingBox(
                         label: 'p3',
-                        paddingWidget: Container(color: theme.primary, width: 30, height: 30).p3(),
+                        paddingWidget: Container(
+                          color: theme.primary,
+                          width: 30,
+                          height: 30,
+                        ).p3(),
                       ),
                       _SpacingBox(
                         label: 'p4',
-                        paddingWidget: Container(color: theme.primary, width: 30, height: 30).p4(),
+                        paddingWidget: Container(
+                          color: theme.primary,
+                          width: 30,
+                          height: 30,
+                        ).p4(),
                       ),
                       _SpacingBox(
                         label: 'p5',
-                        paddingWidget: Container(color: theme.primary, width: 30, height: 30).p5(),
+                        paddingWidget: Container(
+                          color: theme.primary,
+                          width: 30,
+                          height: 30,
+                        ).p5(),
                       ),
                     ],
                   ).pb4(),
 
-                  const Text('Auto Margin Layout (Push-alignment in Stack/Flex):').fwBold().fs5().pb3(),
+                  const Text(
+                    'Auto Margin Layout (Push-alignment in Stack/Flex):',
+                  ).fwBold().fs5().pb3(),
                   Container(
                     width: double.infinity,
                     height: 120,
@@ -206,7 +287,13 @@ class UtilitiesShowcase extends StatelessWidget {
                           height: 40,
                           color: theme.primary,
                           child: const Center(
-                            child: Text('mxAuto', style: TextStyle(color: Colors.white, fontSize: 12)),
+                            child: Text(
+                              'mxAuto',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
                           ),
                         ).mxAuto(),
                         // Left Aligned via meAuto()
@@ -215,7 +302,13 @@ class UtilitiesShowcase extends StatelessWidget {
                           height: 40,
                           color: theme.danger,
                           child: const Center(
-                            child: Text('meAuto', style: TextStyle(color: Colors.white, fontSize: 12)),
+                            child: Text(
+                              'meAuto',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
                           ),
                         ).meAuto(),
                         // Right Aligned via msAuto()
@@ -224,7 +317,13 @@ class UtilitiesShowcase extends StatelessWidget {
                           height: 40,
                           color: theme.success,
                           child: const Center(
-                            child: Text('msAuto', style: TextStyle(color: Colors.white, fontSize: 12)),
+                            child: Text(
+                              'msAuto',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
                           ),
                         ).msAuto(),
                       ],
@@ -237,7 +336,8 @@ class UtilitiesShowcase extends StatelessWidget {
             // 3. Sizing Section
             _Section(
               title: 'Sizing & Viewport Utilities',
-              description: 'Control width/height percentages and viewport dimensions (vw, vh).',
+              description:
+                  'Control width/height percentages and viewport dimensions (vw, vh).',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -253,10 +353,58 @@ class UtilitiesShowcase extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(height: 24, color: theme.info, child: const Center(child: Text('w25', style: TextStyle(color: Colors.white, fontSize: 11)))).w25().pb2(),
-                        Container(height: 24, color: theme.info, child: const Center(child: Text('w50', style: TextStyle(color: Colors.white, fontSize: 11)))).w50().pb2(),
-                        Container(height: 24, color: theme.info, child: const Center(child: Text('w75', style: TextStyle(color: Colors.white, fontSize: 11)))).w75().pb2(),
-                        Container(height: 24, color: theme.info, child: const Center(child: Text('w100', style: TextStyle(color: Colors.white, fontSize: 11)))).w100(),
+                        Container(
+                          height: 24,
+                          color: theme.info,
+                          child: const Center(
+                            child: Text(
+                              'w25',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
+                              ),
+                            ),
+                          ),
+                        ).w25().pb2(),
+                        Container(
+                          height: 24,
+                          color: theme.info,
+                          child: const Center(
+                            child: Text(
+                              'w50',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
+                              ),
+                            ),
+                          ),
+                        ).w50().pb2(),
+                        Container(
+                          height: 24,
+                          color: theme.info,
+                          child: const Center(
+                            child: Text(
+                              'w75',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
+                              ),
+                            ),
+                          ),
+                        ).w75().pb2(),
+                        Container(
+                          height: 24,
+                          color: theme.info,
+                          child: const Center(
+                            child: Text(
+                              'w100',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
+                              ),
+                            ),
+                          ),
+                        ).w100(),
                       ],
                     ),
                   ).pb4(),
@@ -276,10 +424,15 @@ class UtilitiesShowcase extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   color: theme.bodyBg,
                                   borderRadius: BorderRadius.circular(16),
-                                  border: Border.all(color: theme.border, width: 1.5),
+                                  border: Border.all(
+                                    color: theme.border,
+                                    width: 1.5,
+                                  ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withValues(alpha: 0.3),
+                                      color: Colors.black.withValues(
+                                        alpha: 0.3,
+                                      ),
                                       blurRadius: 24,
                                       offset: const Offset(0, 10),
                                     ),
@@ -294,13 +447,14 @@ class UtilitiesShowcase extends StatelessWidget {
                                       size: 48,
                                       color: theme.primary,
                                     ).pb3(),
-                                    const Text('50vh Viewport Height')
-                                        .fwBold()
-                                        .fs4()
-                                        .pb2(),
+                                    const Text(
+                                      '50vh Viewport Height',
+                                    ).fwBold().fs4().pb2(),
                                     Text(
                                       'This container is exactly 50vh tall!',
-                                      style: TextStyle(color: theme.bodyTextSecondary),
+                                      style: TextStyle(
+                                        color: theme.bodyTextSecondary,
+                                      ),
                                     ).pb4(),
                                     BsButton(
                                       label: 'Close Demo',
@@ -323,11 +477,14 @@ class UtilitiesShowcase extends StatelessWidget {
             // 4. Text Utilities
             _Section(
               title: 'Text & Casing Utilities',
-              description: 'Font weights, styles, decoration, wrapping, and text transform operations.',
+              description:
+                  'Font weights, styles, decoration, wrapping, and text transform operations.',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Casing Transformations (NEW!):').fwBold().fs5().pb3(),
+                  const Text(
+                    'Casing Transformations (NEW!):',
+                  ).fwBold().fs5().pb3(),
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(16),
@@ -339,9 +496,15 @@ class UtilitiesShowcase extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('ORIGINAL: bootstrap ui flutter').fwBold().pb2(),
-                        const Text('bootstrap ui flutter').textUppercase().pb2(),
-                        const Text('BOOTSTRAP UI FLUTTER').textLowercase().pb2(),
+                        const Text(
+                          'ORIGINAL: bootstrap ui flutter',
+                        ).fwBold().pb2(),
+                        const Text(
+                          'bootstrap ui flutter',
+                        ).textUppercase().pb2(),
+                        const Text(
+                          'BOOTSTRAP UI FLUTTER',
+                        ).textLowercase().pb2(),
                         const Text('bootstrap ui flutter').textCapitalize(),
                       ],
                     ),
@@ -357,8 +520,9 @@ class UtilitiesShowcase extends StatelessWidget {
                             border: Border.all(color: theme.border),
                             borderRadius: BorderRadius.circular(6),
                           ),
-                          child: const Text('This text wraps automatically to multiple lines because it is configured with textWrap().')
-                              .textWrap(),
+                          child: const Text(
+                            'This text wraps automatically to multiple lines because it is configured with textWrap().',
+                          ).textWrap(),
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -370,14 +534,17 @@ class UtilitiesShowcase extends StatelessWidget {
                             borderRadius: BorderRadius.circular(6),
                           ),
                           clipBehavior: Clip.antiAlias,
-                          child: const Text('This text will not wrap and overflows textNowrap()')
-                              .textNowrap(),
+                          child: const Text(
+                            'This text will not wrap and overflows textNowrap()',
+                          ).textNowrap(),
                         ),
                       ),
                     ],
                   ).pb4(),
 
-                  const Text('Display Headings (display-1 to display-6):').fwBold().fs5().pb3(),
+                  const Text(
+                    'Display Headings (display-1 to display-6):',
+                  ).fwBold().fs5().pb3(),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -424,9 +591,96 @@ class UtilitiesShowcase extends StatelessWidget {
                     children: [
                       const Text('Italic text').fstItalic(),
                       const Text('Underlined text').textDecorationUnderline(),
-                      const Text('Line-through text').textDecorationLineThrough(),
-                      const Text('Underline Strike').textDecorationUnderline().textDecorationLineThrough(),
+                      const Text(
+                        'Line-through text',
+                      ).textDecorationLineThrough(),
+                      const Text(
+                        'Underline Strike',
+                      ).textDecorationUnderline().textDecorationLineThrough(),
                     ],
+                  ),
+                ],
+              ),
+            ),
+
+            // 5. Breakpoints & Responsive Utilities
+            _Section(
+              title: 'Responsive Breakpoint Utilities',
+              description:
+                  'Utilities that apply dynamically based on screen width.',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Display & Visibility:').fwBold().fs5().pb3(),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: theme.info.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: theme.info.withValues(alpha: 0.3),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Builder(
+                          builder: (context) {
+                            final width = MediaQuery.sizeOf(context).width;
+                            return Text(
+                              'Current Window Width: ${width.toStringAsFixed(0)}px',
+                              style: TextStyle(
+                                color: theme.info,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ).pb2();
+                          },
+                        ),
+                        const Text(
+                          'Resize window to see effects.',
+                        ).fwLight().pb2(),
+                        Row(
+                          children: [
+                            const Icon(Icons.phone_android).pe2(),
+                            const Text('Always Visible'),
+                          ],
+                        ).pb2(),
+                        Row(
+                          children: [
+                            const Icon(Icons.tablet).pe2(),
+                            Text(
+                              'Hidden on Medium (md) & Up',
+                              style: TextStyle(
+                                color: theme.danger,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ).dNone(BsBreakpoints.md).pb2(),
+                        Row(
+                          children: [
+                            const Icon(Icons.desktop_windows).pe2(),
+                            Text(
+                              'Visible ONLY on Large (lg) & Up',
+                              style: TextStyle(
+                                color: theme.success,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ).dBlock(BsBreakpoints.xxl).pb2(),
+                      ],
+                    ),
+                  ).pb4(),
+
+                  const Text('Responsive Spacing:').fwBold().fs5().pb3(),
+                  Container(
+                    color: theme.primary,
+                    child: const Text(
+                      'p1 on small, p5 on medium',
+                      style: TextStyle(color: Colors.white),
+                    ).p1().p5(BsBreakpoints.md),
                   ),
                 ],
               ),
@@ -452,7 +706,11 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.5,
+          ),
         ).pb(4),
         if (description != null) Text(description!).pb(16),
         Container(

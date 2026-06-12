@@ -7,16 +7,29 @@
 
 Zusätzlich zum Spacing bietet die Bibliothek weitere Extensions, um die UI-Entwicklung zu beschleunigen.
 
+## Breakpoint-Unterstützung
+
+Die meisten Utility-Extensions unterstützen einen optionalen `breakpoint`-Parameter vom Typ `double?` (z. B. über `BsBreakpoints`). Wenn dieser übergeben wird, wendet die Extension das Verhalten nur an, wenn die Bildschirmbreite mindestens dem Breakpoint entspricht (Mobile First).
+
+```dart
+// Erst ab mittleren Bildschirmen unsichtbar
+Text('Versteckt').dNone(BsBreakpoints.md);
+
+// Erst ab großen Bildschirmen zentriert
+Container().center(BsBreakpoints.lg);
+```
+
 ## Anzeige & Sichtbarkeit (Display)
 
 `BsDisplayExtension` kümmert sich um das Ein-/Ausblenden und die Transparenz.
 
 | Methode | Beschreibung |
 | :--- | :--- |
-| `.visible(bool)` | Wrapper für das `Visibility`-Widget. |
-| `.gone(bool)` | `Visibility` mit `maintainState: false`. |
-| `.dNone()` | Alias für `.gone(true)`. |
-| `.opacity(double)` | Wrapper für das `Opacity`-Widget. |
+| `.visible(bool, [double? breakpoint])` | Wrapper für das `Visibility`-Widget. |
+| `.gone(bool, [double? breakpoint])` | `Visibility` mit `maintainState: false`. |
+| `.dNone([double? breakpoint])` | Alias für `.gone(true)`. Versteckt das Element. |
+| `.dBlock([double? breakpoint])` | Alias für `.gone(false)`. Zeigt das Element an. |
+| `.opacity(double, [double? breakpoint])` | Wrapper für das `Opacity`-Widget. |
 
 ```dart
 Text('Versteckt').dNone();

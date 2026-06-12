@@ -88,5 +88,22 @@ void main() {
       // Feedback widget should be present
       expect(find.byType(BsFormFeedback), findsOneWidget);
     });
+
+    testWidgets('renders floating label correctly', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        buildTestableWidget(
+          BsInput(
+            floatingLabel: 'Email address',
+            placeholder: 'name@example.com',
+          ),
+        ),
+      );
+
+      // Label should be visible
+      expect(find.text('Email address'), findsOneWidget);
+      
+      // Hint text should be visible since it's floating
+      expect(find.byType(TextField), findsOneWidget);
+    });
   });
 }

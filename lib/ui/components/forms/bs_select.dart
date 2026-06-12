@@ -4,6 +4,7 @@ import '../../tokens/enums.dart';
 import '../../tokens/typography.dart';
 import 'bs_feedback.dart';
 import 'bs_input_group.dart';
+import 'bs_validated_form.dart';
 
 /// A Bootstrap-style select (dropdown) component.
 ///
@@ -17,6 +18,7 @@ class BsSelect<T> extends FormField<T> {
     T? value,
     this.size = BsInputSize.md,
     this.disabled = false,
+    this.floatingLabel,
     this.placeholder,
     this.onChanged,
     this.validationState,
@@ -40,6 +42,9 @@ class BsSelect<T> extends FormField<T> {
 
   /// Whether the select is disabled (grayed out, unclickable).
   final bool disabled;
+
+  /// The text for a Bootstrap 5 Floating Label (`.form-floating`).
+  final String? floatingLabel;
 
   /// The hint text to display when no value is selected.
   final Widget? placeholder;
@@ -86,11 +91,17 @@ class _BsSelectState<T> extends FormFieldState<T> {
   Widget _buildField() {
     final theme = context.bs;
 
+    final bool wasValidated = BsValidatedForm.of(context);
+
     // Resolve Validation State
     BsValidationState currentState =
         widget.validationState ?? BsValidationState.none;
-    if (widget.validationState == null && hasError) {
-      currentState = BsValidationState.invalid;
+    if (widget.validationState == null) {
+      if (hasError) {
+        currentState = BsValidationState.invalid;
+      } else if (wasValidated) {
+        currentState = BsValidationState.valid;
+      }
     }
 
     final bool isInvalid = currentState == BsValidationState.invalid;
@@ -158,6 +169,12 @@ class _BsSelectState<T> extends FormFieldState<T> {
       minHeight = 48.0; // <--- NEU
     }
 
+    final bool isFloating = widget.floatingLabel != null;
+    if (isFloating) {
+      minHeight = 58.0; // 3.5rem + 2px
+      padding = const EdgeInsets.only(top: 26.0, bottom: 6.0, left: 12.0, right: 36.0);
+    }
+
     final double baseRadius = effectiveSize == BsInputSize.sm
         ? 4.0
         : (effectiveSize == BsInputSize.lg ? 8.0 : 6.0);
@@ -200,33 +217,60 @@ class _BsSelectState<T> extends FormFieldState<T> {
               ]
             : null,
       ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<T>(
-          isDense: true,
-          value: value,
-          items: widget.items,
-          onChanged: widget.disabled
-              ? null
-              : (T? newValue) {
-                  didChange(newValue);
-                  if (widget.onChanged != null) widget.onChanged!(newValue);
-                },
-          focusNode: _focusNode,
-          hint: widget.placeholder,
-          style: TextStyle(
-            color: widget.disabled ? theme.bodyTextSecondary : theme.bodyText,
-            fontSize: fontSize,
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: [
+          DropdownButtonHideUnderline(
+            child: DropdownButton<T>(
+              isDense: true,
+              value: value,
+              items: widget.items,
+              onChanged: widget.disabled
+                  ? null
+                  : (T? newValue) {
+                      didChange(newValue);
+                      if (widget.onChanged != null) widget.onChanged!(newValue);
+                    },
+              focusNode: _focusNode,
+              hint: isFloating ? (value == null && _isFocused ? widget.placeholder : null) : widget.placeholder,
+              style: TextStyle(
+                color: widget.disabled ? theme.bodyTextSecondary : theme.bodyText,
+                fontSize: fontSize,
+              ),
+              icon: Icon(
+                Icons.expand_more,
+                color: indicatorColor,
+                size: iconSize,
+              ), // Custom chevron
+              iconSize: iconSize,
+              isExpanded: true, // Make sure it takes full width of the field
+              dropdownColor: theme.bodyBg, // Match dropdown background to theme
+              padding: padding, // Use padding here directly
+            ),
           ),
-          icon: Icon(
-            Icons.expand_more,
-            color: indicatorColor,
-            size: iconSize,
-          ), // Custom chevron
-          iconSize: iconSize,
-          isExpanded: true, // Make sure it takes full width of the field
-          dropdownColor: theme.bodyBg, // Match dropdown background to theme
-          padding: padding, // Use padding here directly
-        ),
+          if (isFloating)
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 100),
+              curve: Curves.easeInOut,
+              left: 12.0,
+              top: _isFocused || value != null ? 6.0 : (minHeight / 2 - fontSize / 2 - 2),
+              child: IgnorePointer(
+                child: AnimatedScale(
+                  duration: const Duration(milliseconds: 100),
+                  curve: Curves.easeInOut,
+                  scale: _isFocused || value != null ? 0.85 : 1.0,
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    widget.floatingLabel!,
+                    style: TextStyle(
+                      color: theme.bodyTextSecondary,
+                      fontSize: fontSize,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        ],
       ),
     );
 

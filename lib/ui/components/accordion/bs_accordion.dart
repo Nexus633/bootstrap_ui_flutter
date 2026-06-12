@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
+import '../../tokens/shadows.dart';
+import '../../tokens/transitions.dart';
 import '../../utilities/size_extension.dart';
 import '../../utilities/spacing_extension.dart';
 
@@ -145,7 +147,7 @@ class _BsAccordionState extends State<BsAccordion> {
 
 // ─── Internal Item Widget ─────────────────────────────────────────────────────
 
-class _BsAccordionItemWidget extends StatelessWidget {
+class _BsAccordionItemWidget extends StatefulWidget {
   const _BsAccordionItemWidget({
     required this.item,
     required this.isOpen,
@@ -165,61 +167,88 @@ class _BsAccordionItemWidget extends StatelessWidget {
   final MouseCursor? mouseCursor;
 
   @override
+  State<_BsAccordionItemWidget> createState() => _BsAccordionItemWidgetState();
+}
+
+class _BsAccordionItemWidgetState extends State<_BsAccordionItemWidget> {
+  bool _isFocused = false;
+  bool _isHovered = false;
+
+  @override
   Widget build(BuildContext context) {
     final bsTheme = context.bs;
 
-    // Bootstrap styling for active header
-    final headerBgColor = isOpen
-        ? activeColor.withValues(alpha: 0.1)
-        : Colors.transparent;
+    final headerBgColor = widget.isOpen
+        ? widget.activeColor.withValues(alpha: 0.1)
+        : (_isHovered || _isFocused ? bsTheme.bodyBgSecondary : Colors.transparent);
 
-    // IMPORTANT: When closed, we use bodyText (for contrast)
-    final headerTextColor = isOpen ? activeColor : bsTheme.bodyText;
+    final headerTextColor = widget.isOpen ? widget.activeColor : bsTheme.bodyText;
 
     return Container(
       decoration: BoxDecoration(
-        border: showBottomBorder ? Border(bottom: borderSide) : null,
+        border: widget.showBottomBorder ? Border(bottom: widget.borderSide) : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // ─── Header ─────────────────────────────────────────────────────────
-          Material(
-            color: headerBgColor,
-            child: InkWell(
-              mouseCursor: mouseCursor,
-              onTap: onToggle,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    item.title,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: headerTextColor,
-                    ),
-                  ).expanded(),
-                  AnimatedRotation(
-                    turns: isOpen ? -0.5 : 0.0,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                    child: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: headerTextColor,
-                    ),
+          Semantics(
+            button: true,
+            expanded: widget.isOpen,
+            child: FocusableActionDetector(
+              mouseCursor: widget.mouseCursor ?? SystemMouseCursors.click,
+              onShowHoverHighlight: (v) => setState(() => _isHovered = v),
+              onShowFocusHighlight: (v) => setState(() => _isFocused = v),
+              actions: {
+                ActivateIntent: CallbackAction<Intent>(
+                  onInvoke: (_) {
+                    widget.onToggle();
+                    return null;
+                  },
+                ),
+              },
+              child: GestureDetector(
+                onTap: widget.onToggle,
+                behavior: HitTestBehavior.opaque,
+                child: AnimatedContainer(
+                  duration: BsTransitions.baseDuration,
+                  decoration: BoxDecoration(
+                    color: headerBgColor,
+                    boxShadow: _isFocused ? BsShadows.focusRing(widget.activeColor) : null,
                   ),
-                ],
-              ).px(20).py(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        widget.item.title,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: headerTextColor,
+                        ),
+                      ).expanded(),
+                      AnimatedRotation(
+                        turns: widget.isOpen ? -0.5 : 0.0,
+                        duration: BsTransitions.baseDuration,
+                        curve: Curves.easeInOut,
+                        child: Icon(
+                          Icons.keyboard_arrow_down,
+                          color: headerTextColor,
+                        ),
+                      ),
+                    ],
+                  ).px(20).py(16),
+                ),
+              ),
             ),
           ),
 
           // ─── Body (Animated) ────────────────────────────────────────────────
           AnimatedSize(
-            duration: const Duration(milliseconds: 300),
+            duration: BsTransitions.baseDuration,
             curve: Curves.easeInOut,
             alignment: Alignment.topCenter,
-            child: (isOpen ? item.body.p(20) : const SizedBox.shrink()).w100(),
+            child: (widget.isOpen ? widget.item.body.p(20) : const SizedBox.shrink()).w100(),
           ),
         ],
       ),

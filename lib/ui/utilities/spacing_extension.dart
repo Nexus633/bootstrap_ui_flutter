@@ -3,587 +3,471 @@ import 'package:flutter/material.dart';
 import '../tokens/spacing.dart';
 
 /// Extension on [Widget] to provide Bootstrap-like spacing utilities.
-///
-/// This extension allows for concise application of padding and margin to widgets,
-/// mirroring Bootstrap's `p-*`, `m-*`, etc., utility classes.
-///
-/// Example:
-/// ```dart
-/// Text('Hello').p3();  // Applies standard padding level 3 (1rem/16px)
-/// Text('World').mb2(); // Applies standard margin-bottom level 2 (0.5rem/8px)
-/// ```
 extension BsSpacingExtension on Widget {
-  // ─── Padding Utilities (Dynamic Values) ──────────────────────────────────
+  // ─── Breakpoint Helper ─────────────────────────────────────────────────────
+
+  Widget _apply(double? breakpoint, Widget Function(Widget) wrap) {
+    if (breakpoint == null) return wrap(this);
+    return Builder(
+      builder: (context) {
+        if (MediaQuery.sizeOf(context).width >= breakpoint) {
+          return wrap(this);
+        }
+        return this;
+      },
+    );
+  }
 
   /// Applies custom [EdgeInsets] as padding.
   Widget padding(EdgeInsets value) => Padding(padding: value, child: this);
 
-  /// Applies uniform padding on all sides.
-  Widget p(double value) =>
-      Padding(padding: EdgeInsets.all(value), child: this);
+  // ─── Padding Utilities (Dynamic Values) ──────────────────────────────────
 
-  /// Applies horizontal padding (left and right).
-  Widget px(double value) => Padding(
-    padding: EdgeInsets.symmetric(horizontal: value),
-    child: this,
-  );
+  /// Applies all padding.
+  Widget p(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.all(value), child: w));
 
-  /// Applies vertical padding (top and bottom).
-  Widget py(double value) => Padding(
-    padding: EdgeInsets.symmetric(vertical: value),
-    child: this,
-  );
+  /// Applies horizontal padding.
+  Widget px(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.symmetric(horizontal: value), child: w));
 
-  /// Applies padding only to the top side.
-  Widget pt(double value) => Padding(
-    padding: EdgeInsets.only(top: value),
-    child: this,
-  );
+  /// Applies vertical padding.
+  Widget py(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.symmetric(vertical: value), child: w));
 
-  /// Applies padding only to the bottom side.
-  Widget pb(double value) => Padding(
-    padding: EdgeInsets.only(bottom: value),
-    child: this,
-  );
+  /// Applies top padding.
+  Widget pt(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.only(top: value), child: w));
 
-  /// Applies padding only to the start (left) side.
-  Widget ps(double value) => Padding(
-    padding: EdgeInsets.only(left: value),
-    child: this,
-  );
+  /// Applies bottom padding.
+  Widget pb(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.only(bottom: value), child: w));
 
-  /// Applies padding only to the end (right) side.
-  Widget pe(double value) => Padding(
-    padding: EdgeInsets.only(right: value),
-    child: this,
-  );
+  /// Applies left padding.
+  Widget ps(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.only(left: value), child: w));
 
-  // ─── Margin Utilities (Dynamic Values) ───────────────────────────────────
+  /// Applies right padding.
+  Widget pe(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.only(right: value), child: w));
+  // ─── Margin Utilities (Dynamic Values) ──────────────────────────────────
 
-  /// Applies uniform margin on all sides.
-  Widget m(double value) =>
-      Padding(padding: EdgeInsets.all(value), child: this);
+  /// Applies all margin.
+  Widget m(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.all(value), child: w));
 
-  /// Applies horizontal margin (left and right).
-  Widget mx(double value) => Padding(
-    padding: EdgeInsets.symmetric(horizontal: value),
-    child: this,
-  );
+  /// Applies horizontal margin.
+  Widget mx(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.symmetric(horizontal: value), child: w));
 
-  /// Applies vertical margin (top and bottom).
-  Widget my(double value) => Padding(
-    padding: EdgeInsets.symmetric(vertical: value),
-    child: this,
-  );
+  /// Applies vertical margin.
+  Widget my(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.symmetric(vertical: value), child: w));
 
-  /// Applies margin only to the top side.
-  Widget mt(double value) => Padding(
-    padding: EdgeInsets.only(top: value),
-    child: this,
-  );
+  /// Applies top margin.
+  Widget mt(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.only(top: value), child: w));
 
-  /// Applies margin only to the bottom side.
-  Widget mb(double value) => Padding(
-    padding: EdgeInsets.only(bottom: value),
-    child: this,
-  );
+  /// Applies bottom margin.
+  Widget mb(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.only(bottom: value), child: w));
 
-  /// Applies margin only to the start (left) side.
-  Widget ms(double value) => Padding(
-    padding: EdgeInsets.only(left: value),
-    child: this,
-  );
+  /// Applies left margin.
+  Widget ms(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.only(left: value), child: w));
 
-  /// Applies margin only to the end (right) side.
-  Widget me(double value) => Padding(
-    padding: EdgeInsets.only(right: value),
-    child: this,
-  );
+  /// Applies right margin.
+  Widget me(double value, [double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: EdgeInsets.only(right: value), child: w));
 
-  // ─── Uniform Padding (Standard Values) ─────────────────────────────────────
+  // ─── Padding All (Standard Values) ──────────────────────────────────
 
-  /// Applies uniform padding of [BsSpacing.s1] on all sides.
-  Widget p1() => Padding(padding: const EdgeInsets.all(BsSpacing.s1), child: this);
+  /// Applies all padding of [BsSpacing.s1].
+  Widget p1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.all(BsSpacing.s1), child: w));
 
-  /// Applies uniform padding of [BsSpacing.s2] on all sides.
-  Widget p2() => Padding(padding: const EdgeInsets.all(BsSpacing.s2), child: this);
+  /// Applies all padding of [BsSpacing.s2].
+  Widget p2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.all(BsSpacing.s2), child: w));
 
-  /// Applies uniform padding of [BsSpacing.s3] on all sides.
-  Widget p3() => Padding(padding: const EdgeInsets.all(BsSpacing.s3), child: this);
+  /// Applies all padding of [BsSpacing.s3].
+  Widget p3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.all(BsSpacing.s3), child: w));
 
-  /// Applies uniform padding of [BsSpacing.s4] on all sides.
-  Widget p4() => Padding(padding: const EdgeInsets.all(BsSpacing.s4), child: this);
+  /// Applies all padding of [BsSpacing.s4].
+  Widget p4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.all(BsSpacing.s4), child: w));
 
-  /// Applies uniform padding of [BsSpacing.s5] on all sides.
-  Widget p5() => Padding(padding: const EdgeInsets.all(BsSpacing.s5), child: this);
+  /// Applies all padding of [BsSpacing.s5].
+  Widget p5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.all(BsSpacing.s5), child: w));
 
-  // ─── Uniform Margin (Standard Values) ──────────────────────────────────────
+  // ─── Padding Horizontal (Standard Values) ──────────────────────────────────
 
-  /// Applies uniform margin of [BsSpacing.s1] on all sides.
-  Widget m1() => Padding(padding: const EdgeInsets.all(BsSpacing.s1), child: this);
+  /// Applies horizontal padding of [BsSpacing.s1].
+  Widget px1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s1), child: w));
 
-  /// Applies uniform margin of [BsSpacing.s2] on all sides.
-  Widget m2() => Padding(padding: const EdgeInsets.all(BsSpacing.s2), child: this);
+  /// Applies horizontal padding of [BsSpacing.s2].
+  Widget px2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s2), child: w));
 
-  /// Applies uniform margin of [BsSpacing.s3] on all sides.
-  Widget m3() => Padding(padding: const EdgeInsets.all(BsSpacing.s3), child: this);
+  /// Applies horizontal padding of [BsSpacing.s3].
+  Widget px3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s3), child: w));
 
-  /// Applies uniform margin of [BsSpacing.s4] on all sides.
-  Widget m4() => Padding(padding: const EdgeInsets.all(BsSpacing.s4), child: this);
+  /// Applies horizontal padding of [BsSpacing.s4].
+  Widget px4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s4), child: w));
 
-  /// Applies uniform margin of [BsSpacing.s5] on all sides.
-  Widget m5() => Padding(padding: const EdgeInsets.all(BsSpacing.s5), child: this);
+  /// Applies horizontal padding of [BsSpacing.s5].
+  Widget px5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s5), child: w));
 
-  // ─── Horizontal Padding (Standard Values) ──────────────────────────────────
+  // ─── Padding Vertical (Standard Values) ──────────────────────────────────
 
-  /// Applies horizontal padding (left and right) of [BsSpacing.s1].
-  Widget px1() => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s1),
-    child: this,
-  );
+  /// Applies vertical padding of [BsSpacing.s1].
+  Widget py1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(vertical: BsSpacing.s1), child: w));
 
-  /// Applies horizontal padding (left and right) of [BsSpacing.s2].
-  Widget px2() => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s2),
-    child: this,
-  );
+  /// Applies vertical padding of [BsSpacing.s2].
+  Widget py2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(vertical: BsSpacing.s2), child: w));
 
-  /// Applies horizontal padding (left and right) of [BsSpacing.s3].
-  Widget px3() => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s3),
-    child: this,
-  );
+  /// Applies vertical padding of [BsSpacing.s3].
+  Widget py3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(vertical: BsSpacing.s3), child: w));
 
-  /// Applies horizontal padding (left and right) of [BsSpacing.s4].
-  Widget px4() => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s4),
-    child: this,
-  );
+  /// Applies vertical padding of [BsSpacing.s4].
+  Widget py4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(vertical: BsSpacing.s4), child: w));
 
-  /// Applies horizontal padding (left and right) of [BsSpacing.s5].
-  Widget px5() => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s5),
-    child: this,
-  );
+  /// Applies vertical padding of [BsSpacing.s5].
+  Widget py5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(vertical: BsSpacing.s5), child: w));
 
-  // ─── Horizontal Margin (Standard Values) ───────────────────────────────────
-
-  /// Applies horizontal margin (left and right) of [BsSpacing.s1].
-  Widget mx1() => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s1),
-    child: this,
-  );
-
-  /// Applies horizontal margin (left and right) of [BsSpacing.s2].
-  Widget mx2() => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s2),
-    child: this,
-  );
-
-  /// Applies horizontal margin (left and right) of [BsSpacing.s3].
-  Widget mx3() => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s3),
-    child: this,
-  );
-
-  /// Applies horizontal margin (left and right) of [BsSpacing.s4].
-  Widget mx4() => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s4),
-    child: this,
-  );
-
-  /// Applies horizontal margin (left and right) of [BsSpacing.s5].
-  Widget mx5() => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s5),
-    child: this,
-  );
-
-  // ─── Vertical Padding (Standard Values) ────────────────────────────────────
-
-  /// Applies vertical padding (top and bottom) of [BsSpacing.s1].
-  Widget py1() => Padding(
-    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s1),
-    child: this,
-  );
-
-  /// Applies vertical padding (top and bottom) of [BsSpacing.s2].
-  Widget py2() => Padding(
-    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s2),
-    child: this,
-  );
-
-  /// Applies vertical padding (top and bottom) of [BsSpacing.s3].
-  Widget py3() => Padding(
-    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s3),
-    child: this,
-  );
-
-  /// Applies vertical padding (top and bottom) of [BsSpacing.s4].
-  Widget py4() => Padding(
-    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s4),
-    child: this,
-  );
-
-  /// Applies vertical padding (top and bottom) of [BsSpacing.s5].
-  Widget py5() => Padding(
-    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s5),
-    child: this,
-  );
-
-  // ─── Vertical Margin (Standard Values) ─────────────────────────────────────
-
-  /// Applies vertical margin (top and bottom) of [BsSpacing.s1].
-  Widget my1() => Padding(
-    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s1),
-    child: this,
-  );
-
-  /// Applies vertical margin (top and bottom) of [BsSpacing.s2].
-  Widget my2() => Padding(
-    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s2),
-    child: this,
-  );
-
-  /// Applies vertical margin (top and bottom) of [BsSpacing.s3].
-  Widget my3() => Padding(
-    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s3),
-    child: this,
-  );
-
-  /// Applies vertical margin (top and bottom) of [BsSpacing.s4].
-  Widget my4() => Padding(
-    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s4),
-    child: this,
-  );
-
-  /// Applies vertical margin (top and bottom) of [BsSpacing.s5].
-  Widget my5() => Padding(
-    padding: const EdgeInsets.symmetric(vertical: BsSpacing.s5),
-    child: this,
-  );
-
-  // ─── Top Padding (Standard Values) ─────────────────────────────────────────
+  // ─── Padding Top (Standard Values) ──────────────────────────────────
 
   /// Applies top padding of [BsSpacing.s1].
-  Widget pt1() => Padding(
-    padding: const EdgeInsets.only(top: BsSpacing.s1),
-    child: this,
-  );
+  Widget pt1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(top: BsSpacing.s1), child: w));
 
   /// Applies top padding of [BsSpacing.s2].
-  Widget pt2() => Padding(
-    padding: const EdgeInsets.only(top: BsSpacing.s2),
-    child: this,
-  );
+  Widget pt2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(top: BsSpacing.s2), child: w));
 
   /// Applies top padding of [BsSpacing.s3].
-  Widget pt3() => Padding(
-    padding: const EdgeInsets.only(top: BsSpacing.s3),
-    child: this,
-  );
+  Widget pt3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(top: BsSpacing.s3), child: w));
 
   /// Applies top padding of [BsSpacing.s4].
-  Widget pt4() => Padding(
-    padding: const EdgeInsets.only(top: BsSpacing.s4),
-    child: this,
-  );
+  Widget pt4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(top: BsSpacing.s4), child: w));
 
   /// Applies top padding of [BsSpacing.s5].
-  Widget pt5() => Padding(
-    padding: const EdgeInsets.only(top: BsSpacing.s5),
-    child: this,
-  );
+  Widget pt5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(top: BsSpacing.s5), child: w));
 
-  // ─── Top Margin (Standard Values) ──────────────────────────────────────────
-
-  /// Applies top margin of [BsSpacing.s1].
-  Widget mt1() => Padding(
-    padding: const EdgeInsets.only(top: BsSpacing.s1),
-    child: this,
-  );
-
-  /// Applies top margin of [BsSpacing.s2].
-  Widget mt2() => Padding(
-    padding: const EdgeInsets.only(top: BsSpacing.s2),
-    child: this,
-  );
-
-  /// Applies top margin of [BsSpacing.s3].
-  Widget mt3() => Padding(
-    padding: const EdgeInsets.only(top: BsSpacing.s3),
-    child: this,
-  );
-
-  /// Applies top margin of [BsSpacing.s4].
-  Widget mt4() => Padding(
-    padding: const EdgeInsets.only(top: BsSpacing.s4),
-    child: this,
-  );
-
-  /// Applies top margin of [BsSpacing.s5].
-  Widget mt5() => Padding(
-    padding: const EdgeInsets.only(top: BsSpacing.s5),
-    child: this,
-  );
-
-  // ─── Bottom Padding (Standard Values) ──────────────────────────────────────
+  // ─── Padding Bottom (Standard Values) ──────────────────────────────────
 
   /// Applies bottom padding of [BsSpacing.s1].
-  Widget pb1() => Padding(
-    padding: const EdgeInsets.only(bottom: BsSpacing.s1),
-    child: this,
-  );
+  Widget pb1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(bottom: BsSpacing.s1), child: w));
 
   /// Applies bottom padding of [BsSpacing.s2].
-  Widget pb2() => Padding(
-    padding: const EdgeInsets.only(bottom: BsSpacing.s2),
-    child: this,
-  );
+  Widget pb2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(bottom: BsSpacing.s2), child: w));
 
   /// Applies bottom padding of [BsSpacing.s3].
-  Widget pb3() => Padding(
-    padding: const EdgeInsets.only(bottom: BsSpacing.s3),
-    child: this,
-  );
+  Widget pb3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(bottom: BsSpacing.s3), child: w));
 
   /// Applies bottom padding of [BsSpacing.s4].
-  Widget pb4() => Padding(
-    padding: const EdgeInsets.only(bottom: BsSpacing.s4),
-    child: this,
-  );
+  Widget pb4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(bottom: BsSpacing.s4), child: w));
 
   /// Applies bottom padding of [BsSpacing.s5].
-  Widget pb5() => Padding(
-    padding: const EdgeInsets.only(bottom: BsSpacing.s5),
-    child: this,
-  );
+  Widget pb5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(bottom: BsSpacing.s5), child: w));
 
-  // ─── Bottom Margin (Standard Values) ───────────────────────────────────────
+  // ─── Padding Left (Standard Values) ──────────────────────────────────
+
+  /// Applies left padding of [BsSpacing.s1].
+  Widget ps1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(left: BsSpacing.s1), child: w));
+
+  /// Applies left padding of [BsSpacing.s2].
+  Widget ps2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(left: BsSpacing.s2), child: w));
+
+  /// Applies left padding of [BsSpacing.s3].
+  Widget ps3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(left: BsSpacing.s3), child: w));
+
+  /// Applies left padding of [BsSpacing.s4].
+  Widget ps4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(left: BsSpacing.s4), child: w));
+
+  /// Applies left padding of [BsSpacing.s5].
+  Widget ps5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(left: BsSpacing.s5), child: w));
+
+  // ─── Padding Right (Standard Values) ──────────────────────────────────
+
+  /// Applies right padding of [BsSpacing.s1].
+  Widget pe1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(right: BsSpacing.s1), child: w));
+
+  /// Applies right padding of [BsSpacing.s2].
+  Widget pe2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(right: BsSpacing.s2), child: w));
+
+  /// Applies right padding of [BsSpacing.s3].
+  Widget pe3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(right: BsSpacing.s3), child: w));
+
+  /// Applies right padding of [BsSpacing.s4].
+  Widget pe4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(right: BsSpacing.s4), child: w));
+
+  /// Applies right padding of [BsSpacing.s5].
+  Widget pe5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(right: BsSpacing.s5), child: w));
+
+  // ─── Margin All (Standard Values) ──────────────────────────────────
+
+  /// Applies all margin of [BsSpacing.s1].
+  Widget m1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.all(BsSpacing.s1), child: w));
+
+  /// Applies all margin of [BsSpacing.s2].
+  Widget m2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.all(BsSpacing.s2), child: w));
+
+  /// Applies all margin of [BsSpacing.s3].
+  Widget m3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.all(BsSpacing.s3), child: w));
+
+  /// Applies all margin of [BsSpacing.s4].
+  Widget m4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.all(BsSpacing.s4), child: w));
+
+  /// Applies all margin of [BsSpacing.s5].
+  Widget m5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.all(BsSpacing.s5), child: w));
+
+  // ─── Margin Horizontal (Standard Values) ──────────────────────────────────
+
+  /// Applies horizontal margin of [BsSpacing.s1].
+  Widget mx1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s1), child: w));
+
+  /// Applies horizontal margin of [BsSpacing.s2].
+  Widget mx2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s2), child: w));
+
+  /// Applies horizontal margin of [BsSpacing.s3].
+  Widget mx3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s3), child: w));
+
+  /// Applies horizontal margin of [BsSpacing.s4].
+  Widget mx4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s4), child: w));
+
+  /// Applies horizontal margin of [BsSpacing.s5].
+  Widget mx5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(horizontal: BsSpacing.s5), child: w));
+
+  // ─── Margin Vertical (Standard Values) ──────────────────────────────────
+
+  /// Applies vertical margin of [BsSpacing.s1].
+  Widget my1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(vertical: BsSpacing.s1), child: w));
+
+  /// Applies vertical margin of [BsSpacing.s2].
+  Widget my2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(vertical: BsSpacing.s2), child: w));
+
+  /// Applies vertical margin of [BsSpacing.s3].
+  Widget my3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(vertical: BsSpacing.s3), child: w));
+
+  /// Applies vertical margin of [BsSpacing.s4].
+  Widget my4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(vertical: BsSpacing.s4), child: w));
+
+  /// Applies vertical margin of [BsSpacing.s5].
+  Widget my5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(vertical: BsSpacing.s5), child: w));
+
+  // ─── Margin Top (Standard Values) ──────────────────────────────────
+
+  /// Applies top margin of [BsSpacing.s1].
+  Widget mt1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(top: BsSpacing.s1), child: w));
+
+  /// Applies top margin of [BsSpacing.s2].
+  Widget mt2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(top: BsSpacing.s2), child: w));
+
+  /// Applies top margin of [BsSpacing.s3].
+  Widget mt3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(top: BsSpacing.s3), child: w));
+
+  /// Applies top margin of [BsSpacing.s4].
+  Widget mt4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(top: BsSpacing.s4), child: w));
+
+  /// Applies top margin of [BsSpacing.s5].
+  Widget mt5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(top: BsSpacing.s5), child: w));
+
+  // ─── Margin Bottom (Standard Values) ──────────────────────────────────
 
   /// Applies bottom margin of [BsSpacing.s1].
-  Widget mb1() => Padding(
-    padding: const EdgeInsets.only(bottom: BsSpacing.s1),
-    child: this,
-  );
+  Widget mb1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(bottom: BsSpacing.s1), child: w));
 
   /// Applies bottom margin of [BsSpacing.s2].
-  Widget mb2() => Padding(
-    padding: const EdgeInsets.only(bottom: BsSpacing.s2),
-    child: this,
-  );
+  Widget mb2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(bottom: BsSpacing.s2), child: w));
 
   /// Applies bottom margin of [BsSpacing.s3].
-  Widget mb3() => Padding(
-    padding: const EdgeInsets.only(bottom: BsSpacing.s3),
-    child: this,
-  );
+  Widget mb3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(bottom: BsSpacing.s3), child: w));
 
   /// Applies bottom margin of [BsSpacing.s4].
-  Widget mb4() => Padding(
-    padding: const EdgeInsets.only(bottom: BsSpacing.s4),
-    child: this,
-  );
+  Widget mb4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(bottom: BsSpacing.s4), child: w));
 
   /// Applies bottom margin of [BsSpacing.s5].
-  Widget mb5() => Padding(
-    padding: const EdgeInsets.only(bottom: BsSpacing.s5),
-    child: this,
-  );
+  Widget mb5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(bottom: BsSpacing.s5), child: w));
 
-  // ─── Start Padding (Standard Values) ───────────────────────────────────────
+  // ─── Margin Left (Standard Values) ──────────────────────────────────
 
-  /// Applies start (left) padding of [BsSpacing.s1].
-  Widget ps1() => Padding(
-    padding: const EdgeInsets.only(left: BsSpacing.s1),
-    child: this,
-  );
+  /// Applies left margin of [BsSpacing.s1].
+  Widget ms1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(left: BsSpacing.s1), child: w));
 
-  /// Applies start (left) padding of [BsSpacing.s2].
-  Widget ps2() => Padding(
-    padding: const EdgeInsets.only(left: BsSpacing.s2),
-    child: this,
-  );
+  /// Applies left margin of [BsSpacing.s2].
+  Widget ms2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(left: BsSpacing.s2), child: w));
 
-  /// Applies start (left) padding of [BsSpacing.s3].
-  Widget ps3() => Padding(
-    padding: const EdgeInsets.only(left: BsSpacing.s3),
-    child: this,
-  );
+  /// Applies left margin of [BsSpacing.s3].
+  Widget ms3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(left: BsSpacing.s3), child: w));
 
-  /// Applies start (left) padding of [BsSpacing.s4].
-  Widget ps4() => Padding(
-    padding: const EdgeInsets.only(left: BsSpacing.s4),
-    child: this,
-  );
+  /// Applies left margin of [BsSpacing.s4].
+  Widget ms4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(left: BsSpacing.s4), child: w));
 
-  /// Applies start (left) padding of [BsSpacing.s5].
-  Widget ps5() => Padding(
-    padding: const EdgeInsets.only(left: BsSpacing.s5),
-    child: this,
-  );
+  /// Applies left margin of [BsSpacing.s5].
+  Widget ms5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(left: BsSpacing.s5), child: w));
 
-  // ─── Start Margin (Standard Values) ────────────────────────────────────────
+  // ─── Margin Right (Standard Values) ──────────────────────────────────
 
-  /// Applies start (left) margin of [BsSpacing.s1].
-  Widget ms1() => Padding(
-    padding: const EdgeInsets.only(left: BsSpacing.s1),
-    child: this,
-  );
+  /// Applies right margin of [BsSpacing.s1].
+  Widget me1([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(right: BsSpacing.s1), child: w));
 
-  /// Applies start (left) margin of [BsSpacing.s2].
-  Widget ms2() => Padding(
-    padding: const EdgeInsets.only(left: BsSpacing.s2),
-    child: this,
-  );
+  /// Applies right margin of [BsSpacing.s2].
+  Widget me2([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(right: BsSpacing.s2), child: w));
 
-  /// Applies start (left) margin of [BsSpacing.s3].
-  Widget ms3() => Padding(
-    padding: const EdgeInsets.only(left: BsSpacing.s3),
-    child: this,
-  );
+  /// Applies right margin of [BsSpacing.s3].
+  Widget me3([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(right: BsSpacing.s3), child: w));
 
-  /// Applies start (left) margin of [BsSpacing.s4].
-  Widget ms4() => Padding(
-    padding: const EdgeInsets.only(left: BsSpacing.s4),
-    child: this,
-  );
+  /// Applies right margin of [BsSpacing.s4].
+  Widget me4([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(right: BsSpacing.s4), child: w));
 
-  /// Applies start (left) margin of [BsSpacing.s5].
-  Widget ms5() => Padding(
-    padding: const EdgeInsets.only(left: BsSpacing.s5),
-    child: this,
-  );
+  /// Applies right margin of [BsSpacing.s5].
+  Widget me5([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(right: BsSpacing.s5), child: w));
 
-  // ─── End Padding (Standard Values) ─────────────────────────────────────────
+  // ─── Padding Level 0 (Standard Values) ──────────────────────────────────
 
-  /// Applies end (right) padding of [BsSpacing.s1].
-  Widget pe1() => Padding(
-    padding: const EdgeInsets.only(right: BsSpacing.s1),
-    child: this,
-  );
+  /// Applies zero all padding.
+  Widget p0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.all(0.0), child: w));
 
-  /// Applies end (right) padding of [BsSpacing.s2].
-  Widget pe2() => Padding(
-    padding: const EdgeInsets.only(right: BsSpacing.s2),
-    child: this,
-  );
+  /// Applies zero horizontal padding.
+  Widget px0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(horizontal: 0.0), child: w));
 
-  /// Applies end (right) padding of [BsSpacing.s3].
-  Widget pe3() => Padding(
-    padding: const EdgeInsets.only(right: BsSpacing.s3),
-    child: this,
-  );
+  /// Applies zero vertical padding.
+  Widget py0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(vertical: 0.0), child: w));
 
-  /// Applies end (right) padding of [BsSpacing.s4].
-  Widget pe4() => Padding(
-    padding: const EdgeInsets.only(right: BsSpacing.s4),
-    child: this,
-  );
+  /// Applies zero top padding.
+  Widget pt0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(top: 0.0), child: w));
 
-  /// Applies end (right) padding of [BsSpacing.s5].
-  Widget pe5() => Padding(
-    padding: const EdgeInsets.only(right: BsSpacing.s5),
-    child: this,
-  );
+  /// Applies zero bottom padding.
+  Widget pb0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(bottom: 0.0), child: w));
 
-  // ─── End Margin (Standard Values) ──────────────────────────────────────────
+  /// Applies zero left padding.
+  Widget ps0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(left: 0.0), child: w));
 
-  /// Applies end (right) margin of [BsSpacing.s1].
-  Widget me1() => Padding(
-    padding: const EdgeInsets.only(right: BsSpacing.s1),
-    child: this,
-  );
+  /// Applies zero right padding.
+  Widget pe0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(right: 0.0), child: w));
 
-  /// Applies end (right) margin of [BsSpacing.s2].
-  Widget me2() => Padding(
-    padding: const EdgeInsets.only(right: BsSpacing.s2),
-    child: this,
-  );
+  // ─── Margin Level 0 (Standard Values) ──────────────────────────────────
 
-  /// Applies end (right) margin of [BsSpacing.s3].
-  Widget me3() => Padding(
-    padding: const EdgeInsets.only(right: BsSpacing.s3),
-    child: this,
-  );
+  /// Applies zero all margin.
+  Widget m0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.all(0.0), child: w));
 
-  /// Applies end (right) margin of [BsSpacing.s4].
-  Widget me4() => Padding(
-    padding: const EdgeInsets.only(right: BsSpacing.s4),
-    child: this,
-  );
+  /// Applies zero horizontal margin.
+  Widget mx0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(horizontal: 0.0), child: w));
 
-  /// Applies end (right) margin of [BsSpacing.s5].
-  Widget me5() => Padding(
-    padding: const EdgeInsets.only(right: BsSpacing.s5),
-    child: this,
-  );
+  /// Applies zero vertical margin.
+  Widget my0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.symmetric(vertical: 0.0), child: w));
 
-  // ─── Level 0 Padding (Standard Values) ─────────────────────────────────────
+  /// Applies zero top margin.
+  Widget mt0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(top: 0.0), child: w));
 
-  /// Applies zero padding on all sides.
-  Widget p0() => Padding(padding: EdgeInsets.zero, child: this);
+  /// Applies zero bottom margin.
+  Widget mb0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(bottom: 0.0), child: w));
 
-  /// Applies zero horizontal padding (left and right).
-  Widget px0() => Padding(padding: const EdgeInsets.symmetric(horizontal: 0.0), child: this);
+  /// Applies zero left margin.
+  Widget ms0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(left: 0.0), child: w));
 
-  /// Applies zero vertical padding (top and bottom).
-  Widget py0() => Padding(padding: const EdgeInsets.symmetric(vertical: 0.0), child: this);
-
-  /// Applies zero padding to the top side.
-  Widget pt0() => Padding(padding: const EdgeInsets.only(top: 0.0), child: this);
-
-  /// Applies zero padding to the bottom side.
-  Widget pb0() => Padding(padding: const EdgeInsets.only(bottom: 0.0), child: this);
-
-  /// Applies zero padding to the start side.
-  Widget ps0() => Padding(padding: const EdgeInsets.only(left: 0.0), child: this);
-
-  /// Applies zero padding to the end side.
-  Widget pe0() => Padding(padding: const EdgeInsets.only(right: 0.0), child: this);
-
-  // ─── Level 0 Margin (Standard Values) ──────────────────────────────────────
-
-  /// Applies zero margin on all sides.
-  Widget m0() => Padding(padding: EdgeInsets.zero, child: this);
-
-  /// Applies zero horizontal margin (left and right).
-  Widget mx0() => Padding(padding: const EdgeInsets.symmetric(horizontal: 0.0), child: this);
-
-  /// Applies zero vertical margin (top and bottom).
-  Widget my0() => Padding(padding: const EdgeInsets.symmetric(vertical: 0.0), child: this);
-
-  /// Applies zero margin to the top side.
-  Widget mt0() => Padding(padding: const EdgeInsets.only(top: 0.0), child: this);
-
-  /// Applies zero margin to the bottom side.
-  Widget mb0() => Padding(padding: const EdgeInsets.only(bottom: 0.0), child: this);
-
-  /// Applies zero margin to the start side.
-  Widget ms0() => Padding(padding: const EdgeInsets.only(left: 0.0), child: this);
-
-  /// Applies zero margin to the end side.
-  Widget me0() => Padding(padding: const EdgeInsets.only(right: 0.0), child: this);
+  /// Applies zero right margin.
+  Widget me0([double? breakpoint]) =>
+      _apply(breakpoint, (w) => Padding(padding: const EdgeInsets.only(right: 0.0), child: w));
 
   // ─── Auto Margin Utilities ──────────────────────────────────────────────────
 
   /// Centers the widget horizontally and vertically, matching `m-auto`.
-  Widget mAuto() => Center(child: this);
+  Widget mAuto([double? breakpoint]) => _apply(breakpoint, (w) => Center(child: w));
 
   /// Centers the widget horizontally within its parent, matching `mx-auto`.
-  Widget mxAuto() => Align(alignment: Alignment.center, child: this);
+  Widget mxAuto([double? breakpoint]) => _apply(breakpoint, (w) => Align(alignment: Alignment.center, child: w));
 
   /// Centers the widget vertically within its parent, matching `my-auto`.
-  Widget myAuto() => Align(alignment: Alignment.center, child: this);
+  Widget myAuto([double? breakpoint]) => _apply(breakpoint, (w) => Align(alignment: Alignment.center, child: w));
 
   /// Aligns the widget to the end (right) of its parent, matching `ms-auto` in horizontal layout.
-  Widget msAuto() => Align(alignment: AlignmentDirectional.centerEnd, child: this);
+  Widget msAuto([double? breakpoint]) => _apply(breakpoint, (w) => Align(alignment: AlignmentDirectional.centerEnd, child: w));
 
   /// Aligns the widget to the start (left) of its parent, matching `me-auto` in horizontal layout.
-  Widget meAuto() => Align(alignment: AlignmentDirectional.centerStart, child: this);
+  Widget meAuto([double? breakpoint]) => _apply(breakpoint, (w) => Align(alignment: AlignmentDirectional.centerStart, child: w));
 
   /// Aligns the widget to the bottom of its parent, matching `mt-auto` in vertical layout.
-  Widget mtAuto() => Align(alignment: Alignment.bottomCenter, child: this);
+  Widget mtAuto([double? breakpoint]) => _apply(breakpoint, (w) => Align(alignment: Alignment.bottomCenter, child: w));
 
   /// Aligns the widget to the top of its parent, matching `mb-auto` in vertical layout.
-  Widget mbAuto() => Align(alignment: Alignment.topCenter, child: this);
+  Widget mbAuto([double? breakpoint]) => _apply(breakpoint, (w) => Align(alignment: Alignment.topCenter, child: w));
 }

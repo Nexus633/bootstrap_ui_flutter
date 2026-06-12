@@ -4,6 +4,8 @@ import '../../tokens/colors.dart';
 import '../../tokens/spacing.dart';
 import '../../tokens/typography.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
+import '../../tokens/transitions.dart';
 import '../forms/bs_input_group.dart';
 import '../spinner/bs_spinner.dart';
 
@@ -78,6 +80,7 @@ class BsButton extends StatefulWidget {
 class _BsButtonState extends State<BsButton> {
   bool _isPressed = false;
   bool _isHovered = false;
+  bool _isFocused = false;
 
   bool get _isDisabled => widget.onPressed == null || widget.isLoading;
 
@@ -98,24 +101,18 @@ class _BsButtonState extends State<BsButton> {
     final Color fgColor = _resolveForegroundColor(style, bsTheme);
 
     Widget buttonWidget = AnimatedContainer(
-      duration: const Duration(milliseconds: 100),
+      duration: BsTransitions.baseDuration,
       width: widget.fullWidth ? double.infinity : null,
       padding: style.padding,
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: style.borderRadius,
         border: _resolveBorder(style, bsTheme),
-        boxShadow: _isPressed && !_isDisabled
-            ? [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.15),
-                  blurRadius: 0,
-                  spreadRadius: 0,
-                  offset: const Offset(0, 2),
-                  blurStyle: BlurStyle.inner,
-                ),
-              ]
-            : null,
+        boxShadow: _isFocused && !_isDisabled
+            ? BsShadows.focusRing(style.backgroundColor)
+            : (_isPressed && !_isDisabled
+                ? BsShadows.inset
+                : null),
       ),
       child: _buildContent(style, fgColor),
     );
@@ -175,26 +172,41 @@ class _BsButtonState extends State<BsButton> {
       );
     }
 
-    return MouseRegion(
-      cursor: _isDisabled
-          ? SystemMouseCursors.forbidden
-          : SystemMouseCursors.click,
-      onEnter: (_) {
-        if (!_isDisabled) setState(() => _isHovered = true);
-      },
-      onExit: (_) => setState(() => _isHovered = false),
-      child: GestureDetector(
-        onTapDown: _isDisabled
-            ? null
-            : (_) => setState(() => _isPressed = true),
-        onTapUp: _isDisabled
-            ? null
-            : (_) {
-                setState(() => _isPressed = false);
+    return Semantics(
+      button: true,
+      enabled: !_isDisabled,
+      label: widget.label,
+      child: FocusableActionDetector(
+        mouseCursor: _isDisabled
+            ? SystemMouseCursors.forbidden
+            : SystemMouseCursors.click,
+        onShowFocusHighlight: (v) => setState(() => _isFocused = v),
+        onShowHoverHighlight: (v) {
+          if (!_isDisabled) setState(() => _isHovered = v);
+        },
+        actions: {
+          ActivateIntent: CallbackAction<Intent>(
+            onInvoke: (_) {
+              if (!_isDisabled) {
                 widget.onPressed?.call();
-              },
-        onTapCancel: () => setState(() => _isPressed = false),
-        child: buttonWidget,
+              }
+              return null;
+            },
+          ),
+        },
+        child: GestureDetector(
+          onTapDown: _isDisabled
+              ? null
+              : (_) => setState(() => _isPressed = true),
+          onTapUp: _isDisabled
+              ? null
+              : (_) {
+                  setState(() => _isPressed = false);
+                  widget.onPressed?.call();
+                },
+          onTapCancel: () => setState(() => _isPressed = false),
+          child: buttonWidget,
+        ),
       ),
     );
   }

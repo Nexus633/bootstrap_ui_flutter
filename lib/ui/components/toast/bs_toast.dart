@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import '../../tokens/bootstrap_theme.dart';
+import '../../tokens/shadows.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/z_index.dart';
 import '../button/bs_close_button.dart';
 import 'bs_toast_manager.dart';
 
@@ -77,19 +80,15 @@ class BsToast extends StatelessWidget {
       ),
     );
 
-    return Container(
+    return Semantics(
+      sortKey: const OrdinalSortKey(BsZIndex.toast * 1.0),
+      child: Container(
       width: width,
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(color: borderColor, width: 1.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        boxShadow: BsShadows.regular,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -105,7 +104,7 @@ class BsToast extends StatelessWidget {
           bodyWidget,
         ],
       ),
-    );
+    ));
   }
 }
 

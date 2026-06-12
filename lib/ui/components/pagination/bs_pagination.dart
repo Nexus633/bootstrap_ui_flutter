@@ -2,7 +2,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
 import '../../tokens/spacing.dart';
+import '../../tokens/transitions.dart';
 import '../../tokens/bs_icons.dart';
 import '../../tokens/typography.dart';
 import '../icon/bs_icon.dart';
@@ -118,6 +120,7 @@ class BsPaginationItem extends StatefulWidget {
 
 class _BsPaginationItemState extends State<BsPaginationItem> {
   bool _isHovered = false;
+  bool _isFocused = false;
 
   Color _resolveVariantColor(BsVariant variant, BsThemeData theme) {
     return switch (variant) {
@@ -201,10 +204,10 @@ class _BsPaginationItemState extends State<BsPaginationItem> {
               ? _resolveVariantColor(activeVar, theme)
               : theme.primary);
     } else {
-      resolvedTextColor = _isHovered
+      resolvedTextColor = (_isHovered || _isFocused)
           ? (hovTxtColor ?? theme.linkHoverColor)
           : (normalTxtColor ?? theme.linkColor);
-      resolvedBgColor = _isHovered
+      resolvedBgColor = (_isHovered || _isFocused)
           ? (hovBgColor ?? theme.bodyBgSecondary)
           : (normalBgColor ?? theme.bodyBg);
       resolvedBorderColor = bordColor ?? theme.border;
@@ -214,12 +217,14 @@ class _BsPaginationItemState extends State<BsPaginationItem> {
         widget._border ?? Border.all(color: resolvedBorderColor, width: 1.0);
     final BorderRadius borderRadius = widget._borderRadius ?? BorderRadius.zero;
 
-    Widget content = Container(
+    Widget content = AnimatedContainer(
+      duration: BsTransitions.baseDuration,
       constraints: BoxConstraints(minWidth: minSize, minHeight: minSize),
       decoration: BoxDecoration(
         color: resolvedBgColor,
         border: border,
         borderRadius: borderRadius,
+        boxShadow: _isFocused ? BsShadows.focusRing(resolvedBgColor) : null,
       ),
       padding: padding,
       child: IconTheme.merge(
@@ -239,16 +244,27 @@ class _BsPaginationItemState extends State<BsPaginationItem> {
 
     // Apply interactivity if not active and not disabled
     if (!widget.disabled && !widget.active && widget.onPressed != null) {
-      content = MouseRegion(
-        cursor: SystemMouseCursors.click,
-        onEnter: (_) => setState(() => _isHovered = true),
-        onExit: (_) => setState(() => _isHovered = false),
-        child: GestureDetector(
-          onTap: () {
-            widget.onPressed!();
-            setState(() => _isHovered = false);
+      content = Semantics(
+        button: true,
+        child: FocusableActionDetector(
+          mouseCursor: SystemMouseCursors.click,
+          onShowHoverHighlight: (v) => setState(() => _isHovered = v),
+          onShowFocusHighlight: (v) => setState(() => _isFocused = v),
+          actions: {
+            ActivateIntent: CallbackAction<Intent>(
+              onInvoke: (_) {
+                widget.onPressed!();
+                return null;
+              },
+            ),
           },
-          child: content,
+          child: GestureDetector(
+            onTap: () {
+              widget.onPressed!();
+              setState(() => _isHovered = false);
+            },
+            child: content,
+          ),
         ),
       );
     }

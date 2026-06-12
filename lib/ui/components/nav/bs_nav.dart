@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/colors.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
+import '../../tokens/transitions.dart';
 
 /// Scope shared down from [BsNav] to its children.
 class _BsNavScope extends InheritedWidget {
@@ -200,6 +202,7 @@ class BsNavLink extends StatefulWidget {
 
 class _BsNavLinkState extends State<BsNavLink> {
   bool _isHovered = false;
+  bool _isFocused = false;
 
   @override
   Widget build(BuildContext context) {
@@ -241,7 +244,8 @@ class _BsNavLinkState extends State<BsNavLink> {
       );
     }
 
-    Widget content = Container(
+    Widget content = AnimatedContainer(
+      duration: BsTransitions.baseDuration,
       decoration: decoration,
       padding: padding,
       child: Align(
@@ -304,14 +308,27 @@ class _BsNavLinkState extends State<BsNavLink> {
       return MouseRegion(cursor: SystemMouseCursors.forbidden, child: content);
     }
 
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: widget.onPressed,
-        child: content,
+    return Semantics(
+      button: true,
+      enabled: !widget.disabled,
+      selected: widget.active,
+      child: FocusableActionDetector(
+        mouseCursor: SystemMouseCursors.click,
+        onShowHoverHighlight: (v) => setState(() => _isHovered = v),
+        onShowFocusHighlight: (v) => setState(() => _isFocused = v),
+        actions: {
+          ActivateIntent: CallbackAction<Intent>(
+            onInvoke: (_) {
+              widget.onPressed?.call();
+              return null;
+            },
+          ),
+        },
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: widget.onPressed,
+          child: content,
+        ),
       ),
     );
   }
@@ -445,6 +462,7 @@ class _BsNavLinkState extends State<BsNavLink> {
             topLeft: Radius.circular(4.0),
             topRight: Radius.circular(4.0),
           ),
+          boxShadow: _isFocused ? BsShadows.focusRing(theme.primary) : null,
         );
 
       case BsNavVariant.pills:
@@ -452,15 +470,20 @@ class _BsNavLinkState extends State<BsNavLink> {
           return BoxDecoration(
             color: theme.primary,
             borderRadius: BorderRadius.circular(6.0),
+            boxShadow: _isFocused ? BsShadows.focusRing(theme.primary) : null,
           );
         }
         if (_isHovered) {
           return BoxDecoration(
             color: theme.primary.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(6.0),
+            boxShadow: _isFocused ? BsShadows.focusRing(theme.primary) : null,
           );
         }
-        return null;
+        return BoxDecoration(
+          borderRadius: BorderRadius.circular(6.0),
+          boxShadow: _isFocused ? BsShadows.focusRing(theme.primary) : null,
+        );
 
       case BsNavVariant.underline:
         if (widget.active) {
@@ -513,7 +536,7 @@ class BsTabContent extends StatelessWidget {
 
     if (fade) {
       return AnimatedSwitcher(
-        duration: const Duration(milliseconds: 150),
+        duration: BsTransitions.fadeDuration,
         transitionBuilder: (Widget child, Animation<double> animation) {
           return FadeTransition(opacity: animation, child: child);
         },

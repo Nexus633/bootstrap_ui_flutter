@@ -97,5 +97,20 @@ void main() {
       expect(find.text('Please select an option'), findsOneWidget);
       expect(find.byType(BsFormFeedback), findsOneWidget);
     });
+
+    testWidgets('renders floating label correctly', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        buildTestableWidget(
+          BsSelect<String>(
+            floatingLabel: 'Choose wisely',
+            placeholder: const Text('Open this select menu'),
+            items: sampleItems,
+          ),
+        ),
+      );
+
+      // Label should be visible
+      expect(find.text('Choose wisely'), findsOneWidget);
+    });
   });
 }

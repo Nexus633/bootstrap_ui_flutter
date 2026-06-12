@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/colors.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
+import '../../tokens/transitions.dart';
+import '../../tokens/z_index.dart';
 import '../button/bs_close_button.dart';
 
 /// A Bootstrap-style offcanvas panel (`BsOffcanvas`).
@@ -124,13 +128,7 @@ class BsOffcanvas extends StatelessWidget {
         BoxDecoration(
           color: resolvedBgColor,
           border: defaultBorder,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.15),
-              blurRadius: 16,
-              offset: const Offset(0, 8),
-            ),
-          ],
+          boxShadow: BsShadows.regular,
         );
 
     final panelContent = Column(
@@ -149,18 +147,24 @@ class BsOffcanvas extends StatelessWidget {
 
     // Apply dimensions based on placement
     if (placement == BsOffcanvasPlacement.start || placement == BsOffcanvasPlacement.end) {
-      return Container(
-        width: resolvedWidth,
-        height: double.infinity,
-        decoration: panelDecoration,
-        child: finalPanel,
+      return Semantics(
+        sortKey: const OrdinalSortKey(BsZIndex.offcanvas * 1.0),
+        child: Container(
+          width: resolvedWidth,
+          height: double.infinity,
+          decoration: panelDecoration,
+          child: finalPanel,
+        ),
       );
     } else {
-      return Container(
-        width: double.infinity,
-        height: resolvedHeight,
-        decoration: panelDecoration,
-        child: finalPanel,
+      return Semantics(
+        sortKey: const OrdinalSortKey(BsZIndex.offcanvas * 1.0),
+        child: Container(
+          width: double.infinity,
+          height: resolvedHeight,
+          decoration: panelDecoration,
+          child: finalPanel,
+        ),
       );
     }
   }
@@ -304,7 +308,7 @@ class _BsOffcanvasBackdropWrapperState
     super.initState();
     _pulseController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 150),
+      duration: BsTransitions.fadeDuration,
     );
     _pulseAnimation = TweenSequence<double>([
       TweenSequenceItem(
@@ -439,7 +443,7 @@ Future<T?> showBsOffcanvas<T>({
     barrierDismissible: false,
     barrierLabel: 'Dismiss',
     barrierColor: Colors.transparent,
-    transitionDuration: const Duration(milliseconds: 300),
+    transitionDuration: BsTransitions.modalDuration,
     pageBuilder: (context, animation, secondaryAnimation) {
       return builder(context);
     },

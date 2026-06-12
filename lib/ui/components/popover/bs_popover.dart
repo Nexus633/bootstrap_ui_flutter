@@ -1,7 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
+import '../../tokens/z_index.dart';
 
 // ─── BsPopoverController ──────────────────────────────────────────────────────
 
@@ -288,18 +291,14 @@ class _BsPopoverState extends State<BsPopover> {
     _overlayEntry = OverlayEntry(
       builder: (context) {
         // Base Popover Container
-        final popoverCard = Container(
+        final popoverCard = Semantics(
+          sortKey: const OrdinalSortKey(BsZIndex.popover * 1.0),
+          child: Container(
           decoration: BoxDecoration(
             color: effectiveBgColor,
             border: Border.all(color: effectiveBorderColor, width: 1.0),
             borderRadius: BorderRadius.circular(8.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.15),
-                blurRadius: 10.0,
-                offset: const Offset(0.0, 5.0),
-              ),
-            ],
+            boxShadow: BsShadows.regular,
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(7.0),
@@ -345,7 +344,7 @@ class _BsPopoverState extends State<BsPopover> {
               ],
             ),
           ),
-        );
+        ));
 
         // Align arrow according to placement
         final Widget popoverWithArrow;

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
+import '../../tokens/transitions.dart';
+import '../../tokens/z_index.dart';
 import '../button/bs_close_button.dart';
 
 /// A Bootstrap-style modal dialog component (`BsModal`).
@@ -53,19 +57,15 @@ class BsModal extends StatelessWidget {
       color: theme.bodyBg,
       borderRadius: BorderRadius.circular(borderRadiusVal),
       border: Border.all(color: theme.border, width: 1.0),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withValues(alpha: 0.15),
-          blurRadius: 16,
-          offset: const Offset(0, 8),
-        ),
-      ],
+      boxShadow: BsShadows.regular,
     );
 
     final double modalWidth = _resolveWidth(context, screenWidth);
 
     if (size == BsModalSize.fullscreen) {
-      return Container(
+      return Semantics(
+        sortKey: const OrdinalSortKey(BsZIndex.modal * 1.0),
+        child: Container(
         width: screenWidth,
         height: screenHeight,
         decoration: dialogDecoration,
@@ -79,7 +79,7 @@ class BsModal extends StatelessWidget {
             ?footer,
           ],
         ),
-      );
+      ));
     }
 
     if (scrollable) {
@@ -88,8 +88,10 @@ class BsModal extends StatelessWidget {
           maxWidth: modalWidth,
           maxHeight: screenHeight - 60,
         ),
-        child: Container(
-          decoration: dialogDecoration,
+        child: Semantics(
+          sortKey: const OrdinalSortKey(BsZIndex.modal * 1.0),
+          child: Container(
+            decoration: dialogDecoration,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -104,10 +106,12 @@ class BsModal extends StatelessWidget {
             ],
           ),
         ),
-      );
+      ));
     } else {
-      return Container(
-        margin: EdgeInsets.only(
+      return Semantics(
+        sortKey: const OrdinalSortKey(BsZIndex.modal * 1.0),
+        child: Container(
+          margin: EdgeInsets.only(
           top: centered ? 0.0 : 30.0,
           bottom: centered ? 0.0 : 30.0,
         ),
@@ -122,7 +126,7 @@ class BsModal extends StatelessWidget {
             ?footer,
           ],
         ),
-      );
+      ));
     }
   }
 
@@ -320,7 +324,7 @@ class _BsModalBackdropWrapperState extends State<_BsModalBackdropWrapper> with S
     super.initState();
     _pulseController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 150),
+      duration: BsTransitions.fadeDuration,
     );
     _pulseAnimation = TweenSequence<double>([
       TweenSequenceItem(
@@ -430,7 +434,7 @@ Future<T?> showBsModal<T>({
     barrierDismissible: false,
     barrierLabel: 'Dismiss',
     barrierColor: Colors.transparent,
-    transitionDuration: const Duration(milliseconds: 300),
+    transitionDuration: BsTransitions.modalDuration,
     pageBuilder: (context, animation, secondaryAnimation) {
       return builder(context);
     },

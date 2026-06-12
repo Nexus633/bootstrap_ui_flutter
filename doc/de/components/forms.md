@@ -106,11 +106,38 @@ BsInputGroup(
     BsInput(placeholder: 'Benutzername').expanded(), // Das eigentliche Eingabefeld
   ],
 )
+
+// Zusätze können auch Widgets sein, wie z. B. Checkboxen:
+BsInputGroup(
+  children: [
+    BsInputGroupText.widget(child: BsCheckbox(initialValue: true)),
+    BsInput(placeholder: 'Checkbox in der Gruppe...').expanded(),
+  ],
+)
+```
+
+### 7. Floating Labels (`.form-floating`)
+
+Erstellen Sie elegant schwebende Formular-Labels, die sich über Ihre Eingabefelder legen, indem Sie den Parameter `floatingLabel` bei `BsInput` oder `BsSelect` nutzen.
+
+```dart
+BsInput(
+  floatingLabel: 'E-Mail-Adresse',
+  placeholder: 'name@example.com',
+)
+
+BsSelect<String>(
+  floatingLabel: 'Funktioniert auch mit Selects',
+  placeholder: const Text('Menü öffnen'),
+  items: const [
+    DropdownMenuItem(value: '1', child: Text('Eins')),
+  ],
+)
 ```
 
 ## Validierung & Zustand
 
-Alle Eingabefelder unterstützen die Eigenschaft `validationState` für die explizite Zustandsverwaltung (z. B. bei der Validierung über eine externe API, ohne ein Flutter `Form` zu verwenden).
+Alle Eingabefelder unterstützen die Eigenschaft `validationState` für die explizite Zustandsverwaltung (z. B. bei der Validierung über eine externe API, ohne ein Flutter `Form` zu verwenden). Zudem wird automatisch der Bootstrap `BsShadows.focusRing` (in rot oder grün) angezeigt, wenn ein validiertes Feld fokussiert wird.
 
 ```dart
 BsInput(

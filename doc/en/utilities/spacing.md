@@ -11,6 +11,7 @@ The `BsSpacingExtension` provides a set of concise methods to apply padding and 
 
 - **Concise Syntax**: Chainable methods like `.p3()`, `.mb2()`, etc.
 - **Bootstrap Alignment**: Uses standard Bootstrap spacing levels (1-5).
+- **Responsive**: Supports breakpoints (`BsBreakpoints`) for conditional application.
 - **Flexible**: Allows custom values via `.p(double)`, `.m(double)`, etc.
 - **Context Aware**: Correctly handles padding (inner space) and margin (outer space) concepts in Flutter's widget tree.
 
@@ -27,6 +28,9 @@ Padding(
 
 // With BsSpacingExtension
 Text('Hello').p3()
+
+// Responsive Spacing
+Text('Hello').p3(BsBreakpoints.md) // Applies padding only on md screens and up
 
 // Margin (Applying space outside a decorated box)
 Container(color: Colors.red, child: Text('Alert'))

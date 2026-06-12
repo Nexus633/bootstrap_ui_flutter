@@ -13,7 +13,7 @@ import '../showcase/form_showcase.dart';
 import '../showcase/breadcrumb_showcase.dart';
 import '../showcase/helpers_showcase.dart';
 import '../showcase/utilities_showcase.dart';
-import '../showcase/heading_showcase.dart';
+import '../showcase/typography_showcase.dart';
 import '../showcase/card_showcase.dart';
 import '../showcase/carousel_showcase.dart';
 import '../showcase/collapse_showcase.dart';
@@ -161,9 +161,9 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
     ),
     _NavItem(
       group: 'Components',
-      label: 'Headings',
+      label: 'Typography',
       icon: BsIcons.typeH1,
-      page: const HeadingShowcase(),
+      page: const TypographyShowcase(),
     ),
     _NavItem(
       group: 'Components',

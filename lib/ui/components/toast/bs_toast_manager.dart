@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import '../../tokens/transitions.dart';
 
 /// Global configuration and management for Bootstrap Toasts.
 class BsToastManager {
@@ -49,7 +50,7 @@ class BsToastManager {
     );
 
     queue.toasts.insert(0, entry);
-    queue.listKey.currentState?.insertItem(0, duration: const Duration(milliseconds: 300));
+    queue.listKey.currentState?.insertItem(0, duration: BsTransitions.toastDuration);
 
     if (duration != null) {
       entry.timer = Timer(duration, () {
@@ -70,11 +71,11 @@ class BsToastManager {
       queue.listKey.currentState?.removeItem(
         index,
         (context, animation) => _buildItem(removedItem, animation, entry.alignment),
-        duration: const Duration(milliseconds: 300),
+        duration: BsTransitions.toastDuration,
       );
 
       if (queue.toasts.isEmpty) {
-        Future.delayed(const Duration(milliseconds: 300), () {
+        Future.delayed(BsTransitions.toastDuration, () {
           if (queue.toasts.isEmpty) {
             _queues.remove(entry.alignment);
             _overlayEntry?.markNeedsBuild();

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/z_index.dart';
 
 /// A Bootstrap-style Tooltip component.
 ///
@@ -134,7 +136,9 @@ class _BsTooltipState extends State<BsTooltip> {
 
     _overlayEntry = OverlayEntry(
       builder: (context) {
-        final tooltipInner = Container(
+        final tooltipInner = Semantics(
+          sortKey: const OrdinalSortKey(BsZIndex.tooltip * 1.0),
+          child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
           decoration: BoxDecoration(
             color: tooltipColor,
@@ -150,7 +154,7 @@ class _BsTooltipState extends State<BsTooltip> {
             ),
             textAlign: TextAlign.center,
           ),
-        );
+        ));
 
         Widget tooltipWithArrow;
         if (effectivePlacement == BsPlacement.top) {
