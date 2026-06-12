@@ -1,5 +1,9 @@
 # Placeholders (Platzhalter / Lade-Skelette)
 
+## Vorschau
+
+![Vorschau](../../assets/Placeholders.gif)
+
 Placeholders (oder Skeleton Loaders) dienen dazu, temporäre Platzhalter-Strukturen für Inhalte anzuzeigen, die noch geladen werden. Sie verbessern die wahrgenommene Ladezeit und sorgen für eine ruhigere Benutzererfahrung, da Layoutverschiebungen (Layout Shifts) vermieden werden.
 
 Sie basieren auf den CSS-Klassen und dem Design von Bootstrap 5.3.

@@ -2,7 +2,7 @@
 
 ## Vorschau
 
-![Vorschau](../../assets/Breadcrumb.png)
+![Vorschau](../../assets/Breadcrumbs.png)
 
 
 Zeigt den Standort der aktuellen Seite innerhalb einer Navigationshierarchie an, wobei Trennzeichen automatisch hinzugefügt werden.

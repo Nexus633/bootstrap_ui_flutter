@@ -2,7 +2,7 @@
 
 ## Vorschau
 
-![Vorschau](../../assets/ListGroup.png)
+![Vorschau](../../assets/List_Group.gif)
 
 Listengruppen (`BsListGroup`) sind flexible Komponenten zur Anzeige einer Reihe von Inhalten. Sie können für einfache Listen, verlinkte Listen, Buttons oder komplexe benutzerdefinierte Layouts verwendet werden.
 

@@ -2,7 +2,7 @@
 
 ## Vorschau
 
-![Vorschau](../../assets/Utilities-1.png)
+![Vorschau](../../assets/Utilities_1.png)
 
 
 Die `BsSpacingExtension` bietet eine Reihe von prägnanten Methoden, um Padding (Innenabstand) und Margin (Außenabstand) auf jedes Flutter-Widget anzuwenden. Dabei wird die Namenskonvention der Bootstrap-Utility-Klassen übernommen.

@@ -1,5 +1,9 @@
 # Toasts
 
+## Preview
+
+![Preview](../../assets/Toasts.gif)
+
 Push notifications to your visitors with a toast, a lightweight and easily customizable alert message.
 
 ## Overview

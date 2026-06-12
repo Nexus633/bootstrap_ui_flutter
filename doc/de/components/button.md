@@ -2,7 +2,9 @@
 
 ## Vorschau
 
-![Vorschau](../../assets/Button.png)
+| Buttons Vorschau 1 | Buttons Vorschau 2 |
+|:---:|:---:|
+| <img src="../../assets/Buttons_1.png" width="380" alt="Buttons Vorschau 1"> | <img src="../../assets/Buttons_2.png" width="380" alt="Buttons Vorschau 2"> |
 
 
 Die `BsButton` Komponente bietet verschiedene Stile für Aktionen in Formularen, Dialogen und mehr.

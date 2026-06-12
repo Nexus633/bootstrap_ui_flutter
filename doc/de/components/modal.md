@@ -1,5 +1,9 @@
 # Modaldialoge (Modals)
 
+## Vorschau
+
+![Vorschau](../../assets/Modals.gif)
+
 Modaldialoge (`BsModal` und `showBsModal`) sind flexible Container, die über dem Hauptinhalt der Seite eingeblendet werden, um Benutzerbenachrichtigungen, Formulare oder benutzerdefinierte Inhalte anzuzeigen.
 
 ## Features

@@ -2,11 +2,7 @@
 
 ## Preview
 
-| Form Layout 1 | Form Layout 2 |
-|:---:|:---:|
-| <img src="../../assets/Forms-1.png" width="380" alt="Form Layout 1"> | <img src="../../assets/Forms-2.png" width="380" alt="Form Layout 2"> |
-| **Form Layout 3** | **Form Layout 4** |
-| <img src="../../assets/Forms-3.png" width="380" alt="Form Layout 3"> | <img src="../../assets/Forms-4.png" width="380" alt="Form Layout 4"> |
+![Preview](../../assets/Forms.gif)
 
 
 Form components are essential for gathering user input. The `bootstrap_ui_flutter` package provides a comprehensive set of form controls that closely mimic Bootstrap 5's `.form-control`, `.form-select`, `.form-check`, and `.input-group` behaviors, while integrating natively with Flutter's `Form` and `FormField` system.

@@ -1,5 +1,9 @@
 # Progress (Fortschrittsbalken)
 
+## Vorschau
+
+![Vorschau](../../assets/Progress_bars.gif)
+
 Progress-Komponenten (Fortschrittsbalken) zeigen dem Benutzer den Status eines laufenden Prozesses (z. B. Downloads, Uploads oder Berechnungen) an. Sie basieren auf dem Design und Verhalten von Bootstrap 5.3 und unterstützen Beschriftungen, Farbvarianten, gestreifte Muster, Animationen sowie das Stapeln (Stacking) mehrerer Segmente.
 
 ## Verwendung

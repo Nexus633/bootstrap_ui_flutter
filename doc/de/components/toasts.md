@@ -1,5 +1,9 @@
 # Toasts
 
+## Vorschau
+
+![Vorschau](../../assets/Toasts.gif)
+
 Sende Push-Benachrichtigungen an deine Besucher mit einem Toast – einer leichtgewichtigen und einfach anpassbaren Warnmeldung.
 
 ## Übersicht

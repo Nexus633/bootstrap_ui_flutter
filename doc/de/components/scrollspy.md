@@ -1,5 +1,9 @@
 # Scrollspy
 
+## Vorschau
+
+![Vorschau](../../assets/Scrollspy.gif)
+
 Aktualisiert automatisch Bootstrap-Navigations- oder Listengruppen-Komponenten basierend auf der Scrollposition, um anzuzeigen, welcher Link im Sichtbereich (Viewport) gerade aktiv ist.
 
 ## Übersicht

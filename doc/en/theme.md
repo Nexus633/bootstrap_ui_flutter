@@ -2,9 +2,7 @@
 
 ## Preview
 
-| Light Theme | Dark Theme |
-|:---:|:---:|
-| <img src="../assets/Theme-Light.png" width="380" alt="Light Theme"> | <img src="../assets/Theme-Dark.png" width="380" alt="Dark Theme"> |
+![Preview](../assets/Theme_Dark_Light.gif)
 
 The framework uses a token-based system closely aligned with Bootstrap 5.3.
 

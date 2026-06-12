@@ -1,5 +1,9 @@
 # Popovers
 
+## Vorschau
+
+![Vorschau](../../assets/Popovers.gif)
+
 Popovers (Einblendungen) sind kleine Overlay-Boxen, die zusätzlichen Kontext oder Informationen zu einem Element anzeigen, wenn der Benutzer darauf klickt oder mit der Maus darüber fährt. Sie verhalten sich ähnlich wie Tooltips, bieten jedoch Platz für strukturiertere Inhalte (wie Überschriften, Listen oder Buttons).
 
 Sie basieren auf dem Verhalten und Design von Bootstrap 5.3.

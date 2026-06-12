@@ -1,5 +1,9 @@
 # Navs und Tabs (Navigationen)
 
+## Vorschau
+
+![Vorschau](../../assets/Navs_Tabs.gif)
+
 `BsNav` ist eine flexible Navigationskomponente, die auf Flexbox basiert. Sie unterstützt verschiedene Darstellungsstile (einfache Links, Tabs, Pills und Underline), Ausrichtungen, vertikale Anordnung sowie das Umschalten von Tab-Inhalten mit weichen Übergangsanimationen.
 
 ## Features

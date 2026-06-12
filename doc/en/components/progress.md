@@ -1,5 +1,9 @@
 # Progress
 
+## Preview
+
+![Preview](../../assets/Progress_bars.gif)
+
 Progress components (progress bars) provide visual feedback for loading, uploading, downloading, or running activities. They are designed to mirror Bootstrap 5.3 specifications, supporting custom values, text labels, color variants, striped backgrounds, animations, and stacked multi-segment bars.
 
 ## Usage

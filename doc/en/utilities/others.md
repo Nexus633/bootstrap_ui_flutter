@@ -2,7 +2,7 @@
 
 ## Preview
 
-![Preview](../../assets/Utilities-2.png)
+![Preview](../../assets/Utilities_2.png)
 
 
 In addition to spacing, the library provides several other utility extensions to streamline your UI development.

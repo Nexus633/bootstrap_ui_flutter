@@ -1,5 +1,11 @@
 # Navbars
 
+## Preview
+
+| Navbar Preview 1 | Navbar Preview 2 |
+|:---:|:---:|
+| <img src="../../assets/Navbars_1.png" width="380" alt="Navbar Preview 1"> | <img src="../../assets/Navbars_2.png" width="380" alt="Navbar Preview 2"> |
+
 The navigations bar (`BsNavbar`) is a responsive wrapper for your application's header. It supports branding, links, toggler buttons for mobile menus, forms, and secondary text.
 
 ## Features

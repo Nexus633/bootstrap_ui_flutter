@@ -1,5 +1,9 @@
 # Modals
 
+## Preview
+
+![Preview](../../assets/Modals.gif)
+
 Modals (`BsModal` and `showBsModal`) are flexible dialog prompts that overlay the main page content to display notifications, forms, or custom user interactions.
 
 ## Features

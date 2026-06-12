@@ -2,7 +2,7 @@
 
 ## Preview
 
-![Preview](../../assets/Breadcrumb.png)
+![Preview](../../assets/Breadcrumbs.png)
 
 
 Indicate the current page's location within a navigational hierarchy that automatically adds separators via CSS.

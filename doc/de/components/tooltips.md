@@ -1,5 +1,9 @@
 # Tooltips
 
+## Vorschau
+
+![Vorschau](../../assets/Tooltips.gif)
+
 Dokumentation und Beispiele zum Hinzufügen von benutzerdefinierten Bootstrap-Tooltips.
 
 ## Übersicht

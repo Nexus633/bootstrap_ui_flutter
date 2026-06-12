@@ -2,11 +2,7 @@
 
 ## Vorschau
 
-| Grid Auto | Grid MD |
-|:---:|:---:|
-| <img src="../../assets/Grid-auto.png" width="380" alt="Grid Auto"> | <img src="../../assets/Grid-md.png" width="380" alt="Grid MD"> |
-| **Grid LG** | **Container Fluid & Gutter** |
-| <img src="../../assets/Grid-lg.png" width="380" alt="Grid LG"> | <img src="../../assets/Container-fluid-and-gutter.png" width="380" alt="Container Fluid & Gutter"> |
+![Vorschau](../../assets/Grid_System.gif)
 
 
 Das Bootstrap-Grid-System basiert auf einem 12-Spalten-Layout und ist vollständig responsive.
@@ -103,4 +99,4 @@ BsRow(
     ),
   ],
 )
-```
+```

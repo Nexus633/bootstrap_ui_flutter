@@ -2,7 +2,7 @@
 
 ## Preview
 
-![Preview](../../assets/Alert.png)
+![Preview](../../assets/Alerts.gif)
 
 
 The `BsAlert` provides contextual feedback messages for typical user actions.

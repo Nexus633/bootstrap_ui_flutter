@@ -1,5 +1,9 @@
 # Tooltips
 
+## Preview
+
+![Preview](../../assets/Tooltips.gif)
+
 Documentation and examples for adding custom Bootstrap tooltips.
 
 ## Overview

@@ -1,5 +1,11 @@
 # Navigationsleiste (Navbar)
 
+## Vorschau
+
+| Navbar Vorschau 1 | Navbar Vorschau 2 |
+|:---:|:---:|
+| <img src="../../assets/Navbars_1.png" width="380" alt="Navbar Vorschau 1"> | <img src="../../assets/Navbars_2.png" width="380" alt="Navbar Vorschau 2"> |
+
 Die Navigationsleiste (`BsNavbar`) ist ein responsiver Header-Container für die Navigation in deiner Anwendung. Sie unterstützt Branding (Logos), Links, Toggler-Buttons für mobile Ansichten, Formulare und Text-Elemente.
 
 ## Features

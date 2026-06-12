@@ -2,7 +2,9 @@
 
 ## Preview
 
-![Preview](../../assets/Headings.png)
+| Typography Preview 1 | Typography Preview 2 |
+|:---:|:---:|
+| <img src="../../assets/Typography_1.png" width="380" alt="Typography Preview 1"> | <img src="../../assets/Typography_2.png" width="380" alt="Typography Preview 2"> |
 
 
 The `BsHeading` widget is used to render standard heading levels from `<h1>` to `<h6>` with Bootstrap-compatible styles, including the default bottom margins and correct line heights.

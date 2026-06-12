@@ -1,5 +1,9 @@
 # Placeholders
 
+## Preview
+
+![Preview](../../assets/Placeholders.gif)
+
 Placeholders (often called skeleton screens) are used to temporarily display loading states of components before real content is ready. They improve perceived performance and keep the UI stable by preventing sudden layout shifts.
 
 They are designed following Bootstrap 5.3 specifications.

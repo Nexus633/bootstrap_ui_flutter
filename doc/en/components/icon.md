@@ -1,5 +1,11 @@
 # Icon
 
+## Preview
+
+| Icons Preview 1 | Icons Preview 2 |
+|:---:|:---:|
+| <img src="../../assets/Icons_1.png" width="380" alt="Icons Preview 1"> | <img src="../../assets/Icons_2.png" width="380" alt="Icons Preview 2"> |
+
 Icon component for rendering and displaying Bootstrap 5 Icons.
 
 ## Purpose

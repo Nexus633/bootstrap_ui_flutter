@@ -2,7 +2,9 @@
 
 ## Preview
 
-![Preview](../../assets/Button.png)
+| Buttons Preview 1 | Buttons Preview 2 |
+|:---:|:---:|
+| <img src="../../assets/Buttons_1.png" width="380" alt="Buttons Preview 1"> | <img src="../../assets/Buttons_2.png" width="380" alt="Buttons Preview 2"> |
 
 
 The `BsButton` component provides various styles for actions in forms, dialogs, and more.

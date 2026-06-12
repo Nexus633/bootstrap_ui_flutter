@@ -1,5 +1,9 @@
 # Pagination
 
+## Preview
+
+![Preview](../../assets/Pagination.gif)
+
 Pagination components are used to divide content across multiple pages and allow users to navigate between these pages. They are designed following Bootstrap 5.3 specifications.
 
 ## Usage

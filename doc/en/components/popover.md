@@ -1,5 +1,9 @@
 # Popovers
 
+## Preview
+
+![Preview](../../assets/Popovers.gif)
+
 Popovers are small overlay boxes that display secondary, contextual information when a user clicks or hovers over a trigger element. They behave similarly to tooltips but offer more structured layout options (e.g. bold header titles, structured list grids, or action buttons).
 
 They are designed following Bootstrap 5.3 specifications.

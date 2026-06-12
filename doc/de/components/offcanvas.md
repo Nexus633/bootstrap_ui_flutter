@@ -1,5 +1,9 @@
 # Offcanvas-Seitenteile (Offcanvas)
 
+## Vorschau
+
+![Vorschau](../../assets/Offcanvas.gif)
+
 Offcanvas-Seitenteile ([`BsOffcanvas`](file:///E:/FlutterProjects/bootstrap_ui_flutter/lib/ui/components/offcanvas/bs_offcanvas.dart) und [`showBsOffcanvas`](file:///E:/FlutterProjects/bootstrap_ui_flutter/lib/ui/components/offcanvas/bs_offcanvas.dart#L282)) sind flexible Container, die sich von den Bildschirmrändern (links, rechts, oben oder unten) hereinschieben. Sie eignen sich ideal für Navigationen, Einkaufswagen, Filter-Panels oder zusätzliche Informationen.
 
 ## Features

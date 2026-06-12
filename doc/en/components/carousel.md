@@ -2,9 +2,7 @@
 
 ## Preview
 
-| Slide 1 | Slide 2 | Slide 3 |
-|:---:|:---:|:---:|
-| <img src="../../assets/Carousel-1.png" width="250" alt="Slide 1"> | <img src="../../assets/Carousel-2.png" width="250" alt="Slide 2"> | <img src="../../assets/Carousel-3.png" width="250" alt="Slide 3"> |
+![Preview](../../assets/Carousel.gif)
 
 
 A slideshow component for cycling through elements (like images or slides of custom content) with support for controls, indicators, captions, autoplay cycling (with custom intervals), transitions (slide/fade), dark variant, and touch gestures.

@@ -2,7 +2,9 @@
 
 ## Vorschau
 
-![Vorschau](../../assets/Headings.png)
+| Typografie Vorschau 1 | Typografie Vorschau 2 |
+|:---:|:---:|
+| <img src="../../assets/Typography_1.png" width="380" alt="Typografie Vorschau 1"> | <img src="../../assets/Typography_2.png" width="380" alt="Typografie Vorschau 2"> |
 
 
 Das `BsHeading`-Widget wird verwendet, um Standard-Überschriften von `<h1>` bis `<h6>` mit Bootstrap-kompatiblen Stilen zu rendern, einschließlich des standardmäßigen unteren Abstands (Margin) und der korrekten Zeilenhöhe (Line-Height).

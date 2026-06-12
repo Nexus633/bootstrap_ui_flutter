@@ -1,5 +1,9 @@
 # Spinners
 
+## Preview
+
+![Preview](../../assets/Spinners.gif)
+
 Indicate the loading state of a component or page with Bootstrap spinners.
 
 ## Purpose and Use Case

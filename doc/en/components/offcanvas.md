@@ -1,5 +1,9 @@
 # Offcanvas Sidebar (Offcanvas)
 
+## Preview
+
+![Preview](../../assets/Offcanvas.gif)
+
 Offcanvas sidebars ([`BsOffcanvas`](file:///E:/FlutterProjects/bootstrap_ui_flutter/lib/ui/components/offcanvas/bs_offcanvas.dart) and [`showBsOffcanvas`](file:///E:/FlutterProjects/bootstrap_ui_flutter/lib/ui/components/offcanvas/bs_offcanvas.dart#L282)) are flexible containers that slide in from the edges of the viewport (left, right, top, or bottom). They are perfect for navigation, shopping carts, filter panels, or displaying supplementary details.
 
 ## Features

@@ -4,7 +4,7 @@
 
 | Karte Standard | Header & Footer / Image | Kartengruppe (Card Group) |
 |:---:|:---:|:---:|
-| <img src="../../assets/Card-1.png" width="250" alt="Karte Standard"> | <img src="../../assets/Card-2.png" width="250" alt="Header & Footer / Image"> | <img src="../../assets/Card-3.png" width="250" alt="Kartengruppe"> |
+| <img src="../../assets/Cards_1.png" width="250" alt="Karte Standard"> | <img src="../../assets/Cards_2.png" width="250" alt="Header & Footer / Image"> | <img src="../../assets/Cards_3.png" width="250" alt="Kartengruppe"> |
 
 
 Das `BsCard`-Widget ist ein flexibler und erweiterbarer Inhaltscontainer. Es unterstützt Kopfzeilen (Header), Fußzeilen (Footer), Hauptinhalte (Body), Bilder (oben, unten, links, rechts, Overlay), Farbvarianten und anpassbare Layouts.

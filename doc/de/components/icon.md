@@ -1,5 +1,11 @@
 # Icon
 
+## Vorschau
+
+| Icon Vorschau 1 | Icon Vorschau 2 |
+|:---:|:---:|
+| <img src="../../assets/Icons_1.png" width="380" alt="Icon Vorschau 1"> | <img src="../../assets/Icons_2.png" width="380" alt="Icon Vorschau 2"> |
+
 Icon-Komponente zur Nachbildung und Anzeige der Bootstrap 5 Icons.
 
 ## Zweck

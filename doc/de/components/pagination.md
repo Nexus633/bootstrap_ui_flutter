@@ -1,5 +1,9 @@
 # Pagination (Seitennummerierung)
 
+## Vorschau
+
+![Vorschau](../../assets/Pagination.gif)
+
 Pagination-Komponenten dienen dazu, Inhalte auf mehrere Seiten aufzuteilen und dem Benutzer das Navigieren zwischen diesen Seiten zu ermöglichen. Sie basieren auf den CSS-Klassen und dem Layout von Bootstrap 5.3.
 
 ## Verwendung

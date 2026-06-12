@@ -2,9 +2,7 @@
 
 ## Vorschau
 
-| Slide 1 | Slide 2 | Slide 3 |
-|:---:|:---:|:---:|
-| <img src="../../assets/Carousel-1.png" width="250" alt="Slide 1"> | <img src="../../assets/Carousel-2.png" width="250" alt="Slide 2"> | <img src="../../assets/Carousel-3.png" width="250" alt="Slide 3"> |
+![Vorschau](../../assets/Carousel.gif)
 
 
 Eine Slideshow-Komponente zum Durchlaufen von Elementen (wie Bildern oder benutzerdefinierten Inhalten) mit Unterstützung für Steuerelemente (Controls), Indikatoren, Beschriftungen (Captions), automatischem Durchlauf mit individuellen Intervallen, Übergangseffekten (Slide/Fade), dunkler Variante (Dark Theme) und Wischgesten (Touch).

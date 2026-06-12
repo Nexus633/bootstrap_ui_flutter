@@ -2,7 +2,9 @@
 
 ## Preview
 
-![Preview](../../assets/Badge.png)
+| Badges Preview 1 | Badges Preview 2 |
+|:---:|:---:|
+| <img src="../../assets/Badges_1.png" width="380" alt="Badges Preview 1"> | <img src="../../assets/Badges_2.png" width="380" alt="Badges Preview 2"> |
 
 
 The `BsBadge` is used to display small pieces of information such as counters or status labels.
