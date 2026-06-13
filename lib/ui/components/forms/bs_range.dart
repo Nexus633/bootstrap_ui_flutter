@@ -86,16 +86,16 @@ class _BsRangeState extends FormFieldState<double> {
     final bool wasValidated = BsValidatedForm.of(context);
 
     // Resolve Validation State
-    BsValidationState currentState = widget.validationState ?? BsValidationState.none;
+    BsValidationState currentState = widget.validationState ?? .none;
     if (widget.validationState == null) {
       if (hasError) {
-        currentState = BsValidationState.invalid;
+        currentState = .invalid;
       } else if (wasValidated) {
-        currentState = BsValidationState.valid;
+        currentState = .valid;
       }
     }
     
-    final bool isInvalid = currentState == BsValidationState.invalid;
+    final bool isInvalid = currentState == .invalid;
 
     // Resolve Colors
     Color thumbColor = theme.primary;
@@ -107,7 +107,7 @@ class _BsRangeState extends FormFieldState<double> {
       thumbColor = theme.danger;
       activeTrackColor = theme.danger;
       focusRingColor = theme.danger.withValues(alpha: 0.25);
-    } else if (currentState == BsValidationState.valid) {
+    } else if (currentState == .valid) {
       thumbColor = theme.success;
       activeTrackColor = theme.success;
       focusRingColor = theme.success.withValues(alpha: 0.25);
@@ -159,7 +159,7 @@ class _BsRangeState extends FormFieldState<double> {
       children: [
         slider,
         if (hasError)
-          BsFormFeedback(state: BsValidationState.invalid, message: errorText!).pt(4),
+          BsFormFeedback(state: .invalid, message: errorText!).pt(4),
       ],
     );
   }

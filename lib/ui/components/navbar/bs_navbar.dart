@@ -12,21 +12,21 @@ Color? _resolveVariantColor(BuildContext context, BsVariant? variant) {
   if (variant == null) return null;
   final theme = context.bs;
   switch (variant) {
-    case BsVariant.primary:
+    case .primary:
       return theme.primary;
-    case BsVariant.secondary:
+    case .secondary:
       return theme.secondary;
-    case BsVariant.success:
+    case .success:
       return theme.success;
-    case BsVariant.danger:
+    case .danger:
       return theme.danger;
-    case BsVariant.warning:
+    case .warning:
       return theme.warning;
-    case BsVariant.info:
+    case .info:
       return theme.info;
-    case BsVariant.light:
+    case .light:
       return theme.light;
-    case BsVariant.dark:
+    case .dark:
       return theme.dark;
   }
 }
@@ -70,7 +70,7 @@ class BsNavbar extends StatefulWidget {
     super.key,
     this.brand,
     this.collapse,
-    this.expand = BsNavbarExpand.lg,
+    this.expand = .lg,
     this.dark = false,
     this.background,
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -119,25 +119,25 @@ class _BsNavbarState extends State<BsNavbar> {
         // Resolve active expansion state based on layout width
         bool isExpanded = false;
         switch (widget.expand) {
-          case BsNavbarExpand.always:
+          case .always:
             isExpanded = true;
             break;
-          case BsNavbarExpand.sm:
+          case .sm:
             isExpanded = width >= BsBreakpoints.sm;
             break;
-          case BsNavbarExpand.md:
+          case .md:
             isExpanded = width >= BsBreakpoints.md;
             break;
-          case BsNavbarExpand.lg:
+          case .lg:
             isExpanded = width >= BsBreakpoints.lg;
             break;
-          case BsNavbarExpand.xl:
+          case .xl:
             isExpanded = width >= BsBreakpoints.xl;
             break;
-          case BsNavbarExpand.xxl:
+          case .xxl:
             isExpanded = width >= BsBreakpoints.xxl;
             break;
-          case BsNavbarExpand.never:
+          case .never:
             isExpanded = false;
             break;
         }

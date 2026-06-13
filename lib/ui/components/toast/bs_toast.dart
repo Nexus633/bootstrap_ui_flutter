@@ -46,17 +46,17 @@ class BsToast extends StatelessWidget {
 
     if (variant != null) {
       // Color variant applied (text-bg-*)
-      final bool isLightVariant = variant == BsVariant.light || variant == BsVariant.warning || variant == BsVariant.info;
+      final bool isLightVariant = variant == .light || variant == .warning || variant == .info;
       
       bgColor = switch (variant!) {
-        BsVariant.primary => theme.primary,
-        BsVariant.secondary => theme.secondary,
-        BsVariant.success => theme.success,
-        BsVariant.danger => theme.danger,
-        BsVariant.warning => theme.warning,
-        BsVariant.info => theme.info,
-        BsVariant.light => theme.light,
-        BsVariant.dark => theme.dark,
+        .primary => theme.primary,
+        .secondary => theme.secondary,
+        .success => theme.success,
+        .danger => theme.danger,
+        .warning => theme.warning,
+        .info => theme.info,
+        .light => theme.light,
+        .dark => theme.dark,
       };
 
       textColor = isLightVariant ? const Color(0xFF000000) : const Color(0xFFFFFFFF);

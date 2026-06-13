@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import '../../tokens/bootstrap_theme.dart';
@@ -55,8 +54,8 @@ class BsPopover extends StatefulWidget {
     this.content,
     this.titleText,
     this.contentText,
-    this.placement = BsPopoverPlacement.top,
-    this.trigger = BsPopoverTrigger.click,
+    this.placement = .top,
+    this.trigger = .click,
     this.controller,
     this.maxWidth = 276.0,
     this.disabled = false,
@@ -226,34 +225,34 @@ class _BsPopoverState extends State<BsPopover> {
       const double minHeightRequired = 120.0;
       const double minWidthRequired = 200.0;
 
-      if (widget.placement == BsPopoverPlacement.top && spaceAbove < minHeightRequired && spaceBelow > spaceAbove) {
-        effectivePlacement = BsPopoverPlacement.bottom;
-      } else if (widget.placement == BsPopoverPlacement.bottom && spaceBelow < minHeightRequired && spaceAbove > spaceBelow) {
-        effectivePlacement = BsPopoverPlacement.top;
-      } else if (widget.placement == BsPopoverPlacement.start && spaceLeft < minWidthRequired && spaceRight > spaceLeft) {
-        effectivePlacement = BsPopoverPlacement.end;
-      } else if (widget.placement == BsPopoverPlacement.end && spaceRight < minWidthRequired && spaceLeft > spaceRight) {
-        effectivePlacement = BsPopoverPlacement.start;
+      if (widget.placement == .top && spaceAbove < minHeightRequired && spaceBelow > spaceAbove) {
+        effectivePlacement = .bottom;
+      } else if (widget.placement == .bottom && spaceBelow < minHeightRequired && spaceAbove > spaceBelow) {
+        effectivePlacement = .top;
+      } else if (widget.placement == .start && spaceLeft < minWidthRequired && spaceRight > spaceLeft) {
+        effectivePlacement = .end;
+      } else if (widget.placement == .end && spaceRight < minWidthRequired && spaceLeft > spaceRight) {
+        effectivePlacement = .start;
       }
 
       // Configure overlays anchors based on effective placement
       switch (effectivePlacement) {
-        case BsPopoverPlacement.top:
+        case .top:
           targetAnchor = Alignment.topCenter;
           followerAnchor = Alignment.bottomCenter;
           offset = const Offset(0, -2);
           break;
-        case BsPopoverPlacement.bottom:
+        case .bottom:
           targetAnchor = Alignment.bottomCenter;
           followerAnchor = Alignment.topCenter;
           offset = const Offset(0, 2);
           break;
-        case BsPopoverPlacement.start:
+        case .start:
           targetAnchor = Alignment.centerLeft;
           followerAnchor = Alignment.centerRight;
           offset = const Offset(-2, 0);
           break;
-        case BsPopoverPlacement.end:
+        case .end:
           targetAnchor = Alignment.centerRight;
           followerAnchor = Alignment.centerLeft;
           offset = const Offset(2, 0);
@@ -282,7 +281,7 @@ class _BsPopoverState extends State<BsPopover> {
 
     final bool hasHeader = titleWidget != null;
     final Color arrowColor;
-    if (effectivePlacement == BsPopoverPlacement.bottom && hasHeader) {
+    if (effectivePlacement == .bottom && hasHeader) {
       arrowColor = effectiveHeaderBgColor;
     } else {
       arrowColor = effectiveBgColor;
@@ -348,7 +347,7 @@ class _BsPopoverState extends State<BsPopover> {
 
         // Align arrow according to placement
         final Widget popoverWithArrow;
-        if (effectivePlacement == BsPopoverPlacement.top) {
+        if (effectivePlacement == .top) {
           popoverWithArrow = Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -356,21 +355,21 @@ class _BsPopoverState extends State<BsPopover> {
               CustomPaint(
                 size: const Size(12.0, 6.0),
                 painter: _ArrowPainter(
-                  direction: BsPopoverPlacement.top,
+                  direction: .top,
                   color: arrowColor,
                   borderColor: effectiveBorderColor,
                 ),
               ),
             ],
           );
-        } else if (effectivePlacement == BsPopoverPlacement.bottom) {
+        } else if (effectivePlacement == .bottom) {
           popoverWithArrow = Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               CustomPaint(
                 size: const Size(12.0, 6.0),
                 painter: _ArrowPainter(
-                  direction: BsPopoverPlacement.bottom,
+                  direction: .bottom,
                   color: arrowColor,
                   borderColor: effectiveBorderColor,
                 ),
@@ -378,7 +377,7 @@ class _BsPopoverState extends State<BsPopover> {
               popoverCard,
             ],
           );
-        } else if (effectivePlacement == BsPopoverPlacement.start) {
+        } else if (effectivePlacement == .start) {
           popoverWithArrow = Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -386,7 +385,7 @@ class _BsPopoverState extends State<BsPopover> {
               CustomPaint(
                 size: const Size(6.0, 12.0),
                 painter: _ArrowPainter(
-                  direction: BsPopoverPlacement.start,
+                  direction: .start,
                   color: arrowColor,
                   borderColor: effectiveBorderColor,
                 ),
@@ -400,7 +399,7 @@ class _BsPopoverState extends State<BsPopover> {
               CustomPaint(
                 size: const Size(6.0, 12.0),
                 painter: _ArrowPainter(
-                  direction: BsPopoverPlacement.end,
+                  direction: .end,
                   color: arrowColor,
                   borderColor: effectiveBorderColor,
                 ),
@@ -430,7 +429,7 @@ class _BsPopoverState extends State<BsPopover> {
         );
 
         // Outside tap barrier for click triggers
-        if (widget.trigger == BsPopoverTrigger.click) {
+        if (widget.trigger == .click) {
           return Stack(
             children: [
               GestureDetector(
@@ -465,20 +464,30 @@ class _BsPopoverState extends State<BsPopover> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.trigger == BsPopoverTrigger.hover) {
-      return MouseRegion(
-        cursor: widget.disabled ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
-        onEnter: (_) {
+    if (widget.trigger == .hover) {
+      return GestureDetector(
+        onLongPress: () {
           if (!widget.disabled) {
             _effectiveController.open();
           }
         },
-        onExit: (_) {
+        onLongPressEnd: (_) {
           _effectiveController.close();
         },
-        child: CompositedTransformTarget(
-          link: _layerLink,
-          child: widget.child,
+        child: MouseRegion(
+          cursor: widget.disabled ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+          onEnter: (_) {
+            if (!widget.disabled) {
+              _effectiveController.open();
+            }
+          },
+          onExit: (_) {
+            _effectiveController.close();
+          },
+          child: CompositedTransformTarget(
+            link: _layerLink,
+            child: widget.child,
+          ),
         ),
       );
     }
@@ -486,15 +495,9 @@ class _BsPopoverState extends State<BsPopover> {
     // Default trigger is Click
     return MouseRegion(
       cursor: widget.disabled ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
-      child: Listener(
+      child: GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onPointerDown: widget.disabled
-            ? null
-            : (event) {
-                if (event.buttons == kPrimaryButton) {
-                  _togglePopover();
-                }
-              },
+        onTap: widget.disabled ? null : _togglePopover,
         child: CompositedTransformTarget(
           link: _layerLink,
           child: widget.child,
@@ -532,7 +535,7 @@ class _ArrowPainter extends CustomPainter {
     final borderPath = Path();
 
     switch (direction) {
-      case BsPopoverPlacement.top:
+      case .top:
         // Triangle pointing down
         path.moveTo(0, 0);
         path.lineTo(size.width, 0);
@@ -543,7 +546,7 @@ class _ArrowPainter extends CustomPainter {
         borderPath.lineTo(size.width / 2, size.height);
         borderPath.lineTo(size.width, 0);
         break;
-      case BsPopoverPlacement.bottom:
+      case .bottom:
         // Triangle pointing up
         path.moveTo(0, size.height);
         path.lineTo(size.width, size.height);
@@ -554,7 +557,7 @@ class _ArrowPainter extends CustomPainter {
         borderPath.lineTo(size.width / 2, 0);
         borderPath.lineTo(size.width, size.height);
         break;
-      case BsPopoverPlacement.start:
+      case .start:
         // Triangle pointing right
         path.moveTo(0, 0);
         path.lineTo(0, size.height);
@@ -565,7 +568,7 @@ class _ArrowPainter extends CustomPainter {
         borderPath.lineTo(size.width, size.height / 2);
         borderPath.lineTo(0, size.height);
         break;
-      case BsPopoverPlacement.end:
+      case .end:
         // Triangle pointing left
         path.moveTo(size.width, 0);
         path.lineTo(size.width, size.height);

@@ -209,21 +209,27 @@ class BadgeShowcase extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Text('Example Heading 1').fs1().fwBold(),
+                      Expanded(
+                        child: const Text('Example Heading 1').fs1().fwBold(),
+                      ),
                       const SizedBox(width: 12),
                       const BsBadge(label: 'New', variant: BsVariant.primary),
                     ],
                   ).pb3(),
                   Row(
                     children: [
-                      const Text('Example Heading 3').fs3().fwBold(),
+                      Expanded(
+                        child: const Text('Example Heading 3').fs3().fwBold(),
+                      ),
                       const SizedBox(width: 10),
                       const BsBadge(label: 'New', variant: BsVariant.secondary),
                     ],
                   ).pb3(),
                   Row(
                     children: [
-                      const Text('Notifications').fs5().fwSemibold(),
+                      Expanded(
+                        child: const Text('Notifications').fs5().fwSemibold(),
+                      ),
                       const SizedBox(width: 8),
                       const BsBadge(label: '9+', variant: BsVariant.danger),
                     ],
@@ -300,7 +306,8 @@ class BadgeShowcase extends StatelessWidget {
                     children: [
                       BsButton(
                         label: 'Inbox',
-                        variant: BsButtonVariant.outlinePrimary,
+                        variant: BsButtonVariant.primary,
+                        outline: true,
                         badge: const BsBadge(
                           label: '4',
                           variant: BsVariant.primary,

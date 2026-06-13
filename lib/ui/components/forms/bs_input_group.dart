@@ -49,7 +49,7 @@ class BsInputGroup extends StatelessWidget {
   const BsInputGroup({
     super.key,
     required this.children,
-    this.size = BsInputSize.md,
+    this.size = .md,
   });
 
   /// The children of the input group.
@@ -120,7 +120,7 @@ class BsInputGroupText extends StatelessWidget {
     final theme = context.bs;
     final groupContext = BsInputGroupChildContext.of(context);
 
-    final BsInputSize size = groupContext?.size ?? BsInputSize.md;
+    final BsInputSize size = groupContext?.size ?? .md;
     final bool isFirst = groupContext?.isFirst ?? true;
     final bool isLast = groupContext?.isLast ?? true;
 
@@ -131,19 +131,19 @@ class BsInputGroupText extends StatelessWidget {
     double fontSize = BsTypography.fontSizeBase;
     double minHeight = 38.0; // <--- NEU
 
-    if (size == BsInputSize.sm) {
+    if (size == .sm) {
       padding = const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0);
       fontSize = BsTypography.fontSizeSm;
       minHeight = 31.0; // <--- NEU
-    } else if (size == BsInputSize.lg) {
+    } else if (size == .lg) {
       padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0);
       fontSize = BsTypography.fontSizeLg;
       minHeight = 48.0; // <--- NEU
     }
 
-    final double radius = size == BsInputSize.sm
+    final double radius = size == .sm
         ? 4.0
-        : (size == BsInputSize.lg ? 8.0 : 6.0);
+        : (size == .lg ? 8.0 : 6.0);
     final Radius r = Radius.circular(radius);
 
     BorderRadius borderRadius;

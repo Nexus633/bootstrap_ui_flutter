@@ -122,24 +122,28 @@ class ModalShowcase extends StatelessWidget {
                           spacing: 8,
                           runSpacing: 8,
                           children: [
-                            BsButton(
+                             BsButton(
                               label: 'Small (sm)',
-                              variant: BsButtonVariant.outlinePrimary,
+                              variant: BsButtonVariant.primary,
+                              outline: true,
                               onPressed: () => _showSizedModal(context, BsModalSize.sm),
                             ),
                             BsButton(
                               label: 'Large (lg)',
-                              variant: BsButtonVariant.outlinePrimary,
+                              variant: BsButtonVariant.primary,
+                              outline: true,
                               onPressed: () => _showSizedModal(context, BsModalSize.lg),
                             ),
                             BsButton(
                               label: 'Extra Large (xl)',
-                              variant: BsButtonVariant.outlinePrimary,
+                              variant: BsButtonVariant.primary,
+                              outline: true,
                               onPressed: () => _showSizedModal(context, BsModalSize.xl),
                             ),
                             BsButton(
                               label: 'Fullscreen',
-                              variant: BsButtonVariant.outlinePrimary,
+                              variant: BsButtonVariant.primary,
+                              outline: true,
                               onPressed: () => _showSizedModal(context, BsModalSize.fullscreen),
                             ),
                           ],

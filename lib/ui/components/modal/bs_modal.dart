@@ -20,7 +20,7 @@ class BsModal extends StatelessWidget {
     this.header,
     required this.body,
     this.footer,
-    this.size = BsModalSize.md,
+    this.size = .md,
     this.centered = false,
     this.scrollable = false,
   });
@@ -49,9 +49,9 @@ class BsModal extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
 
-    final double borderRadiusVal = size == BsModalSize.fullscreen
+    final double borderRadiusVal = size == .fullscreen
         ? 0.0
-        : (size == BsModalSize.sm ? 4.8 : 8.0);
+        : (size == .sm ? 4.8 : 8.0);
 
     final dialogDecoration = BoxDecoration(
       color: theme.bodyBg,
@@ -62,9 +62,13 @@ class BsModal extends StatelessWidget {
 
     final double modalWidth = _resolveWidth(context, screenWidth);
 
-    if (size == BsModalSize.fullscreen) {
+    if (size == .fullscreen) {
       return Semantics(
         sortKey: const OrdinalSortKey(BsZIndex.modal * 1.0),
+        scopesRoute: true,
+        namesRoute: true,
+        explicitChildNodes: true,
+        label: 'Modal Dialog',
         child: Container(
         width: screenWidth,
         height: screenHeight,
@@ -90,6 +94,10 @@ class BsModal extends StatelessWidget {
         ),
         child: Semantics(
           sortKey: const OrdinalSortKey(BsZIndex.modal * 1.0),
+          scopesRoute: true,
+          namesRoute: true,
+          explicitChildNodes: true,
+          label: 'Modal Dialog',
           child: Container(
             decoration: dialogDecoration,
           child: Column(
@@ -110,6 +118,10 @@ class BsModal extends StatelessWidget {
     } else {
       return Semantics(
         sortKey: const OrdinalSortKey(BsZIndex.modal * 1.0),
+        scopesRoute: true,
+        namesRoute: true,
+        explicitChildNodes: true,
+        label: 'Modal Dialog',
         child: Container(
           margin: EdgeInsets.only(
           top: centered ? 0.0 : 30.0,
@@ -133,19 +145,19 @@ class BsModal extends StatelessWidget {
   double _resolveWidth(BuildContext context, double screenWidth) {
     double maxWidth;
     switch (size) {
-      case BsModalSize.sm:
+      case .sm:
         maxWidth = 300.0;
         break;
-      case BsModalSize.md:
+      case .md:
         maxWidth = 500.0;
         break;
-      case BsModalSize.lg:
+      case .lg:
         maxWidth = 800.0;
         break;
-      case BsModalSize.xl:
+      case .xl:
         maxWidth = 1140.0;
         break;
-      case BsModalSize.fullscreen:
+      case .fullscreen:
         maxWidth = screenWidth;
         break;
     }
@@ -349,9 +361,9 @@ class _BsModalBackdropWrapperState extends State<_BsModalBackdropWrapper> with S
   }
 
   void _handleBackdropTap() {
-    if (widget.backdrop == BsBackdrop.enabled) {
+    if (widget.backdrop == .enabled) {
       Navigator.of(context).pop();
-    } else if (widget.backdrop == BsBackdrop.static) {
+    } else if (widget.backdrop == .static) {
       _triggerPulse();
     }
   }
@@ -422,11 +434,11 @@ class _BsModalBackdropWrapperState extends State<_BsModalBackdropWrapper> with S
 Future<T?> showBsModal<T>({
   required BuildContext context,
   required WidgetBuilder builder,
-  BsBackdrop backdrop = BsBackdrop.enabled,
+  BsBackdrop backdrop = .enabled,
   bool keyboard = true,
   bool centered = false,
 }) {
-  final showBackdrop = backdrop != BsBackdrop.disabled;
+  final showBackdrop = backdrop != .disabled;
   final alignment = centered ? Alignment.center : Alignment.topCenter;
 
   return showGeneralDialog<T>(

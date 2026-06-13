@@ -28,7 +28,7 @@ Hier ist ein einfaches Beispiel für eine Standard-Navbar:
 
 ```dart
 BsNavbar(
-  expand: BsNavbarExpand.lg,
+  expand: .lg,
   brand: Row(
     children: [
       BsNavbarIconBrand(
@@ -77,7 +77,7 @@ BsNavbar(
 | :--- | :--- | :--- | :--- |
 | `brand` | `Widget?` | `null` | Die Marken-Komponente (meistens `BsNavbarBrand`). |
 | `collapse` | `BsNavbarCollapse?` | `null` | Der kollabierbare Inhaltsbereich (meistens `BsNavbarCollapse`). |
-| `expand` | `BsNavbarExpand` | `BsNavbarExpand.lg` | Der Breakpoint, ab dem sich das Menü horizontal ausbreitet (`always`, `sm`, `md`, `lg`, `xl`, `xxl`, `never`). |
+| `expand` | `BsNavbarExpand` | `.lg` | Der Breakpoint, ab dem sich das Menü horizontal ausbreitet (`always`, `sm`, `md`, `lg`, `xl`, `xxl`, `never`). |
 | `dark` | `bool` | `false` | Falls `true`, wird die Navbar für dunkle Hintergründe optimiert (weißer Text/Icons). |
 | `background` | `Color?` | `null` | Eigene Hintergrundfarbe. Standardmäßig abhängig vom Theme. |
 | `padding` | `EdgeInsetsGeometry` | `symmetric(horizontal: 16, vertical: 8)` | Die Innenabstände der Navbar. |

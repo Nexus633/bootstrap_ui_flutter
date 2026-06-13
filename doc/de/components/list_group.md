@@ -101,15 +101,15 @@ BsListGroup(
 BsListGroup(
   children: [
     BsListGroupItem(
-      variant: BsListGroupItemVariant.primary,
+      variant: .primary,
       child: Text('Primäres Element'),
     ),
     BsListGroupItem(
-      variant: BsListGroupItemVariant.success,
+      variant: .success,
       child: Text('Erfolgreiches Element'),
     ),
     BsListGroupItem(
-      variant: BsListGroupItemVariant.danger,
+      variant: .danger,
       child: Text('Gefährliches Element'),
     ),
   ],

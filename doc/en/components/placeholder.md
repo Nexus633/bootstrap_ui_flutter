@@ -27,7 +27,7 @@ Wrap placeholder elements inside a `BsPlaceholderContainer` to animate them.
 **Wave (Shimmer Effect - Recommended):**
 ```dart
 BsPlaceholderContainer(
-  animation: BsPlaceholderAnimation.wave,
+  animation: .wave,
   child: Column(
     children: [
       BsPlaceholder(widthFactor: 0.5),
@@ -41,7 +41,7 @@ BsPlaceholderContainer(
 **Glow (Pulse Opacity Effect):**
 ```dart
 BsPlaceholderContainer(
-  animation: BsPlaceholderAnimation.glow,
+  animation: .glow,
   child: Column(
     children: [
       BsPlaceholder(widthFactor: 0.6),
@@ -55,13 +55,13 @@ BsPlaceholderContainer(
 ## Sizing
 
 Control the placeholder height using the `size` attribute:
-- `BsSize.sm` (small, height: ~11px)
-- `BsSize.md` (medium/default, height: ~14px)
-- `BsSize.lg` (large, height: ~18px)
+- `.sm` (small, height: ~11px)
+- `.md` (medium/default, height: ~14px)
+- `.lg` (large, height: ~18px)
 
 ```dart
 BsPlaceholder(
-  size: BsSize.lg,
+  size: .lg,
   widthFactor: 0.5,
 )
 ```
@@ -85,7 +85,7 @@ You can customize it by providing predefined semantic Bootstrap colors (`BsVaria
 ```dart
 // Predefined semantic variant
 BsPlaceholder(
-  variant: BsVariant.primary,
+  variant: .primary,
   widthFactor: 0.5,
 )
 
@@ -103,7 +103,7 @@ BsPlaceholder(
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | `child` | `Widget` | - | The child subtree containing placeholder widgets. |
-| `animation` | `BsPlaceholderAnimation` | `BsPlaceholderAnimation.glow` | The animation type (`none`, `glow`, `wave`). |
+| `animation` | `BsPlaceholderAnimation` | `.glow` | The animation type (`none`, `glow`, `wave`). |
 | `duration` | `Duration` | `Duration(milliseconds: 2000)` | The duration of one full animation loop. |
 
 ### BsPlaceholder
@@ -114,7 +114,7 @@ BsPlaceholder(
 | `widthFactor` | `double?` | `null` | Fractional width relative to parent (`0.0` to `1.0`). |
 | `colSpan` | `int?` | `null` | Width expressed in columns of a 12-column grid (`1` to `12`). |
 | `height` | `double?` | `null` | Custom height in logical pixels. Overrides `size`. |
-| `size` | `BsSize` | `BsSize.md` | Size variant (`sm`, `md`, `lg`). |
+| `size` | `BsSize` | `.md` | Size variant (`sm`, `md`, `lg`). |
 | `variant` | `BsVariant?` | `null` | Semantic Bootstrap color variant. |
 | `color` | `Color?` | `null` | Custom background color. Overrides `variant`. |
 | `borderRadius` | `BorderRadius?` | `BorderRadius.circular(4.0)` | Corner rounding of the placeholder. |

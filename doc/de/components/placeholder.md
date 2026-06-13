@@ -27,7 +27,7 @@ Um Platzhalter zu animieren, umschließe sie mit einem `BsPlaceholderContainer`.
 **Wave (Shimmer-Effekt - Empfohlen):**
 ```dart
 BsPlaceholderContainer(
-  animation: BsPlaceholderAnimation.wave,
+  animation: .wave,
   child: Column(
     children: [
       BsPlaceholder(widthFactor: 0.5),
@@ -41,7 +41,7 @@ BsPlaceholderContainer(
 **Glow (Pulsierender Opazitäts-Effekt):**
 ```dart
 BsPlaceholderContainer(
-  animation: BsPlaceholderAnimation.glow,
+  animation: .glow,
   child: Column(
     children: [
       BsPlaceholder(widthFactor: 0.6),
@@ -55,13 +55,13 @@ BsPlaceholderContainer(
 ## Größen (Sizing)
 
 Die Höhe der Platzhalter-Zeilen kann über das `size` Attribut gesteuert werden:
-- `BsSize.sm` (klein, ca. 11px hoch)
-- `BsSize.md` (Standard, ca. 14px hoch)
-- `BsSize.lg` (groß, ca. 18px hoch)
+- `.sm` (klein, ca. 11px hoch)
+- `.md` (Standard, ca. 14px hoch)
+- `.lg` (groß, ca. 18px hoch)
 
 ```dart
 BsPlaceholder(
-  size: BsSize.lg,
+  size: .lg,
   widthFactor: 0.5,
 )
 ```
@@ -85,7 +85,7 @@ Du kannst jedoch vordefinierte Bootstrap-Farbvarianten (`BsVariant`) oder ganz e
 ```dart
 // Verwendung einer Bootstrap-Farbvariante
 BsPlaceholder(
-  variant: BsVariant.primary,
+  variant: .primary,
   widthFactor: 0.5,
 )
 
@@ -103,7 +103,7 @@ BsPlaceholder(
 | Eigenschaft | Typ | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
 | `child` | `Widget` | - | Die Kind-Elemente, auf die die Animation angewendet werden soll. |
-| `animation` | `BsPlaceholderAnimation` | `BsPlaceholderAnimation.glow` | Der Animationstyp (`none`, `glow`, `wave`). |
+| `animation` | `BsPlaceholderAnimation` | `.glow` | Der Animationstyp (`none`, `glow`, `wave`). |
 | `duration` | `Duration` | `Duration(milliseconds: 2000)` | Die Dauer eines vollen Animationszyklus. |
 
 ### BsPlaceholder
@@ -114,7 +114,7 @@ BsPlaceholder(
 | `widthFactor` | `double?` | `null` | Relative Breite relativ zum Elternwidget (`0.0` bis `1.0`). |
 | `colSpan` | `int?` | `null` | Breite ausgedrückt in Rasterspalten (`1` bis `12`). |
 | `height` | `double?` | `null` | Custom-Höhe in logischen Pixeln. Überschreibt `size`. |
-| `size` | `BsSize` | `BsSize.md` | Die Größenvariante des Platzhalters (`sm`, `md`, `lg`). |
+| `size` | `BsSize` | `.md` | Die Größenvariante des Platzhalters (`sm`, `md`, `lg`). |
 | `variant` | `BsVariant?` | `null` | Bootstrap-Farbvariante für den Platzhalter. |
 | `color` | `Color?` | `null` | Custom Hintergrundfarbe. Überschreibt `variant`. |
 | `borderRadius` | `BorderRadius?` | `BorderRadius.circular(4.0)` | Rahmenabrundung des Platzhalters. |

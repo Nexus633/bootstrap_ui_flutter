@@ -9,10 +9,10 @@ class BsSpinner extends StatelessWidget {
   /// Creates a Bootstrap spinner.
   const BsSpinner({
     super.key,
-    this.type = BsSpinnerType.border,
+    this.type = .border,
     this.variant,
     this.color,
-    this.size = BsSpinnerSize.md,
+    this.size = .md,
     this.animationDuration = const Duration(milliseconds: 750),
   });
 
@@ -21,18 +21,18 @@ class BsSpinner extends StatelessWidget {
     super.key,
     this.variant,
     this.color,
-    this.size = BsSpinnerSize.md,
+    this.size = .md,
     this.animationDuration = const Duration(milliseconds: 750),
-  }) : type = BsSpinnerType.border;
+  }) : type = .border;
 
   /// Creates a 'grow' spinner.
   const BsSpinner.grow({
     super.key,
     this.variant,
     this.color,
-    this.size = BsSpinnerSize.md,
+    this.size = .md,
     this.animationDuration = const Duration(milliseconds: 750),
-  }) : type = BsSpinnerType.grow;
+  }) : type = .grow;
 
   /// The type of spinner to display (border or grow).
   final BsSpinnerType type;
@@ -58,28 +58,28 @@ class BsSpinner extends StatelessWidget {
       if (variant != null) {
         final bsTheme = context.bs;
         switch (variant!) {
-          case BsVariant.primary:
+          case .primary:
             effectiveColor = bsTheme.primary;
             break;
-          case BsVariant.secondary:
+          case .secondary:
             effectiveColor = bsTheme.secondary;
             break;
-          case BsVariant.success:
+          case .success:
             effectiveColor = bsTheme.success;
             break;
-          case BsVariant.danger:
+          case .danger:
             effectiveColor = bsTheme.danger;
             break;
-          case BsVariant.warning:
+          case .warning:
             effectiveColor = bsTheme.warning;
             break;
-          case BsVariant.info:
+          case .info:
             effectiveColor = bsTheme.info;
             break;
-          case BsVariant.light:
+          case .light:
             effectiveColor = bsTheme.light;
             break;
-          case BsVariant.dark:
+          case .dark:
             effectiveColor = bsTheme.dark;
             break;
         }
@@ -89,10 +89,10 @@ class BsSpinner extends StatelessWidget {
       }
     }
 
-    final double width = size == BsSpinnerSize.sm ? 16.0 : 32.0;
-    final double height = size == BsSpinnerSize.sm ? 16.0 : 32.0;
+    final double width = size == .sm ? 16.0 : 32.0;
+    final double height = size == .sm ? 16.0 : 32.0;
 
-    if (type == BsSpinnerType.grow) {
+    if (type == .grow) {
       return SizedBox(
         width: width,
         height: height,
@@ -104,7 +104,7 @@ class BsSpinner extends StatelessWidget {
     }
 
     // Default to border spinner
-    final double borderWidth = size == BsSpinnerSize.sm ? 3.2 : 4.0;
+    final double borderWidth = size == .sm ? 3.2 : 4.0;
     return SizedBox(
       width: width,
       height: height,

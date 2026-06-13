@@ -219,7 +219,8 @@ class _FormShowcaseState extends State<FormShowcase> {
                     children: [
                       BsButton(
                         label: 'Button',
-                        variant: BsButtonVariant.outlineSecondary,
+                        variant: BsButtonVariant.secondary,
+                        outline: true,
                         onPressed: () {},
                       ),
                       BsInput(placeholder: '').expanded(),
@@ -243,7 +244,7 @@ class _FormShowcaseState extends State<FormShowcase> {
                         gutterY: BsSpacing.s3,
                         children: [
                           BsCol(
-                            config: const BsColConfig(md: 6),
+                            config: const BsColConfig(xs: 12, md: 6),
                             child: BsInput(
                               placeholder: 'First name',
                               initialValue: 'Mark',
@@ -251,21 +252,21 @@ class _FormShowcaseState extends State<FormShowcase> {
                             ),
                           ),
                           BsCol(
-                            config: const BsColConfig(md: 6),
+                            config: const BsColConfig(xs: 12, md: 6),
                             child: BsInput(
                               placeholder: 'Username',
                               validator: (val) => val == null || val.isEmpty ? 'Please choose a username.' : null,
                             ),
                           ),
                           BsCol(
-                            config: const BsColConfig(md: 6),
+                            config: const BsColConfig(xs: 12, md: 6),
                             child: BsInput(
                               placeholder: 'City',
                               validator: (val) => val == null || val.isEmpty ? 'Please provide a valid city.' : null,
                             ),
                           ),
                           BsCol(
-                            config: const BsColConfig(md: 6),
+                            config: const BsColConfig(xs: 12, md: 6),
                             child: BsCheckbox(
                               label: const Text('Agree to terms and conditions'),
                               validator: (val) => val == true ? null : 'You must agree before submitting.',

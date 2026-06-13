@@ -24,11 +24,11 @@ Modals are displayed using the helper function `showBsModal`:
 ```dart
 showBsModal(
   context: context,
-  backdrop: BsModalBackdrop.enabled, // Backdrop behavior
+  backdrop: .enabled, // Backdrop behavior
   keyboard: true,                    // Escape closes modal
   centered: true,                    // Vertically center modal
   builder: (context) => BsModal(
-    size: BsModalSize.md,
+    size: .md,
     header: const BsModalHeader(
       child: Text('Modal Title'),
     ),
@@ -39,12 +39,12 @@ showBsModal(
       children: [
         BsButton(
           label: 'Cancel',
-          variant: BsButtonVariant.secondary,
+          variant: .secondary,
           onPressed: () => Navigator.of(context).pop(),
         ),
         BsButton(
           label: 'Save changes',
-          variant: BsButtonVariant.primary,
+          variant: .primary,
           onPressed: () {
             // Save changes logic
             Navigator.of(context).pop();
@@ -65,7 +65,7 @@ showBsModal(
 | `body` | `Widget` | *required* | The primary body content area of the modal. |
 | `header` | `BsModalHeader?` | `null` | The header of the modal. |
 | `footer` | `BsModalFooter?` | `null` | The footer of the modal. |
-| `size` | `BsModalSize` | `BsModalSize.md` | The width configuration of the modal (`sm`, `md`, `lg`, `xl`, `fullscreen`). |
+| `size` | `BsModalSize` | `.md` | The width configuration of the modal (`sm`, `md`, `lg`, `xl`, `fullscreen`). |
 | `centered` | `bool` | `false` | If `true`, centers the modal vertically in the viewport. |
 | `scrollable` | `bool` | `false` | If `true`, enables vertical scrolling of the body while keeping header and footer fixed. |
 

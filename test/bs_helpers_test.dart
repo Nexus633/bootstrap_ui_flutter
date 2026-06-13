@@ -186,6 +186,30 @@ void main() {
       await tester.tap(find.text('Link'));
       expect(pressed, isTrue);
     });
+
+    testWidgets('has link semantics and focusable ActionDetector', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        buildTestWidget(
+          BsLink(
+            label: Text('Link'),
+            onPressed: () {},
+          ),
+        ),
+      );
+
+      final SemanticsHandle semantics = tester.ensureSemantics();
+      expect(
+        tester.getSemantics(find.text('Link')),
+        matchesSemantics(
+          label: 'Link',
+          isLink: true,
+          hasTapAction: true,
+        ),
+      );
+      semantics.dispose();
+
+      expect(find.byType(FocusableActionDetector), findsOneWidget);
+    });
   });
 
   group('BsIconLink', () {

@@ -50,7 +50,7 @@ Like other components, toasts come with different variants:
 
 ```dart
 BsToast(
-  variant: BsVariant.success,
+  variant: .success,
   header: BsToastHeader(
     title: const Text('Success'),
     onClose: () {},

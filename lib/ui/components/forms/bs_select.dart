@@ -16,7 +16,7 @@ class BsSelect<T> extends FormField<T> {
     super.key,
     required this.items,
     T? value,
-    this.size = BsInputSize.md,
+    this.size = .md,
     this.disabled = false,
     this.floatingLabel,
     this.placeholder,
@@ -95,17 +95,17 @@ class _BsSelectState<T> extends FormFieldState<T> {
 
     // Resolve Validation State
     BsValidationState currentState =
-        widget.validationState ?? BsValidationState.none;
+        widget.validationState ?? .none;
     if (widget.validationState == null) {
       if (hasError) {
-        currentState = BsValidationState.invalid;
+        currentState = .invalid;
       } else if (wasValidated) {
-        currentState = BsValidationState.valid;
+        currentState = .valid;
       }
     }
 
-    final bool isInvalid = currentState == BsValidationState.invalid;
-    final bool isValid = currentState == BsValidationState.valid;
+    final bool isInvalid = currentState == .invalid;
+    final bool isValid = currentState == .valid;
 
     // Resolve Colors based on state
     Color borderColor = theme.border;
@@ -147,7 +147,7 @@ class _BsSelectState<T> extends FormFieldState<T> {
     double iconSize = 24.0;
     double minHeight = 38.0;
 
-    if (effectiveSize == BsInputSize.sm) {
+    if (effectiveSize == .sm) {
       padding = const EdgeInsets.only(
         left: 8.0,
         top: 4.0,
@@ -157,7 +157,7 @@ class _BsSelectState<T> extends FormFieldState<T> {
       fontSize = BsTypography.fontSizeSm;
       iconSize = 20.0;
       minHeight = 31.0; // <--- NEU
-    } else if (effectiveSize == BsInputSize.lg) {
+    } else if (effectiveSize == .lg) {
       padding = const EdgeInsets.only(
         left: 16.0,
         top: 8.0,
@@ -175,9 +175,9 @@ class _BsSelectState<T> extends FormFieldState<T> {
       padding = const EdgeInsets.only(top: 26.0, bottom: 6.0, left: 12.0, right: 36.0);
     }
 
-    final double baseRadius = effectiveSize == BsInputSize.sm
+    final double baseRadius = effectiveSize == .sm
         ? 4.0
-        : (effectiveSize == BsInputSize.lg ? 8.0 : 6.0);
+        : (effectiveSize == .lg ? 8.0 : 6.0);
     final Radius r = Radius.circular(baseRadius);
 
     BorderRadius? groupBorderRadius;
@@ -287,7 +287,7 @@ class _BsSelectState<T> extends FormFieldState<T> {
           Padding(
             padding: const EdgeInsets.only(top: 4.0),
             child: BsFormFeedback(
-              state: BsValidationState.invalid,
+              state: .invalid,
               message: errorText!,
             ),
           ),

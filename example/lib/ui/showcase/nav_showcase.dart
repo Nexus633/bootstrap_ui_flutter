@@ -177,7 +177,7 @@ class _NavShowcaseState extends State<NavShowcase> {
                         onPressed: () => setState(() => _activeTab1 = 2),
                       ),
                     ],
-                  ).p3(),
+                  ),
                   BsCardBody(
                     child: SizedBox(
                       height: 80,

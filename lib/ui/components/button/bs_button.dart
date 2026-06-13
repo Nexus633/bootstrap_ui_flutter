@@ -15,14 +15,32 @@ import '../spinner/bs_spinner.dart';
 ///
 /// Use [BsButton] for actions in forms, dialogs, and more with support for
 /// multiple sizes, states, and variants.
+///
+/// ### Example Usage
+///
+/// ```dart
+/// // Standard Primary Button
+/// BsButton(
+///   label: 'Submit',
+///   onPressed: () => print('Pressed'),
+/// )
+///
+/// // Outline Secondary Button
+/// BsButton(
+///   label: 'Cancel',
+///   variant: BsButtonVariant.secondary,
+///   outline: true,
+///   onPressed: () => Navigator.pop(context),
+/// )
+/// ```
 class BsButton extends StatefulWidget {
   /// Creates a [BsButton] widget.
   const BsButton({
     super.key,
     required this.label,
     this.onPressed,
-    this.variant = BsButtonVariant.primary,
-    this.size = BsButtonSize.md,
+    this.variant = .primary,
+    this.size = .md,
     this.isLoading = false,
     this.icon,
     this.iconVariant,
@@ -30,8 +48,9 @@ class BsButton extends StatefulWidget {
     this.fullWidth = false,
     this.customBorderRadius,
     this.badge,
-    this.badgePosition = BsBadgePosition.trailing,
+    this.badgePosition = .trailing,
     this.color,
+    this.outline = false,
   });
 
   /// The text label to display on the button.
@@ -72,6 +91,9 @@ class BsButton extends StatefulWidget {
 
   /// Optional custom background color for the button. Overrides [variant].
   final Color? color;
+
+  /// Whether the button should be rendered as an outline button.
+  final bool outline;
 
   @override
   State<BsButton> createState() => _BsButtonState();
@@ -120,32 +142,32 @@ class _BsButtonState extends State<BsButton> {
     // Absolute Badges (corners)
     final bool isAbsoluteBadge =
         widget.badge != null &&
-        (widget.badgePosition == BsBadgePosition.topLeft ||
-            widget.badgePosition == BsBadgePosition.topRight ||
-            widget.badgePosition == BsBadgePosition.bottomLeft ||
-            widget.badgePosition == BsBadgePosition.bottomRight);
+        (widget.badgePosition == .topLeft ||
+            widget.badgePosition == .topRight ||
+            widget.badgePosition == .bottomLeft ||
+            widget.badgePosition == .bottomRight);
 
     if (isAbsoluteBadge) {
       double? top, bottom, left, right;
       Offset offset = Offset.zero;
 
       switch (widget.badgePosition) {
-        case BsBadgePosition.topLeft:
+        case .topLeft:
           top = 0;
           left = 0;
           offset = const Offset(-0.5, -0.5);
           break;
-        case BsBadgePosition.topRight:
+        case .topRight:
           top = 0;
           right = 0;
           offset = const Offset(0.5, -0.5);
           break;
-        case BsBadgePosition.bottomLeft:
+        case .bottomLeft:
           bottom = 0;
           left = 0;
           offset = const Offset(-0.5, 0.5);
           break;
-        case BsBadgePosition.bottomRight:
+        case .bottomRight:
           bottom = 0;
           right = 0;
           offset = const Offset(0.5, 0.5);
@@ -218,11 +240,11 @@ class _BsButtonState extends State<BsButton> {
       return bsTheme.bodyBgSecondary; // Dynamic disabled background
     }
 
-    if (widget.variant == BsButtonVariant.link) {
+    if (widget.variant == .link) {
       return Colors.transparent;
     }
 
-    final bool isOutline = widget.color == null && widget.variant.name.startsWith('outline');
+    final bool isOutline = widget.color == null && widget.outline && widget.variant != .link;
 
     if (_isPressed) {
       return isOutline
@@ -244,7 +266,7 @@ class _BsButtonState extends State<BsButton> {
       return bsTheme.bodyTextTertiary; // Dynamic disabled text
     }
 
-    final bool isOutline = widget.color == null && widget.variant.name.startsWith('outline');
+    final bool isOutline = widget.color == null && widget.outline && widget.variant != .link;
     if (_isPressed && isOutline) {
       return Colors.white;
     }
@@ -273,7 +295,7 @@ class _BsButtonState extends State<BsButton> {
   // ─── Content Builder ────────────────────────────────────────────────────────
 
   Widget _buildContent(_ButtonStyle style, Color textColor) {
-    final bool isLink = widget.variant == BsButtonVariant.link;
+    final bool isLink = widget.variant == .link;
     final bool showUnderline =
         isLink && (_isHovered || _isPressed) && !_isDisabled;
 
@@ -288,14 +310,14 @@ class _BsButtonState extends State<BsButton> {
     final List<Widget> content = [];
 
     final bool isLeadingBadge =
-        widget.badge != null && widget.badgePosition == BsBadgePosition.leading;
+        widget.badge != null && widget.badgePosition == .leading;
     final bool isTrailingBadge =
         widget.badge != null &&
-        widget.badgePosition == BsBadgePosition.trailing;
+        widget.badgePosition == .trailing;
 
     if (widget.isLoading) {
       content.add(
-        const BsSpinner.border(size: BsSpinnerSize.sm),
+        const BsSpinner.border(size: .sm),
       );
       if (widget.label.isNotEmpty) {
         content.add(const SizedBox(width: 8));
@@ -355,14 +377,14 @@ class _BsButtonState extends State<BsButton> {
 
   Color _resolveVariantColor(BsVariant variant, BsThemeData bs) {
     return switch (variant) {
-      BsVariant.primary => bs.primary,
-      BsVariant.secondary => bs.secondary,
-      BsVariant.success => bs.success,
-      BsVariant.danger => bs.danger,
-      BsVariant.warning => bs.warning,
-      BsVariant.info => bs.info,
-      BsVariant.light => bs.light,
-      BsVariant.dark => bs.dark,
+      .primary => bs.primary,
+      .secondary => bs.secondary,
+      .success => bs.success,
+      .danger => bs.danger,
+      .warning => bs.warning,
+      .info => bs.info,
+      .light => bs.light,
+      .dark => bs.dark,
     };
   }
 
@@ -376,22 +398,22 @@ class _BsButtonState extends State<BsButton> {
   ) {
     final groupContext = BsInputGroupChildContext.of(context);
     final BsButtonSize effectiveSize = groupContext != null ? 
-      (groupContext.size == BsInputSize.sm ? BsButtonSize.sm : 
-       (groupContext.size == BsInputSize.lg ? BsButtonSize.lg : BsButtonSize.md))
+      (groupContext.size == .sm ? .sm : 
+       (groupContext.size == .lg ? .lg : .md))
       : size;
 
     final EdgeInsets padding = switch (effectiveSize) {
-      BsButtonSize.sm => BsSpacing.btnPaddingSm,
-      BsButtonSize.md => BsSpacing.btnPaddingMd,
-      BsButtonSize.lg => BsSpacing.btnPaddingLg,
+      .sm => BsSpacing.btnPaddingSm,
+      .md => BsSpacing.btnPaddingMd,
+      .lg => BsSpacing.btnPaddingLg,
     };
     final TextStyle textStyle = switch (effectiveSize) {
-      BsButtonSize.sm => BsTypography.btnSm,
-      BsButtonSize.md => BsTypography.btnMd,
-      BsButtonSize.lg => BsTypography.btnLg,
+      .sm => BsTypography.btnSm,
+      .md => BsTypography.btnMd,
+      .lg => BsTypography.btnLg,
     };
     
-    final double baseRadius = effectiveSize == BsButtonSize.sm ? 4.0 : (effectiveSize == BsButtonSize.lg ? 8.0 : 6.0);
+    final double baseRadius = effectiveSize == .sm ? 4.0 : (effectiveSize == .lg ? 8.0 : 6.0);
     final Radius r = Radius.circular(baseRadius);
 
     BorderRadius? groupBorderRadius;
@@ -421,8 +443,8 @@ class _BsButtonState extends State<BsButton> {
       );
     }
 
-    return switch (variant) {
-      BsButtonVariant.primary => _ButtonStyle(
+    final _ButtonStyle baseStyle = switch (variant) {
+      .primary => _ButtonStyle(
         backgroundColor: bs.primary,
         foregroundColor: BsColors.onPrimary,
         border: bs.primary,
@@ -430,7 +452,7 @@ class _BsButtonState extends State<BsButton> {
         textStyle: textStyle,
         borderRadius: borderRadius,
       ),
-      BsButtonVariant.secondary => _ButtonStyle(
+      .secondary => _ButtonStyle(
         backgroundColor: bs.secondary,
         foregroundColor: BsColors.onSecondary,
         border: bs.secondary,
@@ -438,7 +460,7 @@ class _BsButtonState extends State<BsButton> {
         textStyle: textStyle,
         borderRadius: borderRadius,
       ),
-      BsButtonVariant.success => _ButtonStyle(
+      .success => _ButtonStyle(
         backgroundColor: bs.success,
         foregroundColor: BsColors.onSuccess,
         border: bs.success,
@@ -446,7 +468,7 @@ class _BsButtonState extends State<BsButton> {
         textStyle: textStyle,
         borderRadius: borderRadius,
       ),
-      BsButtonVariant.danger => _ButtonStyle(
+      .danger => _ButtonStyle(
         backgroundColor: bs.danger,
         foregroundColor: BsColors.onDanger,
         border: bs.danger,
@@ -454,7 +476,7 @@ class _BsButtonState extends State<BsButton> {
         textStyle: textStyle,
         borderRadius: borderRadius,
       ),
-      BsButtonVariant.warning => _ButtonStyle(
+      .warning => _ButtonStyle(
         backgroundColor: bs.warning,
         foregroundColor: BsColors.onWarning,
         border: bs.warning,
@@ -462,7 +484,7 @@ class _BsButtonState extends State<BsButton> {
         textStyle: textStyle,
         borderRadius: borderRadius,
       ),
-      BsButtonVariant.info => _ButtonStyle(
+      .info => _ButtonStyle(
         backgroundColor: bs.info,
         foregroundColor: BsColors.onInfo,
         border: bs.info,
@@ -470,7 +492,7 @@ class _BsButtonState extends State<BsButton> {
         textStyle: textStyle,
         borderRadius: borderRadius,
       ),
-      BsButtonVariant.light => _ButtonStyle(
+      .light => _ButtonStyle(
         backgroundColor: bs.light,
         foregroundColor: bs.onLight,
         border: bs.light,
@@ -478,7 +500,7 @@ class _BsButtonState extends State<BsButton> {
         textStyle: textStyle,
         borderRadius: borderRadius,
       ),
-      BsButtonVariant.dark => _ButtonStyle(
+      .dark => _ButtonStyle(
         backgroundColor: bs.dark,
         foregroundColor: bs.onDark,
         border: bs.dark,
@@ -486,67 +508,9 @@ class _BsButtonState extends State<BsButton> {
         textStyle: textStyle,
         borderRadius: borderRadius,
       ),
-      BsButtonVariant.outlinePrimary => _ButtonStyle(
-        backgroundColor: Colors.transparent,
-        foregroundColor: bs.primary,
-        border: bs.primary,
-        padding: padding,
-        textStyle: textStyle,
-        borderRadius: borderRadius,
-      ),
-      BsButtonVariant.outlineSecondary => _ButtonStyle(
-        backgroundColor: Colors.transparent,
-        foregroundColor: bs.secondary,
-        border: bs.secondary,
-        padding: padding,
-        textStyle: textStyle,
-        borderRadius: borderRadius,
-      ),
-      BsButtonVariant.outlineSuccess => _ButtonStyle(
-        backgroundColor: Colors.transparent,
-        foregroundColor: bs.success,
-        border: bs.success,
-        padding: padding,
-        textStyle: textStyle,
-        borderRadius: borderRadius,
-      ),
-      BsButtonVariant.outlineDanger => _ButtonStyle(
-        backgroundColor: Colors.transparent,
-        foregroundColor: bs.danger,
-        border: bs.danger,
-        padding: padding,
-        textStyle: textStyle,
-        borderRadius: borderRadius,
-      ),
-      BsButtonVariant.outlineWarning => _ButtonStyle(
-        backgroundColor: Colors.transparent,
-        foregroundColor: bs.warning,
-        border: bs.warning,
-        padding: padding,
-        textStyle: textStyle,
-        borderRadius: borderRadius,
-      ),
-      BsButtonVariant.outlineInfo => _ButtonStyle(
-        backgroundColor: Colors.transparent,
-        foregroundColor: bs.info,
-        border: bs.info,
-        padding: padding,
-        textStyle: textStyle,
-        borderRadius: borderRadius,
-      ),
-      BsButtonVariant.outlineDark => _ButtonStyle(
-        backgroundColor: Colors.transparent,
-        // bs.bodyText is black in Light Mode and light gray in Dark Mode!
-        // Perfect for visibility on dark backgrounds.
-        foregroundColor: bs.bodyText,
-        border: bs.bodyText,
-        padding: padding,
-        textStyle: textStyle,
-        borderRadius: borderRadius,
-      ),
 
       // Link remains the same
-      BsButtonVariant.link => _ButtonStyle(
+      .link => _ButtonStyle(
         backgroundColor: Colors.transparent,
         foregroundColor: bs.linkColor,
         padding: padding,
@@ -554,6 +518,24 @@ class _BsButtonState extends State<BsButton> {
         borderRadius: borderRadius,
       ),
     };
+
+    if (widget.outline && variant != .link && widget.color == null) {
+      final Color outlineColor = switch (variant) {
+        .dark => bs.bodyText,
+        _ => baseStyle.backgroundColor,
+      };
+
+      return _ButtonStyle(
+        backgroundColor: Colors.transparent,
+        foregroundColor: outlineColor,
+        border: outlineColor,
+        padding: padding,
+        textStyle: textStyle,
+        borderRadius: borderRadius,
+      );
+    }
+
+    return baseStyle;
   }
 }
 

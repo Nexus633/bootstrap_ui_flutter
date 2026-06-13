@@ -17,7 +17,7 @@ class BsHeading extends StatelessWidget {
   const BsHeading(
     this.text, {
     super.key,
-    this.level = BsHeadingLevel.h1,
+    this.level = .h1,
     this.color,
     this.textAlign,
     this.removeMargin = false,
@@ -49,12 +49,12 @@ class BsHeading extends StatelessWidget {
     final theme = context.bs;
 
     final double fontSize = switch (level) {
-      BsHeadingLevel.h1 => BsTypography.h1,
-      BsHeadingLevel.h2 => BsTypography.h2,
-      BsHeadingLevel.h3 => BsTypography.h3,
-      BsHeadingLevel.h4 => BsTypography.h4,
-      BsHeadingLevel.h5 => BsTypography.h5,
-      BsHeadingLevel.h6 => BsTypography.h6,
+      .h1 => BsTypography.h1,
+      .h2 => BsTypography.h2,
+      .h3 => BsTypography.h3,
+      .h4 => BsTypography.h4,
+      .h5 => BsTypography.h5,
+      .h6 => BsTypography.h6,
     };
 
     final TextStyle style = TextStyle(

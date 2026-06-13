@@ -124,14 +124,14 @@ class _BsPaginationItemState extends State<BsPaginationItem> {
 
   Color _resolveVariantColor(BsVariant variant, BsThemeData theme) {
     return switch (variant) {
-      BsVariant.primary => theme.primary,
-      BsVariant.secondary => theme.secondary,
-      BsVariant.success => theme.success,
-      BsVariant.danger => theme.danger,
-      BsVariant.warning => theme.warning,
-      BsVariant.info => theme.info,
-      BsVariant.light => theme.light,
-      BsVariant.dark => theme.dark,
+      .primary => theme.primary,
+      .secondary => theme.secondary,
+      .success => theme.success,
+      .danger => theme.danger,
+      .warning => theme.warning,
+      .info => theme.info,
+      .light => theme.light,
+      .dark => theme.dark,
     };
   }
 
@@ -142,7 +142,7 @@ class _BsPaginationItemState extends State<BsPaginationItem> {
     // Determine padding, typography and size properties from BsTypography.
     final parentPagination = context
         .findAncestorWidgetOfExactType<BsPagination>();
-    final size = parentPagination?.size ?? BsSize.md;
+    final size = parentPagination?.size ?? .md;
 
     final EdgeInsets padding;
     final double fontSize;
@@ -150,19 +150,19 @@ class _BsPaginationItemState extends State<BsPaginationItem> {
     final double minSize;
 
     switch (size) {
-      case BsSize.sm:
+      case .sm:
         padding = const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0);
         fontSize = BsTypography.fontSizeSm;
         iconSize = BsTypography.iconSizeSm;
         minSize = 31.0;
         break;
-      case BsSize.lg:
+      case .lg:
         padding = const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0);
         fontSize = BsTypography.fontSizeLg;
         iconSize = BsTypography.iconSizeLg;
         minSize = 48.0;
         break;
-      case BsSize.md:
+      case .md:
         padding = const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0);
         fontSize = BsTypography.fontSizeBase;
         iconSize = BsTypography.iconSizeBase;
@@ -286,8 +286,8 @@ class BsPagination extends StatelessWidget {
   const BsPagination({
     super.key,
     required this.items,
-    this.size = BsSize.md,
-    this.alignment = BsPaginationAlignment.start,
+    this.size = .md,
+    this.alignment = .start,
     this.activeVariant,
     this.activeColor,
     this.activeTextColor,
@@ -309,8 +309,8 @@ class BsPagination extends StatelessWidget {
     required int totalPages,
     required ValueChanged<int> onPageChanged,
     int maxVisiblePages = 5,
-    BsSize size = BsSize.md,
-    BsPaginationAlignment alignment = BsPaginationAlignment.start,
+    BsSize size = .md,
+    BsPaginationAlignment alignment = .start,
     bool showFirstLast = true,
     bool showPrevNext = true,
     Widget? firstLabel,
@@ -326,145 +326,20 @@ class BsPagination extends StatelessWidget {
     Color? hoverBgColor,
     Color? borderColor,
   }) {
-    final List<BsPaginationItem> generatedItems = [];
-
-    // Ensure page counts are valid
-    final int current = max(1, currentPage);
-    final int total = max(1, totalPages);
-
-    // 1. First Page Button
-    if (showFirstLast) {
-      generatedItems.add(
-        BsPaginationItem(
-          key: const ValueKey('page_first'),
-          disabled: current == 1,
-          onPressed: current > 1 ? () => onPageChanged(1) : null,
-          child: firstLabel ?? const BsIcon(BsIcons.chevronDoubleLeft),
-        ),
-      );
-    }
-
-    // 2. Previous Page Button
-    if (showPrevNext) {
-      generatedItems.add(
-        BsPaginationItem(
-          key: const ValueKey('page_prev'),
-          disabled: current == 1,
-          onPressed: current > 1 ? () => onPageChanged(current - 1) : null,
-          child: prevLabel ?? const BsIcon(BsIcons.chevronLeft),
-        ),
-      );
-    }
-
-    // 3. Page Numbers calculation
-    int startPage = 1;
-    int endPage = total;
-
-    if (total > maxVisiblePages) {
-      final int half = (maxVisiblePages - 1) ~/ 2;
-      startPage = current - half;
-      endPage = current + half;
-
-      if (startPage < 1) {
-        endPage += (1 - startPage);
-        startPage = 1;
-      }
-      if (endPage > total) {
-        startPage -= (endPage - total);
-        endPage = total;
-      }
-      startPage = max(1, startPage);
-    }
-
-    // First page always shown if startPage > 1
-    if (startPage > 1) {
-      generatedItems.add(
-        BsPaginationItem(
-          key: const ValueKey('page_1'),
-          active: current == 1,
-          onPressed: current == 1 ? null : () => onPageChanged(1),
-          child: const Text('1'),
-        ),
-      );
-
-      if (startPage > 2) {
-        generatedItems.add(
-          const BsPaginationItem(
-            key: ValueKey('page_ellipsis_start'),
-            disabled: true,
-            child: Text('...'),
-          ),
-        );
-      }
-    }
-
-    // Visible window of page buttons
-    for (int p = startPage; p <= endPage; p++) {
-      // Skip if page is 1 or total (already handled manually by start/end caps)
-      if (p == 1 && startPage > 1) continue;
-      if (p == total && endPage < total) continue;
-
-      generatedItems.add(
-        BsPaginationItem(
-          key: ValueKey('page_$p'),
-          active: current == p,
-          onPressed: current == p ? null : () => onPageChanged(p),
-          child: Text('$p'),
-        ),
-      );
-    }
-
-    // Last page always shown if endPage < total
-    if (endPage < total) {
-      if (endPage < total - 1) {
-        generatedItems.add(
-          const BsPaginationItem(
-            key: ValueKey('page_ellipsis_end'),
-            disabled: true,
-            child: Text('...'),
-          ),
-        );
-      }
-
-      generatedItems.add(
-        BsPaginationItem(
-          key: ValueKey('page_$total'),
-          active: current == total,
-          onPressed: current == total ? null : () => onPageChanged(total),
-          child: Text('$total'),
-        ),
-      );
-    }
-
-    // 4. Next Page Button
-    if (showPrevNext) {
-      generatedItems.add(
-        BsPaginationItem(
-          key: const ValueKey('page_next'),
-          disabled: current == total,
-          onPressed: current < total ? () => onPageChanged(current + 1) : null,
-          child: nextLabel ?? const BsIcon(BsIcons.chevronRight),
-        ),
-      );
-    }
-
-    // 5. Last Page Button
-    if (showFirstLast) {
-      generatedItems.add(
-        BsPaginationItem(
-          key: const ValueKey('page_last'),
-          disabled: current == total,
-          onPressed: current < total ? () => onPageChanged(total) : null,
-          child: lastLabel ?? const BsIcon(BsIcons.chevronDoubleRight),
-        ),
-      );
-    }
-
-    return BsPagination(
+    return _BsAutomaticPagination(
       key: key,
-      items: generatedItems,
+      currentPage: currentPage,
+      totalPages: totalPages,
+      onPageChanged: onPageChanged,
+      maxVisiblePages: maxVisiblePages,
       size: size,
       alignment: alignment,
+      showFirstLast: showFirstLast,
+      showPrevNext: showPrevNext,
+      firstLabel: firstLabel,
+      prevLabel: prevLabel,
+      nextLabel: nextLabel,
+      lastLabel: lastLabel,
       activeVariant: activeVariant,
       activeColor: activeColor,
       activeTextColor: activeTextColor,
@@ -516,13 +391,13 @@ class BsPagination extends StatelessWidget {
     // Resolve border radius based on pagination size
     final BorderRadius radius;
     switch (size) {
-      case BsSize.sm:
+      case .sm:
         radius = BsRadius.sm;
         break;
-      case BsSize.lg:
+      case .lg:
         radius = BsRadius.lg;
         break;
-      case BsSize.md:
+      case .md:
         radius = BsRadius.md;
         break;
     }
@@ -581,20 +456,244 @@ class BsPagination extends StatelessWidget {
       children: styledChildren,
     );
 
+    final Widget scrollableRow = SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: row,
+    );
+
     // Map the align option to standard AlignmentGeometry
     AlignmentGeometry alignGeometry;
     switch (alignment) {
-      case BsPaginationAlignment.center:
+      case .center:
         alignGeometry = Alignment.center;
         break;
-      case BsPaginationAlignment.end:
+      case .end:
         alignGeometry = Alignment.centerRight;
         break;
-      case BsPaginationAlignment.start:
+      case .start:
         alignGeometry = Alignment.centerLeft;
         break;
     }
 
-    return Align(alignment: alignGeometry, child: row);
+    return Align(alignment: alignGeometry, child: scrollableRow);
+  }
+}
+
+class _BsAutomaticPagination extends BsPagination {
+  const _BsAutomaticPagination({
+    super.key,
+    required this.currentPage,
+    required this.totalPages,
+    required this.onPageChanged,
+    this.maxVisiblePages = 5,
+    super.size = .md,
+    super.alignment = .start,
+    this.showFirstLast = true,
+    this.showPrevNext = true,
+    this.firstLabel,
+    this.prevLabel,
+    this.nextLabel,
+    this.lastLabel,
+    super.activeVariant,
+    super.activeColor,
+    super.activeTextColor,
+    super.textColor,
+    super.hoverTextColor,
+    super.bgColor,
+    super.hoverBgColor,
+    super.borderColor,
+  }) : super(items: const []);
+
+  final int currentPage;
+  final int totalPages;
+  final ValueChanged<int> onPageChanged;
+  final int maxVisiblePages;
+  final bool showFirstLast;
+  final bool showPrevNext;
+  final Widget? firstLabel;
+  final Widget? prevLabel;
+  final Widget? nextLabel;
+  final Widget? lastLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double availableWidth = constraints.maxWidth.isFinite
+            ? constraints.maxWidth
+            : MediaQuery.sizeOf(context).width;
+
+        final List<BsPaginationItem> generatedItems = [];
+        final int current = max(1, currentPage);
+        final int total = max(1, totalPages);
+
+        // Determine responsive settings based on button sizing
+        final bool onlyIcons;
+        final bool isCompact;
+        switch (size) {
+          case .lg:
+            onlyIcons = availableWidth < 380;
+            isCompact = availableWidth < 480;
+            break;
+          case .md:
+            onlyIcons = availableWidth < 300;
+            isCompact = availableWidth < 380;
+            break;
+          case .sm:
+            onlyIcons = availableWidth < 250;
+            isCompact = availableWidth < 310;
+            break;
+        }
+        
+        // Effective maxVisiblePages: on mobile it's max 3
+        final int effectiveMaxVisible = onlyIcons ? 0 : (isCompact ? 3 : maxVisiblePages);
+
+        // 1. First Page Button
+        if (showFirstLast) {
+          generatedItems.add(
+            BsPaginationItem(
+              key: const ValueKey('page_first'),
+              disabled: current == 1,
+              onPressed: current > 1 ? () => onPageChanged(1) : null,
+              child: firstLabel ?? const BsIcon(BsIcons.chevronDoubleLeft),
+            ),
+          );
+        }
+
+        // 2. Previous Page Button
+        if (showPrevNext) {
+          generatedItems.add(
+            BsPaginationItem(
+              key: const ValueKey('page_prev'),
+              disabled: current == 1,
+              onPressed: current > 1 ? () => onPageChanged(current - 1) : null,
+              child: prevLabel ?? const BsIcon(BsIcons.chevronLeft),
+            ),
+          );
+        }
+
+        if (!onlyIcons) {
+          // 3. Page Numbers calculation
+          int startPage = 1;
+          int endPage = total;
+
+          if (total > effectiveMaxVisible) {
+            final int half = (effectiveMaxVisible - 1) ~/ 2;
+            startPage = current - half;
+            endPage = current + half;
+
+            if (startPage < 1) {
+              endPage += (1 - startPage);
+              startPage = 1;
+            }
+            if (endPage > total) {
+              startPage -= (endPage - total);
+              endPage = total;
+            }
+            startPage = max(1, startPage);
+          }
+
+          // First page always shown if startPage > 1 (only if not in compact mode)
+          if (startPage > 1 && !isCompact) {
+            generatedItems.add(
+              BsPaginationItem(
+                key: const ValueKey('page_1'),
+                active: current == 1,
+                onPressed: current == 1 ? null : () => onPageChanged(1),
+                child: const Text('1'),
+              ),
+            );
+
+            if (startPage > 2) {
+              generatedItems.add(
+                const BsPaginationItem(
+                  key: ValueKey('page_ellipsis_start'),
+                  disabled: true,
+                  child: Text('...'),
+                ),
+              );
+            }
+          }
+
+          // Visible window of page buttons
+          for (int p = startPage; p <= endPage; p++) {
+            // Skip if page is 1 or total (already handled manually by start/end caps in non-compact mode)
+            if (!isCompact) {
+              if (p == 1 && startPage > 1) continue;
+              if (p == total && endPage < total) continue;
+            }
+
+            generatedItems.add(
+              BsPaginationItem(
+                key: ValueKey('page_$p'),
+                active: current == p,
+                onPressed: current == p ? null : () => onPageChanged(p),
+                child: Text('$p'),
+              ),
+            );
+          }
+
+          // Last page always shown if endPage < total (only if not in compact mode)
+          if (endPage < total && !isCompact) {
+            if (endPage < total - 1) {
+              generatedItems.add(
+                const BsPaginationItem(
+                  key: ValueKey('page_ellipsis_end'),
+                  disabled: true,
+                  child: Text('...'),
+                ),
+              );
+            }
+
+            generatedItems.add(
+              BsPaginationItem(
+                key: ValueKey('page_$total'),
+                active: current == total,
+                onPressed: current == total ? null : () => onPageChanged(total),
+                child: Text('$total'),
+              ),
+            );
+          }
+        }
+
+        // 4. Next Page Button
+        if (showPrevNext) {
+          generatedItems.add(
+            BsPaginationItem(
+              key: const ValueKey('page_next'),
+              disabled: current == total,
+              onPressed: current < total ? () => onPageChanged(current + 1) : null,
+              child: nextLabel ?? const BsIcon(BsIcons.chevronRight),
+            ),
+          );
+        }
+
+        // 5. Last Page Button
+        if (showFirstLast) {
+          generatedItems.add(
+            BsPaginationItem(
+              key: const ValueKey('page_last'),
+              disabled: current == total,
+              onPressed: current < total ? () => onPageChanged(total) : null,
+              child: lastLabel ?? const BsIcon(BsIcons.chevronDoubleRight),
+            ),
+          );
+        }
+
+        return BsPagination(
+          items: generatedItems,
+          size: size,
+          alignment: alignment,
+          activeVariant: activeVariant,
+          activeColor: activeColor,
+          activeTextColor: activeTextColor,
+          textColor: textColor,
+          hoverTextColor: hoverTextColor,
+          bgColor: bgColor,
+          hoverBgColor: hoverBgColor,
+          borderColor: borderColor,
+        );
+      },
+    );
   }
 }

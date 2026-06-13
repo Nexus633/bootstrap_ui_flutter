@@ -35,6 +35,7 @@ class BsLink extends StatefulWidget {
 
 class _BsLinkState extends State<BsLink> {
   bool _isHovered = false;
+  bool _isFocused = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,21 +45,63 @@ class _BsLinkState extends State<BsLink> {
         ? widget.color!.withValues(alpha: 0.8)
         : bsTheme.linkHoverColor;
 
-    return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
-      cursor: SystemMouseCursors.click,
+    return FocusableActionDetector(
+      mouseCursor: SystemMouseCursors.click,
+      onShowHoverHighlight: (value) {
+        setState(() {
+          _isHovered = value;
+        });
+      },
+      onShowFocusHighlight: (value) {
+        setState(() {
+          _isFocused = value;
+        });
+      },
+      actions: {
+        ActivateIntent: CallbackAction<ActivateIntent>(
+          onInvoke: (intent) {
+            widget.onPressed();
+            return null;
+          },
+        ),
+      },
       child: GestureDetector(
         onTap: widget.onPressed,
-        child: DefaultTextStyle.merge(
-          style: TextStyle(
-            color: _isHovered ? hoverColor : baseColor,
-            decoration: widget.underline || _isHovered
-                ? TextDecoration.underline
-                : TextDecoration.none,
-            decorationColor: _isHovered ? hoverColor : baseColor,
+        child: Semantics(
+          container: true,
+          link: true,
+          onTap: widget.onPressed,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(
+                color: _isFocused
+                    ? baseColor.withValues(alpha: 0.5)
+                    : Colors.transparent,
+                width: 1.5,
+              ),
+              boxShadow: _isFocused
+                  ? [
+                      BoxShadow(
+                        color: baseColor.withValues(alpha: 0.25),
+                        spreadRadius: 2,
+                        blurRadius: 0,
+                      ),
+                    ]
+                  : null,
+            ),
+            child: DefaultTextStyle.merge(
+              style: TextStyle(
+                color: _isHovered ? hoverColor : baseColor,
+                decoration: widget.underline || _isHovered
+                    ? TextDecoration.underline
+                    : TextDecoration.none,
+                decorationColor: _isHovered ? hoverColor : baseColor,
+              ),
+              child: widget.label,
+            ),
           ),
-          child: widget.label,
         ),
       ),
     );

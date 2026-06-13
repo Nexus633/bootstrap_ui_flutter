@@ -17,7 +17,7 @@ Wrap the widget that should trigger the tooltip with a `BsTooltip`. Provide the 
 ```dart
 BsTooltip(
   message: 'Tooltip on top',
-  placement: BsPlacement.top,
+  placement: .top,
   child: BsButton(
     label: 'Hover me',
     onPressed: () {},
@@ -29,10 +29,10 @@ BsTooltip(
 
 Four directions are available: `top`, `end` (right), `bottom`, and `start` (left) aligned.
 
-- `BsPlacement.top`
-- `BsPlacement.bottom`
-- `BsPlacement.start`
-- `BsPlacement.end`
+- `.top`
+- `.bottom`
+- `.start`
+- `.end`
 
 Note: Tooltips will attempt to reposition themselves automatically if they detect they are going out of screen boundaries.
 
@@ -58,7 +58,7 @@ Tooltips support custom background colors as well as all Bootstrap variants. If 
 ```dart
 BsTooltip(
   message: 'Success Action',
-  variant: BsVariant.success,
+  variant: .success,
   child: BsButton(label: 'Save', onPressed: () {}),
 )
 

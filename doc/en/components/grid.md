@@ -13,7 +13,7 @@ The Bootstrap grid system is based on a 12-column layout and is fully responsive
 
 ```dart
 BsContainer(
-  type: BsContainerType.fixed, // or .fluid, .sm, .md, etc.
+  type: .fixed, // or .fluid, .sm, .md, etc.
   child: MyContent(),
 )
 ```
@@ -69,15 +69,15 @@ BsCol(
 ### Horizontal Alignment (`justify`)
 The `justify` property on `BsRow` horizontally distributes remaining space in a row (maps to `.justify-content-*` in Bootstrap):
 
-* `BsRowJustify.start` (Default)
-* `BsRowJustify.center`
-* `BsRowJustify.end`
-* `BsRowJustify.between`
-* `BsRowJustify.around`
+* `.start` (Default)
+* `.center`
+* `.end`
+* `.between`
+* `.around`
 
 ```dart
 BsRow(
-  justify: BsRowJustify.center,
+  justify: .center,
   children: [ ... ],
 )
 ```
@@ -90,11 +90,11 @@ Vertical alignment can be configured on the row level (`BsRow.alignItems`) or ov
 
 ```dart
 BsRow(
-  alignItems: BsRowAlignItems.center, // Vertically centers all columns
+  alignItems: .center, // Vertically centers all columns
   children: [
     BsCol(child: Text('Centered')),
     BsCol(
-      alignSelf: BsColAlignSelf.end, // Overrides for this column (aligned to bottom)
+      alignSelf: .end, // Overrides for this column (aligned to bottom)
       child: Text('Bottom'),
     ),
   ],

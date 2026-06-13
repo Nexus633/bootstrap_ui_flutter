@@ -32,7 +32,7 @@ To trigger the popover on hover, set the `trigger` parameter to `BsPopoverTrigge
 BsPopover(
   titleText: 'Hover Info',
   contentText: 'This popover opens when you hover the button.',
-  trigger: BsPopoverTrigger.hover,
+  trigger: .hover,
   child: BsButton(
     label: 'Hover over me',
     onPressed: () {},
@@ -45,7 +45,7 @@ Popovers can accept custom widgets for headers and body contents instead of plai
 
 ```dart
 BsPopover(
-  placement: BsPopoverPlacement.bottom,
+  placement: .bottom,
   title: Row(
     children: [
       Icon(Icons.info, size: 16),
@@ -61,7 +61,7 @@ BsPopover(
       SizedBox(height: 8),
       BsButton(
         label: 'Submit Action',
-        size: BsButtonSize.sm,
+        size: .sm,
         onPressed: () {},
       ),
     ],
@@ -137,8 +137,8 @@ Position popovers horizontally or vertically using the `placement` attribute:
 | `content` | `Widget?` | `null` | Custom content body widget (overrides `contentText`). |
 | `titleText` | `String?` | `null` | Plain text label for the title header. |
 | `contentText` | `String?` | `null` | Plain text label for the content body. |
-| `placement` | `BsPopoverPlacement` | `BsPopoverPlacement.top` | Preferred placement direction (`top`, `bottom`, `start`, `end`). |
-| `trigger` | `BsPopoverTrigger` | `BsPopoverTrigger.click` | Event that opens the popover (`click`, `hover`). |
+| `placement` | `BsPopoverPlacement` | `.top` | Preferred placement direction (`top`, `bottom`, `start`, `end`). |
+| `trigger` | `BsPopoverTrigger` | `.click` | Event that opens the popover (`click`, `hover`). |
 | `controller` | `BsPopoverController?` | `null` | Optional controller for programmatic management. |
 | `maxWidth` | `double` | `276.0` | Maximum width of the popover box. |
 | `disabled` | `bool` | `false` | Disables popover interactions. |

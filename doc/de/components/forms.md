@@ -24,7 +24,7 @@ Eine vielseitige Texteingabe-Komponente, die `TextFormField` ersetzt.
 ```dart
 BsInput(
   placeholder: 'name@example.com',
-  size: BsInputSize.md, // .form-control-md
+  size: .md, // .form-control-md
   disabled: false,
   readonly: false,
   plainText: false, // .form-control-plaintext
@@ -137,7 +137,7 @@ Alle Eingabefelder unterstützen die Eigenschaft `validationState` für die expl
 
 ```dart
 BsInput(
-  validationState: BsValidationState.valid, // Erzwingt das .is-valid Styling
+  validationState: .valid, // Erzwingt das .is-valid Styling
 )
 ```
 

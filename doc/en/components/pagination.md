@@ -60,13 +60,13 @@ BsPagination.automatic(
 
 ## Sizing
 
-Configure different sizes using the `size` attribute: `BsSize.sm` (small), `BsSize.md` (medium/default), or `BsSize.lg` (large).
+Configure different sizes using the `size` attribute: `.sm` (small), `.md` (medium/default), or `.lg` (large).
 
 ```dart
 BsPagination.automatic(
   currentPage: 1,
   totalPages: 5,
-  size: BsSize.lg, // Large pagination buttons
+  size: .lg, // Large pagination buttons
   onPageChanged: (page) {},
 )
 ```
@@ -74,15 +74,15 @@ BsPagination.automatic(
 ## Alignment
 
 Change the horizontal alignment of the pagination row using the `alignment` attribute:
-- `BsPaginationAlignment.start` (Left-aligned - default)
-- `BsPaginationAlignment.center` (Centered)
-- `BsPaginationAlignment.end` (Right-aligned)
+- `.start` (Left-aligned - default)
+- `.center` (Centered)
+- `.end` (Right-aligned)
 
 ```dart
 BsPagination.automatic(
   currentPage: 1,
   totalPages: 5,
-  alignment: BsPaginationAlignment.center,
+  alignment: .center,
   onPageChanged: (page) {},
 )
 ```
@@ -94,8 +94,8 @@ BsPagination.automatic(
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | `items` | `List<BsPaginationItem>` | - | The list of pagination items to display. |
-| `size` | `BsSize` | `BsSize.md` | The size variant of the pagination buttons (`sm`, `md`, `lg`). |
-| `alignment` | `BsPaginationAlignment` | `BsPaginationAlignment.start` | The horizontal alignment of the row (`start`, `center`, `end`). |
+| `size` | `BsSize` | `.md` | The size variant of the pagination buttons (`sm`, `md`, `lg`). |
+| `alignment` | `BsPaginationAlignment` | `.start` | The horizontal alignment of the row (`start`, `center`, `end`). |
 | `activeVariant` | `BsVariant?` | `null` | Theme variant for active item background. |
 | `activeColor` | `Color?` | `null` | Custom background color for active state (overrides `activeVariant`). |
 | `activeTextColor` | `Color?` | `null` | Custom text/icon color for active state. |

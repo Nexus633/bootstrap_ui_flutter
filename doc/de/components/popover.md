@@ -32,7 +32,7 @@ Um das Popover beim Überfahren mit der Maus anzuzeigen, stelle `trigger` auf `B
 BsPopover(
   titleText: 'Info',
   contentText: 'Dieses Popover öffnet sich beim Hovern.',
-  trigger: BsPopoverTrigger.hover,
+  trigger: .hover,
   child: BsButton(
     label: 'Fahre über mich',
     onPressed: () {},
@@ -45,7 +45,7 @@ Popovers können statt einfachem Text beliebige Widgets für Titel und Inhalt en
 
 ```dart
 BsPopover(
-  placement: BsPopoverPlacement.bottom,
+  placement: .bottom,
   title: Row(
     children: [
       Icon(Icons.info, size: 16),
@@ -61,7 +61,7 @@ BsPopover(
       SizedBox(height: 8),
       BsButton(
         label: 'Aktion ausführen',
-        size: BsButtonSize.sm,
+        size: .sm,
         onPressed: () {},
       ),
     ],
@@ -137,8 +137,8 @@ BsPopover(
 | `content` | `Widget?` | `null` | Custom Inhalts-Widget (überschreibt `contentText`). |
 | `titleText` | `String?` | `null` | Komfort-Titel als Textzeichenfolge. |
 | `contentText` | `String?` | `null` | Komfort-Inhalt als Textzeichenfolge. |
-| `placement` | `BsPopoverPlacement` | `BsPopoverPlacement.top` | Bevorzugte Ausrichtungsrichtung (`top`, `bottom`, `start`, `end`). |
-| `trigger` | `BsPopoverTrigger` | `BsPopoverTrigger.click` | Die Interaktion zum Öffnen (`click`, `hover`). |
+| `placement` | `BsPopoverPlacement` | `.top` | Bevorzugte Ausrichtungsrichtung (`top`, `bottom`, `start`, `end`). |
+| `trigger` | `BsPopoverTrigger` | `.click` | Die Interaktion zum Öffnen (`click`, `hover`). |
 | `controller` | `BsPopoverController?` | `null` | Optionaler Controller zur programmgesteuerten Steuerung. |
 | `maxWidth` | `double` | `276.0` | Maximale Breite der Popover-Box. |
 | `disabled` | `bool` | `false` | Deaktiviert Interaktionen. |

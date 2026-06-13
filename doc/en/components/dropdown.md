@@ -23,7 +23,7 @@ A standard dropdown can be defined simply using a `label`. It automatically rend
 ```dart
 BsDropdown(
   label: 'Dropdown Button',
-  toggleVariant: BsButtonVariant.primary,
+  toggleVariant: .primary,
   menu: BsDropdownMenu(
     children: [
       BsDropdownItem(
@@ -78,8 +78,8 @@ You can open dropdowns in four directions: `down` (default), `up` (dropup), `end
 
 ```dart
 BsDropdown(
-  direction: BsDropdownDirection.up, // Opens above
-  alignment: BsDropdownAlignment.end, // Right-aligned menu
+  direction: .up, // Opens above
+  alignment: .end, // Right-aligned menu
   toggle: BsButton(label: 'Dropup Right', onPressed: () {}),
   menu: BsDropdownMenu(
     children: [
@@ -101,7 +101,7 @@ Adjust how the dropdown closes when clicking inside or outside the menu:
 
 ```dart
 BsDropdown(
-  autoClose: BsDropdownAutoClose.outside,
+  autoClose: .outside,
   toggle: BsButton(label: 'Click outside to close', onPressed: () {}),
   menu: BsDropdownMenu(
     children: [
@@ -123,7 +123,7 @@ BsDropdownMenu(
 
 // 2. Apply a semantic color variant
 BsDropdownMenu(
-  variant: BsCardVariant.success,
+  variant: .success,
   children: [...],
 )
 
@@ -146,11 +146,11 @@ BsDropdownMenu(
 | `toggle` | `Widget?` | `null` | A custom static widget to act as the toggle trigger. |
 | `toggleBuilder` | `Widget Function(BuildContext, VoidCallback, bool)?` | `null` | A custom builder giving access to the toggle action and open state (perfect for split buttons). |
 | `menu` | `BsDropdownMenu` | **Required** | The overlay menu widget containing items. |
-| `direction` | `BsDropdownDirection` | `BsDropdownDirection.down` | Direction the menu opens (down, up, start, end). |
-| `alignment` | `BsDropdownAlignment` | `BsDropdownAlignment.start` | Menu alignment (start, end). |
-| `autoClose` | `BsDropdownAutoClose` | `BsDropdownAutoClose.always` | Controls auto-closing interactions. |
-| `toggleVariant` | `BsButtonVariant` | `BsButtonVariant.primary` | The color variant of the default trigger button. |
-| `toggleSize` | `BsButtonSize` | `BsButtonSize.md` | The size variant of the default trigger button. |
+| `direction` | `BsDropdownDirection` | `.down` | Direction the menu opens (down, up, start, end). |
+| `alignment` | `BsDropdownAlignment` | `.start` | Menu alignment (start, end). |
+| `autoClose` | `BsDropdownAutoClose` | `.always` | Controls auto-closing interactions. |
+| `toggleVariant` | `BsButtonVariant` | `.primary` | The color variant of the default trigger button. |
+| `toggleSize` | `BsButtonSize` | `.md` | The size variant of the default trigger button. |
 | `showCaret` | `bool` | `true` | Whether to display the caret arrow icon on the default trigger button. |
 | `disabled` | `bool` | `false` | Disables interactions if true. |
 

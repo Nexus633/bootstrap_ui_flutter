@@ -40,7 +40,7 @@ class _MyTabbedWidgetState extends State<MyTabbedWidget> {
     return Column(
       children: [
         BsNav(
-          variant: BsNavVariant.tabs,
+          variant: .tabs,
           children: [
             BsNavLink(
               label: 'Startseite',
@@ -85,8 +85,8 @@ Pills heben den aktiven Link mit einer soliden Hintergrundfarbe hervor:
 
 ```dart
 BsNav(
-  variant: BsNavVariant.pills,
-  alignment: BsNavAlignment.center,
+  variant: .pills,
+  alignment: .center,
   children: [
     BsNavLink(label: 'Aktiv', active: true, onPressed: () {}),
     BsNavLink(label: 'Link 1', onPressed: () {}),
@@ -101,7 +101,7 @@ Underline verwendet eine farbige Linie direkt unter dem Text, um den aktiven Zus
 
 ```dart
 BsNav(
-  variant: BsNavVariant.underline,
+  variant: .underline,
   children: [
     BsNavLink(label: 'Aktiv', active: true, onPressed: () {}),
     BsNavLink(label: 'Link 1', onPressed: () {}),
@@ -116,7 +116,7 @@ Du kannst die Text- und Icon-Farben der Links im inaktiven und aktiven Zustand i
 
 ```dart
 BsNav(
-  variant: BsNavVariant.plain,
+  variant: .plain,
   children: [
     BsNavLink(
       label: 'Grüner Link',
@@ -143,8 +143,8 @@ BsNav(
 | Eigenschaft | Typ | Standard | Beschreibung |
 | :--- | :--- | :--- | :--- |
 | `children` | `List<Widget>` | *erforderlich* | Die Liste der Navigationselemente (meistens [BsNavLink]). |
-| `variant` | `BsNavVariant` | `BsNavVariant.plain` | Der visuelle Stil der Navigation (`plain`, `tabs`, `pills`, `underline`). |
-| `alignment` | `BsNavAlignment` | `BsNavAlignment.start` | Horizontale Ausrichtung der Links (`start`, `center`, `end`, `fill`, `justified`). |
+| `variant` | `BsNavVariant` | `.plain` | Der visuelle Stil der Navigation (`plain`, `tabs`, `pills`, `underline`). |
+| `alignment` | `BsNavAlignment` | `.start` | Horizontale Ausrichtung der Links (`start`, `center`, `end`, `fill`, `justified`). |
 | `vertical` | `bool` | `false` | Legt fest, ob die Elemente vertikal gestapelt werden. |
 | `padding` | `EdgeInsetsGeometry` | `EdgeInsets.zero` | Innenabstand des Navigations-Containers. |
 

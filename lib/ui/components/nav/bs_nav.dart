@@ -41,10 +41,11 @@ class BsNav extends StatelessWidget {
   const BsNav({
     super.key,
     required this.children,
-    this.variant = BsNavVariant.plain,
-    this.alignment = BsNavAlignment.start,
+    this.variant = .plain,
+    this.alignment = .start,
     this.vertical = false,
     this.padding = EdgeInsets.zero,
+    this.wrap = true,
   });
 
   /// The nav items, typically [BsNavLink]s.
@@ -62,6 +63,11 @@ class BsNav extends StatelessWidget {
   /// Padding around the nav container.
   final EdgeInsetsGeometry padding;
 
+  /// Whether horizontal nav items should wrap when space is insufficient.
+  ///
+  /// Defaults to true, mirroring Bootstrap's flex-wrap behavior.
+  final bool wrap;
+
   @override
   Widget build(BuildContext context) {
     final theme = context.bs;
@@ -71,8 +77,8 @@ class BsNav extends StatelessWidget {
     for (int i = 0; i < children.length; i++) {
       Widget child = children[i];
       if (!vertical &&
-          (alignment == BsNavAlignment.fill ||
-              alignment == BsNavAlignment.justified)) {
+          (alignment == .fill ||
+              alignment == .justified)) {
         child = Expanded(child: child);
       }
       wrappedChildren.add(child);
@@ -81,7 +87,7 @@ class BsNav extends StatelessWidget {
     Widget content;
     if (vertical) {
       content = Padding(
-        padding: variant == BsNavVariant.tabs
+        padding: variant == .tabs
             ? const EdgeInsets.only(right: 12.0)
             : EdgeInsets.zero,
         child: Column(
@@ -91,16 +97,50 @@ class BsNav extends StatelessWidget {
         ),
       );
     } else {
-      content = Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: _resolveMainAxisAlignment(alignment),
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: wrappedChildren,
-      );
+      final bool hasExpanded = alignment == .fill || alignment == .justified;
+      if (!hasExpanded) {
+        if (wrap) {
+          WrapAlignment wrapAlign = WrapAlignment.start;
+          if (alignment == .center) {
+            wrapAlign = WrapAlignment.center;
+          } else if (alignment == .end) {
+            wrapAlign = WrapAlignment.end;
+          }
+          content = Wrap(
+            alignment: wrapAlign,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: wrappedChildren,
+          );
+        } else {
+          AlignmentGeometry alignGeometry = Alignment.centerLeft;
+          if (alignment == .center) {
+            alignGeometry = Alignment.center;
+          } else if (alignment == .end) {
+            alignGeometry = Alignment.centerRight;
+          }
+          content = Align(
+            alignment: alignGeometry,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: wrappedChildren,
+              ),
+            ),
+          );
+        }
+      } else {
+        content = Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: wrappedChildren,
+        );
+      }
     }
 
     // Apply borders for tabbed navigation containers
-    if (variant == BsNavVariant.tabs) {
+    if (variant == .tabs) {
       if (vertical) {
         content = Stack(
           fit: StackFit.passthrough,
@@ -138,19 +178,6 @@ class BsNav extends StatelessWidget {
       vertical: vertical,
       child: Padding(padding: padding, child: content),
     );
-  }
-
-  MainAxisAlignment _resolveMainAxisAlignment(BsNavAlignment alignment) {
-    switch (alignment) {
-      case BsNavAlignment.start:
-      case BsNavAlignment.fill:
-      case BsNavAlignment.justified:
-        return MainAxisAlignment.start;
-      case BsNavAlignment.center:
-        return MainAxisAlignment.center;
-      case BsNavAlignment.end:
-        return MainAxisAlignment.end;
-    }
   }
 }
 
@@ -207,7 +234,7 @@ class _BsNavLinkState extends State<BsNavLink> {
   @override
   Widget build(BuildContext context) {
     final scope = _BsNavScope.of(context);
-    final variant = scope?.variant ?? BsNavVariant.plain;
+    final variant = scope?.variant ?? .plain;
     final vertical = scope?.vertical ?? false;
 
     final theme = context.bs;
@@ -257,7 +284,7 @@ class _BsNavLinkState extends State<BsNavLink> {
     );
 
     // Apply offset and border masking for active/hovered tabs to seamlessly merge with background
-    final bool isTabs = variant == BsNavVariant.tabs;
+    final bool isTabs = variant == .tabs;
     final bool showMask = (widget.active || _isHovered) && isTabs && !vertical;
 
     if (showMask) {
@@ -335,18 +362,18 @@ class _BsNavLinkState extends State<BsNavLink> {
 
   EdgeInsetsGeometry _resolveDefaultPadding(BsNavVariant variant) {
     switch (variant) {
-      case BsNavVariant.plain:
-      case BsNavVariant.pills:
-      case BsNavVariant.tabs:
+      case .plain:
+      case .pills:
+      case .tabs:
         return const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0);
-      case BsNavVariant.underline:
+      case .underline:
         return const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0);
     }
   }
 
   TextStyle _resolveTextStyle(BsNavVariant variant, BsThemeData theme) {
     const double baseSize = 16.0;
-    if (variant == BsNavVariant.underline) {
+    if (variant == .underline) {
       return TextStyle(
         fontSize: baseSize,
         fontWeight: widget.active ? FontWeight.w600 : FontWeight.normal,
@@ -377,16 +404,16 @@ class _BsNavLinkState extends State<BsNavLink> {
     }
 
     switch (variant) {
-      case BsNavVariant.plain:
-      case BsNavVariant.tabs:
+      case .plain:
+      case .tabs:
         if (widget.active) {
-          return variant == BsNavVariant.tabs ? theme.bodyText : theme.primary;
+          return variant == .tabs ? theme.bodyText : theme.primary;
         }
         return _isHovered
             ? theme.primary
             : theme.primary.withValues(alpha: 0.8);
 
-      case BsNavVariant.pills:
+      case .pills:
         if (widget.active) {
           return BsColors.onPrimary;
         }
@@ -394,7 +421,7 @@ class _BsNavLinkState extends State<BsNavLink> {
             ? theme.primary
             : theme.primary.withValues(alpha: 0.8);
 
-      case BsNavVariant.underline:
+      case .underline:
         if (widget.active) {
           return theme.bodyText;
         }
@@ -412,10 +439,10 @@ class _BsNavLinkState extends State<BsNavLink> {
     if (widget.disabled) return null;
 
     switch (variant) {
-      case BsNavVariant.plain:
+      case .plain:
         return null;
 
-      case BsNavVariant.tabs:
+      case .tabs:
         if (widget.active) {
           if (vertical) {
             return BoxDecoration(
@@ -465,7 +492,7 @@ class _BsNavLinkState extends State<BsNavLink> {
           boxShadow: _isFocused ? BsShadows.focusRing(theme.primary) : null,
         );
 
-      case BsNavVariant.pills:
+      case .pills:
         if (widget.active) {
           return BoxDecoration(
             color: theme.primary,
@@ -485,7 +512,7 @@ class _BsNavLinkState extends State<BsNavLink> {
           boxShadow: _isFocused ? BsShadows.focusRing(theme.primary) : null,
         );
 
-      case BsNavVariant.underline:
+      case .underline:
         if (widget.active) {
           return BoxDecoration(
             border: Border(

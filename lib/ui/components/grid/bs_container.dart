@@ -15,14 +15,14 @@ class BsContainer extends StatelessWidget {
   const BsContainer({
     super.key,
     required this.child,
-    this.type = BsContainerType.fixed,
+    this.type = .fixed,
     this.padding,
   });
 
   /// Shortcut for .container-fluid.
   /// Creates a container that is always 100% wide.
   const BsContainer.fluid({super.key, required this.child, this.padding})
-    : type = BsContainerType.fluid;
+    : type = .fluid;
 
   /// The widget to display inside the container.
   final Widget child;
@@ -59,11 +59,11 @@ class BsContainer extends StatelessWidget {
   double _resolveMaxWidth(double availableWidth) {
     switch (type) {
       // .container-fluid → always full width
-      case BsContainerType.fluid:
+      case .fluid:
         return double.infinity;
 
       // .container → levels depending on the viewport width
-      case BsContainerType.fixed:
+      case .fixed:
         if (availableWidth >= BsBreakpoints.xxl) {
           return BsBreakpoints.containerXxl;
         }
@@ -82,31 +82,31 @@ class BsContainer extends StatelessWidget {
         return double.infinity; // xs → fluid
 
       // .container-sm: fluid until sm, then fixed
-      case BsContainerType.sm:
+      case .sm:
         if (availableWidth >= BsBreakpoints.sm) {
           return BsBreakpoints.containerSm;
         }
         return double.infinity;
 
-      case BsContainerType.md:
+      case .md:
         if (availableWidth >= BsBreakpoints.md) {
           return BsBreakpoints.containerMd;
         }
         return double.infinity;
 
-      case BsContainerType.lg:
+      case .lg:
         if (availableWidth >= BsBreakpoints.lg) {
           return BsBreakpoints.containerLg;
         }
         return double.infinity;
 
-      case BsContainerType.xl:
+      case .xl:
         if (availableWidth >= BsBreakpoints.xl) {
           return BsBreakpoints.containerXl;
         }
         return double.infinity;
 
-      case BsContainerType.xxl:
+      case .xxl:
         if (availableWidth >= BsBreakpoints.xxl) {
           return BsBreakpoints.containerXxl;
         }

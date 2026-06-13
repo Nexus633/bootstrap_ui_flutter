@@ -101,17 +101,17 @@ class _BsCheckboxState extends FormFieldState<bool> {
 
     // Resolve Validation State
     BsValidationState currentState =
-        widget.validationState ?? BsValidationState.none;
+        widget.validationState ?? .none;
     if (widget.validationState == null) {
       if (hasError) {
-        currentState = BsValidationState.invalid;
+        currentState = .invalid;
       } else if (wasValidated) {
-        currentState = BsValidationState.valid;
+        currentState = .valid;
       }
     }
 
-    final bool isInvalid = currentState == BsValidationState.invalid;
-    final bool isValid = currentState == BsValidationState.valid;
+    final bool isInvalid = currentState == .invalid;
+    final bool isValid = currentState == .valid;
 
     // Resolve Colors
     Color borderColor = theme.border; // equivalent to .form-check-input border
@@ -279,7 +279,7 @@ class _BsCheckboxState extends FormFieldState<bool> {
         content,
         if (hasError)
           BsFormFeedback(
-            state: BsValidationState.invalid,
+            state: .invalid,
             message: errorText!,
           ).pt(4),
       ],

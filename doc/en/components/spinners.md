@@ -47,20 +47,20 @@ BsSpinner.grow()
 Spinners use `currentColor` by default. You can easily customize their color using text color utilities or color variants.
 
 ```dart
-BsSpinner.border(variant: BsVariant.primary)
-BsSpinner.border(variant: BsVariant.success)
+BsSpinner.border(variant: .primary)
+BsSpinner.border(variant: .success)
 
-BsSpinner.grow(variant: BsVariant.danger)
-BsSpinner.grow(variant: BsVariant.warning)
+BsSpinner.grow(variant: .danger)
+BsSpinner.grow(variant: .warning)
 ```
 
 ### Size
 
-Use `BsSpinnerSize.sm` to make a smaller spinner that can quickly be used within other components, like buttons.
+Use `.sm` to make a smaller spinner that can quickly be used within other components, like buttons.
 
 ```dart
-BsSpinner.border(size: BsSpinnerSize.sm)
-BsSpinner.grow(size: BsSpinnerSize.sm)
+BsSpinner.border(size: .sm)
+BsSpinner.grow(size: .sm)
 ```
 
 ### Custom Duration (Speed)

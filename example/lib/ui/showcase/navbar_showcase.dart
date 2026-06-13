@@ -109,7 +109,8 @@ class _NavbarShowcaseState extends State<NavbarShowcase> {
                         const SizedBox(width: 8),
                         BsButton(
                           label: 'Search',
-                          variant: BsButtonVariant.outlineSuccess,
+                          variant: BsButtonVariant.success,
+                          outline: true,
                           size: BsButtonSize.sm,
                           onPressed: () {},
                         ),

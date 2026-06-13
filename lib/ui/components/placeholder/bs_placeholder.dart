@@ -150,7 +150,7 @@ class BsPlaceholder extends StatelessWidget {
     this.widthFactor,
     this.colSpan,
     this.height,
-    this.size = BsSize.md,
+    this.size = .md,
     this.variant,
     this.color,
     this.borderRadius,
@@ -198,13 +198,13 @@ class BsPlaceholder extends StatelessWidget {
       resolvedHeight = height!;
     } else {
       switch (size) {
-        case BsSize.sm:
+        case .sm:
           resolvedHeight = 11.0; // matches .placeholder-sm (.8em ≈ 12px)
           break;
-        case BsSize.lg:
+        case .lg:
           resolvedHeight = 18.0; // matches .placeholder-lg (1.2em ≈ 18px)
           break;
-        case BsSize.md:
+        case .md:
           resolvedHeight = 14.0; // matches .placeholder (1em ≈ 15px)
           break;
       }
@@ -301,14 +301,14 @@ class BsPlaceholder extends StatelessWidget {
 
   Color _resolveVariantColor(BsVariant variant, BsThemeData theme) {
     return switch (variant) {
-      BsVariant.primary => theme.primary,
-      BsVariant.secondary => theme.secondary,
-      BsVariant.success => theme.success,
-      BsVariant.danger => theme.danger,
-      BsVariant.warning => theme.warning,
-      BsVariant.info => theme.info,
-      BsVariant.light => theme.light,
-      BsVariant.dark => theme.dark,
+      .primary => theme.primary,
+      .secondary => theme.secondary,
+      .success => theme.success,
+      .danger => theme.danger,
+      .warning => theme.warning,
+      .info => theme.info,
+      .light => theme.light,
+      .dark => theme.dark,
     };
   }
 }

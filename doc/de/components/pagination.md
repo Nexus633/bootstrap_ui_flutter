@@ -60,13 +60,13 @@ BsPagination.automatic(
 
 ## Größen (Sizing)
 
-Du kannst die Größe über das `size` Attribut mit `BsSize.sm` (klein), `BsSize.md` (Standard) oder `BsSize.lg` (groß) anpassen.
+Du kannst die Größe über das `size` Attribut mit `.sm` (klein), `.md` (Standard) oder `.lg` (groß) anpassen.
 
 ```dart
 BsPagination.automatic(
   currentPage: 1,
   totalPages: 5,
-  size: BsSize.lg, // Große Seitennummerierung
+  size: .lg, // Große Seitennummerierung
   onPageChanged: (page) {},
 )
 ```
@@ -74,15 +74,15 @@ BsPagination.automatic(
 ## Ausrichtung (Alignment)
 
 Pagination-Komponenten können horizontal ausgerichtet werden über das `alignment` Attribut:
-- `BsPaginationAlignment.start` (Links-bündig - Standard)
-- `BsPaginationAlignment.center` (Zentriert)
-- `BsPaginationAlignment.end` (Rechts-bündig)
+- `.start` (Links-bündig - Standard)
+- `.center` (Zentriert)
+- `.end` (Rechts-bündig)
 
 ```dart
 BsPagination.automatic(
   currentPage: 1,
   totalPages: 5,
-  alignment: BsPaginationAlignment.center,
+  alignment: .center,
   onPageChanged: (page) {},
 )
 ```
@@ -94,8 +94,8 @@ BsPagination.automatic(
 | Eigenschaft | Typ | Standardwert | Beschreibung |
 | --- | --- | --- | --- |
 | `items` | `List<BsPaginationItem>` | - | Die Liste der Pagination-Elemente, die angezeigt werden. |
-| `size` | `BsSize` | `BsSize.md` | Die Größe der Pagination-Buttons (`sm`, `md`, `lg`). |
-| `alignment` | `BsPaginationAlignment` | `BsPaginationAlignment.start` | Die horizontale Ausrichtung (`start`, `center`, `end`). |
+| `size` | `BsSize` | `.md` | Die Größe der Pagination-Buttons (`sm`, `md`, `lg`). |
+| `alignment` | `BsPaginationAlignment` | `.start` | Die horizontale Ausrichtung (`start`, `center`, `end`). |
 | `activeVariant` | `BsVariant?` | `null` | Theme-Farbe für den Hintergrund im aktiven Zustand. |
 | `activeColor` | `Color?` | `null` | Custom Hintergrundfarbe für den aktiven Zustand (überschreibt `activeVariant`). |
 | `activeTextColor` | `Color?` | `null` | Custom Textfarbe für den aktiven Zustand. |

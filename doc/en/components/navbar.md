@@ -28,7 +28,7 @@ Here is a standard example for a navbar:
 
 ```dart
 BsNavbar(
-  expand: BsNavbarExpand.lg,
+  expand: .lg,
   brand: Row(
     children: [
       BsNavbarIconBrand(
@@ -77,7 +77,7 @@ BsNavbar(
 | :--- | :--- | :--- | :--- |
 | `brand` | `Widget?` | `null` | The brand component (typically a [BsNavbarBrand]). |
 | `collapse` | `BsNavbarCollapse?` | `null` | The collapsible menu area (typically a [BsNavbarCollapse]). |
-| `expand` | `BsNavbarExpand` | `BsNavbarExpand.lg` | The breakpoint at which the navbar expands horizontally. |
+| `expand` | `BsNavbarExpand` | `.lg` | The breakpoint at which the navbar expands horizontally. |
 | `dark` | `bool` | `false` | If `true`, adjusts color contrast for dark backgrounds (white text/icons). |
 | `background` | `Color?` | `null` | Custom background color. Defaults to theme's dark/light colors. |
 | `padding` | `EdgeInsetsGeometry` | `symmetric(horizontal: 16, vertical: 8)` | Internal padding of the navbar container. |

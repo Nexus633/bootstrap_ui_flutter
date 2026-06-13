@@ -59,7 +59,8 @@ class BreadcrumbShowcase extends StatelessWidget {
             // 1. Basic Example
             _Section(
               title: 'Basic Example',
-              description: 'Demonstrating 1-level, 2-level and 3-level breadcrumb paths.',
+              description:
+                  'Demonstrating 1-level, 2-level and 3-level breadcrumb paths.',
               child: BsRow(
                 children: [
                   BsCol(
@@ -69,20 +70,38 @@ class BreadcrumbShowcase extends StatelessWidget {
                       children: [
                         BsBreadcrumb(
                           items: [
-                            BsBreadcrumbItem(label: const Text('Home'), active: true),
+                            BsBreadcrumbItem(
+                              label: const Text('Home'),
+                              active: true,
+                            ),
                           ],
                         ),
                         BsBreadcrumb(
                           items: [
-                            BsBreadcrumbItem(label: const Text('Home'), onPressed: () {}),
-                            BsBreadcrumbItem(label: const Text('Library'), active: true),
+                            BsBreadcrumbItem(
+                              label: const Text('Home'),
+                              onPressed: () {},
+                            ),
+                            BsBreadcrumbItem(
+                              label: const Text('Library'),
+                              active: true,
+                            ),
                           ],
                         ),
                         BsBreadcrumb(
                           items: [
-                            BsBreadcrumbItem(label: const Text('Home'), onPressed: () {}),
-                            BsBreadcrumbItem(label: const Text('Library'), onPressed: () {}),
-                            BsBreadcrumbItem(label: const Text('Data'), active: true),
+                            BsBreadcrumbItem(
+                              label: const Text('Home'),
+                              onPressed: () {},
+                            ),
+                            BsBreadcrumbItem(
+                              label: const Text('Library'),
+                              onPressed: () {},
+                            ),
+                            BsBreadcrumbItem(
+                              label: const Text('Data'),
+                              active: true,
+                            ),
                           ],
                         ),
                       ],
@@ -95,7 +114,8 @@ class BreadcrumbShowcase extends StatelessWidget {
             // 2. Custom Dividers
             _Section(
               title: 'Custom Dividers',
-              description: 'Separators can be customized with strings, empty dividers, or icon widgets.',
+              description:
+                  'Separators can be customized with strings, empty dividers, or icon widgets.',
               child: BsRow(
                 children: [
                   BsCol(
@@ -103,30 +123,66 @@ class BreadcrumbShowcase extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Arrow Divider (String):').fwBold().fs6().pb2(),
+                        const Text(
+                          'Arrow Divider (String):',
+                        ).fwBold().fs6().pb2(),
                         BsBreadcrumb(
-                          divider: '>',
+                          divider: Text('>'),
                           items: [
-                            BsBreadcrumbItem(label: const Text('Home'), onPressed: () {}),
-                            BsBreadcrumbItem(label: const Text('Library'), active: true),
+                            BsBreadcrumbItem(
+                              label: const Text('Home'),
+                              onPressed: () {},
+                            ),
+                            BsBreadcrumbItem(
+                              label: const Text('Library'),
+                              active: true,
+                            ),
                           ],
                         ),
 
-                        const Text('Icon Divider (Widget):').fwBold().fs6().pb2(),
+                        const Text(
+                          'Icon Divider (Widget):',
+                        ).fwBold().fs6().pb2(),
                         BsBreadcrumb(
                           divider: const BsIcon(BsIcons.chevronRight, size: 14),
                           items: [
-                            BsBreadcrumbItem(label: const Text('Home'), onPressed: () {}),
-                            BsBreadcrumbItem(label: const Text('Library'), active: true),
+                            BsBreadcrumbItem(
+                              label: const Text('Home'),
+                              onPressed: () {},
+                            ),
+                            BsBreadcrumbItem(
+                              label: const Text('Library'),
+                              active: true,
+                            ),
                           ],
                         ),
 
-                        const Text('Empty Divider (None):').fwBold().fs6().pb2(),
+                        const Text(
+                          'Empty Divider (None):',
+                        ).fwBold().fs6().pb2(),
                         BsBreadcrumb(
-                          divider: '',
+                          divider: null,
                           items: [
-                            BsBreadcrumbItem(label: const Text('Home'), onPressed: () {}),
-                            BsBreadcrumbItem(label: const Text('Library'), active: true),
+                            BsBreadcrumbItem(
+                              label: const Text('Home'),
+                              onPressed: () {},
+                            ),
+                            BsBreadcrumbItem(
+                              label: const Text('Library'),
+                              active: true,
+                            ),
+                          ],
+                        ),
+
+                        const Text(
+                          'Breadcrumb only with Text() Widget:',
+                        ).fwBold().fs6().pb2(),
+                        BsBreadcrumb(
+                          divider: const Text('<>'),
+                          items: [
+                            const Text('Home'),
+                            const Text('Library'),
+                            const Text('Data'),
                           ],
                         ),
                       ],
@@ -156,7 +212,11 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.5,
+          ),
         ).pb(4),
         if (description != null) Text(description!).pb(16),
         Container(

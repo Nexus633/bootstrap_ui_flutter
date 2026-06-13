@@ -91,15 +91,15 @@ class _BsRadioState<T> extends State<BsRadio<T>> {
 
     // Resolve Validation State colors
     BsValidationState currentState =
-        widget.validationState ?? BsValidationState.none;
+        widget.validationState ?? .none;
     if (widget.validationState == null) {
       if (wasValidated) {
-        currentState = BsValidationState.valid;
+        currentState = .valid;
       }
     }
 
-    final bool isInvalid = currentState == BsValidationState.invalid;
-    final bool isValid = currentState == BsValidationState.valid;
+    final bool isInvalid = currentState == .invalid;
+    final bool isValid = currentState == .valid;
 
     Color borderColor = theme.border;
     Color focusBorderColor = theme.primary.withValues(alpha: 0.5);

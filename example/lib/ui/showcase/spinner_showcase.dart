@@ -65,9 +65,22 @@ class SpinnerShowcase extends StatelessWidget {
             _Section(
               title: 'Colors',
               description: 'The border spinner uses currentColor for its border-color, meaning you can customize the color with variant utilities.',
-              child: Row(
+              child: Wrap(
+                spacing: 12,
+                runSpacing: 12,
                 children: BsVariant.values.map((variant) {
-                  return BsSpinner.border(variant: variant).pe(12);
+                  final spinner = BsSpinner.border(variant: variant);
+                  if (variant == BsVariant.light) {
+                    return Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: theme.dark,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: spinner,
+                    );
+                  }
+                  return spinner;
                 }).toList(),
               ),
             ),
@@ -81,9 +94,22 @@ class SpinnerShowcase extends StatelessWidget {
             _Section(
               title: 'Growing Colors',
               description: 'Once again, this spinner is built with currentColor, so you can easily change its appearance with color variants.',
-              child: Row(
+              child: Wrap(
+                spacing: 12,
+                runSpacing: 12,
                 children: BsVariant.values.map((variant) {
-                  return BsSpinner.grow(variant: variant).pe(12);
+                  final spinner = BsSpinner.grow(variant: variant);
+                  if (variant == BsVariant.light) {
+                    return Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: theme.dark,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: spinner,
+                    );
+                  }
+                  return spinner;
                 }).toList(),
               ),
             ),

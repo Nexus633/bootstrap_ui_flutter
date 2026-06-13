@@ -47,7 +47,7 @@ BsCard(
 ```dart
 BsCard(
   image: Image.network('https://picsum.photos/300/200'),
-  imagePosition: BsCardImagePosition.top,
+  imagePosition: .top,
   body: BsCardBody(
     children: [
       BsCardTitle('Card with Top Image'),
@@ -61,7 +61,7 @@ BsCard(
 ```dart
 BsCard(
   image: Image.network('https://picsum.photos/300/200', fit: BoxFit.cover),
-  imagePosition: BsCardImagePosition.left,
+  imagePosition: .left,
   imageFlex: 4,
   contentFlex: 8,
   body: BsCardBody(
@@ -77,7 +77,7 @@ BsCard(
 ```dart
 // Colored background and text contrast
 BsCard(
-  variant: BsCardVariant.primary,
+  variant: .primary,
   body: BsCardBody(
     children: [
       BsCardTitle('Primary Card Title'),
@@ -88,7 +88,7 @@ BsCard(
 
 // Border colored variant only
 BsCard(
-  borderVariant: BsCardVariant.danger,
+  borderVariant: .danger,
   body: BsCardBody(
     children: [
       BsCardTitle('Danger Border Card'),
@@ -134,7 +134,7 @@ BsCardGroup(
 | `footer` | `Widget?` | `null` | Optional footer widget (typically `BsCardFooter`). |
 | `children` | `List<Widget>?` | `null` | Overrides individual layout parameters to stack widgets vertically. |
 | `image` | `Widget?` | `null` | Image widget to include. |
-| `imagePosition` | `BsCardImagePosition` | `BsCardImagePosition.top` | Position of the image (top, bottom, left, right, overlay). |
+| `imagePosition` | `BsCardImagePosition` | `.top` | Position of the image (top, bottom, left, right, overlay). |
 | `imageFlex` | `int` | `4` | Flex ratio for horizontal image layout. |
 | `contentFlex` | `int` | `8` | Flex ratio for horizontal content layout. |
 | `variant` | `BsCardVariant?` | `null` | Background and text color variant (`.text-bg-*`). |

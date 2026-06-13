@@ -37,7 +37,7 @@ Du kannst das Icon mit den typischen Bootstrap-Farbvarianten einfärben.
 ```dart
 BsIcon(
   BsIcons.checkCircleFill,
-  variant: BsIconVariant.success,
+  variant: .success,
 )
 ```
 

@@ -15,7 +15,8 @@ class _ScrollspyShowcaseState extends State<ScrollspyShowcase> {
   final GlobalKey _section3Key = GlobalKey();
   final GlobalKey _section4Key = GlobalKey();
 
-  final BsScrollspyController _navbarScrollspyController = BsScrollspyController();
+  final BsScrollspyController _navbarScrollspyController =
+      BsScrollspyController();
   final GlobalKey _navSec1 = GlobalKey();
   final GlobalKey _navSec2 = GlobalKey();
   final GlobalKey _navDrop1 = GlobalKey();
@@ -113,23 +114,35 @@ class _ScrollspyShowcaseState extends State<ScrollspyShowcase> {
                           children: [
                             BsNavLink(
                               label: 'Item 1',
-                              active: _scrollspyController.activeTargetId == 'item-1',
-                              onPressed: () => _scrollspyController.scrollToTarget('item-1'),
+                              active:
+                                  _scrollspyController.activeTargetId ==
+                                  'item-1',
+                              onPressed: () =>
+                                  _scrollspyController.scrollToTarget('item-1'),
                             ),
                             BsNavLink(
                               label: 'Item 2',
-                              active: _scrollspyController.activeTargetId == 'item-2',
-                              onPressed: () => _scrollspyController.scrollToTarget('item-2'),
+                              active:
+                                  _scrollspyController.activeTargetId ==
+                                  'item-2',
+                              onPressed: () =>
+                                  _scrollspyController.scrollToTarget('item-2'),
                             ),
                             BsNavLink(
                               label: 'Item 3',
-                              active: _scrollspyController.activeTargetId == 'item-3',
-                              onPressed: () => _scrollspyController.scrollToTarget('item-3'),
+                              active:
+                                  _scrollspyController.activeTargetId ==
+                                  'item-3',
+                              onPressed: () =>
+                                  _scrollspyController.scrollToTarget('item-3'),
                             ),
                             BsNavLink(
                               label: 'Item 4',
-                              active: _scrollspyController.activeTargetId == 'item-4',
-                              onPressed: () => _scrollspyController.scrollToTarget('item-4'),
+                              active:
+                                  _scrollspyController.activeTargetId ==
+                                  'item-4',
+                              onPressed: () =>
+                                  _scrollspyController.scrollToTarget('item-4'),
                             ),
                           ],
                         );
@@ -160,25 +173,33 @@ class _ScrollspyShowcaseState extends State<ScrollspyShowcase> {
                                 _ContentSection(
                                   key: _section1Key,
                                   title: 'Item 1',
-                                  text: 'This is some placeholder content for the scrollspy page. ' * 5,
+                                  text:
+                                      'This is some placeholder content for the scrollspy page. ' *
+                                      5,
                                   theme: theme,
                                 ),
                                 _ContentSection(
                                   key: _section2Key,
                                   title: 'Item 2',
-                                  text: 'This is some placeholder content for the scrollspy page. ' * 8,
+                                  text:
+                                      'This is some placeholder content for the scrollspy page. ' *
+                                      8,
                                   theme: theme,
                                 ),
                                 _ContentSection(
                                   key: _section3Key,
                                   title: 'Item 3',
-                                  text: 'This is some placeholder content for the scrollspy page. ' * 6,
+                                  text:
+                                      'This is some placeholder content for the scrollspy page. ' *
+                                      6,
                                   theme: theme,
                                 ),
                                 _ContentSection(
                                   key: _section4Key,
                                   title: 'Item 4',
-                                  text: 'This is some placeholder content for the scrollspy page. ' * 10,
+                                  text:
+                                      'This is some placeholder content for the scrollspy page. ' *
+                                      10,
                                   theme: theme,
                                 ),
                               ],
@@ -191,69 +212,107 @@ class _ScrollspyShowcaseState extends State<ScrollspyShowcase> {
                 ],
               ),
             ),
-            
+
             _Section(
               title: 'Navbar with Dropdown',
-              description: 'Scrollspy works with navbars and dropdowns. In this example, the dropdown item becomes active when the scroll reaches its target.',
+              description:
+                  'Scrollspy works with navbars and dropdowns. In this example, the dropdown item becomes active when the scroll reaches its target.',
               child: Column(
                 children: [
                   Container(
                     decoration: BoxDecoration(
                       color: theme.light,
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(8),
+                      ),
                       border: Border.all(color: theme.border),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                    child: Row(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 8.0,
+                    ),
+                    child: Wrap(
+                      alignment: WrapAlignment.spaceBetween,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: 16,
+                      runSpacing: 8,
                       children: [
-                        const Text('Navbar', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: AnimatedBuilder(
-                            animation: _navbarScrollspyController,
-                            builder: (context, _) {
-                              return BsNav(
-                                variant: BsNavVariant.pills,
-                                children: [
-                                  BsNavLink(
-                                    label: 'First',
-                                    active: _navbarScrollspyController.activeTargetId == 'first',
-                                    onPressed: () => _navbarScrollspyController.scrollToTarget('first'),
-                                  ),
-                                  BsNavLink(
-                                    label: 'Second',
-                                    active: _navbarScrollspyController.activeTargetId == 'second',
-                                    onPressed: () => _navbarScrollspyController.scrollToTarget('second'),
-                                  ),
-                                  BsDropdown(
-                                    toggleBuilder: (context, toggle, isOpen) {
-                                      final isDropdownActive = _navbarScrollspyController.activeTargetId == 'drop1' ||
-                                                               _navbarScrollspyController.activeTargetId == 'drop2';
-                                      return BsNavLink(
-                                        label: 'Dropdown',
-                                        active: isDropdownActive,
-                                        onPressed: toggle,
-                                      );
-                                    },
-                                    menu: BsDropdownMenu(
-                                      children: [
-                                        BsDropdownItem(
-                                          active: _navbarScrollspyController.activeTargetId == 'drop1',
-                                          onPressed: () => _navbarScrollspyController.scrollToTarget('drop1'),
-                                          child: const Text('Third'),
-                                        ),
-                                        BsDropdownItem(
-                                          active: _navbarScrollspyController.activeTargetId == 'drop2',
-                                          onPressed: () => _navbarScrollspyController.scrollToTarget('drop2'),
-                                          child: const Text('Fourth'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
+                        const Text(
+                          'Navbar',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
+                        ),
+                        AnimatedBuilder(
+                          animation: _navbarScrollspyController,
+                          builder: (context, _) {
+                            return BsNav(
+                              variant: BsNavVariant.pills,
+                              children: [
+                                BsNavLink(
+                                  label: 'First',
+                                  active:
+                                      _navbarScrollspyController
+                                          .activeTargetId ==
+                                      'first',
+                                  onPressed: () =>
+                                      _navbarScrollspyController
+                                          .scrollToTarget('first'),
+                                ),
+                                BsNavLink(
+                                  label: 'Second',
+                                  active:
+                                      _navbarScrollspyController
+                                          .activeTargetId ==
+                                      'second',
+                                  onPressed: () =>
+                                      _navbarScrollspyController
+                                          .scrollToTarget('second'),
+                                ),
+                                BsDropdown(
+                                  toggleBuilder: (context, toggle, isOpen) {
+                                    final isDropdownActive =
+                                        _navbarScrollspyController
+                                                .activeTargetId ==
+                                            'drop1' ||
+                                        _navbarScrollspyController
+                                                .activeTargetId ==
+                                            'drop2';
+                                    return BsNavLink(
+                                      label: 'Dropdown',
+                                      active: isDropdownActive,
+                                      onPressed: toggle,
+                                    );
+                                  },
+                                  menu: BsDropdownMenu(
+                                    children: [
+                                      BsDropdownItem(
+                                        active:
+                                            _navbarScrollspyController
+                                                .activeTargetId ==
+                                            'drop1',
+                                        onPressed: () =>
+                                            _navbarScrollspyController
+                                                .scrollToTarget('drop1'),
+                                        child: const Text('Third'),
+                                      ),
+                                      BsDropdownItem(
+                                        active:
+                                            _navbarScrollspyController
+                                                .activeTargetId ==
+                                            'drop2',
+                                        onPressed: () =>
+                                            _navbarScrollspyController
+                                                .scrollToTarget('drop2'),
+                                        child: const Text('Fourth'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -262,7 +321,9 @@ class _ScrollspyShowcaseState extends State<ScrollspyShowcase> {
                     height: 250,
                     decoration: BoxDecoration(
                       color: theme.bodyBgSecondary,
-                      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
+                      borderRadius: const BorderRadius.vertical(
+                        bottom: Radius.circular(8),
+                      ),
                       border: Border(
                         left: BorderSide(color: theme.border),
                         right: BorderSide(color: theme.border),
@@ -281,25 +342,33 @@ class _ScrollspyShowcaseState extends State<ScrollspyShowcase> {
                               _ContentSection(
                                 key: _navSec1,
                                 title: 'First',
-                                text: 'This is some placeholder content for the scrollspy page. ' * 5,
+                                text:
+                                    'This is some placeholder content for the scrollspy page. ' *
+                                    5,
                                 theme: theme,
                               ),
                               _ContentSection(
                                 key: _navSec2,
                                 title: 'Second',
-                                text: 'This is some placeholder content for the scrollspy page. ' * 5,
+                                text:
+                                    'This is some placeholder content for the scrollspy page. ' *
+                                    5,
                                 theme: theme,
                               ),
                               _ContentSection(
                                 key: _navDrop1,
                                 title: 'Third (Dropdown)',
-                                text: 'This is some placeholder content for the scrollspy page. ' * 8,
+                                text:
+                                    'This is some placeholder content for the scrollspy page. ' *
+                                    8,
                                 theme: theme,
                               ),
                               _ContentSection(
                                 key: _navDrop2,
                                 title: 'Fourth (Dropdown)',
-                                text: 'This is some placeholder content for the scrollspy page. ' * 8,
+                                text:
+                                    'This is some placeholder content for the scrollspy page. ' *
+                                    8,
                                 theme: theme,
                               ),
                             ],
@@ -335,7 +404,10 @@ class _ContentSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)).pb2(),
+        Text(
+          title,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ).pb2(),
         Text(text, style: TextStyle(color: theme.bodyText)).pb4(),
       ],
     );
@@ -356,7 +428,11 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.5,
+          ),
         ).pb(4),
         if (description != null) Text(description!).pb(16),
         Container(

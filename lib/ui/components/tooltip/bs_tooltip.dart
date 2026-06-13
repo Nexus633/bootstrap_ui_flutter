@@ -16,7 +16,7 @@ class BsTooltip extends StatefulWidget {
     super.key,
     required this.message,
     required this.child,
-    this.placement = BsPlacement.top,
+    this.placement = .top,
     this.disabled = false,
     this.variant,
     this.color,
@@ -80,33 +80,33 @@ class _BsTooltipState extends State<BsTooltip> {
     const double minHeightRequired = 40.0;
     const double minWidthRequired = 100.0;
 
-    if (widget.placement == BsPlacement.top && spaceAbove < minHeightRequired && spaceBelow > spaceAbove) {
-      effectivePlacement = BsPlacement.bottom;
-    } else if (widget.placement == BsPlacement.bottom && spaceBelow < minHeightRequired && spaceAbove > spaceBelow) {
-      effectivePlacement = BsPlacement.top;
-    } else if (widget.placement == BsPlacement.start && spaceLeft < minWidthRequired && spaceRight > spaceLeft) {
-      effectivePlacement = BsPlacement.end;
-    } else if (widget.placement == BsPlacement.end && spaceRight < minWidthRequired && spaceLeft > spaceRight) {
-      effectivePlacement = BsPlacement.start;
+    if (widget.placement == .top && spaceAbove < minHeightRequired && spaceBelow > spaceAbove) {
+      effectivePlacement = .bottom;
+    } else if (widget.placement == .bottom && spaceBelow < minHeightRequired && spaceAbove > spaceBelow) {
+      effectivePlacement = .top;
+    } else if (widget.placement == .start && spaceLeft < minWidthRequired && spaceRight > spaceLeft) {
+      effectivePlacement = .end;
+    } else if (widget.placement == .end && spaceRight < minWidthRequired && spaceLeft > spaceRight) {
+      effectivePlacement = .start;
     }
 
     switch (effectivePlacement) {
-      case BsPlacement.top:
+      case .top:
         targetAnchor = Alignment.topCenter;
         followerAnchor = Alignment.bottomCenter;
         offset = const Offset(0, -6);
         break;
-      case BsPlacement.bottom:
+      case .bottom:
         targetAnchor = Alignment.bottomCenter;
         followerAnchor = Alignment.topCenter;
         offset = const Offset(0, 6);
         break;
-      case BsPlacement.start:
+      case .start:
         targetAnchor = Alignment.centerLeft;
         followerAnchor = Alignment.centerRight;
         offset = const Offset(-6, 0);
         break;
-      case BsPlacement.end:
+      case .end:
         targetAnchor = Alignment.centerRight;
         followerAnchor = Alignment.centerLeft;
         offset = const Offset(6, 0);
@@ -118,14 +118,14 @@ class _BsTooltipState extends State<BsTooltip> {
       if (widget.color != null) return widget.color!;
       if (widget.variant != null) {
         return switch (widget.variant!) {
-          BsVariant.primary => theme.primary,
-          BsVariant.secondary => theme.secondary,
-          BsVariant.success => theme.success,
-          BsVariant.danger => theme.danger,
-          BsVariant.warning => theme.warning,
-          BsVariant.info => theme.info,
-          BsVariant.light => theme.light,
-          BsVariant.dark => theme.dark,
+          .primary => theme.primary,
+          .secondary => theme.secondary,
+          .success => theme.success,
+          .danger => theme.danger,
+          .warning => theme.warning,
+          .info => theme.info,
+          .light => theme.light,
+          .dark => theme.dark,
         };
       }
       return Colors.black; // Bootstrap default
@@ -157,36 +157,36 @@ class _BsTooltipState extends State<BsTooltip> {
         ));
 
         Widget tooltipWithArrow;
-        if (effectivePlacement == BsPlacement.top) {
+        if (effectivePlacement == .top) {
           tooltipWithArrow = Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               tooltipInner,
               CustomPaint(
                 size: const Size(8.0, 4.0),
-                painter: _TooltipArrowPainter(direction: BsPlacement.top, color: tooltipColor),
+                painter: _TooltipArrowPainter(direction: .top, color: tooltipColor),
               ),
             ],
           );
-        } else if (effectivePlacement == BsPlacement.bottom) {
+        } else if (effectivePlacement == .bottom) {
           tooltipWithArrow = Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               CustomPaint(
                 size: const Size(8.0, 4.0),
-                painter: _TooltipArrowPainter(direction: BsPlacement.bottom, color: tooltipColor),
+                painter: _TooltipArrowPainter(direction: .bottom, color: tooltipColor),
               ),
               tooltipInner,
             ],
           );
-        } else if (effectivePlacement == BsPlacement.start) {
+        } else if (effectivePlacement == .start) {
           tooltipWithArrow = Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Flexible(child: tooltipInner),
               CustomPaint(
                 size: const Size(4.0, 8.0),
-                painter: _TooltipArrowPainter(direction: BsPlacement.start, color: tooltipColor),
+                painter: _TooltipArrowPainter(direction: .start, color: tooltipColor),
               ),
             ],
           );
@@ -196,7 +196,7 @@ class _BsTooltipState extends State<BsTooltip> {
             children: [
               CustomPaint(
                 size: const Size(4.0, 8.0),
-                painter: _TooltipArrowPainter(direction: BsPlacement.end, color: tooltipColor),
+                painter: _TooltipArrowPainter(direction: .end, color: tooltipColor),
               ),
               Flexible(child: tooltipInner),
             ],
@@ -232,28 +232,38 @@ class _BsTooltipState extends State<BsTooltip> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) {
+    return GestureDetector(
+      onLongPress: () {
         if (!widget.disabled) {
-          setState(() => _isHovered = true);
           _showTooltip();
         }
       },
-      onExit: (_) {
-        setState(() => _isHovered = false);
+      onLongPressEnd: (_) {
         _hideTooltip();
       },
-      child: Focus(
-        onFocusChange: (hasFocus) {
-          if (hasFocus && !widget.disabled) {
+      child: MouseRegion(
+        onEnter: (_) {
+          if (!widget.disabled) {
+            setState(() => _isHovered = true);
             _showTooltip();
-          } else if (!hasFocus && !_isHovered) {
-            _hideTooltip();
           }
         },
-        child: CompositedTransformTarget(
-          link: _layerLink,
-          child: widget.child,
+        onExit: (_) {
+          setState(() => _isHovered = false);
+          _hideTooltip();
+        },
+        child: Focus(
+          onFocusChange: (hasFocus) {
+            if (hasFocus && !widget.disabled) {
+              _showTooltip();
+            } else if (!hasFocus && !_isHovered) {
+              _hideTooltip();
+            }
+          },
+          child: CompositedTransformTarget(
+            link: _layerLink,
+            child: widget.child,
+          ),
         ),
       ),
     );
@@ -274,22 +284,22 @@ class _TooltipArrowPainter extends CustomPainter {
     final path = Path();
 
     switch (direction) {
-      case BsPlacement.top:
+      case .top:
         path.moveTo(0, 0);
         path.lineTo(size.width, 0);
         path.lineTo(size.width / 2, size.height);
         break;
-      case BsPlacement.bottom:
+      case .bottom:
         path.moveTo(0, size.height);
         path.lineTo(size.width, size.height);
         path.lineTo(size.width / 2, 0);
         break;
-      case BsPlacement.start:
+      case .start:
         path.moveTo(0, 0);
         path.lineTo(0, size.height);
         path.lineTo(size.width, size.height / 2);
         break;
-      case BsPlacement.end:
+      case .end:
         path.moveTo(size.width, 0);
         path.lineTo(size.width, size.height);
         path.lineTo(0, size.height / 2);

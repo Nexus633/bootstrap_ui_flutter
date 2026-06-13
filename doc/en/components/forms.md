@@ -24,7 +24,7 @@ A versatile text input component replacing `TextFormField`.
 ```dart
 BsInput(
   placeholder: 'name@example.com',
-  size: BsInputSize.md, // .form-control-md
+  size: .md, // .form-control-md
   disabled: false,
   readonly: false,
   plainText: false, // .form-control-plaintext
@@ -137,7 +137,7 @@ All inputs support a `validationState` property for explicit state management (e
 
 ```dart
 BsInput(
-  validationState: BsValidationState.valid, // Forces .is-valid styling
+  validationState: .valid, // Forces .is-valid styling
 )
 ```
 

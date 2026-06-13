@@ -19,7 +19,7 @@ class BsInput extends FormField<String> {
     super.key,
     this.controller,
     String? initialValue,
-    this.size = BsInputSize.md,
+    this.size = .md,
     this.disabled = false,
     this.readonly = false,
     this.plainText = false,
@@ -206,17 +206,17 @@ class _BsInputState extends FormFieldState<String> {
 
     // Resolve Validation State
     BsValidationState currentState =
-        widget.validationState ?? BsValidationState.none;
+        widget.validationState ?? .none;
     if (widget.validationState == null) {
       if (hasError) {
-        currentState = BsValidationState.invalid;
+        currentState = .invalid;
       } else if (wasValidated) {
-        currentState = BsValidationState.valid;
+        currentState = .valid;
       }
     }
 
-    final bool isInvalid = currentState == BsValidationState.invalid;
-    final bool isValid = currentState == BsValidationState.valid;
+    final bool isInvalid = currentState == .invalid;
+    final bool isValid = currentState == .valid;
 
     // Resolve Colors based on state
     Color borderColor = theme.border;
@@ -251,11 +251,11 @@ class _BsInputState extends FormFieldState<String> {
     double fontSize = BsTypography.fontSizeBase; // 1rem
     double minHeight = 38.0;
 
-    if (effectiveSize == BsInputSize.sm) {
+    if (effectiveSize == .sm) {
       padding = const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0);
       fontSize = BsTypography.fontSizeSm;
       minHeight = 31.0; // <--- NEU: Bootstrap sm height
-    } else if (effectiveSize == BsInputSize.lg) {
+    } else if (effectiveSize == .lg) {
       padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0);
       fontSize = BsTypography.fontSizeLg;
       minHeight = 48.0; // <--- NEU: Bootstrap lg height
@@ -274,9 +274,9 @@ class _BsInputState extends FormFieldState<String> {
       padding = const EdgeInsets.only(top: 26.0, bottom: 6.0, left: 12.0, right: 12.0);
     }
 
-    final double baseRadius = effectiveSize == BsInputSize.sm
+    final double baseRadius = effectiveSize == .sm
         ? 4.0
-        : (effectiveSize == BsInputSize.lg ? 8.0 : 6.0);
+        : (effectiveSize == .lg ? 8.0 : 6.0);
     final Radius r = Radius.circular(baseRadius);
 
     BorderRadius? groupBorderRadius;
@@ -383,22 +383,36 @@ class _BsInputState extends FormFieldState<String> {
       ),
     );
 
+    final String? semanticsLabel = widget.floatingLabel != null
+        ? (hasError ? '${widget.floatingLabel} - Fehler: $errorText' : widget.floatingLabel)
+        : null;
+
+    final String? semanticsHint = widget.placeholder != null
+        ? (hasError && widget.floatingLabel == null ? '${widget.placeholder} - Fehler: $errorText' : widget.placeholder)
+        : null;
+
+    final Widget semanticsWidget = Semantics(
+      label: semanticsLabel,
+      hint: semanticsHint,
+      child: inputWidget,
+    );
+
     // If inside an InputGroup, we MUST NOT wrap the inputWidget in a Column that takes min height.
     // The InputGroup uses IntrinsicHeight + CrossAxisAlignment.stretch on its children.
     // A Column with MainAxisSize.min will NOT stretch its children vertically to fill the IntrinsicHeight.
     // So if it's in a group, we return just the inputWidget, and the feedback will have to be handled differently (e.g. grouped below the entire InputGroup).
     if (groupContext != null) {
-      return inputWidget;
+      return semanticsWidget;
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        inputWidget,
+        semanticsWidget,
         if (hasError)
           BsFormFeedback(
-            state: BsValidationState.invalid,
+            state: .invalid,
             message: errorText!,
           ).pt(4),
       ],

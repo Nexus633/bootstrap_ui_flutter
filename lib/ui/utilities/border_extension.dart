@@ -84,14 +84,14 @@ extension BsBorderExtension on Widget {
   Widget borderVariant(BuildContext context, BsVariant variant, {double width = 1.0}) {
     final theme = context.bs;
     final color = switch (variant) {
-      BsVariant.primary => theme.primary,
-      BsVariant.secondary => theme.secondary,
-      BsVariant.success => theme.success,
-      BsVariant.danger => theme.danger,
-      BsVariant.warning => theme.warning,
-      BsVariant.info => theme.info,
-      BsVariant.light => theme.light,
-      BsVariant.dark => theme.dark,
+      .primary => theme.primary,
+      .secondary => theme.secondary,
+      .success => theme.success,
+      .danger => theme.danger,
+      .warning => theme.warning,
+      .info => theme.info,
+      .light => theme.light,
+      .dark => theme.dark,
     };
     return border(color: color, width: width);
   }

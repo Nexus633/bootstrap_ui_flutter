@@ -47,7 +47,7 @@ BsCard(
 ```dart
 BsCard(
   image: Image.network('https://picsum.photos/300/200'),
-  imagePosition: BsCardImagePosition.top,
+  imagePosition: .top,
   body: BsCardBody(
     children: [
       BsCardTitle('Karte mit Bild oben'),
@@ -61,7 +61,7 @@ BsCard(
 ```dart
 BsCard(
   image: Image.network('https://picsum.photos/300/200', fit: BoxFit.cover),
-  imagePosition: BsCardImagePosition.left,
+  imagePosition: .left,
   imageFlex: 4,
   contentFlex: 8,
   body: BsCardBody(
@@ -77,7 +77,7 @@ BsCard(
 ```dart
 // Farbiger Hintergrund und passender Textkontrast
 BsCard(
-  variant: BsCardVariant.primary,
+  variant: .primary,
   body: BsCardBody(
     children: [
       BsCardTitle('Primäre Karte'),
@@ -88,7 +88,7 @@ BsCard(
 
 // Nur farbiger Rahmen (Border Variant)
 BsCard(
-  borderVariant: BsCardVariant.danger,
+  borderVariant: .danger,
   body: BsCardBody(
     children: [
       BsCardTitle('Rote Rahmen-Karte'),
@@ -134,7 +134,7 @@ BsCardGroup(
 | `footer` | `Widget?` | `null` | Optionales Fußzeilen-Widget (typischerweise `BsCardFooter`). |
 | `children` | `List<Widget>?` | `null` | Überschreibt Einzel-Layoutparameter für einen vertikalen Stapel (Column). |
 | `image` | `Widget?` | `null` | Anzuzeigendes Bild-Widget. |
-| `imagePosition` | `BsCardImagePosition` | `BsCardImagePosition.top` | Position des Bildes (top, bottom, left, right, overlay). |
+| `imagePosition` | `BsCardImagePosition` | `.top` | Position des Bildes (top, bottom, left, right, overlay). |
 | `imageFlex` | `int` | `4` | Flex-Verhältnis für horizontales Bild. |
 | `contentFlex` | `int` | `8` | Flex-Verhältnis für horizontalen Inhalt. |
 | `variant` | `BsCardVariant?` | `null` | Hintergrund- und Schriftfarbvariante (`.text-bg-*`). |

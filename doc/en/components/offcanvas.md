@@ -27,11 +27,11 @@ Offcanvas dialog panels are typically opened using the [`showBsOffcanvas`](file:
 ```dart
 showBsOffcanvas(
   context: context,
-  placement: BsOffcanvasPlacement.start,
-  backdrop: BsOffcanvasBackdrop.enabled,
+  placement: .start,
+  backdrop: .enabled,
   keyboard: true,
   builder: (context) => BsOffcanvas(
-    placement: BsOffcanvasPlacement.start,
+    placement: .start,
     header: const BsOffcanvasHeader(
       child: Text('Navigation Menu'),
     ),
@@ -55,7 +55,7 @@ showBsOffcanvas(
 | :--- | :--- | :--- | :--- |
 | `body` | `Widget` | *required* | The primary content area of the panel (usually [`BsOffcanvasBody`](file:///E:/FlutterProjects/bootstrap_ui_flutter/lib/ui/components/offcanvas/bs_offcanvas.dart#L168)). |
 | `header` | `BsOffcanvasHeader?` | `null` | The header widget of the panel (usually [`BsOffcanvasHeader`](file:///E:/FlutterProjects/bootstrap_ui_flutter/lib/ui/components/offcanvas/bs_offcanvas.dart#L108)). |
-| `placement` | `BsOffcanvasPlacement` | `BsOffcanvasPlacement.start` | The placement edge edge (`start`, `end`, `top`, `bottom`). |
+| `placement` | `BsOffcanvasPlacement` | `.start` | The placement edge edge (`start`, `end`, `top`, `bottom`). |
 | `width` | `double?` | `400.0` | The width of the panel (only applicable when `placement` is `start` or `end`). Clamped to viewport width. |
 | `height` | `double?` | `300.0` | The height of the panel (only applicable when `placement` is `top` or `bottom`). Clamped to viewport height. |
 | `variant` | `BsOffcanvasVariant?` | `null` | Color variant of the panel (maps to Bootstrap `.text-bg-*`). |

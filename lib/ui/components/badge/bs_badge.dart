@@ -12,7 +12,7 @@ class BsBadge extends StatelessWidget {
   const BsBadge({
     super.key,
     required this.label,
-    this.variant = BsVariant.primary,
+    this.variant = .primary,
     this.isPill = false,
   });
 
@@ -42,7 +42,7 @@ class BsBadge extends StatelessWidget {
         borderRadius: radius,
         // Optional: A light border for the light badge
         border:
-            variant == BsVariant.light
+            variant == .light
                 ? Border.all(color: bsTheme.border, width: 1.0)
                 : null,
       ),
@@ -62,35 +62,35 @@ class BsBadge extends StatelessWidget {
 
   _BadgeStyle _resolveStyle(BsVariant variant, BsThemeData bs) {
     return switch (variant) {
-      BsVariant.primary => _BadgeStyle(
+      .primary => _BadgeStyle(
         backgroundColor: bs.primary, // Now accesses the Dark/Light Mode value!
         textColor: BsColors.onPrimary,
       ),
-      BsVariant.secondary => _BadgeStyle(
+      .secondary => _BadgeStyle(
         backgroundColor: bs.secondary,
         textColor: BsColors.onSecondary,
       ),
-      BsVariant.success => _BadgeStyle(
+      .success => _BadgeStyle(
         backgroundColor: bs.success,
         textColor: BsColors.onSuccess,
       ),
-      BsVariant.danger => _BadgeStyle(
+      .danger => _BadgeStyle(
         backgroundColor: bs.danger,
         textColor: BsColors.onDanger,
       ),
-      BsVariant.warning => _BadgeStyle(
+      .warning => _BadgeStyle(
         backgroundColor: bs.warning,
         textColor: BsColors.onWarning,
       ),
-      BsVariant.info => _BadgeStyle(
+      .info => _BadgeStyle(
         backgroundColor: bs.info,
         textColor: BsColors.onInfo,
       ),
-      BsVariant.light => _BadgeStyle(
+      .light => _BadgeStyle(
         backgroundColor: bs.light,
         textColor: bs.onLight,
       ),
-      BsVariant.dark => _BadgeStyle(
+      .dark => _BadgeStyle(
         backgroundColor: bs.dark,
         textColor: bs.onDark,
       ),

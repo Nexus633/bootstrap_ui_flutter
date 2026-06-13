@@ -379,7 +379,7 @@ _ListGroupItemColors _resolveVariantColors(
   BsThemeData theme,
 ) {
   switch (variant) {
-    case BsVariant.primary:
+    case .primary:
       final bg = theme.primaryBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -387,7 +387,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.primaryTextEmphasis.withValues(alpha: 0.15),
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.secondary:
+    case .secondary:
       final bg = theme.secondaryBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -395,7 +395,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.secondaryTextEmphasis.withValues(alpha: 0.15),
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.success:
+    case .success:
       final bg = theme.successBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -403,7 +403,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.successTextEmphasis.withValues(alpha: 0.15),
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.danger:
+    case .danger:
       final bg = theme.dangerBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -411,7 +411,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.dangerTextEmphasis.withValues(alpha: 0.15),
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.warning:
+    case .warning:
       final bg = theme.warningBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -419,7 +419,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.warningTextEmphasis.withValues(alpha: 0.15),
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.info:
+    case .info:
       final bg = theme.infoBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -427,7 +427,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.infoTextEmphasis.withValues(alpha: 0.15),
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.light:
+    case .light:
       final bg = theme.lightBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -435,7 +435,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.border,
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.dark:
+    case .dark:
       final bg = theme.darkBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
