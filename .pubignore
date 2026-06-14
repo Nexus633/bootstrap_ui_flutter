@@ -25,3 +25,8 @@ README.de.md
 
 # Icon
 icon_generate/
+
+example/build/
+
+# Large assets in docs (gifs, images) are hosted on GitHub
+doc/assets/

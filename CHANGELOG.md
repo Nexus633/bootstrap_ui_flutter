@@ -20,7 +20,7 @@
    - Added missing platform directories (`ios`, `macos`, `linux`) to the showcase app.
    - Registered `BsLocalizations.delegate` in the showcase MaterialApp.
  * **Testing & Quality**:
-   - Expanded test suite to **247 tests** (adding 18 new widget tests for accessibility and localizations).
+   - Expanded test suite to **255 tests** (adding new widget tests for accessibility and localizations).
    - Introduced a robust localization mock delegate pattern for widget testing to avoid filesystem and asset-loading latency on CI pipelines.
    - Verified 100% clean static analysis (`flutter analyze`) and all tests green.
 
