@@ -1,3 +1,29 @@
+## 0.6.0
+ * **Localization (JSON-based)**:
+   - Migrated from hardcoded `BsLocalizationConfig` to a dynamic, asset-based JSON localization system using `BsLocalizations` and `BsLocalizations.delegate`.
+   - Added translations for **10 languages**: English, German, French, Spanish, Italian, Portuguese, Dutch, Polish, Russian, and Turkish.
+   - Designed for zero-configuration: `isSupported` returns `true` for all locales, enabling developers to drop in new JSON files (e.g., `zh.json`) without modifying or re-compiling the library.
+   - Built-in graceful fallback to English (`en.json`) if file loading fails or a language is not supported.
+ * **Semantics & Accessibility (100% Scope)**:
+   - Achieved comprehensive accessibility coverage across all components.
+   - Added custom semantics support for `BsSelect` (linking floating label and error validation).
+   - Added progress bar role and value mapping to `BsProgress` & `BsProgressBar`.
+   - Added status role and loading announcements to `BsSpinner` (utilizing `liveRegion`).
+   - Added full navigation controls, indicator selection, and carousel role semantics to `BsCarousel`.
+   - Added custom screen reader labels (`semanticsLabel`) to `BsBadge` and interactive role overlays (`link`/`button`) to `BsCard`.
+ * **Design Tokens & Refactoring**:
+   - Added shadow, transition, and z-index design tokens, form validation state, and typography components.
+   - Refactored all enums across the codebase to use modern Dart short-dot syntax for a cleaner API.
+   - Relocated icon assets to `assets/fonts/` for unified packaging.
+ * **Showcase & Platform Support**:
+   - Initialized cross-platform project structures for the example application.
+   - Added missing platform directories (`ios`, `macos`, `linux`) to the showcase app.
+   - Registered `BsLocalizations.delegate` in the showcase MaterialApp.
+ * **Testing & Quality**:
+   - Expanded test suite to **247 tests** (adding 18 new widget tests for accessibility and localizations).
+   - Introduced a robust localization mock delegate pattern for widget testing to avoid filesystem and asset-loading latency on CI pipelines.
+   - Verified 100% clean static analysis (`flutter analyze`) and all tests green.
+
 ## 0.5.0 (Beta Release)
  * **New Components**:
    - `BsListGroup` (Flexible and powerful list groups, items, and action states)

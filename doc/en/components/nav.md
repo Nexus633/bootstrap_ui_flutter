@@ -1,5 +1,9 @@
 # Navs and Tabs
 
+## Preview
+
+![Preview](../../assets/Navs_Tabs.gif)
+
 `BsNav` is a flexible navigation component built with Flexbox. It supports multiple display styles (plain links, tabs, pills, and underline), custom alignments, vertical stacked layouts, and tab content switching with a fade transition.
 
 ## Features
@@ -36,7 +40,7 @@ class _MyTabbedWidgetState extends State<MyTabbedWidget> {
     return Column(
       children: [
         BsNav(
-          variant: BsNavVariant.tabs,
+          variant: .tabs,
           children: [
             BsNavLink(
               label: 'Home',
@@ -81,8 +85,8 @@ Pills display active navigation links with solid background colors:
 
 ```dart
 BsNav(
-  variant: BsNavVariant.pills,
-  alignment: BsNavAlignment.center,
+  variant: .pills,
+  alignment: .center,
   children: [
     BsNavLink(label: 'Active', active: true, onPressed: () {}),
     BsNavLink(label: 'Link', onPressed: () {}),
@@ -97,7 +101,7 @@ Underline uses bottom lines to indicate active states:
 
 ```dart
 BsNav(
-  variant: BsNavVariant.underline,
+  variant: .underline,
   children: [
     BsNavLink(label: 'Active', active: true, onPressed: () {}),
     BsNavLink(label: 'Link', onPressed: () {}),
@@ -112,7 +116,7 @@ You can optionally override default link text and icon colors for both active an
 
 ```dart
 BsNav(
-  variant: BsNavVariant.plain,
+  variant: .plain,
   children: [
     BsNavLink(
       label: 'Green Link',
@@ -139,8 +143,8 @@ BsNav(
 | Property | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `children` | `List<Widget>` | *required* | The navigation items (typically [BsNavLink]s). |
-| `variant` | `BsNavVariant` | `BsNavVariant.plain` | The visual variant style (`plain`, `tabs`, `pills`, `underline`). |
-| `alignment` | `BsNavAlignment` | `BsNavAlignment.start` | Horizontal alignment of the links (`start`, `center`, `end`, `fill`, `justified`). |
+| `variant` | `BsNavVariant` | `.plain` | The visual variant style (`plain`, `tabs`, `pills`, `underline`). |
+| `alignment` | `BsNavAlignment` | `.start` | Horizontal alignment of the links (`start`, `center`, `end`, `fill`, `justified`). |
 | `vertical` | `bool` | `false` | Whether navigation items stack vertically. |
 | `padding` | `EdgeInsetsGeometry` | `EdgeInsets.zero` | Padding around the nav container. |
 

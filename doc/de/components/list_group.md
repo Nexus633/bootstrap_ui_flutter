@@ -2,7 +2,7 @@
 
 ## Vorschau
 
-![Vorschau](../../assets/ListGroup.png)
+![Vorschau](../../assets/List_Group.gif)
 
 Listengruppen (`BsListGroup`) sind flexible Komponenten zur Anzeige einer Reihe von Inhalten. Sie können für einfache Listen, verlinkte Listen, Buttons oder komplexe benutzerdefinierte Layouts verwendet werden.
 
@@ -101,15 +101,15 @@ BsListGroup(
 BsListGroup(
   children: [
     BsListGroupItem(
-      variant: BsListGroupItemVariant.primary,
+      variant: .primary,
       child: Text('Primäres Element'),
     ),
     BsListGroupItem(
-      variant: BsListGroupItemVariant.success,
+      variant: .success,
       child: Text('Erfolgreiches Element'),
     ),
     BsListGroupItem(
-      variant: BsListGroupItemVariant.danger,
+      variant: .danger,
       child: Text('Gefährliches Element'),
     ),
   ],

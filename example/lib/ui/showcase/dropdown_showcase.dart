@@ -103,13 +103,21 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: theme.border),
               ),
-              child: Row(
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 8,
+                runSpacing: 4,
                 children: [
-                  BsIcon(BsIcons.infoCircle, color: theme.primary),
-                  const SizedBox(width: 8),
-                  const Text(
-                    'Last Action: ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      BsIcon(BsIcons.infoCircle, color: theme.primary),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'Last Action: ',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
                   Text(
                     _selectedAction,
@@ -213,7 +221,7 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
               ),
             ),
 
-            // 3. Directions & Alignments
+             // 3. Directions & Alignments
             _Section(
               title: 'Directions & Alignments',
               description: 'Position the menu above (Dropup), to the left (Dropstart), to the right (Dropend), or align it to the end.',
@@ -222,25 +230,25 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
                 runSpacing: 12,
                 children: [
                   BsDropdown(
-                    direction: BsDropdownDirection.up,
+                    direction: .up,
                     label: 'Dropup',
                     toggleVariant: BsButtonVariant.secondary,
                     menu: _buildMenu('Dropup'),
                   ),
                   BsDropdown(
-                    direction: BsDropdownDirection.end,
+                    direction: .end,
                     label: 'Dropend (Right)',
                     toggleVariant: BsButtonVariant.secondary,
                     menu: _buildMenu('Dropend'),
                   ),
                   BsDropdown(
-                    direction: BsDropdownDirection.start,
+                    direction: .start,
                     label: 'Dropstart (Left)',
                     toggleVariant: BsButtonVariant.secondary,
                     menu: _buildMenu('Dropstart'),
                   ),
                   BsDropdown(
-                    alignment: BsDropdownAlignment.end,
+                    alignment: .end,
                     label: 'End-Aligned',
                     toggleVariant: BsButtonVariant.secondary,
                     menu: _buildMenu('End-Aligned'),
@@ -258,27 +266,31 @@ class _DropdownShowcaseState extends State<DropdownShowcase> {
                 runSpacing: 12,
                 children: [
                   BsDropdown(
-                    autoClose: BsDropdownAutoClose.always,
+                    autoClose: .always,
                     label: 'always (Default)',
-                    toggleVariant: BsButtonVariant.outlineDark,
+                    toggleVariant: BsButtonVariant.dark,
+                    outline: true,
                     menu: _buildMenu('autoClose: always'),
                   ),
                   BsDropdown(
-                    autoClose: BsDropdownAutoClose.inside,
+                    autoClose: .inside,
                     label: 'inside (Only close on item click)',
-                    toggleVariant: BsButtonVariant.outlineDark,
+                    toggleVariant: BsButtonVariant.dark,
+                    outline: true,
                     menu: _buildMenu('autoClose: inside'),
                   ),
                   BsDropdown(
-                    autoClose: BsDropdownAutoClose.outside,
+                    autoClose: .outside,
                     label: 'outside (Only close on outside click)',
-                    toggleVariant: BsButtonVariant.outlineDark,
+                    toggleVariant: BsButtonVariant.dark,
+                    outline: true,
                     menu: _buildMenu('autoClose: outside'),
                   ),
                   BsDropdown(
-                    autoClose: BsDropdownAutoClose.none,
+                    autoClose: .none,
                     label: 'none (Manual toggle)',
-                    toggleVariant: BsButtonVariant.outlineDark,
+                    toggleVariant: BsButtonVariant.dark,
+                    outline: true,
                     menu: _buildMenu('autoClose: none'),
                   ),
                 ],

@@ -1,0 +1,9 @@
+{
+  "errorPrefix": "Błąd",
+  "carouselNext": "Następny slajd",
+  "carouselPrev": "Poprzedni slajd",
+  "carouselContainer": "Karuzela obrazów",
+  "carouselIndicator": "Przejdź do slajdu {index}",
+  "spinner": "Ładowanie...",
+  "progressBar": "Pasek postępu"
+}

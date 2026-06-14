@@ -2,11 +2,7 @@
 
 ## Vorschau
 
-| Dropdown Links | Dropdown Split Button | Dropdown Oben |
-|:---:|:---:|:---:|
-| <img src="../../assets/Dropdown-1.png" width="250" alt="Dropdown Links"> | <img src="../../assets/Dropdown-2.png" width="250" alt="Split Button"> | <img src="../../assets/Dropdown-3.png" width="250" alt="Dropdown Oben"> |
-| **Dropdown Rechts** | **Dropdown Links** | **Dropdown Ausrichtung** |
-| <img src="../../assets/Dropdown-4.png" width="250" alt="Dropdown Rechts"> | <img src="../../assets/Dropdown-5.png" width="250" alt="Dropdown Links"> | <img src="../../assets/Dropdown-6.png" width="250" alt="Dropdown Ausrichtung"> |
+![Vorschau](../../assets/Dropdowns.gif)
 
 
 Dropdowns sind einblendbare Menüs, die Listen von Links oder Aktionen anzeigen. Das Paket enthält:
@@ -27,7 +23,7 @@ Ein Standard-Dropdown kann ganz einfach über einen `label` definiert werden. Es
 ```dart
 BsDropdown(
   label: 'Dropdown Button',
-  toggleVariant: BsButtonVariant.primary,
+  toggleVariant: .primary,
   menu: BsDropdownMenu(
     children: [
       BsDropdownItem(
@@ -82,8 +78,8 @@ Das Dropdown kann in vier Richtungen geöffnet werden: `down` (Standard), `up` (
 
 ```dart
 BsDropdown(
-  direction: BsDropdownDirection.up, // Öffnet sich nach oben
-  alignment: BsDropdownAlignment.end, // Rechtsbündig ausgerichtet
+  direction: .up, // Öffnet sich nach oben
+  alignment: .end, // Rechtsbündig ausgerichtet
   toggle: BsButton(label: 'Dropup rechts', onPressed: () {}),
   menu: BsDropdownMenu(
     children: [
@@ -105,7 +101,7 @@ Sie können konfigurieren, wann sich das Menü automatisch schließt:
 
 ```dart
 BsDropdown(
-  autoClose: BsDropdownAutoClose.outside,
+  autoClose: .outside,
   toggle: BsButton(label: 'Klick außerhalb schließt', onPressed: () {}),
   menu: BsDropdownMenu(
     children: [
@@ -127,7 +123,7 @@ BsDropdownMenu(
 
 // 2. Eine semantische Farbvariante anwenden
 BsDropdownMenu(
-  variant: BsCardVariant.success,
+  variant: .success,
   children: [...],
 )
 
@@ -150,11 +146,11 @@ BsDropdownMenu(
 | `toggle` | `Widget?` | `null` | Ein benutzerdefiniertes Trigger-Widget, welches das Dropdown öffnet. |
 | `toggleBuilder` | `Widget Function(BuildContext, VoidCallback, bool)?` | `null` | Ein Builder-Callback zur individuellen Steuerung des Triggers (optimal für Split-Buttons). |
 | `menu` | `BsDropdownMenu` | **Erforderlich** | Das Dropdown-Menü mit den enthaltenen Elementen. |
-| `direction` | `BsDropdownDirection` | `BsDropdownDirection.down` | Öffnungsrichtung (down, up, start, end). |
-| `alignment` | `BsDropdownAlignment` | `BsDropdownAlignment.start` | Ausrichtung des Menüs (start, end). |
-| `autoClose` | `BsDropdownAutoClose` | `BsDropdownAutoClose.always` | Legt das Verhalten beim Schließen fest. |
-| `toggleVariant` | `BsButtonVariant` | `BsButtonVariant.primary` | Die Farbvariante des Standard-Trigger-Buttons. |
-| `toggleSize` | `BsButtonSize` | `BsButtonSize.md` | Die Größenvariante des Standard-Trigger-Buttons. |
+| `direction` | `BsDropdownDirection` | `.down` | Öffnungsrichtung (down, up, start, end). |
+| `alignment` | `BsDropdownAlignment` | `.start` | Ausrichtung des Menüs (start, end). |
+| `autoClose` | `BsDropdownAutoClose` | `.always` | Legt das Verhalten beim Schließen fest. |
+| `toggleVariant` | `BsButtonVariant` | `.primary` | Die Farbvariante des Standard-Trigger-Buttons. |
+| `toggleSize` | `BsButtonSize` | `.md` | Die Größenvariante des Standard-Trigger-Buttons. |
 | `showCaret` | `bool` | `true` | Bestimmt, ob das Pfeilsymbol (Caret) auf dem Standard-Trigger-Button angezeigt wird. |
 | `disabled` | `bool` | `false` | Deaktiviert die Interaktion mit dem Dropdown bei `true`. |
 

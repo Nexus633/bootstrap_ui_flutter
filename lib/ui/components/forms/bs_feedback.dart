@@ -29,12 +29,12 @@ class BsFormFeedback extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (state == BsValidationState.none || message.isEmpty) {
+    if (state == .none || message.isEmpty) {
       return const SizedBox.shrink();
     }
 
     final theme = context.bs;
-    final bool isInvalid = state == BsValidationState.invalid;
+    final bool isInvalid = state == .invalid;
     
     // Default Bootstrap colors for feedback
     final Color feedbackColor = isInvalid ? theme.danger : theme.success;

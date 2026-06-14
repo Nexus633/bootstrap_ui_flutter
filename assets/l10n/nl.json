@@ -1,0 +1,9 @@
+{
+  "errorPrefix": "Fout",
+  "carouselNext": "Volgende dia",
+  "carouselPrev": "Vorige dia",
+  "carouselContainer": "Afbeeldingencarrousel",
+  "carouselIndicator": "Ga naar dia {index}",
+  "spinner": "Laden...",
+  "progressBar": "Voortgangsbalk"
+}

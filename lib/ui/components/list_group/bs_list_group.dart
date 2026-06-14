@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
 import '../../tokens/spacing.dart';
+import '../../tokens/transitions.dart';
 import '../../utilities/spacing_extension.dart';
 
 /// Scope shared down from [BsListGroup] to its children.
@@ -168,6 +170,7 @@ class BsListGroupItem extends StatefulWidget {
 
 class _BsListGroupItemState extends State<BsListGroupItem> {
   bool _isHovered = false;
+  bool _isFocused = false;
 
   @override
   Widget build(BuildContext context) {
@@ -206,7 +209,7 @@ class _BsListGroupItemState extends State<BsListGroupItem> {
 
     // Apply hover states if interactive (onPressed != null)
     final bool isInteractive = widget.onPressed != null && !widget.disabled;
-    if (isInteractive && _isHovered) {
+    if (isInteractive && (_isHovered || _isFocused)) {
       if (widget.active) {
         backgroundColor = theme.primary.withValues(alpha: 0.9);
       } else if (widget.variant != null) {
@@ -301,11 +304,13 @@ class _BsListGroupItemState extends State<BsListGroupItem> {
       );
     }
 
-    Widget itemWidget = Container(
+    Widget itemWidget = AnimatedContainer(
+      duration: BsTransitions.baseDuration,
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: borderRadius,
         border: border,
+        boxShadow: _isFocused ? BsShadows.focusRing(borderSideColor) : null,
       ),
       child: Padding(
         padding: itemPadding,
@@ -318,14 +323,26 @@ class _BsListGroupItemState extends State<BsListGroupItem> {
 
     // 6. Interactions & Accessibility
     if (isInteractive) {
-      itemWidget = MouseRegion(
-        onEnter: (_) => setState(() => _isHovered = true),
-        onExit: (_) => setState(() => _isHovered = false),
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: widget.onPressed,
-          behavior: HitTestBehavior.opaque,
-          child: itemWidget,
+      itemWidget = Semantics(
+        button: true,
+        selected: widget.active,
+        child: FocusableActionDetector(
+          mouseCursor: SystemMouseCursors.click,
+          onShowHoverHighlight: (v) => setState(() => _isHovered = v),
+          onShowFocusHighlight: (v) => setState(() => _isFocused = v),
+          actions: {
+            ActivateIntent: CallbackAction<Intent>(
+              onInvoke: (_) {
+                widget.onPressed?.call();
+                return null;
+              },
+            ),
+          },
+          child: GestureDetector(
+            onTap: widget.onPressed,
+            behavior: HitTestBehavior.opaque,
+            child: itemWidget,
+          ),
         ),
       );
     } else if (widget.disabled) {
@@ -362,7 +379,7 @@ _ListGroupItemColors _resolveVariantColors(
   BsThemeData theme,
 ) {
   switch (variant) {
-    case BsVariant.primary:
+    case .primary:
       final bg = theme.primaryBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -370,7 +387,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.primaryTextEmphasis.withValues(alpha: 0.15),
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.secondary:
+    case .secondary:
       final bg = theme.secondaryBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -378,7 +395,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.secondaryTextEmphasis.withValues(alpha: 0.15),
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.success:
+    case .success:
       final bg = theme.successBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -386,7 +403,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.successTextEmphasis.withValues(alpha: 0.15),
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.danger:
+    case .danger:
       final bg = theme.dangerBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -394,7 +411,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.dangerTextEmphasis.withValues(alpha: 0.15),
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.warning:
+    case .warning:
       final bg = theme.warningBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -402,7 +419,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.warningTextEmphasis.withValues(alpha: 0.15),
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.info:
+    case .info:
       final bg = theme.infoBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -410,7 +427,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.infoTextEmphasis.withValues(alpha: 0.15),
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.light:
+    case .light:
       final bg = theme.lightBgSubtle;
       return _ListGroupItemColors(
         bg: bg,
@@ -418,7 +435,7 @@ _ListGroupItemColors _resolveVariantColors(
         border: theme.border,
         hoverBg: Color.alphaBlend(Colors.black.withValues(alpha: 0.04), bg),
       );
-    case BsVariant.dark:
+    case .dark:
       final bg = theme.darkBgSubtle;
       return _ListGroupItemColors(
         bg: bg,

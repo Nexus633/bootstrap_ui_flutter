@@ -13,6 +13,7 @@ class _FormShowcaseState extends State<FormShowcase> {
   String? _selectedValue;
   bool _switchValue = false;
   double _rangeValue = 50.0;
+  bool _wasValidated = false;
 
   @override
   Widget build(BuildContext context) {
@@ -69,12 +70,16 @@ class _FormShowcaseState extends State<FormShowcase> {
             // 1. Form Controls
             _Section(
               title: 'Form Controls',
-              description: 'Standard text input fields, passwords, readonly and plaintext fields.',
+              description:
+                  'Standard text input fields, passwords, readonly and plaintext fields.',
               child: Column(
                 children: [
                   BsInput(placeholder: 'name@example.com').pb3(),
                   BsInput(placeholder: 'Password', obscureText: true).pb3(),
-                  BsInput(placeholder: 'Disabled input field', disabled: true).pb3(),
+                  BsInput(
+                    placeholder: 'Disabled input field',
+                    disabled: true,
+                  ).pb3(),
                   BsInput(
                     initialValue: 'Readonly input here...',
                     readonly: true,
@@ -87,7 +92,8 @@ class _FormShowcaseState extends State<FormShowcase> {
             // 2. Sizing
             _Section(
               title: 'Input Sizing',
-              description: 'Set heights using custom size settings (sm, md, lg).',
+              description:
+                  'Set heights using custom size settings (sm, md, lg).',
               child: Column(
                 children: [
                   BsInput(
@@ -131,7 +137,8 @@ class _FormShowcaseState extends State<FormShowcase> {
             // 4. Checks, Radios & Switches
             _Section(
               title: 'Checks, Radios & Switches',
-              description: 'Custom checkboxes, radio selections and toggle switches.',
+              description:
+                  'Custom checkboxes, radio selections and toggle switches.',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -152,7 +159,8 @@ class _FormShowcaseState extends State<FormShowcase> {
                     label: const Text('Default switch checkbox'),
                     isSwitch: true,
                     initialValue: _switchValue,
-                    onChanged: (val) => setState(() => _switchValue = val ?? false),
+                    onChanged: (val) =>
+                        setState(() => _switchValue = val ?? false),
                   ).pb2(),
                   BsCheckbox(
                     label: const Text('Disabled switch checkbox'),
@@ -166,7 +174,8 @@ class _FormShowcaseState extends State<FormShowcase> {
             // 5. Range Sliders
             _Section(
               title: 'Range Sliders',
-              description: 'Horizontal range sliders with support for disabled states.',
+              description:
+                  'Horizontal range sliders with support for disabled states.',
               child: Column(
                 children: [
                   BsRange(
@@ -181,7 +190,8 @@ class _FormShowcaseState extends State<FormShowcase> {
             // 6. Input Groups
             _Section(
               title: 'Input Groups',
-              description: 'Prepend or append text, badges or buttons around form inputs.',
+              description:
+                  'Prepend or append text, badges or buttons around form inputs.',
               child: Column(
                 children: [
                   BsInputGroup(
@@ -205,9 +215,23 @@ class _FormShowcaseState extends State<FormShowcase> {
                   ).pb3(),
                   BsInputGroup(
                     children: [
+                      BsInputGroupText.widget(
+                        child: BsCheckbox(
+                          initialValue: true,
+                          onChanged: (val) {},
+                        ),
+                      ),
+                      BsInput(
+                        placeholder: 'Checkbox in input group...',
+                      ).expanded(),
+                    ],
+                  ).pb3(),
+                  BsInputGroup(
+                    children: [
                       BsButton(
                         label: 'Button',
-                        variant: BsButtonVariant.outlineSecondary,
+                        variant: BsButtonVariant.secondary,
+                        outline: true,
                         onPressed: () {},
                       ),
                       BsInput(placeholder: '').expanded(),
@@ -220,56 +244,102 @@ class _FormShowcaseState extends State<FormShowcase> {
             // 7. Validation
             _Section(
               title: 'Form Validation',
-              description: 'Provide valuable, actionable feedback to users with native form validator flows.',
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    BsRow(
-                      gutterY: BsSpacing.s3,
-                      children: [
-                        BsCol(
-                          config: const BsColConfig(md: 6),
-                          child: BsInput(
-                            placeholder: 'First name',
-                            initialValue: 'Mark',
-                            validationState: BsValidationState.valid,
+              description:
+                  'Provide valuable, actionable feedback to users with native form validator flows. Click "Submit form" to trigger the validation.',
+              child: BsValidatedForm(
+                wasValidated: _wasValidated,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      BsRow(
+                        gutterY: BsSpacing.s3,
+                        children: [
+                          BsCol(
+                            config: const BsColConfig(xs: 12, md: 6),
+                            child: BsInput(
+                              placeholder: 'First name',
+                              initialValue: 'Mark',
+                              validator: (val) => val == null || val.isEmpty
+                                  ? 'Please choose a first name.'
+                                  : null,
+                            ),
                           ),
-                        ),
-                        BsCol(
-                          config: const BsColConfig(md: 6),
-                          child: BsInput(
-                            placeholder: 'Username',
-                            validator: (val) => val == null || val.isEmpty ? 'Please choose a username.' : null,
+                          BsCol(
+                            config: const BsColConfig(xs: 12, md: 6),
+                            child: BsInput(
+                              placeholder: 'Username',
+                              validator: (val) => val == null || val.isEmpty
+                                  ? 'Please choose a username.'
+                                  : null,
+                            ),
                           ),
-                        ),
-                        BsCol(
-                          config: const BsColConfig(md: 6),
-                          child: BsInput(
-                            placeholder: 'City',
-                            validator: (val) => val == null || val.isEmpty ? 'Please provide a valid city.' : null,
+                          BsCol(
+                            config: const BsColConfig(xs: 12, md: 6),
+                            child: BsInput(
+                              placeholder: 'City',
+                              validator: (val) => val == null || val.isEmpty
+                                  ? 'Please provide a valid city.'
+                                  : null,
+                            ),
                           ),
-                        ),
-                        BsCol(
-                          config: const BsColConfig(md: 6),
-                          child: BsCheckbox(
-                            label: const Text('Agree to terms and conditions'),
-                            validator: (val) => val == true ? null : 'You must agree before submitting.',
+                          BsCol(
+                            config: const BsColConfig(xs: 12, md: 6),
+                            child: BsCheckbox(
+                              label: const Text(
+                                'Agree to terms and conditions',
+                              ),
+                              validator: (val) => val == true
+                                  ? null
+                                  : 'You must agree before submitting.',
+                            ),
                           ),
-                        ),
-                        BsCol(
-                          config: const BsColConfig.all(12),
-                          child: BsButton(
-                            label: 'Submit form',
-                            onPressed: () {
-                              _formKey.currentState!.validate();
-                            },
+                          BsCol(
+                            config: const BsColConfig.all(12),
+                            child: BsButton(
+                              label: 'Submit form',
+                              onPressed: () {
+                                setState(() {
+                                  _wasValidated = true;
+                                });
+                                _formKey.currentState!.validate();
+                              },
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
+              ),
+            ),
+
+            // 8. Floating Labels
+            _Section(
+              title: 'Floating Labels',
+              description:
+                  'Create beautifully simple form labels that float over your input fields.',
+              child: Column(
+                children: [
+                  BsInput(
+                    floatingLabel: 'Email address',
+                    placeholder: 'name@example.com',
+                  ).pb3(),
+                  BsInput(
+                    floatingLabel: 'Password',
+                    placeholder: 'Password',
+                    obscureText: true,
+                  ).pb3(),
+                  BsSelect<String>(
+                    floatingLabel: 'Works with selects',
+                    placeholder: const Text('Open this select menu'),
+                    items: const [
+                      DropdownMenuItem(value: '1', child: Text('One')),
+                      DropdownMenuItem(value: '2', child: Text('Two')),
+                      DropdownMenuItem(value: '3', child: Text('Three')),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
@@ -293,7 +363,11 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.5,
+          ),
         ).pb(4),
         if (description != null) Text(description!).pb(16),
         Container(

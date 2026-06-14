@@ -2,7 +2,7 @@
 
 ## Preview
 
-![Preview](../../assets/Breadcrumb.png)
+![Preview](../../assets/Breadcrumbs.png)
 
 
 Indicate the current page's location within a navigational hierarchy that automatically adds separators via CSS.
@@ -32,15 +32,23 @@ BsBreadcrumb(
     ),
   ],
 )
+
+BsBreadcrumb(
+  items: [
+    const Text('Home'),
+    const Text('Library'),
+    const Text('Data')
+  ]
+)
 ```
 
 ## Changing the Divider
 
-The divider can be changed by providing the `divider` property to `BsBreadcrumb`. It accepts a `String` or a `Widget`.
+The divider can be changed by providing the `divider` property to `BsBreadcrumb`. It accepts a `Widget`.
 
 ```dart
 BsBreadcrumb(
-  divider: '>',
+  divider: const Text('>'),
   items: [...],
 )
 
@@ -58,7 +66,7 @@ BsBreadcrumb(
 | Property | Type | Description |
 | --- | --- | --- |
 | `items` | `List<BsBreadcrumbItem>` | The list of breadcrumb items to display. |
-| `divider` | `dynamic` | The divider to display between items. Defaults to "/". Can be a `String` or a `Widget`. |
+| `divider` | `Widget?` | The divider to display between items. Defaults to "/". |
 
 ### BsBreadcrumbItem
 

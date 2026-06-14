@@ -1,5 +1,9 @@
 # Offcanvas-Seitenteile (Offcanvas)
 
+## Vorschau
+
+![Vorschau](../../assets/Offcanvas.gif)
+
 Offcanvas-Seitenteile ([`BsOffcanvas`](file:///E:/FlutterProjects/bootstrap_ui_flutter/lib/ui/components/offcanvas/bs_offcanvas.dart) und [`showBsOffcanvas`](file:///E:/FlutterProjects/bootstrap_ui_flutter/lib/ui/components/offcanvas/bs_offcanvas.dart#L282)) sind flexible Container, die sich von den Bildschirmrändern (links, rechts, oben oder unten) hereinschieben. Sie eignen sich ideal für Navigationen, Einkaufswagen, Filter-Panels oder zusätzliche Informationen.
 
 ## Features
@@ -23,11 +27,11 @@ Offcanvas-Dialoge werden typischerweise über die Methode [`showBsOffcanvas`](fi
 ```dart
 showBsOffcanvas(
   context: context,
-  placement: BsOffcanvasPlacement.start,
-  backdrop: BsOffcanvasBackdrop.enabled,
+  placement: .start,
+  backdrop: .enabled,
   keyboard: true,
   builder: (context) => BsOffcanvas(
-    placement: BsOffcanvasPlacement.start,
+    placement: .start,
     header: const BsOffcanvasHeader(
       child: Text('Navigation'),
     ),
@@ -51,7 +55,7 @@ showBsOffcanvas(
 | :--- | :--- | :--- | :--- |
 | `body` | `Widget` | *erforderlich* | Der primäre Inhaltsbereich des Panels (meist [`BsOffcanvasBody`](file:///E:/FlutterProjects/bootstrap_ui_flutter/lib/ui/components/offcanvas/bs_offcanvas.dart#L168)). |
 | `header` | `BsOffcanvasHeader?` | `null` | Der Kopfbereich des Panels (meist [`BsOffcanvasHeader`](file:///E:/FlutterProjects/bootstrap_ui_flutter/lib/ui/components/offcanvas/bs_offcanvas.dart#L108)). |
-| `placement` | `BsOffcanvasPlacement` | `BsOffcanvasPlacement.start` | Die Platzierungskante (`start`, `end`, `top`, `bottom`). |
+| `placement` | `BsOffcanvasPlacement` | `.start` | Die Platzierungskante (`start`, `end`, `top`, `bottom`). |
 | `width` | `double?` | `400.0` | Die Breite des Panels (nur bei `start` / `end`). Begrenzt auf die Bildschirmbreite. |
 | `height` | `double?` | `300.0` | Die Höhe des Panels (nur bei `top` / `bottom`). Begrenzt auf die Bildschirmhöhe. |
 | `variant` | `BsOffcanvasVariant?` | `null` | Farbvariante des Panels (entspricht Bootstrap `.text-bg-*`). |

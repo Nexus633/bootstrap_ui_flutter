@@ -2,7 +2,7 @@
 
 ## Vorschau
 
-![Vorschau](../../assets/Breadcrumb.png)
+![Vorschau](../../assets/Breadcrumbs.png)
 
 
 Zeigt den Standort der aktuellen Seite innerhalb einer Navigationshierarchie an, wobei Trennzeichen automatisch hinzugefügt werden.
@@ -32,6 +32,14 @@ BsBreadcrumb(
     ),
   ],
 )
+
+BsBreadcrumb(
+  items: [
+    const Text('Home'),
+    const Text('Library'),
+    const Text('Data')
+  ]
+)
 ```
 
 ## Ändern des Trennzeichens (Divider)
@@ -40,7 +48,7 @@ Das Trennzeichen kann durch Angabe der Eigenschaft `divider` bei `BsBreadcrumb` 
 
 ```dart
 BsBreadcrumb(
-  divider: '>',
+  divider: const Text('>'),
   items: [...],
 )
 
@@ -58,7 +66,7 @@ BsBreadcrumb(
 | Eigenschaft | Typ | Beschreibung |
 | --- | --- | --- |
 | `items` | `List<BsBreadcrumbItem>` | Die Liste der Breadcrumb-Elemente, die angezeigt werden sollen. |
-| `divider` | `dynamic` | Das Trennzeichen, das zwischen den Elementen angezeigt werden soll. Standardmäßig "/". Kann ein `String` oder ein `Widget` sein. |
+| `divider` | `Widget?` | Das Trennzeichen, das zwischen den Elementen angezeigt werden soll. Standardmäßig "/". |
 
 ### BsBreadcrumbItem
 

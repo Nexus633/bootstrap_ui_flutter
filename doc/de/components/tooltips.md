@@ -1,5 +1,9 @@
 # Tooltips
 
+## Vorschau
+
+![Vorschau](../../assets/Tooltips.gif)
+
 Dokumentation und Beispiele zum Hinzufügen von benutzerdefinierten Bootstrap-Tooltips.
 
 ## Übersicht
@@ -13,7 +17,7 @@ Umschließe das Widget, das den Tooltip auslösen soll, mit einem `BsTooltip`. �
 ```dart
 BsTooltip(
   message: 'Tooltip oben',
-  placement: BsPlacement.top,
+  placement: .top,
   child: BsButton(
     label: 'Hover mich',
     onPressed: () {},
@@ -25,10 +29,10 @@ BsTooltip(
 
 Vier Richtungen sind verfügbar: `top`, `end` (rechts), `bottom` und `start` (links) ausgerichtet.
 
-- `BsPlacement.top`
-- `BsPlacement.bottom`
-- `BsPlacement.start`
-- `BsPlacement.end`
+- `.top`
+- `.bottom`
+- `.start`
+- `.end`
 
 Hinweis: Tooltips versuchen automatisch, ihre Position anzupassen, wenn sie erkennen, dass sie die Bildschirmgrenzen überschreiten.
 
@@ -54,7 +58,7 @@ Tooltips unterstützen benutzerdefinierte Hintergrundfarben sowie alle Bootstrap
 ```dart
 BsTooltip(
   message: 'Erfolgsaktion',
-  variant: BsVariant.success,
+  variant: .success,
   child: BsButton(label: 'Speichern', onPressed: () {}),
 )
 

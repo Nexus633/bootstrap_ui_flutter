@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
+import '../../tokens/transitions.dart';
 import '../../tokens/typography.dart';
 import '../../utilities/spacing_extension.dart';
+import 'bs_validated_form.dart';
 
 /// A Bootstrap-style radio button component.
 ///
@@ -83,13 +86,22 @@ class _BsRadioState<T> extends State<BsRadio<T>> {
   Widget build(BuildContext context) {
     final theme = context.bs;
     final bool isChecked = widget.value == widget.groupValue;
+    
+    final bool wasValidated = BsValidatedForm.of(context);
 
     // Resolve Validation State colors
-    final bool isInvalid = widget.validationState == BsValidationState.invalid;
-    final bool isValid = widget.validationState == BsValidationState.valid;
+    BsValidationState currentState =
+        widget.validationState ?? .none;
+    if (widget.validationState == null) {
+      if (wasValidated) {
+        currentState = .valid;
+      }
+    }
+
+    final bool isInvalid = currentState == .invalid;
+    final bool isValid = currentState == .valid;
 
     Color borderColor = theme.border;
-    Color focusRingColor = theme.primary.withValues(alpha: 0.25);
     Color focusBorderColor = theme.primary.withValues(alpha: 0.5);
     Color activeBgColor = theme.primary;
     Color activeBorderColor = theme.primary;
@@ -97,13 +109,11 @@ class _BsRadioState<T> extends State<BsRadio<T>> {
     if (isInvalid) {
       borderColor = theme.danger;
       focusBorderColor = theme.danger;
-      focusRingColor = theme.danger.withValues(alpha: 0.25);
       activeBgColor = theme.danger;
       activeBorderColor = theme.danger;
     } else if (isValid) {
       borderColor = theme.success;
       focusBorderColor = theme.success;
-      focusRingColor = theme.success.withValues(alpha: 0.25);
       activeBgColor = theme.success;
       activeBorderColor = theme.success;
     }
@@ -123,7 +133,7 @@ class _BsRadioState<T> extends State<BsRadio<T>> {
 
     // Input Visual
     final Widget inputVisual = AnimatedContainer(
-      duration: const Duration(milliseconds: 150),
+      duration: BsTransitions.baseDuration,
       width: 16.0,
       height: 16.0,
       decoration: BoxDecoration(
@@ -134,13 +144,7 @@ class _BsRadioState<T> extends State<BsRadio<T>> {
           width: 1.0,
         ),
         boxShadow: (_isFocused && !widget.disabled)
-            ? [
-                BoxShadow(
-                  color: focusRingColor,
-                  blurRadius: 0,
-                  spreadRadius: 4.0,
-                ),
-              ]
+            ? BsShadows.focusRing(isInvalid ? theme.danger : (isValid ? theme.success : theme.primary))
             : null,
       ),
       child: isChecked
@@ -157,19 +161,8 @@ class _BsRadioState<T> extends State<BsRadio<T>> {
           : null,
     );
 
-    // Keyboard navigation
-    final Widget inputWidget = Focus(
-      focusNode: _focusNode,
-      onKeyEvent: (node, event) {
-        if (event.logicalKey.keyLabel == 'Enter' ||
-            event.logicalKey.keyLabel == ' ') {
-          _select();
-          return KeyEventResult.handled;
-        }
-        return KeyEventResult.ignored;
-      },
-      child: inputVisual,
-    );
+    // No custom focus wrapper needed, handled by FocusableActionDetector
+    final Widget inputWidget = inputVisual;
 
     // Label
     Widget? labelWidget;
@@ -199,18 +192,31 @@ class _BsRadioState<T> extends State<BsRadio<T>> {
       }
     }
 
-    Widget content = MouseRegion(
-      cursor: widget.disabled
-          ? SystemMouseCursors.forbidden
-          : SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: _select,
-        behavior: HitTestBehavior.opaque,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: rowChildren,
-        ).py(4),
+    Widget content = Semantics(
+      checked: isChecked,
+      inMutuallyExclusiveGroup: true,
+      enabled: !widget.disabled,
+      child: FocusableActionDetector(
+        focusNode: _focusNode,
+        mouseCursor: widget.disabled ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+        onShowFocusHighlight: (v) => setState(() => _isFocused = v),
+        actions: {
+          ActivateIntent: CallbackAction<Intent>(
+            onInvoke: (_) {
+              _select();
+              return null;
+            },
+          ),
+        },
+        child: GestureDetector(
+          onTap: _select,
+          behavior: HitTestBehavior.opaque,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: rowChildren,
+          ).py(4),
+        ),
       ),
     );
 

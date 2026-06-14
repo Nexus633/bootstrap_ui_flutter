@@ -127,9 +127,9 @@ class HelpersShowcase extends StatelessWidget {
                 child: BsHStack(
                   gap: 16,
                   children: const [
-                    Text('Left side content block'),
+                    Expanded(child: Text('Left side content block')),
                     BsVerticalRule(),
-                    Text('Right side content block'),
+                    Expanded(child: Text('Right side content block')),
                   ],
                 ),
               ),
@@ -190,8 +190,10 @@ class HelpersShowcase extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BsHStack(
-                    gap: 20,
+                  Wrap(
+                    spacing: 20,
+                    runSpacing: 12,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       BsLink(
                         label: const Text('Primary Link'),
@@ -207,11 +209,6 @@ class HelpersShowcase extends StatelessWidget {
                         underline: false,
                         onPressed: () {},
                       ),
-                    ],
-                  ).pb4(),
-                  BsHStack(
-                    gap: 20,
-                    children: [
                       BsIconLink(
                         label: const Text('Icon link after'),
                         icon: const BsIcon(BsIcons.arrowRight, size: 16),

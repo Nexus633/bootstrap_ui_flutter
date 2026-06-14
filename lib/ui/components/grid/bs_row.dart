@@ -131,7 +131,7 @@ class BsCol extends StatelessWidget {
     required this.child,
     this.config = const BsColConfig(),
     this.offset = const BsOffsetConfig(),
-    this.alignSelf = BsColAlignSelf.auto,
+    this.alignSelf = .auto,
   });
 
   /// The content of the column.
@@ -165,8 +165,8 @@ class BsRow extends StatelessWidget {
     required this.children,
     this.gutterX = BsSpacing.s3,
     this.gutterY = BsSpacing.s3,
-    this.justify = BsRowJustify.start,
-    this.alignItems = BsRowAlignItems.stretch,
+    this.justify = .start,
+    this.alignItems = .stretch,
   });
 
   /// The columns of this row. Must be a list of [BsCol] widgets.
@@ -252,9 +252,9 @@ class BsRow extends StatelessWidget {
 
   Widget _buildSingleRow(List<BsCol> cols, double width, {required bool forceMaxHeight}) {
     final List<Widget> lineWidgets = [];
-    final bool useFixedGutters = justify == BsRowJustify.start ||
-        justify == BsRowJustify.center ||
-        justify == BsRowJustify.end;
+    final bool useFixedGutters = justify == .start ||
+        justify == .center ||
+        justify == .end;
 
     for (int i = 0; i < cols.length; i++) {
       final col = cols[i];
@@ -275,7 +275,7 @@ class BsRow extends StatelessWidget {
       }
 
       // Determine effective vertical alignment for this column
-      final BsColAlignSelf effectiveAlign = col.alignSelf == BsColAlignSelf.auto
+      final BsColAlignSelf effectiveAlign = col.alignSelf == .auto
           ? _mapRowAlignToColAlign(alignItems)
           : col.alignSelf;
 
@@ -316,38 +316,38 @@ class BsRow extends StatelessWidget {
 
   MainAxisAlignment _mapJustify(BsRowJustify justify) {
     switch (justify) {
-      case BsRowJustify.start:
+      case .start:
         return MainAxisAlignment.start;
-      case BsRowJustify.center:
+      case .center:
         return MainAxisAlignment.center;
-      case BsRowJustify.end:
+      case .end:
         return MainAxisAlignment.end;
-      case BsRowJustify.between:
+      case .between:
         return MainAxisAlignment.spaceBetween;
-      case BsRowJustify.around:
+      case .around:
         return MainAxisAlignment.spaceAround;
     }
   }
 
   BsColAlignSelf _mapRowAlignToColAlign(BsRowAlignItems align) {
     switch (align) {
-      case BsRowAlignItems.start:
-        return BsColAlignSelf.start;
-      case BsRowAlignItems.center:
-        return BsColAlignSelf.center;
-      case BsRowAlignItems.end:
-        return BsColAlignSelf.end;
-      case BsRowAlignItems.stretch:
-        return BsColAlignSelf.stretch;
+      case .start:
+        return .start;
+      case .center:
+        return .center;
+      case .end:
+        return .end;
+      case .stretch:
+        return .stretch;
     }
   }
 
   Widget _wrapWithAlignSelf(Widget child, BsColAlignSelf alignSelf) {
     switch (alignSelf) {
-      case BsColAlignSelf.auto:
-      case BsColAlignSelf.stretch:
+      case .auto:
+      case .stretch:
         return child;
-      case BsColAlignSelf.start:
+      case .start:
         return Align(
           alignment: Alignment.topCenter,
           child: SizedBox(
@@ -355,7 +355,7 @@ class BsRow extends StatelessWidget {
             child: child,
           ),
         );
-      case BsColAlignSelf.center:
+      case .center:
         return Align(
           alignment: Alignment.center,
           child: SizedBox(
@@ -363,7 +363,7 @@ class BsRow extends StatelessWidget {
             child: child,
           ),
         );
-      case BsColAlignSelf.end:
+      case .end:
         return Align(
           alignment: Alignment.bottomCenter,
           child: SizedBox(

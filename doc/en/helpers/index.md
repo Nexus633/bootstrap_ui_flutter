@@ -4,7 +4,7 @@
 
 | Helpers 1 | Helpers 2 |
 |:---:|:---:|
-| <img src="../../assets/Helpers-1.png" width="380" alt="Helpers 1"> | <img src="../../assets/Helpers-2.png" width="380" alt="Helpers 2"> |
+| <img src="../../assets/Helpers_1.png" width="380" alt="Helpers 1"> | <img src="../../assets/Helpers_2.png" width="380" alt="Helpers 2"> |
 
 
 Bootstrap-inspired helper classes and widgets to speed up development and maintain consistency.

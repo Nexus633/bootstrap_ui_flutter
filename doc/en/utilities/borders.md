@@ -31,7 +31,7 @@ Text('Content').borderTop(color: Colors.red, width: 3.0);
 
 ```dart
 // Border with Bootstrap "primary" theme color
-Text('Content').borderVariant(context, BsVariant.primary);
+Text('Content').borderVariant(context, .primary);
 ```
 
 ---

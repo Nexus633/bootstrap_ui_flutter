@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/transitions.dart';
 import '../../utilities/size_extension.dart';
 import '../../utilities/spacing_extension.dart';
 import '../button/bs_close_button.dart';
@@ -15,15 +16,15 @@ class BsAlert extends StatefulWidget {
   const BsAlert({
     super.key,
     required this.child,
-    this.variant = BsVariant.primary,
+    this.variant = .primary,
     this.icon,
     this.iconColor,
     this.iconVariant,
     this.dismissible = false,
     this.onClose,
-    this.animation = BsAlertAnimation.fade,
-    this.animationInDuration = const Duration(milliseconds: 200),
-    this.animationOutDuration = const Duration(milliseconds: 200),
+    this.animation = .fade,
+    this.animationInDuration = BsTransitions.baseDuration,
+    this.animationOutDuration = BsTransitions.baseDuration,
     this.autoCloseDuration,
   });
 
@@ -90,7 +91,7 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
 
     _updateSlideAnimation();
 
-    if (widget.animation == BsAlertAnimation.none) {
+    if (widget.animation == .none) {
       _controller.value = 1.0;
     } else {
       _controller.forward();
@@ -112,10 +113,10 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
 
   Offset _getBeginOffset() {
     return switch (widget.animation) {
-      BsAlertAnimation.slideTop => const Offset(0, -1),
-      BsAlertAnimation.slideBottom => const Offset(0, 1),
-      BsAlertAnimation.slideLeft => const Offset(-1, 0),
-      BsAlertAnimation.slideRight => const Offset(1, 0),
+      .slideTop => const Offset(0, -1),
+      .slideBottom => const Offset(0, 1),
+      .slideLeft => const Offset(-1, 0),
+      .slideRight => const Offset(1, 0),
       _ => Offset.zero,
     };
   }
@@ -136,7 +137,7 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
   }
 
   void _handleClose() {
-    if (widget.animation == BsAlertAnimation.none) {
+    if (widget.animation == .none) {
       _controller.value = 0.0; // Hide immediately
       widget.onClose?.call();
     } else {
@@ -150,36 +151,40 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final _AlertColors colors = _resolveColors(widget.variant);
 
-    final Widget content = Container(
-      decoration: BoxDecoration(
-        color: colors.backgroundColor,
-        borderRadius: BorderRadius.circular(8.0),
-        border: Border.all(color: colors.borderColor, width: 1.0),
+    final Widget content = Semantics(
+      liveRegion: true,
+      container: true,
+      child: Container(
+        decoration: BoxDecoration(
+          color: colors.backgroundColor,
+          borderRadius: BorderRadius.circular(8.0),
+          border: Border.all(color: colors.borderColor, width: 1.0),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.icon != null) ...[
+              Icon(
+                widget.icon,
+                color: _resolveIconColor(colors.iconColor),
+                size: 24,
+              ),
+              const SizedBox(width: 12),
+            ],
+            DefaultTextStyle(
+              style: TextStyle(color: colors.textColor, fontSize: 16),
+              child: widget.child,
+            ).expanded(),
+            if (widget.dismissible) ...[
+              const SizedBox(width: 12),
+              BsCloseButton(
+                onPressed: _handleClose,
+                color: colors.textColor,
+              ),
+            ],
+          ],
+        ).p3(),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (widget.icon != null) ...[
-            Icon(
-              widget.icon,
-              color: _resolveIconColor(colors.iconColor),
-              size: 24,
-            ),
-            const SizedBox(width: 12),
-          ],
-          DefaultTextStyle(
-            style: TextStyle(color: colors.textColor, fontSize: 16),
-            child: widget.child,
-          ).expanded(),
-          if (widget.dismissible) ...[
-            const SizedBox(width: 12),
-            BsCloseButton(
-              onPressed: _handleClose,
-              color: colors.textColor,
-            ),
-          ],
-        ],
-      ).p3(),
     ).w100().pb3();
 
     Widget animatedContent = content;
@@ -191,8 +196,8 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
     );
 
     // Slide Transition (only if a slide animation was selected)
-    if (widget.animation != BsAlertAnimation.fade &&
-        widget.animation != BsAlertAnimation.none) {
+    if (widget.animation != .fade &&
+        widget.animation != .none) {
       animatedContent = SlideTransition(
         position: _slideAnimation,
         child: animatedContent,
@@ -211,14 +216,14 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
     if (widget.iconVariant != null) {
       final bs = context.bs;
       return switch (widget.iconVariant!) {
-        BsVariant.primary => bs.primary,
-        BsVariant.secondary => bs.secondary,
-        BsVariant.success => bs.success,
-        BsVariant.danger => bs.danger,
-        BsVariant.warning => bs.warning,
-        BsVariant.info => bs.info,
-        BsVariant.light => bs.light,
-        BsVariant.dark => bs.dark,
+        .primary => bs.primary,
+        .secondary => bs.secondary,
+        .success => bs.success,
+        .danger => bs.danger,
+        .warning => bs.warning,
+        .info => bs.info,
+        .light => bs.light,
+        .dark => bs.dark,
       };
     }
     return widget.iconColor ?? fallback;
@@ -228,36 +233,36 @@ class _BsAlertState extends State<BsAlert> with SingleTickerProviderStateMixin {
     final bs = context.bs;
 
     final Color textColor = switch (variant) {
-      BsVariant.primary => bs.primaryTextEmphasis,
-      BsVariant.secondary => bs.secondaryTextEmphasis,
-      BsVariant.success => bs.successTextEmphasis,
-      BsVariant.danger => bs.dangerTextEmphasis,
-      BsVariant.warning => bs.warningTextEmphasis,
-      BsVariant.info => bs.infoTextEmphasis,
-      BsVariant.light => bs.lightTextEmphasis,
-      BsVariant.dark => bs.darkTextEmphasis,
+      .primary => bs.primaryTextEmphasis,
+      .secondary => bs.secondaryTextEmphasis,
+      .success => bs.successTextEmphasis,
+      .danger => bs.dangerTextEmphasis,
+      .warning => bs.warningTextEmphasis,
+      .info => bs.infoTextEmphasis,
+      .light => bs.lightTextEmphasis,
+      .dark => bs.darkTextEmphasis,
     };
 
     final Color bgColor = switch (variant) {
-      BsVariant.primary => bs.primaryBgSubtle,
-      BsVariant.secondary => bs.secondaryBgSubtle,
-      BsVariant.success => bs.successBgSubtle,
-      BsVariant.danger => bs.dangerBgSubtle,
-      BsVariant.warning => bs.warningBgSubtle,
-      BsVariant.info => bs.infoBgSubtle,
-      BsVariant.light => bs.lightBgSubtle,
-      BsVariant.dark => bs.darkBgSubtle,
+      .primary => bs.primaryBgSubtle,
+      .secondary => bs.secondaryBgSubtle,
+      .success => bs.successBgSubtle,
+      .danger => bs.dangerBgSubtle,
+      .warning => bs.warningBgSubtle,
+      .info => bs.infoBgSubtle,
+      .light => bs.lightBgSubtle,
+      .dark => bs.darkBgSubtle,
     };
 
     final Color borderColor = switch (variant) {
-      BsVariant.primary => bs.primaryBorderSubtle,
-      BsVariant.secondary => bs.secondaryBorderSubtle,
-      BsVariant.success => bs.successBorderSubtle,
-      BsVariant.danger => bs.dangerBorderSubtle,
-      BsVariant.warning => bs.warningBorderSubtle,
-      BsVariant.info => bs.infoBorderSubtle,
-      BsVariant.light => bs.lightBorderSubtle,
-      BsVariant.dark => bs.darkBorderSubtle,
+      .primary => bs.primaryBorderSubtle,
+      .secondary => bs.secondaryBorderSubtle,
+      .success => bs.successBorderSubtle,
+      .danger => bs.dangerBorderSubtle,
+      .warning => bs.warningBorderSubtle,
+      .info => bs.infoBorderSubtle,
+      .light => bs.lightBorderSubtle,
+      .dark => bs.darkBorderSubtle,
     };
 
     return _AlertColors(

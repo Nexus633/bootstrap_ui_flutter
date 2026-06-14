@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
+import '../../tokens/transitions.dart';
 import '../../tokens/typography.dart';
+import '../../utilities/bs_localizations.dart';
 import '../../utilities/spacing_extension.dart';
 import 'bs_feedback.dart';
-
 import 'bs_input_group.dart';
+import 'bs_validated_form.dart';
 
 /// A Bootstrap-style text input component.
 ///
@@ -17,10 +20,11 @@ class BsInput extends FormField<String> {
     super.key,
     this.controller,
     String? initialValue,
-    this.size = BsInputSize.md,
+    this.size = .md,
     this.disabled = false,
     this.readonly = false,
     this.plainText = false,
+    this.floatingLabel,
     this.placeholder,
     this.keyboardType,
     this.obscureText = false,
@@ -58,6 +62,9 @@ class BsInput extends FormField<String> {
 
   /// Whether to render the input as plain text (`.form-control-plaintext`).
   final bool plainText;
+
+  /// The text for a Bootstrap 5 Floating Label (`.form-floating`).
+  final String? floatingLabel;
 
   /// The hint text to display when the input is empty.
   final String? placeholder;
@@ -196,29 +203,32 @@ class _BsInputState extends FormFieldState<String> {
   Widget _buildField() {
     final theme = context.bs;
 
+    final bool wasValidated = BsValidatedForm.of(context);
+
     // Resolve Validation State
     BsValidationState currentState =
-        widget.validationState ?? BsValidationState.none;
-    if (widget.validationState == null && hasError) {
-      currentState = BsValidationState.invalid;
+        widget.validationState ?? .none;
+    if (widget.validationState == null) {
+      if (hasError) {
+        currentState = .invalid;
+      } else if (wasValidated) {
+        currentState = .valid;
+      }
     }
 
-    final bool isInvalid = currentState == BsValidationState.invalid;
-    final bool isValid = currentState == BsValidationState.valid;
+    final bool isInvalid = currentState == .invalid;
+    final bool isValid = currentState == .valid;
 
     // Resolve Colors based on state
     Color borderColor = theme.border;
-    Color focusRingColor = theme.primary.withValues(alpha: 0.25);
     Color focusBorderColor = theme.primary.withValues(alpha: 0.5);
 
     if (isInvalid) {
       borderColor = theme.danger;
       focusBorderColor = theme.danger;
-      focusRingColor = theme.danger.withValues(alpha: 0.25);
     } else if (isValid) {
       borderColor = theme.success;
       focusBorderColor = theme.success;
-      focusRingColor = theme.success.withValues(alpha: 0.25);
     }
 
     Color bgColor = theme.bodyBg;
@@ -242,11 +252,11 @@ class _BsInputState extends FormFieldState<String> {
     double fontSize = BsTypography.fontSizeBase; // 1rem
     double minHeight = 38.0;
 
-    if (effectiveSize == BsInputSize.sm) {
+    if (effectiveSize == .sm) {
       padding = const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0);
       fontSize = BsTypography.fontSizeSm;
       minHeight = 31.0; // <--- NEU: Bootstrap sm height
-    } else if (effectiveSize == BsInputSize.lg) {
+    } else if (effectiveSize == .lg) {
       padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0);
       fontSize = BsTypography.fontSizeLg;
       minHeight = 48.0; // <--- NEU: Bootstrap lg height
@@ -259,9 +269,15 @@ class _BsInputState extends FormFieldState<String> {
       );
     }
 
-    final double baseRadius = effectiveSize == BsInputSize.sm
+    final bool isFloating = widget.floatingLabel != null;
+    if (isFloating) {
+      minHeight = 58.0; // 3.5rem + 2px
+      padding = const EdgeInsets.only(top: 26.0, bottom: 6.0, left: 12.0, right: 12.0);
+    }
+
+    final double baseRadius = effectiveSize == .sm
         ? 4.0
-        : (effectiveSize == BsInputSize.lg ? 8.0 : 6.0);
+        : (effectiveSize == .lg ? 8.0 : 6.0);
     final Radius r = Radius.circular(baseRadius);
 
     BorderRadius? groupBorderRadius;
@@ -283,7 +299,7 @@ class _BsInputState extends FormFieldState<String> {
     final InputDecoration decoration = InputDecoration(
       isDense: true,
       contentPadding: padding,
-      hintText: widget.placeholder,
+      hintText: isFloating ? (_isFocused ? widget.placeholder : null) : widget.placeholder,
       hintStyle: TextStyle(color: theme.bodyTextSecondary, fontSize: fontSize),
       filled: false,
       border: InputBorder.none,
@@ -297,55 +313,91 @@ class _BsInputState extends FormFieldState<String> {
 
     // Container for Focus Ring and Visual Bounds
     final Widget inputWidget = AnimatedContainer(
-      duration: const Duration(milliseconds: 150),
+      duration: BsTransitions.baseDuration,
       constraints: BoxConstraints(minHeight: minHeight),
       decoration: BoxDecoration(
-        color: bgColor, // Moved from InputDecoration
+        color: bgColor,
         borderRadius: borderRadius,
         border: widget.plainText
             ? null
             : Border.all(
                 color: _isFocused ? focusBorderColor : borderColor,
                 width: 1.0,
-              ), // Moved from InputDecoration
+              ),
         boxShadow: (_isFocused && !widget.disabled && !widget.plainText)
-            ? [
-                BoxShadow(
-                  color: focusRingColor,
-                  blurRadius: 0,
-                  spreadRadius: 4.0,
-                ),
-              ] // Bootstrap uses 0 0 0 .25rem
+            ? BsShadows.focusRing(isInvalid ? theme.danger : (isValid ? theme.success : theme.primary))
             : null,
       ),
 
-      child: TextField(
-        controller: _effectiveController,
-        focusNode: _effectiveFocusNode,
-        keyboardType: widget.keyboardType,
-        obscureText: widget.obscureText,
-        maxLines: widget.maxLines,
-        minLines: widget.minLines,
-        enabled: !widget.disabled,
-        readOnly:
-            widget.readonly ||
-            widget
-                .plainText, // Plain text implies readonly visually in Bootstrap usage
-        style: TextStyle(
-          color: widget.disabled ? theme.bodyTextSecondary : theme.bodyText,
-          fontSize: fontSize,
-        ),
-        cursorColor: theme.bodyText,
-        decoration: decoration,
-        onChanged: (value) {
-          didChange(value);
-          if (widget.onChanged != null) widget.onChanged!(value);
-        },
-        onSubmitted: widget.onFieldSubmitted,
-        textAlignVertical: (widget.maxLines == null || widget.maxLines! > 1)
-            ? TextAlignVertical.top
-            : TextAlignVertical.center, // Helps center text when stretched
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: [
+          TextField(
+            controller: _effectiveController,
+            focusNode: _effectiveFocusNode,
+            keyboardType: widget.keyboardType,
+            obscureText: widget.obscureText,
+            maxLines: widget.maxLines,
+            minLines: widget.minLines,
+            enabled: !widget.disabled,
+            readOnly:
+                widget.readonly ||
+                widget.plainText,
+            style: TextStyle(
+              color: widget.disabled ? theme.bodyTextSecondary : theme.bodyText,
+              fontSize: fontSize,
+            ),
+            cursorColor: theme.bodyText,
+            decoration: decoration,
+            onChanged: (value) {
+              didChange(value);
+              if (widget.onChanged != null) widget.onChanged!(value);
+            },
+            onSubmitted: widget.onFieldSubmitted,
+            textAlignVertical: (widget.maxLines == null || widget.maxLines! > 1)
+                ? TextAlignVertical.top
+                : TextAlignVertical.center,
+          ),
+          if (isFloating)
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 100),
+              curve: Curves.easeInOut,
+              left: 12.0,
+              top: _isFocused || _effectiveController.text.isNotEmpty ? 6.0 : (minHeight / 2 - fontSize / 2 - 2),
+              child: IgnorePointer(
+                child: AnimatedScale(
+                  duration: const Duration(milliseconds: 100),
+                  curve: Curves.easeInOut,
+                  scale: _isFocused || _effectiveController.text.isNotEmpty ? 0.85 : 1.0,
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    widget.floatingLabel!,
+                    style: TextStyle(
+                      color: theme.bodyTextSecondary,
+                      fontSize: fontSize,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        ],
       ),
+    );
+
+    final String errorPrefix = BsLocalizations.of(context)?.errorPrefix ?? 'Error';
+
+    final String? semanticsLabel = widget.floatingLabel != null
+        ? (hasError ? '${widget.floatingLabel} - $errorPrefix: $errorText' : widget.floatingLabel)
+        : null;
+
+    final String? semanticsHint = widget.placeholder != null
+        ? (hasError && widget.floatingLabel == null ? '${widget.placeholder} - $errorPrefix: $errorText' : widget.placeholder)
+        : null;
+
+    final Widget semanticsWidget = Semantics(
+      label: semanticsLabel,
+      hint: semanticsHint,
+      child: inputWidget,
     );
 
     // If inside an InputGroup, we MUST NOT wrap the inputWidget in a Column that takes min height.
@@ -353,17 +405,17 @@ class _BsInputState extends FormFieldState<String> {
     // A Column with MainAxisSize.min will NOT stretch its children vertically to fill the IntrinsicHeight.
     // So if it's in a group, we return just the inputWidget, and the feedback will have to be handled differently (e.g. grouped below the entire InputGroup).
     if (groupContext != null) {
-      return inputWidget;
+      return semanticsWidget;
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        inputWidget,
+        semanticsWidget,
         if (hasError)
           BsFormFeedback(
-            state: BsValidationState.invalid,
+            state: .invalid,
             message: errorText!,
           ).pt(4),
       ],

@@ -4,7 +4,7 @@
 
 | Standard Figure | Figure with Caption |
 |:---:|:---:|
-| <img src="../../assets/Figures-1.png" width="380" alt="Standard Figure"> | <img src="../../assets/Figures-2.png" width="380" alt="Figure with Caption"> |
+| <img src="../../assets/Figures_1.png" width="380" alt="Standard Figure"> | <img src="../../assets/Figures_2.png" width="380" alt="Figure with Caption"> |
 
 
 The Figure component is used for displaying related content, such as an image with an optional caption, mimicking Bootstrap 5 functionality.

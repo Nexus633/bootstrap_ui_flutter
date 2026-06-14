@@ -4,7 +4,7 @@
 
 | Fluid Image | Thumbnail Image |
 |:---:|:---:|
-| <img src="../../assets/Images-1.png" width="380" alt="Fluid Image"> | <img src="../../assets/Images-2.png" width="380" alt="Thumbnail Image"> |
+| <img src="../../assets/Images_1.png" width="380" alt="Fluid Image"> | <img src="../../assets/Images_2.png" width="380" alt="Thumbnail Image"> |
 
 
 Image component mimicking Bootstrap 5 image functionalities.

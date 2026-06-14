@@ -2,7 +2,7 @@
 
 ## Preview
 
-![Preview](../../assets/Accordion.png)
+![Preview](../../assets/Accordion.gif)
 
 
 The `BsAccordion` is a component that allows content to be organized in space-saving collapsible areas.

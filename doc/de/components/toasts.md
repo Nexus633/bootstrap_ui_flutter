@@ -1,5 +1,9 @@
 # Toasts
 
+## Vorschau
+
+![Vorschau](../../assets/Toasts.gif)
+
 Sende Push-Benachrichtigungen an deine Besucher mit einem Toast – einer leichtgewichtigen und einfach anpassbaren Warnmeldung.
 
 ## Übersicht
@@ -46,7 +50,7 @@ Wie andere Komponenten auch, kommen Toasts in verschiedenen Varianten:
 
 ```dart
 BsToast(
-  variant: BsVariant.success,
+  variant: .success,
   header: BsToastHeader(
     title: const Text('Erfolg'),
     onClose: () {},

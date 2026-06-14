@@ -2,11 +2,7 @@
 
 ## Vorschau
 
-| Grid Auto | Grid MD |
-|:---:|:---:|
-| <img src="../../assets/Grid-auto.png" width="380" alt="Grid Auto"> | <img src="../../assets/Grid-md.png" width="380" alt="Grid MD"> |
-| **Grid LG** | **Container Fluid & Gutter** |
-| <img src="../../assets/Grid-lg.png" width="380" alt="Grid LG"> | <img src="../../assets/Container-fluid-and-gutter.png" width="380" alt="Container Fluid & Gutter"> |
+![Vorschau](../../assets/Grid_System.gif)
 
 
 Das Bootstrap-Grid-System basiert auf einem 12-Spalten-Layout und ist vollständig responsive.
@@ -17,7 +13,7 @@ Das Bootstrap-Grid-System basiert auf einem 12-Spalten-Layout und ist vollständ
 
 ```dart
 BsContainer(
-  type: BsContainerType.fixed, // oder .fluid, .sm, .md, etc.
+  type: .fixed, // oder .fluid, .sm, .md, etc.
   child: MyContent(),
 )
 ```
@@ -73,15 +69,15 @@ BsCol(
 ### Horizontale Ausrichtung (`justify`)
 Über das `justify` Property in `BsRow` kann der freie Platz in einer Zeile horizontal verteilt werden (entspricht `.justify-content-*` in Bootstrap):
 
-* `BsRowJustify.start` (Standard)
-* `BsRowJustify.center`
-* `BsRowJustify.end`
-* `BsRowJustify.between`
-* `BsRowJustify.around`
+* `.start` (Standard)
+* `.center`
+* `.end`
+* `.between`
+* `.around`
 
 ```dart
 BsRow(
-  justify: BsRowJustify.center,
+  justify: .center,
   children: [ ... ],
 )
 ```
@@ -94,13 +90,13 @@ Die vertikale Ausrichtung kann auf Zeilenebene (`BsRow.alignItems`) oder individ
 
 ```dart
 BsRow(
-  alignItems: BsRowAlignItems.center, // Vertikal zentriert alle Spalten
+  alignItems: .center, // Vertikal zentriert alle Spalten
   children: [
     BsCol(child: Text('Zentriert')),
     BsCol(
-      alignSelf: BsColAlignSelf.end, // Überschreibt für diese Spalte (unten ausgerichtet)
+      alignSelf: .end, // Überschreibt für diese Spalte (unten ausgerichtet)
       child: Text('Unten'),
     ),
   ],
 )
-```
+```

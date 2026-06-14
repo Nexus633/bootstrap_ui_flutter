@@ -1,7 +1,7 @@
 # Bootstrap UI for Flutter
 
 <p align="center">
-  <img src="doc/assets/Theme-Dark.png" alt="Bootstrap UI Flutter" width="100%" style="border-radius: 8px;">
+  <img src="doc/assets/Theme_Dark_Light.gif" alt="Bootstrap UI Flutter" width="100%" style="border-radius: 8px;">
 </p>
 
 A Flutter component library that faithfully implements the **Bootstrap 5.3 design system**. Built for developers who want to create modern, highly responsive, and beautiful Flutter web, desktop, and mobile applications with the familiar Bootstrap aesthetic and developer experience.
@@ -43,7 +43,7 @@ A Flutter component library that faithfully implements the **Bootstrap 5.3 desig
 
 | Light Theme | Dark Theme |
 |:---:|:---:|
-| <img src="doc/assets/Theme-Light.png" width="380" alt="Light Theme"> | <img src="doc/assets/Theme-Dark.png" width="380" alt="Dark Theme"> |
+| <img src="doc/assets/Theme_Light.png" width="380" alt="Light Theme"> | <img src="doc/assets/Theme_Dark.png" width="380" alt="Dark Theme"> |
 
 ---
 

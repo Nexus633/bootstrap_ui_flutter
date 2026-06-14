@@ -1,5 +1,9 @@
 # Progress
 
+## Preview
+
+![Preview](../../assets/Progress_bars.gif)
+
 Progress components (progress bars) provide visual feedback for loading, uploading, downloading, or running activities. They are designed to mirror Bootstrap 5.3 specifications, supporting custom values, text labels, color variants, striped backgrounds, animations, and stacked multi-segment bars.
 
 ## Usage
@@ -48,7 +52,7 @@ Supports standard Bootstrap theme colors or custom color choices:
 // Success theme (Green)
 BsProgress.single(
   value: 80.0,
-  variant: BsVariant.success,
+  variant: .success,
 )
 
 // Custom Colors
@@ -89,9 +93,9 @@ Embed multiple `BsProgressBar` components inside a single `BsProgress` container
 ```dart
 BsProgress(
   bars: [
-    BsProgressBar(value: 15.0, variant: BsVariant.primary, label: '15%'),
-    BsProgressBar(value: 30.0, variant: BsVariant.success, label: '30%'),
-    BsProgressBar(value: 20.0, variant: BsVariant.info, label: '20%'),
+    BsProgressBar(value: 15.0, variant: .primary, label: '15%'),
+    BsProgressBar(value: 30.0, variant: .success, label: '30%'),
+    BsProgressBar(value: 20.0, variant: .info, label: '20%'),
   ],
 )
 ```
@@ -113,7 +117,7 @@ BsProgress(
 | --- | --- | --- | --- |
 | `value` | `double` | - | Percentage value from `0.0` to `100.0`. |
 | `label` | `String?` | `null` | Optional text label inside the progress bar segment. |
-| `variant` | `BsVariant?` | `BsVariant.primary` | Bootstrap theme color variant. |
+| `variant` | `BsVariant?` | `.primary` | Bootstrap theme color variant. |
 | `striped` | `bool` | `false` | Enables diagonal striped pattern. |
 | `animated` | `bool` | `false` | Enables scrolling animation of diagonal stripes. |
 | `color` | `Color?` | `null` | Custom fill color (overrides `variant`). |
@@ -123,4 +127,4 @@ BsProgress(
 
 * **Clip Behavior**: The container uses `Clip.antiAlias`. This ensures that inner progress segments are clipped at the boundaries, seamlessly preserving the outer track's corner radius.
 * **Proportional Layout**: Multi-segment bars calculate widths dynamically using `Expanded` and flex factors (`value * 1000`), supporting fractional progress values and accurately showing unused track space.
-* **Accessible Contrast**: Light backgrounds (like `BsVariant.light` and `BsVariant.warning`) automatically fall back to dark text colors to ensure high legibility and contrast.
+* **Accessible Contrast**: Light backgrounds (like `.light` and `.warning`) automatically fall back to dark text colors to ensure high legibility and contrast.

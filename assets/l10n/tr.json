@@ -1,0 +1,9 @@
+{
+  "errorPrefix": "Hata",
+  "carouselNext": "Sonraki slayt",
+  "carouselPrev": "Önceki slayt",
+  "carouselContainer": "Resim karuseli",
+  "carouselIndicator": "Slayta git {index}",
+  "spinner": "Yükleniyor...",
+  "progressBar": "İlerleme çubuğu"
+}

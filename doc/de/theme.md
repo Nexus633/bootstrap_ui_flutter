@@ -2,9 +2,7 @@
 
 ## Vorschau
 
-| Helles Theme (Light) | Dunkles Theme (Dark) |
-|:---:|:---:|
-| <img src="../assets/Theme-Light.png" width="380" alt="Helles Theme"> | <img src="../assets/Theme-Dark.png" width="380" alt="Dunkles Theme"> |
+![Vorschau](../assets/Theme_Dark_Light.gif)
 
 Das Framework nutzt ein tokenbasiertes System, das eng an Bootstrap 5.3 angelehnt ist.
 

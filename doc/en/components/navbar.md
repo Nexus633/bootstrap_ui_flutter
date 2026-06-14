@@ -1,5 +1,11 @@
 # Navbars
 
+## Preview
+
+| Navbar Preview 1 | Navbar Preview 2 |
+|:---:|:---:|
+| <img src="../../assets/Navbars_1.png" width="380" alt="Navbar Preview 1"> | <img src="../../assets/Navbars_2.png" width="380" alt="Navbar Preview 2"> |
+
 The navigations bar (`BsNavbar`) is a responsive wrapper for your application's header. It supports branding, links, toggler buttons for mobile menus, forms, and secondary text.
 
 ## Features
@@ -22,7 +28,7 @@ Here is a standard example for a navbar:
 
 ```dart
 BsNavbar(
-  expand: BsNavbarExpand.lg,
+  expand: .lg,
   brand: Row(
     children: [
       BsNavbarIconBrand(
@@ -71,7 +77,7 @@ BsNavbar(
 | :--- | :--- | :--- | :--- |
 | `brand` | `Widget?` | `null` | The brand component (typically a [BsNavbarBrand]). |
 | `collapse` | `BsNavbarCollapse?` | `null` | The collapsible menu area (typically a [BsNavbarCollapse]). |
-| `expand` | `BsNavbarExpand` | `BsNavbarExpand.lg` | The breakpoint at which the navbar expands horizontally. |
+| `expand` | `BsNavbarExpand` | `.lg` | The breakpoint at which the navbar expands horizontally. |
 | `dark` | `bool` | `false` | If `true`, adjusts color contrast for dark backgrounds (white text/icons). |
 | `background` | `Color?` | `null` | Custom background color. Defaults to theme's dark/light colors. |
 | `padding` | `EdgeInsetsGeometry` | `symmetric(horizontal: 16, vertical: 8)` | Internal padding of the navbar container. |

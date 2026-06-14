@@ -1,5 +1,6 @@
 import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'ui/shell/showcase_shell.dart';
 
 final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.system);
@@ -30,6 +31,14 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: BsThemeData.darkTheme.bodyBg,
             extensions: [BsThemeData.darkTheme],
           ),
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            BsLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('de'), Locale('en')],
+          locale: const Locale('en'),
           home: const ShowcaseShell(),
         );
       },

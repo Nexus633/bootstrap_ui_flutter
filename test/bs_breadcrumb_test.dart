@@ -5,12 +5,8 @@ import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
 void main() {
   Widget buildTestWidget(Widget child) {
     return MaterialApp(
-      theme: ThemeData(
-        extensions: [BsThemeData.lightTheme],
-      ),
-      home: Scaffold(
-        body: child,
-      ),
+      theme: ThemeData(extensions: [BsThemeData.lightTheme]),
+      home: Scaffold(body: child),
     );
   }
 
@@ -52,7 +48,7 @@ void main() {
       await tester.pumpWidget(
         buildTestWidget(
           BsBreadcrumb(
-            divider: '>',
+            divider: const Text('>'),
             items: [
               BsBreadcrumbItem(label: Text('Home')),
               BsBreadcrumbItem(label: Text('Library')),
@@ -81,7 +77,9 @@ void main() {
       expect(find.byIcon(Icons.chevron_right), findsOneWidget);
     });
 
-    testWidgets('calls onPressed when item is tapped', (WidgetTester tester) async {
+    testWidgets('calls onPressed when item is tapped', (
+      WidgetTester tester,
+    ) async {
       bool tapped = false;
       await tester.pumpWidget(
         buildTestWidget(
@@ -101,7 +99,9 @@ void main() {
       expect(tapped, isTrue);
     });
 
-    testWidgets('does not call onPressed when item is active', (WidgetTester tester) async {
+    testWidgets('does not call onPressed when item is active', (
+      WidgetTester tester,
+    ) async {
       bool tapped = false;
       await tester.pumpWidget(
         buildTestWidget(
@@ -119,6 +119,78 @@ void main() {
 
       await tester.tap(find.text('Data'));
       expect(tapped, isFalse);
+    });
+
+    testWidgets('non-active clickable item has link semantics and is focusable', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        buildTestWidget(
+          BsBreadcrumb(
+            items: [
+              BsBreadcrumbItem(
+                label: const Text('Home'),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ),
+      );
+
+      final SemanticsHandle semantics = tester.ensureSemantics();
+      expect(
+        tester.getSemantics(find.text('Home')),
+        matchesSemantics(
+          label: 'Home',
+          isLink: true,
+          hasTapAction: true,
+        ),
+      );
+      semantics.dispose();
+
+      expect(find.byType(FocusableActionDetector), findsOneWidget);
+    });
+
+    testWidgets('active or non-clickable item has no link semantics and is not focusable', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        buildTestWidget(
+          BsBreadcrumb(
+            items: [
+              BsBreadcrumbItem(
+                label: const Text('Home'),
+                active: true,
+                onPressed: () {},
+              ),
+              BsBreadcrumbItem(
+                label: const Text('Library'),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      final SemanticsHandle semantics = tester.ensureSemantics();
+      expect(
+        tester.getSemantics(find.text('Home')),
+        matchesSemantics(
+          label: 'Home',
+          isLink: false,
+          hasTapAction: false,
+        ),
+      );
+      expect(
+        tester.getSemantics(find.text('Library')),
+        matchesSemantics(
+          label: 'Library',
+          isLink: false,
+          hasTapAction: false,
+        ),
+      );
+      semantics.dispose();
+
+      expect(find.byType(FocusableActionDetector), findsNothing);
     });
   });
 }

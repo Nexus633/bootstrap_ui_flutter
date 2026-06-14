@@ -2,11 +2,7 @@
 
 ## Preview
 
-| Form Layout 1 | Form Layout 2 |
-|:---:|:---:|
-| <img src="../../assets/Forms-1.png" width="380" alt="Form Layout 1"> | <img src="../../assets/Forms-2.png" width="380" alt="Form Layout 2"> |
-| **Form Layout 3** | **Form Layout 4** |
-| <img src="../../assets/Forms-3.png" width="380" alt="Form Layout 3"> | <img src="../../assets/Forms-4.png" width="380" alt="Form Layout 4"> |
+![Preview](../../assets/Forms.gif)
 
 
 Form components are essential for gathering user input. The `bootstrap_ui_flutter` package provides a comprehensive set of form controls that closely mimic Bootstrap 5's `.form-control`, `.form-select`, `.form-check`, and `.input-group` behaviors, while integrating natively with Flutter's `Form` and `FormField` system.
@@ -28,7 +24,7 @@ A versatile text input component replacing `TextFormField`.
 ```dart
 BsInput(
   placeholder: 'name@example.com',
-  size: BsInputSize.md, // .form-control-md
+  size: .md, // .form-control-md
   disabled: false,
   readonly: false,
   plainText: false, // .form-control-plaintext
@@ -106,16 +102,98 @@ BsInputGroup(
     BsInput(placeholder: 'Username').expanded(), // The input itself
   ],
 )
+
+// Addons can also be widgets, such as checkboxes:
+BsInputGroup(
+  children: [
+    BsInputGroupText.widget(child: BsCheckbox(initialValue: true)),
+    BsInput(placeholder: 'Checkbox within group...').expanded(),
+  ],
+)
+```
+
+### 7. Floating Labels (`.form-floating`)
+
+Create beautifully simple form labels that float over your input fields using the `floatingLabel` parameter on `BsInput` or `BsSelect`.
+
+```dart
+BsInput(
+  floatingLabel: 'Email address',
+  placeholder: 'name@example.com',
+)
+
+BsSelect<String>(
+  floatingLabel: 'Works with selects',
+  placeholder: const Text('Open this select menu'),
+  items: const [
+    DropdownMenuItem(value: '1', child: Text('One')),
+  ],
+)
 ```
 
 ## Validation & State
 
-All inputs support a `validationState` property for explicit state management (e.g., when validating via an external API without using a Flutter `Form`).
+All inputs support a `validationState` property for explicit state management (e.g., when validating via an external API without using a Flutter `Form`). Furthermore, inputs natively display Bootstrap's custom `BsShadows.focusRing` (in red or green) when focused in a validated state.
 
 ```dart
 BsInput(
-  validationState: BsValidationState.valid, // Forces .is-valid styling
+  validationState: .valid, // Forces .is-valid styling
 )
 ```
 
-If used inside a `Form`, simply use the `validator` property. The component will automatically switch to the `invalid` state and display a `BsFormFeedback` widget in red if the validator returns an error string.
+### The `.was-validated` approach (`BsValidatedForm`)
+
+In traditional Bootstrap, applying the `.was-validated` class to a `<form>` triggers valid (green) or invalid (red) feedback for all nested fields based on their HTML5 validation state.
+To replicate this exact behavior in Flutter, wrap your `Form` in a `BsValidatedForm` widget:
+
+```dart
+BsValidatedForm(
+  wasValidated: _hasSubmitted, // Set to true when the user submits the form
+  child: Form(
+    key: _formKey,
+    child: BsInput(
+      validator: (val) => val == null || val.isEmpty ? 'Error' : null,
+    ),
+  ),
+)
+```
+When `wasValidated` is `true`, any field without a validator error will automatically render in the green, valid state.
+
+### Accessibility & Localization
+
+When validation errors occur, they are appended to the widget's semantics structure so screen readers (e.g., TalkBack or VoiceOver) can read them. The error prefix (e.g., `"Error"` for English, `"Fehler"` for German) is automatically resolved at runtime via Flutter's built-in localization system `BsLocalizations`.
+
+The library comes pre-configured with translations for **10 languages**. To use them in your application, simply register the delegate in your `MaterialApp`:
+
+```dart
+import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      locale: const Locale('en'),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        BsLocalizations.delegate, // <--- Register delegate
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('de'),
+      ],
+      home: const Scaffold(body: Center(child: Text('Hello World'))),
+    );
+  }
+}
+```
+
+If no delegate is registered, a safe English fallback will be used. You can easily add new languages (e.g., `zh.json` for Chinese) by putting them into the `assets/l10n/` folder of your host project and adding the locale to the `supportedLocales` list. The library loads them dynamically at runtime!

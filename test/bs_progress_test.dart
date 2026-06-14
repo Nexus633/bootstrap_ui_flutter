@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
+import 'de_locale_helper.dart';
 
 void main() {
   Widget buildTestWidget(Widget child) {
@@ -173,5 +174,86 @@ void main() {
       expect(expandedList[2].flex, 20000);
       expect(expandedList[3].flex, 35000); // spacer
     });
+
+    testWidgets('supports accessibility semantics with labels and values', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        buildTestWidget(
+          const BsProgress(
+            bars: [
+              BsProgressBar(
+                value: 45.0,
+                semanticsLabel: 'Uploading file',
+                semanticsValue: '45 of 100 megabytes',
+              ),
+            ],
+          ),
+        ),
+      );
+
+      final Finder barSemanticsFinder = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.properties.label == 'Uploading file' &&
+            widget.properties.value == '45 of 100 megabytes',
+      );
+      expect(barSemanticsFinder, findsOneWidget);
+    });
+
+    testWidgets('automatically localizes screen reader label when locale is de', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData(
+            extensions: [BsThemeData.lightTheme],
+          ),
+          locale: const Locale('de'),
+          supportedLocales: const [Locale('de'), Locale('en')],
+          localizationsDelegates: const [
+            ...deLocalizationsDelegates,
+            DefaultMaterialLocalizations.delegate,
+            DefaultWidgetsLocalizations.delegate,
+            _TestBsLocalizationsDelegate(progressBar: 'Fortschrittsanzeige'),
+          ],
+          home: const Scaffold(
+            body: BsProgress(
+              bars: [
+                BsProgressBar(value: 30.0),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      final Finder barSemanticsFinder = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.properties.label == 'Fortschrittsanzeige' &&
+            widget.properties.value == '30%',
+      );
+      expect(barSemanticsFinder, findsOneWidget);
+    });
   });
+}
+
+class _TestBsLocalizations extends BsLocalizations {
+  _TestBsLocalizations(super.locale, {required this.customProgressBar});
+  final String customProgressBar;
+
+  @override
+  String get progressBar => customProgressBar;
+}
+
+class _TestBsLocalizationsDelegate extends LocalizationsDelegate<BsLocalizations> {
+  const _TestBsLocalizationsDelegate({required this.progressBar});
+  final String progressBar;
+
+  @override
+  bool isSupported(Locale locale) => true;
+
+  @override
+  Future<BsLocalizations> load(Locale locale) async {
+    return _TestBsLocalizations(locale, customProgressBar: progressBar);
+  }
+
+  @override
+  bool shouldReload(_TestBsLocalizationsDelegate old) => false;
 }

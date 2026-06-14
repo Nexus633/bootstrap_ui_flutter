@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/colors.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
+import '../../tokens/transitions.dart';
+import '../../tokens/z_index.dart';
 import '../button/bs_close_button.dart';
 
 /// A Bootstrap-style offcanvas panel (`BsOffcanvas`).
@@ -17,7 +21,7 @@ class BsOffcanvas extends StatelessWidget {
     super.key,
     this.header,
     required this.body,
-    this.placement = BsOffcanvasPlacement.start,
+    this.placement = .start,
     this.width,
     this.height,
     this.decoration,
@@ -74,25 +78,25 @@ class BsOffcanvas extends StatelessWidget {
 
     if (variant != null && color == null) {
       resolvedBgColor = switch (variant!) {
-        BsVariant.primary => theme.primary,
-        BsVariant.secondary => theme.secondary,
-        BsVariant.success => theme.success,
-        BsVariant.danger => theme.danger,
-        BsVariant.warning => theme.warning,
-        BsVariant.info => theme.info,
-        BsVariant.light => theme.light,
-        BsVariant.dark => theme.dark,
+        .primary => theme.primary,
+        .secondary => theme.secondary,
+        .success => theme.success,
+        .danger => theme.danger,
+        .warning => theme.warning,
+        .info => theme.info,
+        .light => theme.light,
+        .dark => theme.dark,
       };
 
       resolvedTextColor = switch (variant!) {
-        BsVariant.primary => BsColors.onPrimary,
-        BsVariant.secondary => BsColors.onSecondary,
-        BsVariant.success => BsColors.onSuccess,
-        BsVariant.danger => BsColors.onDanger,
-        BsVariant.warning => BsColors.onWarning,
-        BsVariant.info => BsColors.onInfo,
-        BsVariant.light => theme.onLight,
-        BsVariant.dark => theme.onDark,
+        .primary => BsColors.onPrimary,
+        .secondary => BsColors.onSecondary,
+        .success => BsColors.onSuccess,
+        .danger => BsColors.onDanger,
+        .warning => BsColors.onWarning,
+        .info => BsColors.onInfo,
+        .light => theme.onLight,
+        .dark => theme.onDark,
       };
     } else {
       resolvedBgColor = color ?? theme.bodyBg;
@@ -106,16 +110,16 @@ class BsOffcanvas extends StatelessWidget {
     // Default decoration
     final Border defaultBorder;
     switch (placement) {
-      case BsOffcanvasPlacement.start:
+      case .start:
         defaultBorder = Border(right: BorderSide(color: resolvedBorderColor, width: 1.0));
         break;
-      case BsOffcanvasPlacement.end:
+      case .end:
         defaultBorder = Border(left: BorderSide(color: resolvedBorderColor, width: 1.0));
         break;
-      case BsOffcanvasPlacement.top:
+      case .top:
         defaultBorder = Border(bottom: BorderSide(color: resolvedBorderColor, width: 1.0));
         break;
-      case BsOffcanvasPlacement.bottom:
+      case .bottom:
         defaultBorder = Border(top: BorderSide(color: resolvedBorderColor, width: 1.0));
         break;
     }
@@ -124,20 +128,14 @@ class BsOffcanvas extends StatelessWidget {
         BoxDecoration(
           color: resolvedBgColor,
           border: defaultBorder,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.15),
-              blurRadius: 16,
-              offset: const Offset(0, 8),
-            ),
-          ],
+          boxShadow: BsShadows.regular,
         );
 
     final panelContent = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ?header,
-        body,
+        Expanded(child: body),
       ],
     );
 
@@ -148,19 +146,33 @@ class BsOffcanvas extends StatelessWidget {
     }
 
     // Apply dimensions based on placement
-    if (placement == BsOffcanvasPlacement.start || placement == BsOffcanvasPlacement.end) {
-      return Container(
-        width: resolvedWidth,
-        height: double.infinity,
-        decoration: panelDecoration,
-        child: finalPanel,
+    if (placement == .start || placement == .end) {
+      return Semantics(
+        sortKey: const OrdinalSortKey(BsZIndex.offcanvas * 1.0),
+        scopesRoute: true,
+        namesRoute: true,
+        explicitChildNodes: true,
+        label: 'Offcanvas',
+        child: Container(
+          width: resolvedWidth,
+          height: double.infinity,
+          decoration: panelDecoration,
+          child: finalPanel,
+        ),
       );
     } else {
-      return Container(
-        width: double.infinity,
-        height: resolvedHeight,
-        decoration: panelDecoration,
-        child: finalPanel,
+      return Semantics(
+        sortKey: const OrdinalSortKey(BsZIndex.offcanvas * 1.0),
+        scopesRoute: true,
+        namesRoute: true,
+        explicitChildNodes: true,
+        label: 'Offcanvas',
+        child: Container(
+          width: double.infinity,
+          height: resolvedHeight,
+          decoration: panelDecoration,
+          child: finalPanel,
+        ),
       );
     }
   }
@@ -263,9 +275,7 @@ class BsOffcanvasBody extends StatelessWidget {
       );
     }
 
-    return Expanded(
-      child: content,
-    );
+    return content;
   }
 }
 
@@ -304,7 +314,7 @@ class _BsOffcanvasBackdropWrapperState
     super.initState();
     _pulseController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 150),
+      duration: BsTransitions.fadeDuration,
     );
     _pulseAnimation = TweenSequence<double>([
       TweenSequenceItem(
@@ -335,9 +345,9 @@ class _BsOffcanvasBackdropWrapperState
   }
 
   void _handleBackdropTap() {
-    if (widget.backdrop == BsBackdrop.enabled) {
+    if (widget.backdrop == .enabled) {
       Navigator.of(context).pop();
-    } else if (widget.backdrop == BsBackdrop.static) {
+    } else if (widget.backdrop == .static) {
       _triggerPulse();
     }
   }
@@ -374,10 +384,11 @@ class _BsOffcanvasBackdropWrapperState
                 );
               },
             )
-          else if (widget.backdrop != BsBackdrop.disabled)
+          else if (widget.backdrop != .disabled)
             GestureDetector(
               onTap: _handleBackdropTap,
               behavior: HitTestBehavior.translucent,
+              child: const SizedBox.expand(),
             ),
 
           // Offcanvas container alignment
@@ -407,28 +418,28 @@ class _BsOffcanvasBackdropWrapperState
 Future<T?> showBsOffcanvas<T>({
   required BuildContext context,
   required WidgetBuilder builder,
-  BsOffcanvasPlacement placement = BsOffcanvasPlacement.start,
-  BsBackdrop backdrop = BsBackdrop.enabled,
+  BsOffcanvasPlacement placement = .start,
+  BsBackdrop backdrop = .enabled,
   bool keyboard = true,
 }) {
-  final showBackdrop = backdrop != BsBackdrop.disabled;
+  final showBackdrop = backdrop != .disabled;
 
   final Alignment alignment;
   final Offset beginOffset;
   switch (placement) {
-    case BsOffcanvasPlacement.start:
+    case .start:
       alignment = Alignment.centerLeft;
       beginOffset = const Offset(-1.0, 0.0);
       break;
-    case BsOffcanvasPlacement.end:
+    case .end:
       alignment = Alignment.centerRight;
       beginOffset = const Offset(1.0, 0.0);
       break;
-    case BsOffcanvasPlacement.top:
+    case .top:
       alignment = Alignment.topCenter;
       beginOffset = const Offset(0.0, -1.0);
       break;
-    case BsOffcanvasPlacement.bottom:
+    case .bottom:
       alignment = Alignment.bottomCenter;
       beginOffset = const Offset(0.0, 1.0);
       break;
@@ -439,7 +450,7 @@ Future<T?> showBsOffcanvas<T>({
     barrierDismissible: false,
     barrierLabel: 'Dismiss',
     barrierColor: Colors.transparent,
-    transitionDuration: const Duration(milliseconds: 300),
+    transitionDuration: BsTransitions.modalDuration,
     pageBuilder: (context, animation, secondaryAnimation) {
       return builder(context);
     },

@@ -2,10 +2,22 @@
 
 ## Preview
 
-![Preview](../../assets/Utilities-2.png)
+![Preview](../../assets/Utilities_2.png)
 
 
 In addition to spacing, the library provides several other utility extensions to streamline your UI development.
+
+## Breakpoint Support
+
+Most utility extensions support an optional `breakpoint` parameter of type `double?` (e.g. using `BsBreakpoints`). If provided, the utility is applied only when the screen width is greater than or equal to the breakpoint.
+
+```dart
+// Hidden only on medium screens and up
+Text('Hidden').dNone(BsBreakpoints.md);
+
+// Centered only on large screens and up
+Container().center(BsBreakpoints.lg);
+```
 
 ## Display & Visibility
 
@@ -13,10 +25,11 @@ In addition to spacing, the library provides several other utility extensions to
 
 | Method | Description |
 | :--- | :--- |
-| `.visible(bool)` | Standard `Visibility` widget wrapper. |
-| `.gone(bool)` | `Visibility` with `maintainState: false`. |
-| `.dNone()` | Alias for `.gone(true)`. |
-| `.opacity(double)` | `Opacity` widget wrapper. |
+| `.visible(bool, [double? breakpoint])` | Standard `Visibility` widget wrapper. |
+| `.gone(bool, [double? breakpoint])` | `Visibility` with `maintainState: false`. |
+| `.dNone([double? breakpoint])` | Alias for `.gone(true)`. Hides the widget. |
+| `.dBlock([double? breakpoint])` | Alias for `.gone(false)`. Shows the widget. |
+| `.opacity(double, [double? breakpoint])` | `Opacity` widget wrapper. |
 
 ```dart
 Text('Hidden').dNone();

@@ -68,34 +68,27 @@ class _PaginationShowcaseState extends State<PaginationShowcase> {
             _Section(
               title: 'Basic Example (Manual List)',
               description: 'Building pagination manually by nesting page items inside a pagination row.',
-              child: BsRow(
-                children: [
-                  BsCol(
-                    config: const BsColConfig(xs: 12),
-                    child: BsPagination(
-                      items: [
-                        BsPaginationItem(
-                          child: const Text('Previous'),
-                          onPressed: () {},
-                        ),
-                        const BsPaginationItem(
-                          active: true,
-                          child: Text('1'),
-                        ),
-                        BsPaginationItem(
-                          child: const Text('2'),
-                          onPressed: () {},
-                        ),
-                        BsPaginationItem(
-                          child: const Text('3'),
-                          onPressed: () {},
-                        ),
-                        BsPaginationItem(
-                          child: const Text('Next'),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
+              child: BsPagination(
+                items: [
+                  BsPaginationItem(
+                    child: const Text('Previous'),
+                    onPressed: () {},
+                  ),
+                  const BsPaginationItem(
+                    active: true,
+                    child: Text('1'),
+                  ),
+                  BsPaginationItem(
+                    child: const Text('2'),
+                    onPressed: () {},
+                  ),
+                  BsPaginationItem(
+                    child: const Text('3'),
+                    onPressed: () {},
+                  ),
+                  BsPaginationItem(
+                    child: const Text('Next'),
+                    onPressed: () {},
                   ),
                 ],
               ),
@@ -105,42 +98,35 @@ class _PaginationShowcaseState extends State<PaginationShowcase> {
             _Section(
               title: 'Working with Icons',
               description: 'Using double arrows (chevron) or custom icon components for pagination links.',
-              child: BsRow(
-                children: [
-                  BsCol(
-                    config: const BsColConfig(xs: 12),
-                    child: BsPagination(
-                      items: [
-                        BsPaginationItem(
-                          child: const BsIcon(BsIcons.chevronDoubleLeft),
-                          onPressed: () {},
-                        ),
-                        BsPaginationItem(
-                          child: const BsIcon(BsIcons.chevronLeft),
-                          onPressed: () {},
-                        ),
-                        BsPaginationItem(
-                          child: const Text('1'),
-                          onPressed: () {},
-                        ),
-                        const BsPaginationItem(
-                          active: true,
-                          child: Text('2'),
-                        ),
-                        BsPaginationItem(
-                          child: const Text('3'),
-                          onPressed: () {},
-                        ),
-                        BsPaginationItem(
-                          child: const BsIcon(BsIcons.chevronRight),
-                          onPressed: () {},
-                        ),
-                        BsPaginationItem(
-                          child: const BsIcon(BsIcons.chevronDoubleRight),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
+              child: BsPagination(
+                items: [
+                  BsPaginationItem(
+                    child: const BsIcon(BsIcons.chevronDoubleLeft),
+                    onPressed: () {},
+                  ),
+                  BsPaginationItem(
+                    child: const BsIcon(BsIcons.chevronLeft),
+                    onPressed: () {},
+                  ),
+                  BsPaginationItem(
+                    child: const Text('1'),
+                    onPressed: () {},
+                  ),
+                  const BsPaginationItem(
+                    active: true,
+                    child: Text('2'),
+                  ),
+                  BsPaginationItem(
+                    child: const Text('3'),
+                    onPressed: () {},
+                  ),
+                  BsPaginationItem(
+                    child: const BsIcon(BsIcons.chevronRight),
+                    onPressed: () {},
+                  ),
+                  BsPaginationItem(
+                    child: const BsIcon(BsIcons.chevronDoubleRight),
+                    onPressed: () {},
                   ),
                 ],
               ),
@@ -150,34 +136,27 @@ class _PaginationShowcaseState extends State<PaginationShowcase> {
             _Section(
               title: 'Disabled and Active States',
               description: 'Customize states to reflect current page selection and disabled borders.',
-              child: BsRow(
-                children: [
-                  BsCol(
-                    config: const BsColConfig(xs: 12),
-                    child: BsPagination(
-                      items: [
-                        const BsPaginationItem(
-                          disabled: true,
-                          child: Text('Previous'),
-                        ),
-                        const BsPaginationItem(
-                          active: true,
-                          child: Text('1'),
-                        ),
-                        BsPaginationItem(
-                          child: const Text('2'),
-                          onPressed: () {},
-                        ),
-                        BsPaginationItem(
-                          child: const Text('3'),
-                          onPressed: () {},
-                        ),
-                        BsPaginationItem(
-                          child: const Text('Next'),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
+              child: BsPagination(
+                items: [
+                  const BsPaginationItem(
+                    disabled: true,
+                    child: Text('Previous'),
+                  ),
+                  const BsPaginationItem(
+                    active: true,
+                    child: Text('1'),
+                  ),
+                  BsPaginationItem(
+                    child: const Text('2'),
+                    onPressed: () {},
+                  ),
+                  BsPaginationItem(
+                    child: const Text('3'),
+                    onPressed: () {},
+                  ),
+                  BsPaginationItem(
+                    child: const Text('Next'),
+                    onPressed: () {},
                   ),
                 ],
               ),
@@ -190,7 +169,7 @@ class _PaginationShowcaseState extends State<PaginationShowcase> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Large (sm):').fwBold().fs6().pb2(),
+                  const Text('Large (lg):').fwBold().fs6().pb2(),
                   BsPagination.automatic(
                     currentPage: 2,
                     totalPages: 5,

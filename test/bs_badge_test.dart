@@ -38,6 +38,23 @@ void main() {
       final decoration = container.decoration as BoxDecoration;
       expect(decoration.borderRadius, BorderRadius.circular(50.0));
     });
+
+    testWidgets('supports custom semanticsLabel', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        wrap(
+          const BsBadge(
+            label: '9',
+            semanticsLabel: '9 new notifications',
+          ),
+        ),
+      );
+
+      final Finder badgeSemanticsFinder = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.properties.label == '9 new notifications',
+      );
+      expect(badgeSemanticsFinder, findsOneWidget);
+    });
   });
 }
 

@@ -2,7 +2,7 @@
 
 ## Vorschau
 
-![Vorschau](../../assets/Utilities-1.png)
+![Vorschau](../../assets/Utilities_1.png)
 
 
 Die `BsSpacingExtension` bietet eine Reihe von prägnanten Methoden, um Padding (Innenabstand) und Margin (Außenabstand) auf jedes Flutter-Widget anzuwenden. Dabei wird die Namenskonvention der Bootstrap-Utility-Klassen übernommen.
@@ -11,6 +11,7 @@ Die `BsSpacingExtension` bietet eine Reihe von prägnanten Methoden, um Padding 
 
 - **Prägnante Syntax**: Verkettbare Methoden wie `.p3()`, `.mb2()`, etc.
 - **Bootstrap-Konformität**: Nutzt die standardmäßigen Bootstrap-Abstandsstufen (1-5).
+- **Responsive**: Unterstützt Breakpoints (`BsBreakpoints`) für bedingte Anwendung.
 - **Flexibel**: Erlaubt benutzerdefinierte Werte über `.p(double)`, `.m(double)`, etc.
 - **Kontextbewusst**: Berücksichtigt die Konzepte von Padding (innerhalb eines Rahmens) und Margin (außerhalb eines Rahmens) im Flutter-Widget-Baum.
 
@@ -27,6 +28,9 @@ Padding(
 
 // Mit BsSpacingExtension
 Text('Hallo').p3()
+
+// Responsive Spacing
+Text('Hallo').p3(BsBreakpoints.md) // Wendet das Padding nur ab md an
 
 // Margin (Abstand außerhalb einer Dekoration/Box)
 Container(color: Colors.red, child: Text('Alarm'))

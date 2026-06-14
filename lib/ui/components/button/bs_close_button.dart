@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../tokens/shadows.dart';
+import '../../tokens/transitions.dart';
 
 /// A Bootstrap-style close button component (`.btn-close`).
 ///
@@ -67,10 +69,11 @@ class _BsCloseButtonState extends State<BsCloseButton> {
       baseColor = isDarkTheme ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
     }
 
-    // Resolve opacity based on state (Bootstrap standard: 0.5 default, 0.75 hover, 0.25 disabled)
     double opacity = 0.5;
     if (widget.disabled) {
       opacity = 0.25;
+    } else if (_isFocused) {
+      opacity = 1.0;
     } else if (_isHovered) {
       opacity = 0.75;
     }
@@ -91,22 +94,33 @@ class _BsCloseButtonState extends State<BsCloseButton> {
       return buttonIcon;
     }
 
-    return FocusableActionDetector(
-      onShowHoverHighlight: (value) => setState(() => _isHovered = value),
-      onShowFocusHighlight: (value) => setState(() => _isFocused = value),
-      mouseCursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: widget.onPressed,
-        behavior: HitTestBehavior.opaque,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: _isHovered
-                ? baseColor.withValues(alpha: 0.08)
-                : (_isFocused ? baseColor.withValues(alpha: 0.12) : Colors.transparent),
+    return Semantics(
+      button: true,
+      enabled: !widget.disabled,
+      label: 'Close', // Consider making this a parameter for i18n
+      child: FocusableActionDetector(
+        onShowHoverHighlight: (value) => setState(() => _isHovered = value),
+        onShowFocusHighlight: (value) => setState(() => _isFocused = value),
+        mouseCursor: SystemMouseCursors.click,
+        actions: {
+          ActivateIntent: CallbackAction<Intent>(
+            onInvoke: (_) {
+              widget.onPressed?.call();
+              return null;
+            },
           ),
-          child: buttonIcon,
+        },
+        child: GestureDetector(
+          onTap: widget.onPressed,
+          behavior: HitTestBehavior.opaque,
+          child: AnimatedContainer(
+            duration: BsTransitions.baseDuration,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4.0),
+              boxShadow: _isFocused ? BsShadows.focusRing(baseColor) : null,
+            ),
+            child: buttonIcon,
+          ),
         ),
       ),
     );

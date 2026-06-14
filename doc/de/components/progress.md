@@ -1,5 +1,9 @@
 # Progress (Fortschrittsbalken)
 
+## Vorschau
+
+![Vorschau](../../assets/Progress_bars.gif)
+
 Progress-Komponenten (Fortschrittsbalken) zeigen dem Benutzer den Status eines laufenden Prozesses (z. B. Downloads, Uploads oder Berechnungen) an. Sie basieren auf dem Design und Verhalten von Bootstrap 5.3 und unterstützen Beschriftungen, Farbvarianten, gestreifte Muster, Animationen sowie das Stapeln (Stacking) mehrerer Segmente.
 
 ## Verwendung
@@ -48,7 +52,7 @@ Du kannst die Standard-Farbvarianten von Bootstrap verwenden oder eigene Farben 
 // Bootstrap-Erfolgsfarbe (Grün)
 BsProgress.single(
   value: 80.0,
-  variant: BsVariant.success,
+  variant: .success,
 )
 
 // Benutzerdefinierte Farbe
@@ -89,9 +93,9 @@ Du kannst mehrere `BsProgressBar`-Segmente in einen einzelnen `BsProgress`-Conta
 ```dart
 BsProgress(
   bars: [
-    BsProgressBar(value: 15.0, variant: BsVariant.primary, label: '15%'),
-    BsProgressBar(value: 30.0, variant: BsVariant.success, label: '30%'),
-    BsProgressBar(value: 20.0, variant: BsVariant.info, label: '20%'),
+    BsProgressBar(value: 15.0, variant: .primary, label: '15%'),
+    BsProgressBar(value: 30.0, variant: .success, label: '30%'),
+    BsProgressBar(value: 20.0, variant: .info, label: '20%'),
   ],
 )
 ```
@@ -113,7 +117,7 @@ BsProgress(
 | --- | --- | --- | --- |
 | `value` | `double` | - | Der Prozentwert von `0.0` bis `100.0`. |
 | `label` | `String?` | `null` | Optionaler Text innerhalb des Segments. |
-| `variant` | `BsVariant?` | `BsVariant.primary` | Die Bootstrap-Farbvariante. |
+| `variant` | `BsVariant?` | `.primary` | Die Bootstrap-Farbvariante. |
 | `striped` | `bool` | `false` | Aktiviert die diagonalen Streifen. |
 | `animated` | `bool` | `false` | Aktiviert die Bewegung der diagonalen Streifen. |
 | `color` | `Color?` | `null` | Custom Hintergrundfarbe (überschreibt `variant`). |
@@ -123,4 +127,4 @@ BsProgress(
 
 * **ClipBehavior**: Der Container `BsProgress` verwendet `Clip.antiAlias`. Dadurch werden alle inneren `BsProgressBar`-Elemente an den Rändern automatisch beschnitten, sodass die Eckenabrundung des Tracks nahtlos beibehalten wird.
 * **Proportionales Layout**: Die Segmente berechnen ihre Breitenanteile dynamisch über `Expanded` mit einem präzisen Flex-Faktor (`value * 1000`), sodass auch Nachkommastellen genau dargestellt werden und verbleibender Platz (Summe < 100 %) sauber freigelassen wird.
-* **Barrierefreie Textfarben**: Bei hellen Farbvarianten (wie `BsVariant.light` und `BsVariant.warning`) wird automatisch dunkler Text verwendet, um die Lesbarkeit (Kontrast) sicherzustellen.
+* **Barrierefreie Textfarben**: Bei hellen Farbvarianten (wie `.light` und `.warning`) wird automatisch dunkler Text verwendet, um die Lesbarkeit (Kontrast) sicherzustellen.

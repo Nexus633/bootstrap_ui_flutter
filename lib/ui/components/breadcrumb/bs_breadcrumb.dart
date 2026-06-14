@@ -6,7 +6,7 @@ import '../../utilities/spacing_extension.dart';
 ///
 /// Used within a [BsBreadcrumb] to indicate the current page's location
 /// within a navigational hierarchy.
-class BsBreadcrumbItem extends StatelessWidget {
+class BsBreadcrumbItem extends StatefulWidget {
   /// Creates a [BsBreadcrumbItem].
   const BsBreadcrumbItem({
     super.key,
@@ -28,26 +28,80 @@ class BsBreadcrumbItem extends StatelessWidget {
   final bool active;
 
   @override
+  State<BsBreadcrumbItem> createState() => _BsBreadcrumbItemState();
+}
+
+class _BsBreadcrumbItemState extends State<BsBreadcrumbItem> {
+  bool _isHovered = false;
+  bool _isFocused = false;
+
+  @override
   Widget build(BuildContext context) {
     final bsTheme = context.bs;
+    final isClickable = widget.onPressed != null && !widget.active;
 
     final TextStyle textStyle = TextStyle(
-      color: active ? bsTheme.bodyTextSecondary : bsTheme.linkColor,
-      decoration: (onPressed != null && !active) ? TextDecoration.underline : TextDecoration.none,
-      decorationColor: bsTheme.linkColor,
+      color: widget.active
+          ? bsTheme.bodyTextSecondary
+          : (_isHovered ? bsTheme.linkHoverColor : bsTheme.linkColor),
+      decoration: isClickable
+          ? (widget.active ? TextDecoration.none : TextDecoration.underline)
+          : TextDecoration.none,
+      decorationColor: _isHovered ? bsTheme.linkHoverColor : bsTheme.linkColor,
     );
 
-    Widget content = DefaultTextStyle.merge(
-      style: textStyle,
-      child: label,
+    Widget content = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(
+          color: _isFocused
+              ? bsTheme.linkColor.withValues(alpha: 0.5)
+              : Colors.transparent,
+          width: 1.5,
+        ),
+        boxShadow: _isFocused
+            ? [
+                BoxShadow(
+                  color: bsTheme.linkColor.withValues(alpha: 0.25),
+                  spreadRadius: 2,
+                  blurRadius: 0,
+                )
+              ]
+            : null,
+      ),
+      child: DefaultTextStyle.merge(style: textStyle, child: widget.label),
     );
 
-    if (onPressed != null && !active) {
-      content = MouseRegion(
-        cursor: SystemMouseCursors.click,
+    if (isClickable) {
+      content = FocusableActionDetector(
+        mouseCursor: SystemMouseCursors.click,
+        onShowHoverHighlight: (value) {
+          setState(() {
+            _isHovered = value;
+          });
+        },
+        onShowFocusHighlight: (value) {
+          setState(() {
+            _isFocused = value;
+          });
+        },
+        actions: {
+          ActivateIntent: CallbackAction<ActivateIntent>(
+            onInvoke: (intent) {
+              widget.onPressed?.call();
+              return null;
+            },
+          ),
+        },
         child: GestureDetector(
-          onTap: onPressed,
-          child: content,
+          onTap: widget.onPressed,
+          child: Semantics(
+            container: true,
+            link: true,
+            onTap: widget.onPressed,
+            child: content,
+          ),
         ),
       );
     }
@@ -64,19 +118,15 @@ class BsBreadcrumbItem extends StatelessWidget {
 /// See: <https://getbootstrap.com/docs/5.3/components/breadcrumb/>
 class BsBreadcrumb extends StatelessWidget {
   /// Creates a [BsBreadcrumb].
-  const BsBreadcrumb({
-    super.key,
-    required this.items,
-    this.divider,
-  });
+  const BsBreadcrumb({super.key, required this.items, this.divider});
 
   /// The list of breadcrumb items to display.
-  final List<BsBreadcrumbItem> items;
+  final List<Widget> items;
 
   /// The divider to display between items.
   ///
-  /// Defaults to a forward slash ("/"). Can be a [String] or a [Widget].
-  final dynamic divider;
+  /// Defaults to a forward slash ("/"). Can be a [Widget].
+  final Widget? divider;
 
   @override
   Widget build(BuildContext context) {
@@ -107,17 +157,7 @@ class BsBreadcrumb extends StatelessWidget {
     final dividerColor = bsTheme.bodyTextSecondary;
 
     if (divider == null) {
-      return Text(
-        '/',
-        style: TextStyle(color: dividerColor),
-      );
-    }
-
-    if (divider is String) {
-      return Text(
-        divider as String,
-        style: TextStyle(color: dividerColor),
-      );
+      return Text('/', style: TextStyle(color: dividerColor));
     }
 
     if (divider is Widget) {

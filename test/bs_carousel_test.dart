@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
+import 'de_locale_helper.dart';
 
 void main() {
   Widget wrap(Widget child) {
@@ -247,5 +248,176 @@ void main() {
       );
       expect(titleText2.style.color, const Color(0xFF212529));
     });
+    testWidgets('supports accessibility semantics in English (default)', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        wrap(
+          const BsCarousel(
+            autoplay: false,
+            items: [
+              BsCarouselItem(child: SizedBox()),
+              BsCarouselItem(child: SizedBox()),
+            ],
+          ),
+        ),
+      );
+
+      // Verify container semantics
+      final containerSemantics = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.container == true &&
+            widget.properties.label == 'Image carousel',
+      );
+      expect(containerSemantics, findsOneWidget);
+
+      // Verify controls semantics (Previous slide & Next slide)
+      final prevSemantics = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.properties.button == true &&
+            widget.properties.label == 'Previous slide',
+      );
+      expect(prevSemantics, findsOneWidget);
+
+      final nextSemantics = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.properties.button == true &&
+            widget.properties.label == 'Next slide',
+      );
+      expect(nextSemantics, findsOneWidget);
+
+      // Verify indicators semantics
+      final indicator1Semantics = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.properties.button == true &&
+            widget.properties.label == 'Go to slide 1' &&
+            widget.properties.selected == true,
+      );
+      expect(indicator1Semantics, findsOneWidget);
+
+      final indicator2Semantics = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.properties.button == true &&
+            widget.properties.label == 'Go to slide 2' &&
+            widget.properties.selected == false,
+      );
+      expect(indicator2Semantics, findsOneWidget);
+    });
+
+    testWidgets('automatically localizes accessibility semantics when locale is de', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData(extensions: [BsThemeData.lightTheme]),
+          locale: const Locale('de'),
+          supportedLocales: const [Locale('de'), Locale('en')],
+          localizationsDelegates: const [
+            ...deLocalizationsDelegates,
+            DefaultMaterialLocalizations.delegate,
+            DefaultWidgetsLocalizations.delegate,
+            _TestBsLocalizationsDelegate(
+              carouselContainer: 'Bildkarussell',
+              carouselPrev: 'Vorheriges Bild',
+              carouselNext: 'Nächstes Bild',
+              carouselIndicatorPrefix: 'Gehe zu Bild ',
+            ),
+          ],
+          home: const Scaffold(
+            body: BsCarousel(
+              autoplay: false,
+              items: [
+                BsCarouselItem(child: SizedBox()),
+                BsCarouselItem(child: SizedBox()),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      // Verify container semantics
+      final containerSemantics = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.container == true &&
+            widget.properties.label == 'Bildkarussell',
+      );
+      expect(containerSemantics, findsOneWidget);
+
+      // Verify controls semantics (Vorheriges Bild & Nächstes Bild)
+      final prevSemantics = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.properties.button == true &&
+            widget.properties.label == 'Vorheriges Bild',
+      );
+      expect(prevSemantics, findsOneWidget);
+
+      final nextSemantics = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.properties.button == true &&
+            widget.properties.label == 'Nächstes Bild',
+      );
+      expect(nextSemantics, findsOneWidget);
+
+      // Verify indicators semantics
+      final indicatorSemantics = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.properties.button == true &&
+            widget.properties.label == 'Gehe zu Bild 1' &&
+            widget.properties.selected == true,
+      );
+      expect(indicatorSemantics, findsOneWidget);
+    });
   });
+}
+
+class _TestBsLocalizations extends BsLocalizations {
+  _TestBsLocalizations(
+    super.locale, {
+    required this.carouselContainer,
+    required this.carouselPrev,
+    required this.carouselNext,
+    required this.carouselIndicatorPrefix,
+  });
+
+  @override
+  final String carouselContainer;
+  @override
+  final String carouselPrev;
+  @override
+  final String carouselNext;
+  final String carouselIndicatorPrefix;
+
+  @override
+  String carouselIndicator(int index) {
+    return '$carouselIndicatorPrefix${index + 1}';
+  }
+}
+
+class _TestBsLocalizationsDelegate extends LocalizationsDelegate<BsLocalizations> {
+  const _TestBsLocalizationsDelegate({
+    required this.carouselContainer,
+    required this.carouselPrev,
+    required this.carouselNext,
+    required this.carouselIndicatorPrefix,
+  });
+
+  final String carouselContainer;
+  final String carouselPrev;
+  final String carouselNext;
+  final String carouselIndicatorPrefix;
+
+  @override
+  bool isSupported(Locale locale) => true;
+
+  @override
+  Future<BsLocalizations> load(Locale locale) async {
+    return _TestBsLocalizations(
+      locale,
+      carouselContainer: carouselContainer,
+      carouselPrev: carouselPrev,
+      carouselNext: carouselNext,
+      carouselIndicatorPrefix: carouselIndicatorPrefix,
+    );
+  }
+
+  @override
+  bool shouldReload(_TestBsLocalizationsDelegate old) => false;
 }

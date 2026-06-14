@@ -70,13 +70,14 @@ class _AlertShowcaseState extends State<AlertShowcase> {
             // 1. Dynamic Dismissible Alerts
             _Section(
               title: 'Dynamic & Dismissible Alerts',
-              description: 'Dismiss alerts using fade animations and restore them dynamically.',
+              description:
+                  'Dismiss alerts using fade animations and restore them dynamically.',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (activeAlerts.isEmpty)
                     Text(
-                      'All alerts closed!',
+                      'All alerts closed! ${BsLocalizations.of(context)?.errorPrefix}',
                       style: TextStyle(
                         fontStyle: FontStyle.italic,
                         color: theme.bodyTextSecondary,
@@ -88,8 +89,8 @@ class _AlertShowcaseState extends State<AlertShowcase> {
                         for (final alertName in activeAlerts)
                           BsAlert(
                             key: ValueKey(alertName),
-                            variant: BsVariant.info,
-                            icon: Icons.info_outline,
+                            variant: .info,
+                            icon: BsIcons.infoCircleFill,
                             dismissible: true,
                             onClose: () {
                               setState(() {
@@ -102,7 +103,7 @@ class _AlertShowcaseState extends State<AlertShowcase> {
                     ),
                   BsButton(
                     label: 'Restore all alerts',
-                    variant: BsButtonVariant.primary,
+                    variant: .primary,
                     onPressed: () {
                       setState(() {
                         activeAlerts = [
@@ -120,40 +121,41 @@ class _AlertShowcaseState extends State<AlertShowcase> {
             // 2. Animations
             _Section(
               title: 'Entrance Animations',
-              description: 'Choose between different direction-based slide animations or no animation.',
+              description:
+                  'Choose between different direction-based slide animations or no animation.',
               child: Column(
                 children: const [
                   BsAlert(
-                    variant: BsVariant.primary,
-                    animation: BsAlertAnimation.slideLeft,
+                    variant: .primary,
+                    animation: .slideLeft,
                     dismissible: true,
                     child: Text('Sliding in from left (slideLeft)'),
                   ),
                   SizedBox(height: 12),
                   BsAlert(
-                    variant: BsVariant.secondary,
-                    animation: BsAlertAnimation.slideRight,
+                    variant: .secondary,
+                    animation: .slideRight,
                     dismissible: true,
                     child: Text('Sliding in from right (slideRight)'),
                   ),
                   SizedBox(height: 12),
                   BsAlert(
-                    variant: BsVariant.warning,
-                    animation: BsAlertAnimation.slideTop,
+                    variant: .warning,
+                    animation: .slideTop,
                     dismissible: true,
                     child: Text('Sliding in from top (slideTop)'),
                   ),
                   SizedBox(height: 12),
                   BsAlert(
-                    variant: BsVariant.danger,
-                    animation: BsAlertAnimation.slideBottom,
+                    variant: .danger,
+                    animation: .slideBottom,
                     dismissible: true,
                     child: Text('Sliding in from bottom (slideBottom)'),
                   ),
                   SizedBox(height: 12),
                   BsAlert(
-                    variant: BsVariant.info,
-                    animation: BsAlertAnimation.none,
+                    variant: .info,
+                    animation: .none,
                     dismissible: true,
                     child: Text('No animation (none)'),
                   ),
@@ -164,10 +166,11 @@ class _AlertShowcaseState extends State<AlertShowcase> {
             // 3. Auto Close Alert
             _Section(
               title: 'Auto-Closing Alert',
-              description: 'Set a duration to automatically close the alert after a specific time.',
+              description:
+                  'Set a duration to automatically close the alert after a specific time.',
               child: const BsAlert(
-                variant: BsVariant.warning,
-                icon: Icons.timer_outlined,
+                variant: .warning,
+                icon: BsIcons.exclamationTriangleFill,
                 dismissible: true,
                 autoCloseDuration: Duration(seconds: 5),
                 child: Text('This alert closes automatically after 5 seconds.'),
@@ -177,27 +180,32 @@ class _AlertShowcaseState extends State<AlertShowcase> {
             // 4. Static alerts with complex contents
             _Section(
               title: 'Static & Complex Alerts',
-              description: 'Render full widget structures like columns, titles and rich descriptions inside alerts.',
+              description:
+                  'Render full widget structures like columns, titles and rich descriptions inside alerts.',
               child: Column(
                 children: [
                   const BsAlert(
-                    variant: BsVariant.success,
-                    icon: Icons.check_circle_outline,
-                    child: Text('Successfully saved! The database record has been created.'),
+                    variant: .success,
+                    icon: BsIcons.checkCircleFill,
+                    child: Text(
+                      'Successfully saved! The database record has been created.',
+                    ),
                   ),
                   const SizedBox(height: 16),
                   BsAlert(
-                    variant: BsVariant.danger,
-                    icon: Icons.error_outline,
+                    variant: .danger,
+                    icon: BsIcons.xCircleFill,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'An error occurred',
-                        ).fwBold().fs5().pb1(),
+                        const Text('An error occurred').fwBold().fs5().pb1(),
                         Text(
                           'The connection to the secure server could not be established. Please check your network credentials.',
-                          style: TextStyle(color: theme.dangerTextEmphasis.withValues(alpha: 0.9)),
+                          style: TextStyle(
+                            color: theme.dangerTextEmphasis.withValues(
+                              alpha: 0.9,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -226,7 +234,11 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.5,
+          ),
         ).pb(4),
         if (description != null) Text(description!).pb(16),
         Container(

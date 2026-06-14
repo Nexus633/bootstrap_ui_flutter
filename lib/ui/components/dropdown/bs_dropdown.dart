@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/colors.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
 import '../../tokens/spacing.dart';
 import '../../tokens/typography.dart';
+import '../../tokens/z_index.dart';
 
 // ─── Inherited Contexts ───────────────────────────────────────────────────────
 
@@ -56,6 +59,30 @@ class _BsDropdownMenuContext extends InheritedWidget {
 ///
 /// Manages the overlay context, placement direction, alignment, and auto-close
 /// behaviors.
+///
+/// ### Example Usage
+///
+/// ```dart
+/// BsDropdown(
+///   label: 'Dropdown Menu',
+///   toggleVariant: BsButtonVariant.secondary,
+///   outline: true,
+///   menu: BsDropdownMenu(
+///     children: [
+///       BsDropdownHeader(child: Text('Dropdown Header')),
+///       BsDropdownItem(
+///         child: Text('Action 1'),
+///         onPressed: () => print('Action 1 clicked'),
+///       ),
+///       const BsDropdownDivider(),
+///       BsDropdownItem(
+///         child: Text('Disabled Action'),
+///         disabled: true,
+///       ),
+///     ],
+///   ),
+/// )
+/// ```
 class BsDropdown extends StatefulWidget {
   /// Creates a [BsDropdown] widget.
   const BsDropdown({
@@ -64,13 +91,14 @@ class BsDropdown extends StatefulWidget {
     this.toggle,
     this.toggleBuilder,
     required this.menu,
-    this.direction = BsDropdownDirection.down,
-    this.alignment = BsDropdownAlignment.start,
-    this.autoClose = BsDropdownAutoClose.always,
-    this.toggleVariant = BsButtonVariant.primary,
-    this.toggleSize = BsButtonSize.md,
+    this.direction = .down,
+    this.alignment = .start,
+    this.autoClose = .always,
+    this.toggleVariant = .primary,
+    this.toggleSize = .md,
     this.showCaret = true,
     this.disabled = false,
+    this.outline = false,
   }) : assert(toggle != null || toggleBuilder != null || label != null,
             'Either toggle, toggleBuilder, or label must be provided');
 
@@ -108,6 +136,9 @@ class BsDropdown extends StatefulWidget {
 
   /// Whether the dropdown interaction is disabled.
   final bool disabled;
+
+  /// Whether the default toggle button should be rendered as an outline button.
+  final bool outline;
 
   @override
   State<BsDropdown> createState() => _BsDropdownState();
@@ -159,28 +190,28 @@ class _BsDropdownState extends State<BsDropdown> {
       BsDropdownDirection effectiveDirection = widget.direction;
 
       // Collision detection & auto-flip
-      if (widget.direction == BsDropdownDirection.down) {
+      if (widget.direction == .down) {
         if (spaceBelow < minRequiredHeight && spaceAbove > spaceBelow) {
-          effectiveDirection = BsDropdownDirection.up;
+          effectiveDirection = .up;
         }
-      } else if (widget.direction == BsDropdownDirection.up) {
+      } else if (widget.direction == .up) {
         if (spaceAbove < minRequiredHeight && spaceBelow > spaceAbove) {
-          effectiveDirection = BsDropdownDirection.down;
+          effectiveDirection = .down;
         }
-      } else if (widget.direction == BsDropdownDirection.end) {
+      } else if (widget.direction == .end) {
         if (spaceRight < minRequiredWidth && spaceLeft > spaceRight) {
-          effectiveDirection = BsDropdownDirection.start;
+          effectiveDirection = .start;
         }
-      } else if (widget.direction == BsDropdownDirection.start) {
+      } else if (widget.direction == .start) {
         if (spaceLeft < minRequiredWidth && spaceRight > spaceLeft) {
-          effectiveDirection = BsDropdownDirection.end;
+          effectiveDirection = .end;
         }
       }
 
       // Configure anchors, offsets, and maximum height based on resolved direction
       switch (effectiveDirection) {
-        case BsDropdownDirection.down:
-          if (widget.alignment == BsDropdownAlignment.start) {
+        case .down:
+          if (widget.alignment == .start) {
             targetAnchor = Alignment.bottomLeft;
             followerAnchor = Alignment.topLeft;
             offset = const Offset(0, 2);
@@ -191,8 +222,8 @@ class _BsDropdownState extends State<BsDropdown> {
           }
           maxMenuHeight = spaceBelow - 16.0;
           break;
-        case BsDropdownDirection.up:
-          if (widget.alignment == BsDropdownAlignment.start) {
+        case .up:
+          if (widget.alignment == .start) {
             targetAnchor = Alignment.topLeft;
             followerAnchor = Alignment.bottomLeft;
             offset = const Offset(0, -2);
@@ -203,8 +234,8 @@ class _BsDropdownState extends State<BsDropdown> {
           }
           maxMenuHeight = spaceAbove - 16.0;
           break;
-        case BsDropdownDirection.end:
-          if (widget.alignment == BsDropdownAlignment.start) {
+        case .end:
+          if (widget.alignment == .start) {
             targetAnchor = Alignment.topRight;
             followerAnchor = Alignment.topLeft;
             offset = const Offset(2, 0);
@@ -215,8 +246,8 @@ class _BsDropdownState extends State<BsDropdown> {
           }
           maxMenuHeight = screenHeight - 32.0;
           break;
-        case BsDropdownDirection.start:
-          if (widget.alignment == BsDropdownAlignment.start) {
+        case .start:
+          if (widget.alignment == .start) {
             targetAnchor = Alignment.topLeft;
             followerAnchor = Alignment.topRight;
             offset = const Offset(-2, 0);
@@ -259,8 +290,8 @@ class _BsDropdownState extends State<BsDropdown> {
           ),
         );
 
-        if (widget.autoClose == BsDropdownAutoClose.always ||
-            widget.autoClose == BsDropdownAutoClose.outside) {
+        if (widget.autoClose == .always ||
+            widget.autoClose == .outside) {
           return Stack(
             children: [
               // Tap detector barrier for outside click detection
@@ -342,6 +373,7 @@ class _BsDropdownState extends State<BsDropdown> {
         isOpen: _isOpen,
         direction: widget.direction,
         disabled: widget.disabled,
+        outline: widget.outline,
         onTap: _toggleMenu,
       ),
     );
@@ -408,35 +440,35 @@ class BsDropdownMenu extends StatelessWidget {
       dividerCol = textCol.withValues(alpha: 0.15);
     } else if (variant != null) {
       switch (variant!) {
-        case BsVariant.primary:
+        case .primary:
           bg = bsTheme.primary;
           textCol = BsColors.onPrimary;
           break;
-        case BsVariant.secondary:
+        case .secondary:
           bg = bsTheme.secondary;
           textCol = BsColors.onSecondary;
           break;
-        case BsVariant.success:
+        case .success:
           bg = bsTheme.success;
           textCol = BsColors.onSuccess;
           break;
-        case BsVariant.danger:
+        case .danger:
           bg = bsTheme.danger;
           textCol = BsColors.onDanger;
           break;
-        case BsVariant.warning:
+        case .warning:
           bg = bsTheme.warning;
           textCol = BsColors.onWarning;
           break;
-        case BsVariant.info:
+        case .info:
           bg = bsTheme.info;
           textCol = BsColors.onInfo;
           break;
-        case BsVariant.light:
+        case .light:
           bg = bsTheme.light;
           textCol = bsTheme.onLight;
           break;
-        case BsVariant.dark:
+        case .dark:
           bg = bsTheme.dark;
           textCol = bsTheme.onDark;
           break;
@@ -468,29 +500,25 @@ class BsDropdownMenu extends StatelessWidget {
           maxWidth: maxWidth,
         ),
         child: IntrinsicWidth(
-          child: Container(
-            padding: padding,
-            decoration: BoxDecoration(
-              color: bg,
-              borderRadius: BorderRadius.circular(6.0),
-              border: Border.all(color: borderCol, width: 1.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.15),
-                  blurRadius: 10.0,
-                  spreadRadius: 0.0,
-                  offset: const Offset(0.0, 5.0),
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(5.0),
-              child: SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: children,
+          child: Semantics(
+            sortKey: const OrdinalSortKey(BsZIndex.dropdown * 1.0),
+            child: Container(
+              padding: padding,
+              decoration: BoxDecoration(
+                color: bg,
+                borderRadius: BorderRadius.circular(6.0),
+                border: Border.all(color: borderCol, width: 1.0),
+                boxShadow: BsShadows.regular,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5.0),
+                child: SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: children,
+                  ),
                 ),
               ),
             ),
@@ -611,8 +639,8 @@ class _BsDropdownItemState extends State<BsDropdownItem> {
                 widget.onPressed?.call();
                 final dropdownState = _BsDropdownContext.of(context);
                 if (dropdownState != null) {
-                  if (dropdownState.widget.autoClose == BsDropdownAutoClose.always ||
-                      dropdownState.widget.autoClose == BsDropdownAutoClose.inside) {
+                  if (dropdownState.widget.autoClose == .always ||
+                      dropdownState.widget.autoClose == .inside) {
                     dropdownState.close();
                   }
                 }
@@ -738,6 +766,7 @@ class _DefaultToggle extends StatefulWidget {
     required this.isOpen,
     required this.direction,
     required this.disabled,
+    required this.outline,
     required this.onTap,
   });
 
@@ -748,6 +777,7 @@ class _DefaultToggle extends StatefulWidget {
   final bool isOpen;
   final BsDropdownDirection direction;
   final bool disabled;
+  final bool outline;
   final VoidCallback onTap;
 
   @override
@@ -828,17 +858,17 @@ class _DefaultToggleState extends State<_DefaultToggle> {
   IconData _getCaretIcon(BsDropdownDirection direction, bool isOpen) {
     if (isOpen) {
       return switch (direction) {
-        BsDropdownDirection.down => Icons.arrow_drop_up_rounded,
-        BsDropdownDirection.up => Icons.arrow_drop_down_rounded,
-        BsDropdownDirection.end => Icons.arrow_left_rounded,
-        BsDropdownDirection.start => Icons.arrow_right_rounded,
+        .down => Icons.arrow_drop_up_rounded,
+        .up => Icons.arrow_drop_down_rounded,
+        .end => Icons.arrow_left_rounded,
+        .start => Icons.arrow_right_rounded,
       };
     }
     return switch (direction) {
-      BsDropdownDirection.down => Icons.arrow_drop_down_rounded,
-      BsDropdownDirection.up => Icons.arrow_drop_up_rounded,
-      BsDropdownDirection.end => Icons.arrow_right_rounded,
-      BsDropdownDirection.start => Icons.arrow_left_rounded,
+      .down => Icons.arrow_drop_down_rounded,
+      .up => Icons.arrow_drop_up_rounded,
+      .end => Icons.arrow_right_rounded,
+      .start => Icons.arrow_left_rounded,
     };
   }
 
@@ -846,10 +876,10 @@ class _DefaultToggleState extends State<_DefaultToggle> {
     if (widget.disabled) {
       return bsTheme.bodyBgSecondary;
     }
-    if (widget.variant == BsButtonVariant.link) {
+    if (widget.variant == .link) {
       return Colors.transparent;
     }
-    final bool isOutline = widget.variant.name.startsWith('outline');
+    final bool isOutline = widget.outline && widget.variant != .link;
     if (_isPressed) {
       return isOutline
           ? style.foregroundColor.withValues(alpha: 0.85)
@@ -867,7 +897,7 @@ class _DefaultToggleState extends State<_DefaultToggle> {
     if (widget.disabled) {
       return bsTheme.bodyTextTertiary;
     }
-    final bool isOutline = widget.variant.name.startsWith('outline');
+    final bool isOutline = widget.outline && widget.variant != .link;
     if (_isPressed && isOutline) {
       return Colors.white;
     }
@@ -890,20 +920,20 @@ class _DefaultToggleState extends State<_DefaultToggle> {
     BsThemeData bs,
   ) {
     final EdgeInsets padding = switch (size) {
-      BsButtonSize.sm => BsSpacing.btnPaddingSm,
-      BsButtonSize.md => BsSpacing.btnPaddingMd,
-      BsButtonSize.lg => BsSpacing.btnPaddingLg,
+      .sm => BsSpacing.btnPaddingSm,
+      .md => BsSpacing.btnPaddingMd,
+      .lg => BsSpacing.btnPaddingLg,
     };
     final TextStyle textStyle = switch (size) {
-      BsButtonSize.sm => BsTypography.btnSm,
-      BsButtonSize.md => BsTypography.btnMd,
-      BsButtonSize.lg => BsTypography.btnLg,
+      .sm => BsTypography.btnSm,
+      .md => BsTypography.btnMd,
+      .lg => BsTypography.btnLg,
     };
-    final double baseRadius = size == BsButtonSize.sm ? 4.0 : (size == BsButtonSize.lg ? 8.0 : 6.0);
+    final double baseRadius = size == .sm ? 4.0 : (size == .lg ? 8.0 : 6.0);
     final BorderRadius borderRadius = BorderRadius.all(Radius.circular(baseRadius));
 
-    return switch (variant) {
-      BsButtonVariant.primary => _ButtonStyle(
+    final _ButtonStyle baseStyle = switch (variant) {
+      .primary => _ButtonStyle(
           backgroundColor: bs.primary,
           foregroundColor: BsColors.onPrimary,
           border: bs.primary,
@@ -911,7 +941,7 @@ class _DefaultToggleState extends State<_DefaultToggle> {
           textStyle: textStyle,
           borderRadius: borderRadius,
         ),
-      BsButtonVariant.secondary => _ButtonStyle(
+      .secondary => _ButtonStyle(
           backgroundColor: bs.secondary,
           foregroundColor: BsColors.onSecondary,
           border: bs.secondary,
@@ -919,7 +949,7 @@ class _DefaultToggleState extends State<_DefaultToggle> {
           textStyle: textStyle,
           borderRadius: borderRadius,
         ),
-      BsButtonVariant.success => _ButtonStyle(
+      .success => _ButtonStyle(
           backgroundColor: bs.success,
           foregroundColor: BsColors.onSuccess,
           border: bs.success,
@@ -927,7 +957,7 @@ class _DefaultToggleState extends State<_DefaultToggle> {
           textStyle: textStyle,
           borderRadius: borderRadius,
         ),
-      BsButtonVariant.danger => _ButtonStyle(
+      .danger => _ButtonStyle(
           backgroundColor: bs.danger,
           foregroundColor: BsColors.onDanger,
           border: bs.danger,
@@ -935,7 +965,7 @@ class _DefaultToggleState extends State<_DefaultToggle> {
           textStyle: textStyle,
           borderRadius: borderRadius,
         ),
-      BsButtonVariant.warning => _ButtonStyle(
+      .warning => _ButtonStyle(
           backgroundColor: bs.warning,
           foregroundColor: BsColors.onWarning,
           border: bs.warning,
@@ -943,7 +973,7 @@ class _DefaultToggleState extends State<_DefaultToggle> {
           textStyle: textStyle,
           borderRadius: borderRadius,
         ),
-      BsButtonVariant.info => _ButtonStyle(
+      .info => _ButtonStyle(
           backgroundColor: bs.info,
           foregroundColor: BsColors.onInfo,
           border: bs.info,
@@ -951,7 +981,7 @@ class _DefaultToggleState extends State<_DefaultToggle> {
           textStyle: textStyle,
           borderRadius: borderRadius,
         ),
-      BsButtonVariant.light => _ButtonStyle(
+      .light => _ButtonStyle(
           backgroundColor: bs.light,
           foregroundColor: bs.onLight,
           border: bs.light,
@@ -959,7 +989,7 @@ class _DefaultToggleState extends State<_DefaultToggle> {
           textStyle: textStyle,
           borderRadius: borderRadius,
         ),
-      BsButtonVariant.dark => _ButtonStyle(
+      .dark => _ButtonStyle(
           backgroundColor: bs.dark,
           foregroundColor: bs.onDark,
           border: bs.dark,
@@ -967,63 +997,7 @@ class _DefaultToggleState extends State<_DefaultToggle> {
           textStyle: textStyle,
           borderRadius: borderRadius,
         ),
-      BsButtonVariant.outlinePrimary => _ButtonStyle(
-          backgroundColor: Colors.transparent,
-          foregroundColor: bs.primary,
-          border: bs.primary,
-          padding: padding,
-          textStyle: textStyle,
-          borderRadius: borderRadius,
-        ),
-      BsButtonVariant.outlineSecondary => _ButtonStyle(
-          backgroundColor: Colors.transparent,
-          foregroundColor: bs.secondary,
-          border: bs.secondary,
-          padding: padding,
-          textStyle: textStyle,
-          borderRadius: borderRadius,
-        ),
-      BsButtonVariant.outlineSuccess => _ButtonStyle(
-          backgroundColor: Colors.transparent,
-          foregroundColor: bs.success,
-          border: bs.success,
-          padding: padding,
-          textStyle: textStyle,
-          borderRadius: borderRadius,
-        ),
-      BsButtonVariant.outlineDanger => _ButtonStyle(
-          backgroundColor: Colors.transparent,
-          foregroundColor: bs.danger,
-          border: bs.danger,
-          padding: padding,
-          textStyle: textStyle,
-          borderRadius: borderRadius,
-        ),
-      BsButtonVariant.outlineWarning => _ButtonStyle(
-          backgroundColor: Colors.transparent,
-          foregroundColor: bs.warning,
-          border: bs.warning,
-          padding: padding,
-          textStyle: textStyle,
-          borderRadius: borderRadius,
-        ),
-      BsButtonVariant.outlineInfo => _ButtonStyle(
-          backgroundColor: Colors.transparent,
-          foregroundColor: bs.info,
-          border: bs.info,
-          padding: padding,
-          textStyle: textStyle,
-          borderRadius: borderRadius,
-        ),
-      BsButtonVariant.outlineDark => _ButtonStyle(
-          backgroundColor: Colors.transparent,
-          foregroundColor: bs.bodyText,
-          border: bs.bodyText,
-          padding: padding,
-          textStyle: textStyle,
-          borderRadius: borderRadius,
-        ),
-      BsButtonVariant.link => _ButtonStyle(
+      .link => _ButtonStyle(
           backgroundColor: Colors.transparent,
           foregroundColor: bs.linkColor,
           padding: padding,
@@ -1031,6 +1005,24 @@ class _DefaultToggleState extends State<_DefaultToggle> {
           borderRadius: borderRadius,
         ),
     };
+
+    if (widget.outline && variant != .link) {
+      final Color outlineColor = switch (variant) {
+        .dark => bs.bodyText,
+        _ => baseStyle.backgroundColor,
+      };
+
+      return _ButtonStyle(
+        backgroundColor: Colors.transparent,
+        foregroundColor: outlineColor,
+        border: outlineColor,
+        padding: padding,
+        textStyle: textStyle,
+        borderRadius: borderRadius,
+      );
+    }
+
+    return baseStyle;
   }
 }
 

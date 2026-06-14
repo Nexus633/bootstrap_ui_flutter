@@ -2,7 +2,7 @@
 
 ## Preview
 
-![Preview](../../assets/ListGroup.png)
+![Preview](../../assets/List_Group.gif)
 
 List groups (`BsListGroup`) are flexible components for displaying a series of content. They can be customized for basic list items, interactive links/buttons, contextual styles, and custom layouts.
 
@@ -101,15 +101,15 @@ BsListGroup(
 BsListGroup(
   children: [
     BsListGroupItem(
-      variant: BsListGroupItemVariant.primary,
+      variant: .primary,
       child: Text('Primary item'),
     ),
     BsListGroupItem(
-      variant: BsListGroupItemVariant.success,
+      variant: .success,
       child: Text('Success item'),
     ),
     BsListGroupItem(
-      variant: BsListGroupItemVariant.danger,
+      variant: .danger,
       child: Text('Danger item'),
     ),
   ],

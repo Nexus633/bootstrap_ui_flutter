@@ -55,14 +55,14 @@ class BsIcon extends StatelessWidget {
     if (resolvedColor == null && variant != null) {
       final bs = context.bs;
       resolvedColor = switch (variant!) {
-        BsVariant.primary => bs.primary,
-        BsVariant.secondary => bs.secondary,
-        BsVariant.success => bs.success,
-        BsVariant.danger => bs.danger,
-        BsVariant.warning => bs.warning,
-        BsVariant.info => bs.info,
-        BsVariant.light => bs.light,
-        BsVariant.dark => bs.dark,
+        .primary => bs.primary,
+        .secondary => bs.secondary,
+        .success => bs.success,
+        .danger => bs.danger,
+        .warning => bs.warning,
+        .info => bs.info,
+        .light => bs.light,
+        .dark => bs.dark,
       };
     }
 

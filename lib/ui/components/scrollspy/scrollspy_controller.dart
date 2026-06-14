@@ -1,4 +1,5 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import '../../tokens/transitions.dart';
 
 /// A controller for the [BsScrollspy] component.
 ///
@@ -62,7 +63,7 @@ class BsScrollspyController extends ChangeNotifier {
     if (smooth) {
       await Scrollable.ensureVisible(
         context,
-        duration: const Duration(milliseconds: 300),
+        duration: BsTransitions.modalDuration,
         curve: Curves.easeInOut,
       );
     } else {

@@ -13,7 +13,7 @@ import '../showcase/form_showcase.dart';
 import '../showcase/breadcrumb_showcase.dart';
 import '../showcase/helpers_showcase.dart';
 import '../showcase/utilities_showcase.dart';
-import '../showcase/heading_showcase.dart';
+import '../showcase/typography_showcase.dart';
 import '../showcase/card_showcase.dart';
 import '../showcase/carousel_showcase.dart';
 import '../showcase/collapse_showcase.dart';
@@ -161,9 +161,9 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
     ),
     _NavItem(
       group: 'Components',
-      label: 'Headings',
+      label: 'Typography',
       icon: BsIcons.typeH1,
-      page: const HeadingShowcase(),
+      page: const TypographyShowcase(),
     ),
     _NavItem(
       group: 'Components',
@@ -280,9 +280,93 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
   ];
 
   int _selectedIndex = 0;
+  bool _isSidebarCollapsed = false;
+
+  void _openNavigationOffcanvas(BuildContext context) {
+    showBsOffcanvas<void>(
+      context: context,
+      placement: BsOffcanvasPlacement.start,
+      builder: (context) {
+        return BsOffcanvas(
+          width: 280,
+          header: const BsOffcanvasHeader(child: Text('Navigation')),
+          body: BsOffcanvasBody(
+            padding: EdgeInsets.zero,
+            scrollable: false,
+            child: _Sidebar(
+              items: _items,
+              selectedIndex: _selectedIndex,
+              onSelect: (index) {
+                setState(() => _selectedIndex = index);
+                Navigator.pop(context);
+              },
+              isCollapsed: false,
+              showToggle: false,
+              width: double.infinity,
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final bool isMobile = screenWidth < BsBreakpoints.lg;
+
+    if (isMobile) {
+      return Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              BsNavbar(
+                expand: BsNavbarExpand.never,
+                brand: Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: 32,
+                            height: 32,
+                            decoration: BoxDecoration(
+                              color: context.bs.primary,
+                              borderRadius: BsRadius.md,
+                            ),
+                            child: const BsIcon(
+                              BsIcons.bootstrap,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                          const SizedBox(width: BsSpacing.s2),
+                          Text(
+                            'Bootstrap UI',
+                            style: BsTypography.body.copyWith(
+                              color: context.bs.bodyText,
+                              fontWeight: BsTypography.weightBold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                      BsNavbarToggler(
+                        onPressed: () => _openNavigationOffcanvas(context),
+                        isOpen: false,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(child: _items[_selectedIndex].page),
+            ],
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -292,11 +376,15 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
             items: _items,
             selectedIndex: _selectedIndex,
             onSelect: (index) => setState(() => _selectedIndex = index),
+            isCollapsed: _isSidebarCollapsed,
+            onToggleCollapse: () =>
+                setState(() => _isSidebarCollapsed = !_isSidebarCollapsed),
+            showToggle: true,
           ),
           // ── Vertical Divider ────────────────────────────────────────────────
           VerticalDivider(width: 1, color: context.bs.border),
           // ── Content ───────────────────────────────────────────────────────────
-          _items[_selectedIndex].page.expanded(),
+          Expanded(child: SafeArea(child: _items[_selectedIndex].page)),
         ],
       ),
     );
@@ -310,11 +398,19 @@ class _Sidebar extends StatelessWidget {
     required this.items,
     required this.selectedIndex,
     required this.onSelect,
+    this.isCollapsed = false,
+    this.onToggleCollapse,
+    this.showToggle = true,
+    this.width,
   });
 
   final List<_NavItem> items;
   final int selectedIndex;
   final ValueChanged<int> onSelect;
+  final bool isCollapsed;
+  final VoidCallback? onToggleCollapse;
+  final bool showToggle;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -333,7 +429,9 @@ class _Sidebar extends StatelessWidget {
             Divider(color: context.bs.border, height: 1).py2(),
           );
         }
-        sidebarChildren.add(_GroupLabel(item.group!));
+        if (!isCollapsed) {
+          sidebarChildren.add(_GroupLabel(item.group!));
+        }
         lastGroup = item.group;
       }
 
@@ -342,25 +440,30 @@ class _Sidebar extends StatelessWidget {
           item: item,
           isSelected: selectedIndex == i,
           onTap: () => onSelect(i),
+          isCollapsed: isCollapsed,
         ),
       );
     }
 
     return SizedBox(
-      width: 220,
+      width: width ?? (isCollapsed ? 70.0 : 220.0),
       child: ColoredBox(
         color: context.bs.bodyBg,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // ── Logo / Header ──────────────────────────────────────────────────
-            const _SidebarHeader(),
+            _SidebarHeader(
+              isCollapsed: isCollapsed,
+              onToggle: onToggleCollapse ?? () {},
+              showToggle: showToggle,
+            ),
             const Divider(color: Color(0xFF495057), height: 1),
             // ── Nav Items ──────────────────────────────────────────────────────
             ListView(children: sidebarChildren).px2().py2().expanded(),
             // ── Footer ─────────────────────────────────────────────────────────
             const Divider(color: Color(0xFF495057), height: 1),
-            const _SidebarFooter(),
+            _SidebarFooter(isCollapsed: isCollapsed),
           ],
         ),
       ),
@@ -371,10 +474,48 @@ class _Sidebar extends StatelessWidget {
 // ─── Sidebar Header ───────────────────────────────────────────────────────────
 
 class _SidebarHeader extends StatelessWidget {
-  const _SidebarHeader();
+  const _SidebarHeader({
+    required this.isCollapsed,
+    required this.onToggle,
+    this.showToggle = true,
+  });
+
+  final bool isCollapsed;
+  final VoidCallback onToggle;
+  final bool showToggle;
 
   @override
   Widget build(BuildContext context) {
+    if (isCollapsed) {
+      return Column(
+        children: [
+          Container(
+            width: 32,
+            height: 32,
+            decoration: BoxDecoration(
+              color: context.bs.primary,
+              borderRadius: BsRadius.md,
+            ),
+            child: const BsIcon(
+              BsIcons.bootstrap,
+              color: Colors.white,
+              size: 20,
+            ),
+          ).mb2(),
+          IconButton(
+            icon: const Icon(Icons.chevron_right, size: 16),
+            onPressed: onToggle,
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(),
+            style: IconButton.styleFrom(
+              minimumSize: const Size(24, 24),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+          ),
+        ],
+      ).py3();
+    }
+
     return Row(
       children: [
         Container(
@@ -387,26 +528,39 @@ class _SidebarHeader extends StatelessWidget {
           child: const BsIcon(BsIcons.bootstrap, color: Colors.white, size: 20),
         ),
         const SizedBox(width: BsSpacing.s2),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Bootstrap UI',
-              style: BsTypography.body.copyWith(
-                color: context.bs.bodyText,
-                fontWeight: BsTypography.weightBold,
-                fontSize: 14,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Bootstrap UI',
+                style: BsTypography.body.copyWith(
+                  color: context.bs.bodyText,
+                  fontWeight: BsTypography.weightBold,
+                  fontSize: 14,
+                ),
               ),
-            ),
-            Text(
-              'Flutter Components',
-              style: BsTypography.body.copyWith(
-                color: context.bs.bodyTextSecondary,
-                fontSize: 11,
+              Text(
+                'Flutter Components',
+                style: BsTypography.body.copyWith(
+                  color: context.bs.bodyTextSecondary,
+                  fontSize: 11,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+        if (showToggle)
+          IconButton(
+            icon: const Icon(Icons.chevron_left, size: 16),
+            onPressed: onToggle,
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(),
+            style: IconButton.styleFrom(
+              minimumSize: const Size(24, 24),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+          ),
       ],
     ).p3();
   }
@@ -439,32 +593,31 @@ class _NavTile extends StatelessWidget {
     required this.item,
     required this.isSelected,
     required this.onTap,
+    required this.isCollapsed,
   });
 
   final _NavItem item;
   final bool isSelected;
   final VoidCallback onTap;
+  final bool isCollapsed;
 
   @override
   Widget build(BuildContext context) {
     final bs = context.bs;
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 2),
-      child: Material(
-        color: Colors.transparent,
-        borderRadius: BsRadius.md,
-        child: InkWell(
-          mouseCursor: SystemMouseCursors.click,
-          onTap: onTap,
-          borderRadius: BsRadius.md,
-          hoverColor: Colors.white.withValues(alpha: 0.05),
+    Widget iconWidget = BsIcon(
+      item.icon,
+      size: 16,
+      color: isSelected ? bs.primary : const Color(0xFFadb5bd),
+    );
+
+    if (isCollapsed) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 2),
+        child: Tooltip(
+          message: item.label,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 150),
-            padding: const EdgeInsets.symmetric(
-              horizontal: BsSpacing.s2,
-              vertical: 10,
-            ),
             decoration: BoxDecoration(
               color: isSelected
                   ? bs.primary.withValues(alpha: 0.2)
@@ -474,27 +627,71 @@ class _NavTile extends StatelessWidget {
                   ? Border.all(color: bs.primary.withValues(alpha: 0.4))
                   : null,
             ),
-            child: Row(
-              children: [
-                BsIcon(
-                  item.icon,
-                  size: 16,
-                  color: isSelected ? bs.primary : const Color(0xFFadb5bd),
+            child: Material(
+              color: Colors.transparent,
+              borderRadius: BsRadius.md,
+              child: InkWell(
+                mouseCursor: SystemMouseCursors.click,
+                onTap: onTap,
+                borderRadius: BsRadius.md,
+                hoverColor: Colors.white.withValues(alpha: 0.05),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  child: iconWidget,
                 ),
-                const SizedBox(width: BsSpacing.s2),
-                Text(
-                  item.label,
-                  style: BsTypography.body.copyWith(
-                    fontSize: 13,
-                    color: isSelected
-                        ? context.bs.bodyText
-                        : context.bs.bodyText,
-                    fontWeight: isSelected
-                        ? BsTypography.weightBold
-                        : BsTypography.weightNormal,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 2),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? bs.primary.withValues(alpha: 0.2)
+              : Colors.transparent,
+          borderRadius: BsRadius.md,
+          border: isSelected
+              ? Border.all(color: bs.primary.withValues(alpha: 0.4))
+              : null,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          borderRadius: BsRadius.md,
+          child: InkWell(
+            mouseCursor: SystemMouseCursors.click,
+            onTap: onTap,
+            borderRadius: BsRadius.md,
+            hoverColor: Colors.white.withValues(alpha: 0.05),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: BsSpacing.s2,
+                vertical: 10,
+              ),
+              child: Row(
+                children: [
+                  iconWidget,
+                  const SizedBox(width: BsSpacing.s2),
+                  Expanded(
+                    child: Text(
+                      item.label,
+                      overflow: TextOverflow.ellipsis,
+                      style: BsTypography.body.copyWith(
+                        fontSize: 13,
+                        color: context.bs.bodyText,
+                        fontWeight: isSelected
+                            ? BsTypography.weightBold
+                            : BsTypography.weightNormal,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -506,10 +703,23 @@ class _NavTile extends StatelessWidget {
 // ─── Sidebar Footer ───────────────────────────────────────────────────────────
 
 class _SidebarFooter extends StatelessWidget {
-  const _SidebarFooter();
+  const _SidebarFooter({required this.isCollapsed});
+  final bool isCollapsed;
 
   @override
   Widget build(BuildContext context) {
+    if (isCollapsed) {
+      return Text(
+        'B5',
+        textAlign: TextAlign.center,
+        style: BsTypography.body.copyWith(
+          color: context.bs.bodyTextSecondary,
+          fontSize: 11,
+          fontWeight: FontWeight.bold,
+        ),
+      ).py3();
+    }
+
     return Text(
       'Bootstrap 5 · Flutter',
       style: BsTypography.body.copyWith(

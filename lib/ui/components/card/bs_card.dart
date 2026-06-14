@@ -22,7 +22,7 @@ class BsCard extends StatelessWidget {
     this.footer,
     this.children,
     this.image,
-    this.imagePosition = BsCardImagePosition.top,
+    this.imagePosition = .top,
     this.imageFlex = 4,
     this.contentFlex = 8,
     this.variant,
@@ -32,6 +32,9 @@ class BsCard extends StatelessWidget {
     this.borderRadius,
     this.width,
     this.height,
+    this.onTap,
+    this.isLink = false,
+    this.isButton = false,
   });
 
   /// The header widget of the card.
@@ -103,6 +106,17 @@ class BsCard extends StatelessWidget {
   /// Custom height constraint.
   final double? height;
 
+  /// Optional callback for when the card is tapped.
+  ///
+  /// Setting this makes the card interactive.
+  final VoidCallback? onTap;
+
+  /// Whether the card should be declared as a link in the semantics tree.
+  final bool isLink;
+
+  /// Whether the card should be declared as a button in the semantics tree.
+  final bool isButton;
+
   /// Creates a copy of this card with the given parameters overridden.
   BsCard copyWith({
     Widget? header,
@@ -120,6 +134,9 @@ class BsCard extends StatelessWidget {
     BorderRadius? borderRadius,
     double? width,
     double? height,
+    VoidCallback? onTap,
+    bool? isLink,
+    bool? isButton,
   }) {
     return BsCard(
       key: key,
@@ -137,6 +154,9 @@ class BsCard extends StatelessWidget {
       borderRadius: borderRadius ?? this.borderRadius,
       width: width ?? this.width,
       height: height ?? this.height,
+      onTap: onTap ?? this.onTap,
+      isLink: isLink ?? this.isLink,
+      isButton: isButton ?? this.isButton,
       children: children ?? this.children,
     );
   }
@@ -152,14 +172,14 @@ class BsCard extends StatelessWidget {
     Color resolvedBorderColor = borderColor ?? bsTheme.borderTranslucent;
     if (borderVariant != null && borderColor == null) {
       resolvedBorderColor = switch (borderVariant!) {
-        BsVariant.primary => bsTheme.primary,
-        BsVariant.secondary => bsTheme.secondary,
-        BsVariant.success => bsTheme.success,
-        BsVariant.danger => bsTheme.danger,
-        BsVariant.warning => bsTheme.warning,
-        BsVariant.info => bsTheme.info,
-        BsVariant.light => bsTheme.light,
-        BsVariant.dark => bsTheme.dark,
+        .primary => bsTheme.primary,
+        .secondary => bsTheme.secondary,
+        .success => bsTheme.success,
+        .danger => bsTheme.danger,
+        .warning => bsTheme.warning,
+        .info => bsTheme.info,
+        .light => bsTheme.light,
+        .dark => bsTheme.dark,
       };
     }
 
@@ -169,25 +189,25 @@ class BsCard extends StatelessWidget {
 
     if (variant != null && color == null) {
       resolvedBgColor = switch (variant!) {
-        BsVariant.primary => bsTheme.primary,
-        BsVariant.secondary => bsTheme.secondary,
-        BsVariant.success => bsTheme.success,
-        BsVariant.danger => bsTheme.danger,
-        BsVariant.warning => bsTheme.warning,
-        BsVariant.info => bsTheme.info,
-        BsVariant.light => bsTheme.light,
-        BsVariant.dark => bsTheme.dark,
+        .primary => bsTheme.primary,
+        .secondary => bsTheme.secondary,
+        .success => bsTheme.success,
+        .danger => bsTheme.danger,
+        .warning => bsTheme.warning,
+        .info => bsTheme.info,
+        .light => bsTheme.light,
+        .dark => bsTheme.dark,
       };
 
       resolvedTextColor = switch (variant!) {
-        BsVariant.primary => BsColors.onPrimary,
-        BsVariant.secondary => BsColors.onSecondary,
-        BsVariant.success => BsColors.onSuccess,
-        BsVariant.danger => BsColors.onDanger,
-        BsVariant.warning => BsColors.onWarning,
-        BsVariant.info => BsColors.onInfo,
-        BsVariant.light => bsTheme.onLight,
-        BsVariant.dark => bsTheme.onDark,
+        .primary => BsColors.onPrimary,
+        .secondary => BsColors.onSecondary,
+        .success => BsColors.onSuccess,
+        .danger => BsColors.onDanger,
+        .warning => BsColors.onWarning,
+        .info => BsColors.onInfo,
+        .light => bsTheme.onLight,
+        .dark => bsTheme.onDark,
       };
     } else {
       resolvedBgColor = color ?? bsTheme.bodyBg;
@@ -205,7 +225,7 @@ class BsCard extends StatelessWidget {
     } else {
       final List<Widget> items = [];
 
-      if (image != null && imagePosition == BsCardImagePosition.top) {
+      if (image != null && imagePosition == .top) {
         items.add(image!);
       }
       if (header != null) {
@@ -217,7 +237,7 @@ class BsCard extends StatelessWidget {
       if (footer != null) {
         items.add(footer!);
       }
-      if (image != null && imagePosition == BsCardImagePosition.bottom) {
+      if (image != null && imagePosition == .bottom) {
         items.add(image!);
       }
 
@@ -230,7 +250,7 @@ class BsCard extends StatelessWidget {
 
     // ─── 5. Layout Modes (Overlay vs Horizontal vs Vertical) ──────────────────
     if (image != null) {
-      if (imagePosition == BsCardImagePosition.overlay) {
+      if (imagePosition == .overlay) {
         Widget overlayContent = content;
         if (children == null) {
           final List<Widget> items = [];
@@ -258,7 +278,7 @@ class BsCard extends StatelessWidget {
             Positioned.fill(child: overlayContent),
           ],
         );
-      } else if (imagePosition == BsCardImagePosition.top) {
+      } else if (imagePosition == .top) {
         // Special top image clipping
         content = Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -280,7 +300,7 @@ class BsCard extends StatelessWidget {
             ],
           ],
         );
-      } else if (imagePosition == BsCardImagePosition.bottom) {
+      } else if (imagePosition == .bottom) {
         // Special bottom image clipping
         content = Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -302,14 +322,14 @@ class BsCard extends StatelessWidget {
             ),
           ],
         );
-      } else if (imagePosition == BsCardImagePosition.left ||
-          imagePosition == BsCardImagePosition.right) {
+      } else if (imagePosition == .left ||
+          imagePosition == .right) {
         final List<Widget> rowChildren = [];
 
         final imageWidget = Expanded(
           flex: imageFlex,
           child: ClipRRect(
-            borderRadius: imagePosition == BsCardImagePosition.left
+            borderRadius: imagePosition == .left
                 ? BorderRadius.only(
                     topLeft: resolvedBorderRadius.topLeft,
                     bottomLeft: resolvedBorderRadius.bottomLeft,
@@ -324,7 +344,7 @@ class BsCard extends StatelessWidget {
 
         final contentWidget = Expanded(flex: contentFlex, child: content);
 
-        if (imagePosition == BsCardImagePosition.left) {
+        if (imagePosition == .left) {
           rowChildren.addAll([imageWidget, contentWidget]);
         } else {
           rowChildren.addAll([contentWidget, imageWidget]);
@@ -351,7 +371,7 @@ class BsCard extends StatelessWidget {
       cardChild = DefaultTextStyle(style: defaultStyle, child: cardChild);
     }
 
-    return Container(
+    Widget result = Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
@@ -361,6 +381,24 @@ class BsCard extends StatelessWidget {
       ),
       child: cardChild,
     );
+
+    if (onTap != null) {
+      result = GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: result,
+      );
+    }
+
+    if (isLink || isButton || onTap != null) {
+      result = Semantics(
+        link: isLink,
+        button: isButton || (onTap != null && !isLink),
+        child: result,
+      );
+    }
+
+    return result;
   }
 }
 

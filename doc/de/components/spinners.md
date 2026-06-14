@@ -1,5 +1,9 @@
 # Spinners
 
+## Vorschau
+
+![Vorschau](../../assets/Spinners.gif)
+
 Zeigt den Ladezustand einer Komponente oder Seite mit Bootstrap-Spinnern an.
 
 ## Zweck und Einsatzgebiet
@@ -43,20 +47,20 @@ BsSpinner.grow()
 Spinner nutzen standardmäßig die aktuelle Textfarbe (`currentColor`). Du kannst das Aussehen über die Farbvarianten ganz einfach ändern.
 
 ```dart
-BsSpinner.border(variant: BsVariant.primary)
-BsSpinner.border(variant: BsVariant.success)
+BsSpinner.border(variant: .primary)
+BsSpinner.border(variant: .success)
 
-BsSpinner.grow(variant: BsVariant.danger)
-BsSpinner.grow(variant: BsVariant.warning)
+BsSpinner.grow(variant: .danger)
+BsSpinner.grow(variant: .warning)
 ```
 
 ### Größe
 
-Verwende `BsSpinnerSize.sm`, um einen kleineren Spinner zu erzeugen. Dies ist besonders nützlich, wenn er innerhalb einer anderen Komponente, wie z.B. einem Button, angezeigt werden soll.
+Verwende `.sm`, um einen kleineren Spinner zu erzeugen. Dies ist besonders nützlich, wenn er innerhalb einer anderen Komponente, wie z.B. einem Button, angezeigt werden soll.
 
 ```dart
-BsSpinner.border(size: BsSpinnerSize.sm)
-BsSpinner.grow(size: BsSpinnerSize.sm)
+BsSpinner.border(size: .sm)
+BsSpinner.grow(size: .sm)
 ```
 
 ### Geschwindigkeit anpassen

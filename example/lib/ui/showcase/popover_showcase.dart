@@ -10,10 +10,26 @@ class PopoverShowcase extends StatefulWidget {
 
 class _PopoverShowcaseState extends State<PopoverShowcase> {
   final BsPopoverController _controller = BsPopoverController();
+  final BsPopoverController _topController = BsPopoverController();
+  final BsPopoverController _endController = BsPopoverController();
+  final BsPopoverController _bottomController = BsPopoverController();
+  final BsPopoverController _startController = BsPopoverController();
+  final BsPopoverController _clickController = BsPopoverController();
+  final BsPopoverController _customController = BsPopoverController();
+  final BsPopoverController _customPrimaryController = BsPopoverController();
+  final BsPopoverController _customDarkController = BsPopoverController();
 
   @override
   void dispose() {
     _controller.dispose();
+    _topController.dispose();
+    _endController.dispose();
+    _bottomController.dispose();
+    _startController.dispose();
+    _clickController.dispose();
+    _customController.dispose();
+    _customPrimaryController.dispose();
+    _customDarkController.dispose();
     super.dispose();
   }
 
@@ -82,43 +98,47 @@ class _PopoverShowcaseState extends State<PopoverShowcase> {
                     runSpacing: 16,
                     children: [
                       BsPopover(
-                        placement: BsPopoverPlacement.top,
+                        controller: _topController,
+                        placement: .top,
                         titleText: 'Popover on top',
                         contentText: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.',
                         child: BsButton(
                           label: 'Popover on top',
                           variant: BsButtonVariant.secondary,
-                          onPressed: () {},
+                          onPressed: () => _topController.toggle(),
                         ),
                       ),
                       BsPopover(
-                        placement: BsPopoverPlacement.end,
+                        controller: _endController,
+                        placement: .end,
                         titleText: 'Popover on right',
                         contentText: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.',
                         child: BsButton(
                           label: 'Popover on right',
                           variant: BsButtonVariant.secondary,
-                          onPressed: () {},
+                          onPressed: () => _endController.toggle(),
                         ),
                       ),
                       BsPopover(
-                        placement: BsPopoverPlacement.bottom,
+                        controller: _bottomController,
+                        placement: .bottom,
                         titleText: 'Popover on bottom',
                         contentText: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.',
                         child: BsButton(
                           label: 'Popover on bottom',
                           variant: BsButtonVariant.secondary,
-                          onPressed: () {},
+                          onPressed: () => _bottomController.toggle(),
                         ),
                       ),
                       BsPopover(
-                        placement: BsPopoverPlacement.start,
+                        controller: _startController,
+                        placement: .start,
                         titleText: 'Popover on left',
                         contentText: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.',
                         child: BsButton(
                           label: 'Popover on left',
                           variant: BsButtonVariant.secondary,
-                          onPressed: () {},
+                          onPressed: () => _startController.toggle(),
                         ),
                       ),
                     ],
@@ -136,19 +156,20 @@ class _PopoverShowcaseState extends State<PopoverShowcase> {
                 runSpacing: 16,
                 children: [
                   BsPopover(
+                    controller: _clickController,
                     titleText: 'Click Dismissible',
                     contentText: 'And here\'s some amazing content. It\'s very engaging. Right?',
-                    trigger: BsPopoverTrigger.click,
+                    trigger: .click,
                     child: BsButton(
                       label: 'Click Trigger (Default)',
                       variant: BsButtonVariant.danger,
-                      onPressed: () {},
+                      onPressed: () => _clickController.toggle(),
                     ),
                   ),
                   BsPopover(
                     titleText: 'Hover Popover',
                     contentText: 'This popover shows when your mouse enters the button, and hides when it exits.',
-                    trigger: BsPopoverTrigger.hover,
+                    trigger: .hover,
                     child: BsButton(
                       label: 'Hover Trigger',
                       variant: BsButtonVariant.success,
@@ -164,7 +185,8 @@ class _PopoverShowcaseState extends State<PopoverShowcase> {
               title: 'Rich HTML / Custom Content',
               description: 'Popovers can contain custom child widgets for rich title headers and body content panels.',
               child: BsPopover(
-                placement: BsPopoverPlacement.bottom,
+                controller: _customController,
+                placement: .bottom,
                 title: Row(
                   children: [
                     const Icon(Icons.info_outline, color: Colors.blue, size: 16).pe2(),
@@ -187,7 +209,7 @@ class _PopoverShowcaseState extends State<PopoverShowcase> {
                 child: BsButton(
                   label: 'Popover with Custom Content',
                   variant: BsButtonVariant.info,
-                  onPressed: () {},
+                  onPressed: () => _customController.toggle(),
                 ),
               ),
             ),
@@ -205,17 +227,20 @@ class _PopoverShowcaseState extends State<PopoverShowcase> {
                     children: [
                       BsButton(
                         label: 'Force Open',
-                        variant: BsButtonVariant.outlinePrimary,
+                        variant: BsButtonVariant.primary,
+                        outline: true,
                         onPressed: () => _controller.open(),
                       ),
                       BsButton(
                         label: 'Force Close',
-                        variant: BsButtonVariant.outlineSecondary,
+                        variant: BsButtonVariant.secondary,
+                        outline: true,
                         onPressed: () => _controller.close(),
                       ),
                       BsButton(
                         label: 'Toggle State',
-                        variant: BsButtonVariant.outlineDark,
+                        variant: BsButtonVariant.dark,
+                        outline: true,
                         onPressed: () => _controller.toggle(),
                       ),
                     ],
@@ -250,7 +275,8 @@ class _PopoverShowcaseState extends State<PopoverShowcase> {
                 runSpacing: 16,
                 children: [
                   BsPopover(
-                    placement: BsPopoverPlacement.top,
+                    controller: _customPrimaryController,
+                    placement: .top,
                     titleText: 'Primary Popover',
                     contentText: 'This popover is themed with Bootstrap\'s primary color scheme.',
                     backgroundColor: Colors.white,
@@ -261,11 +287,12 @@ class _PopoverShowcaseState extends State<PopoverShowcase> {
                     child: BsButton(
                       label: 'Primary Custom Popover',
                       variant: BsButtonVariant.primary,
-                      onPressed: () {},
+                      onPressed: () => _customPrimaryController.toggle(),
                     ),
                   ),
                   BsPopover(
-                    placement: BsPopoverPlacement.bottom,
+                    controller: _customDarkController,
+                    placement: .bottom,
                     titleText: 'Dark Style Popover',
                     contentText: 'A custom dark-colored popover with light-colored texts.',
                     backgroundColor: const Color(0xFF212529),
@@ -276,7 +303,7 @@ class _PopoverShowcaseState extends State<PopoverShowcase> {
                     child: BsButton(
                       label: 'Dark Custom Popover',
                       variant: BsButtonVariant.dark,
-                      onPressed: () {},
+                      onPressed: () => _customDarkController.toggle(),
                     ),
                   ),
                 ],

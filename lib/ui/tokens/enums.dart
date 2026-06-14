@@ -26,27 +26,6 @@ enum BsButtonVariant {
   /// The dark button variant.
   dark,
 
-  /// Outline version of the primary variant.
-  outlinePrimary,
-
-  /// Outline version of the secondary variant.
-  outlineSecondary,
-
-  /// Outline version of the success variant.
-  outlineSuccess,
-
-  /// Outline version of the danger variant.
-  outlineDanger,
-
-  /// Outline version of the warning variant.
-  outlineWarning,
-
-  /// Outline version of the info variant.
-  outlineInfo,
-
-  /// Outline version of the dark variant.
-  outlineDark,
-
   /// A text-only link variant.
   link,
 }
@@ -137,16 +116,7 @@ enum BsContainerType {
 }
 
 /// Size variants for buttons.
-enum BsButtonSize {
-  /// Small button.
-  sm,
-
-  /// Medium (default) button.
-  md,
-
-  /// Large button.
-  lg,
-}
+typedef BsButtonSize = BsSize;
 
 /// Standard size variants for Bootstrap components.
 enum BsSize {
@@ -215,16 +185,7 @@ enum BsTableResponsive {
 }
 
 /// Sizing options for Bootstrap form controls.
-enum BsInputSize {
-  /// Small input size (`.form-control-sm`).
-  sm,
-
-  /// Default input size (`.form-control`).
-  md,
-
-  /// Large input size (`.form-control-lg`).
-  lg,
-}
+typedef BsInputSize = BsSize;
 
 /// Validation states for Bootstrap form controls.
 enum BsValidationState {

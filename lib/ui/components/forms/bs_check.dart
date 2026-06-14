@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
+import '../../tokens/transitions.dart';
 import '../../tokens/typography.dart';
 import '../../utilities/spacing_extension.dart';
 import 'bs_feedback.dart';
+import 'bs_validated_form.dart';
 
 /// A Bootstrap-style checkbox and switch component.
 ///
@@ -94,19 +97,24 @@ class _BsCheckboxState extends FormFieldState<bool> {
     final theme = context.bs;
     final bool isChecked = value ?? false;
 
+    final bool wasValidated = BsValidatedForm.of(context);
+
     // Resolve Validation State
     BsValidationState currentState =
-        widget.validationState ?? BsValidationState.none;
-    if (widget.validationState == null && hasError) {
-      currentState = BsValidationState.invalid;
+        widget.validationState ?? .none;
+    if (widget.validationState == null) {
+      if (hasError) {
+        currentState = .invalid;
+      } else if (wasValidated) {
+        currentState = .valid;
+      }
     }
 
-    final bool isInvalid = currentState == BsValidationState.invalid;
-    final bool isValid = currentState == BsValidationState.valid;
+    final bool isInvalid = currentState == .invalid;
+    final bool isValid = currentState == .valid;
 
     // Resolve Colors
     Color borderColor = theme.border; // equivalent to .form-check-input border
-    Color focusRingColor = theme.primary.withValues(alpha: 0.25);
     Color focusBorderColor = theme.primary.withValues(alpha: 0.5);
     Color activeBgColor = theme.primary;
     Color activeBorderColor = theme.primary;
@@ -114,13 +122,11 @@ class _BsCheckboxState extends FormFieldState<bool> {
     if (isInvalid) {
       borderColor = theme.danger;
       focusBorderColor = theme.danger;
-      focusRingColor = theme.danger.withValues(alpha: 0.25);
       activeBgColor = theme.danger;
       activeBorderColor = theme.danger;
     } else if (isValid) {
       borderColor = theme.success;
       focusBorderColor = theme.success;
-      focusRingColor = theme.success.withValues(alpha: 0.25);
       activeBgColor = theme.success;
       activeBorderColor = theme.success;
     }
@@ -144,34 +150,23 @@ class _BsCheckboxState extends FormFieldState<bool> {
     if (widget.isSwitch) {
       // Switch rendering
       inputVisual = AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
+        duration: BsTransitions.baseDuration,
         width: 32.0, // 2em
         height: 16.0, // 1em
         decoration: BoxDecoration(
-          color: isChecked
-              ? activeBgColor
-              : (theme
-                    .bodyBgSecondary), // Unchecked switch usually has a gray bg, not pure white
+          color: isChecked ? activeBgColor : theme.bodyBgSecondary,
           borderRadius: BorderRadius.circular(16.0), // Pill shape
           border: Border.all(
-            color: _isFocused
-                ? focusBorderColor
-                : (isChecked ? activeBorderColor : theme.border),
+            color: _isFocused ? focusBorderColor : (isChecked ? activeBorderColor : theme.border),
             width: 1.0,
           ),
           boxShadow: (_isFocused && !widget.disabled)
-              ? [
-                  BoxShadow(
-                    color: focusRingColor,
-                    blurRadius: 0,
-                    spreadRadius: 4.0,
-                  ),
-                ]
+              ? BsShadows.focusRing(isInvalid ? theme.danger : (isValid ? theme.success : theme.primary))
               : null,
         ),
         child: AnimatedAlign(
-          duration: const Duration(milliseconds: 150),
-          curve: Curves.easeInOut,
+          duration: BsTransitions.baseDuration,
+          curve: BsTransitions.baseCurve,
           alignment: isChecked ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
             margin: const EdgeInsets.all(2.0),
@@ -187,7 +182,7 @@ class _BsCheckboxState extends FormFieldState<bool> {
     } else {
       // Checkbox rendering
       inputVisual = AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
+        duration: BsTransitions.baseDuration,
         width: 16.0, // 1em
         height: 16.0, // 1em
         decoration: BoxDecoration(
@@ -198,13 +193,7 @@ class _BsCheckboxState extends FormFieldState<bool> {
             width: 1.0,
           ),
           boxShadow: (_isFocused && !widget.disabled)
-              ? [
-                  BoxShadow(
-                    color: focusRingColor,
-                    blurRadius: 0,
-                    spreadRadius: 4.0,
-                  ),
-                ]
+              ? BsShadows.focusRing(isInvalid ? theme.danger : (isValid ? theme.success : theme.primary))
               : null,
         ),
         child: isChecked
@@ -215,19 +204,8 @@ class _BsCheckboxState extends FormFieldState<bool> {
       );
     }
 
-    // Wrap input with focus node detector for keyboard navigation
-    final Widget inputWidget = Focus(
-      focusNode: _focusNode,
-      onKeyEvent: (node, event) {
-        if (event.logicalKey.keyLabel == 'Enter' ||
-            event.logicalKey.keyLabel == ' ') {
-          _toggle();
-          return KeyEventResult.handled;
-        }
-        return KeyEventResult.ignored;
-      },
-      child: inputVisual,
-    );
+    // No need for a custom Focus wrapper since FocusableActionDetector is used below.
+    final Widget inputWidget = inputVisual;
 
     // ─── Label ─────────────────────────────────────────────────────────────
     Widget? labelWidget;
@@ -261,18 +239,31 @@ class _BsCheckboxState extends FormFieldState<bool> {
       }
     }
 
-    final Widget content = MouseRegion(
-      cursor: widget.disabled
-          ? SystemMouseCursors.forbidden
-          : SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: _toggle,
-        behavior: HitTestBehavior.opaque,
-        child: Row(
-          mainAxisSize: MainAxisSize.min, // shrink-wrap if inline
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: rowChildren,
-        ).py(4), // Give it a slight vertical padding for touch target
+    final Widget content = Semantics(
+      checked: isChecked,
+      toggled: widget.isSwitch ? isChecked : null,
+      enabled: !widget.disabled,
+      child: FocusableActionDetector(
+        focusNode: _focusNode,
+        mouseCursor: widget.disabled ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+        onShowFocusHighlight: (v) => setState(() => _isFocused = v),
+        actions: {
+          ActivateIntent: CallbackAction<Intent>(
+            onInvoke: (_) {
+              _toggle();
+              return null;
+            },
+          ),
+        },
+        child: GestureDetector(
+          onTap: _toggle,
+          behavior: HitTestBehavior.opaque,
+          child: Row(
+            mainAxisSize: MainAxisSize.min, // shrink-wrap if inline
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: rowChildren,
+          ).py(4), // Give it a slight vertical padding for touch target
+        ),
       ),
     );
 
@@ -288,7 +279,7 @@ class _BsCheckboxState extends FormFieldState<bool> {
         content,
         if (hasError)
           BsFormFeedback(
-            state: BsValidationState.invalid,
+            state: .invalid,
             message: errorText!,
           ).pt(4),
       ],

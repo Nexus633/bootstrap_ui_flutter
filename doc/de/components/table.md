@@ -2,9 +2,9 @@
 
 ## Vorschau
 
-| Tabelle Standard | Tabelle Gestreift | Tabelle Responsive |
-|:---:|:---:|:---:|
-| <img src="../../assets/Table-1.png" width="250" alt="Tabelle Standard"> | <img src="../../assets/Table-2.png" width="250" alt="Tabelle Gestreift"> | <img src="../../assets/Table-3.png" width="250" alt="Tabelle Responsive"> |
+| Tabelle Standard | Tabelle Gestreift | Tabelle Dunkel | Tabelle Rahmenlos |
+|:---:|:---:|:---:|:---:|
+| <img src="../../assets/Tables_1.png" width="180" alt="Tabelle Standard"> | <img src="../../assets/Tables_2.png" width="180" alt="Tabelle Gestreift"> | <img src="../../assets/Tables_3.png" width="180" alt="Tabelle Dunkel"> | <img src="../../assets/Tables_4.png" width="180" alt="Tabelle Rahmenlos"> |
 
 
 Dokumentation und Beispiele für das Styling von Tabellen nach Bootstrap-Standard.

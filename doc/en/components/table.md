@@ -2,9 +2,9 @@
 
 ## Preview
 
-| Standard Table | Striped Table | Responsive Table |
-|:---:|:---:|:---:|
-| <img src="../../assets/Table-1.png" width="250" alt="Standard Table"> | <img src="../../assets/Table-2.png" width="250" alt="Striped Table"> | <img src="../../assets/Table-3.png" width="250" alt="Responsive Table"> |
+| Standard Table | Striped Table | Dark Table | Borderless Table |
+|:---:|:---:|:---:|:---:|
+| <img src="../../assets/Tables_1.png" width="180" alt="Standard Table"> | <img src="../../assets/Tables_2.png" width="180" alt="Striped Table"> | <img src="../../assets/Tables_3.png" width="180" alt="Dark Table"> | <img src="../../assets/Tables_4.png" width="180" alt="Borderless Table"> |
 
 
 Documentation and examples for opt-in styling of tables (given their prevalent use in ubiquitous widgets like calendars and date pickers).

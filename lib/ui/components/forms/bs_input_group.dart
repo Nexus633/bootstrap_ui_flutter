@@ -49,7 +49,7 @@ class BsInputGroup extends StatelessWidget {
   const BsInputGroup({
     super.key,
     required this.children,
-    this.size = BsInputSize.md,
+    this.size = .md,
   });
 
   /// The children of the input group.
@@ -103,18 +103,24 @@ class BsInputGroup extends StatelessWidget {
 ///
 /// Implements `.input-group-text` from Bootstrap 5.
 class BsInputGroupText extends StatelessWidget {
-  /// Creates a [BsInputGroupText].
-  const BsInputGroupText(this.text, {super.key});
+  /// Creates a [BsInputGroupText] displaying a string.
+  const BsInputGroupText(this.text, {super.key}) : child = null;
+
+  /// Creates a [BsInputGroupText] containing an arbitrary widget (like a Checkbox).
+  const BsInputGroupText.widget({super.key, required this.child}) : text = null;
 
   /// The text to display.
-  final String text;
+  final String? text;
+
+  /// The widget to display.
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     final theme = context.bs;
     final groupContext = BsInputGroupChildContext.of(context);
 
-    final BsInputSize size = groupContext?.size ?? BsInputSize.md;
+    final BsInputSize size = groupContext?.size ?? .md;
     final bool isFirst = groupContext?.isFirst ?? true;
     final bool isLast = groupContext?.isLast ?? true;
 
@@ -125,19 +131,19 @@ class BsInputGroupText extends StatelessWidget {
     double fontSize = BsTypography.fontSizeBase;
     double minHeight = 38.0; // <--- NEU
 
-    if (size == BsInputSize.sm) {
+    if (size == .sm) {
       padding = const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0);
       fontSize = BsTypography.fontSizeSm;
       minHeight = 31.0; // <--- NEU
-    } else if (size == BsInputSize.lg) {
+    } else if (size == .lg) {
       padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0);
       fontSize = BsTypography.fontSizeLg;
       minHeight = 48.0; // <--- NEU
     }
 
-    final double radius = size == BsInputSize.sm
+    final double radius = size == .sm
         ? 4.0
-        : (size == BsInputSize.lg ? 8.0 : 6.0);
+        : (size == .lg ? 8.0 : 6.0);
     final Radius r = Radius.circular(radius);
 
     BorderRadius borderRadius;
@@ -161,10 +167,10 @@ class BsInputGroupText extends StatelessWidget {
         border: Border.all(color: theme.border, width: 1.0),
         borderRadius: borderRadius,
       ),
-      child: Text(
-        text,
+      child: child ?? (text != null ? Text(
+        text!,
         style: TextStyle(color: theme.bodyText, fontSize: fontSize),
-      ),
+      ) : const SizedBox.shrink()),
     );
   }
 }

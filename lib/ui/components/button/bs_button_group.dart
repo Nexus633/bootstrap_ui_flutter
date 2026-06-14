@@ -86,9 +86,9 @@ class BsButtonGroup extends StatelessWidget {
   BorderRadius _calculateRadius(BsButtonSize size, bool isFirst, bool isLast) {
     // Get base radius from tokens
     final BorderRadius baseRadius = switch (size) {
-      BsButtonSize.sm => BsRadius.sm,
-      BsButtonSize.md => BsRadius.md,
-      BsButtonSize.lg => BsRadius.lg,
+      .sm => BsRadius.sm,
+      .md => BsRadius.md,
+      .lg => BsRadius.lg,
     };
 
     // We extract the pure radius value (e.g. Radius.circular(6)) from the top left,

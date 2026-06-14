@@ -13,7 +13,7 @@ void main() {
   }
 
   group('BsNav and BsNavLink Tests', () {
-    testWidgets('renders simple horizontal nav and links', (WidgetTester tester) async {
+    testWidgets('renders simple horizontal nav and links (wrapped by default)', (WidgetTester tester) async {
       await tester.pumpWidget(
         wrap(
           BsNav(
@@ -41,7 +41,37 @@ void main() {
       expect(find.text('Profile'), findsOneWidget);
       expect(find.text('Disabled'), findsOneWidget);
 
-      // Verify row layout
+      // Verify wrap layout
+      expect(find.byType(Wrap), findsOneWidget);
+      final wrapWidget = tester.widget<Wrap>(find.byType(Wrap));
+      expect(wrapWidget.children.length, 3);
+    });
+
+    testWidgets('renders horizontal nav in Row when wrap is false', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        wrap(
+          BsNav(
+            wrap: false,
+            children: [
+              BsNavLink(
+                label: 'Home',
+                active: true,
+                onPressed: () {},
+              ),
+              BsNavLink(
+                label: 'Profile',
+                onPressed: () {},
+              ),
+              const BsNavLink(
+                label: 'Disabled',
+                disabled: true,
+              ),
+            ],
+          ),
+        ),
+      );
+
+      expect(find.byType(Row), findsOneWidget);
       final row = tester.widget<Row>(find.byType(Row));
       expect(row.children.length, 3);
     });

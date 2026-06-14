@@ -1,5 +1,9 @@
 # Toasts
 
+## Preview
+
+![Preview](../../assets/Toasts.gif)
+
 Push notifications to your visitors with a toast, a lightweight and easily customizable alert message.
 
 ## Overview
@@ -46,7 +50,7 @@ Like other components, toasts come with different variants:
 
 ```dart
 BsToast(
-  variant: BsVariant.success,
+  variant: .success,
   header: BsToastHeader(
     title: const Text('Success'),
     onClose: () {},

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/breakpoints.dart';
 import '../../tokens/enums.dart';
+import '../../tokens/shadows.dart';
+import '../../tokens/transitions.dart';
 import '../collapse/bs_collapse.dart';
 
 
@@ -10,21 +12,21 @@ Color? _resolveVariantColor(BuildContext context, BsVariant? variant) {
   if (variant == null) return null;
   final theme = context.bs;
   switch (variant) {
-    case BsVariant.primary:
+    case .primary:
       return theme.primary;
-    case BsVariant.secondary:
+    case .secondary:
       return theme.secondary;
-    case BsVariant.success:
+    case .success:
       return theme.success;
-    case BsVariant.danger:
+    case .danger:
       return theme.danger;
-    case BsVariant.warning:
+    case .warning:
       return theme.warning;
-    case BsVariant.info:
+    case .info:
       return theme.info;
-    case BsVariant.light:
+    case .light:
       return theme.light;
-    case BsVariant.dark:
+    case .dark:
       return theme.dark;
   }
 }
@@ -68,7 +70,7 @@ class BsNavbar extends StatefulWidget {
     super.key,
     this.brand,
     this.collapse,
-    this.expand = BsNavbarExpand.lg,
+    this.expand = .lg,
     this.dark = false,
     this.background,
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -117,25 +119,25 @@ class _BsNavbarState extends State<BsNavbar> {
         // Resolve active expansion state based on layout width
         bool isExpanded = false;
         switch (widget.expand) {
-          case BsNavbarExpand.always:
+          case .always:
             isExpanded = true;
             break;
-          case BsNavbarExpand.sm:
+          case .sm:
             isExpanded = width >= BsBreakpoints.sm;
             break;
-          case BsNavbarExpand.md:
+          case .md:
             isExpanded = width >= BsBreakpoints.md;
             break;
-          case BsNavbarExpand.lg:
+          case .lg:
             isExpanded = width >= BsBreakpoints.lg;
             break;
-          case BsNavbarExpand.xl:
+          case .xl:
             isExpanded = width >= BsBreakpoints.xl;
             break;
-          case BsNavbarExpand.xxl:
+          case .xxl:
             isExpanded = width >= BsBreakpoints.xxl;
             break;
-          case BsNavbarExpand.never:
+          case .never:
             isExpanded = false;
             break;
         }
@@ -207,7 +209,7 @@ class _BsNavbarState extends State<BsNavbar> {
 }
 
 /// A branding wrapper component for the brand/logo in the navbar (`BsNavbarBrand`).
-class BsNavbarBrand extends StatelessWidget {
+class BsNavbarBrand extends StatefulWidget {
   /// Creates a [BsNavbarBrand] widget.
   const BsNavbarBrand({
     super.key,
@@ -230,6 +232,14 @@ class BsNavbarBrand extends StatelessWidget {
   final Color? color;
 
   @override
+  State<BsNavbarBrand> createState() => _BsNavbarBrandState();
+}
+
+class _BsNavbarBrandState extends State<BsNavbarBrand> {
+  bool _isHovered = false;
+  bool _isFocused = false;
+
+  @override
   Widget build(BuildContext context) {
     final scope = _BsNavbarScope.of(context);
     final isDark = scope?.isDark ?? false;
@@ -237,12 +247,18 @@ class BsNavbarBrand extends StatelessWidget {
     final theme = context.bs;
 
     Color brandColor;
-    if (color != null) {
-      brandColor = color!;
-    } else if (variant != null) {
-      brandColor = _resolveVariantColor(context, variant!)!;
+    if (widget.color != null) {
+      brandColor = widget.color!;
+    } else if (widget.variant != null) {
+      brandColor = _resolveVariantColor(context, widget.variant!)!;
     } else {
       brandColor = isDark ? Colors.white : theme.bodyText;
+    }
+
+    if (_isHovered || _isFocused) {
+      brandColor = widget.color != null
+          ? brandColor.withValues(alpha: 0.8)
+          : brandColor.withValues(alpha: isDark ? 0.75 : 0.7);
     }
 
     Widget content = DefaultTextStyle.merge(
@@ -252,15 +268,28 @@ class BsNavbarBrand extends StatelessWidget {
         color: brandColor,
         decoration: TextDecoration.none,
       ),
-      child: child,
+      child: widget.child,
     );
 
-    if (onPressed != null) {
-      content = MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: onPressed,
-          child: content,
+    if (widget.onPressed != null) {
+      content = Semantics(
+        button: true,
+        child: FocusableActionDetector(
+          mouseCursor: SystemMouseCursors.click,
+          onShowHoverHighlight: (v) => setState(() => _isHovered = v),
+          onShowFocusHighlight: (v) => setState(() => _isFocused = v),
+          actions: {
+            ActivateIntent: CallbackAction<Intent>(
+              onInvoke: (_) {
+                widget.onPressed?.call();
+                return null;
+              },
+            ),
+          },
+          child: GestureDetector(
+            onTap: widget.onPressed,
+            child: content,
+          ),
         ),
       );
     }
@@ -276,7 +305,7 @@ class BsNavbarBrand extends StatelessWidget {
 ///
 /// Typically displays a small logo or icon in the navbar.
 /// Can be positioned next to a [BsNavbarBrand] inside a layout row.
-class BsNavbarIconBrand extends StatelessWidget {
+class BsNavbarIconBrand extends StatefulWidget {
   /// Creates a [BsNavbarIconBrand] widget.
   const BsNavbarIconBrand({
     super.key,
@@ -328,40 +357,67 @@ class BsNavbarIconBrand extends StatelessWidget {
   final EdgeInsetsGeometry padding;
 
   @override
+  State<BsNavbarIconBrand> createState() => _BsNavbarIconBrandState();
+}
+
+class _BsNavbarIconBrandState extends State<BsNavbarIconBrand> {
+  bool _isHovered = false;
+  bool _isFocused = false;
+
+  @override
   Widget build(BuildContext context) {
     final scope = _BsNavbarScope.of(context);
     final isDark = scope?.isDark ?? false;
     final theme = context.bs;
 
-    final Color iconColor = color ?? (isDark ? Colors.white : theme.bodyText);
+    Color iconColor = widget.color ?? (isDark ? Colors.white : theme.bodyText);
+    
+    if (_isHovered || _isFocused) {
+      iconColor = widget.color != null
+          ? iconColor.withValues(alpha: 0.8)
+          : iconColor.withValues(alpha: isDark ? 0.75 : 0.7);
+    }
 
     Widget content = IconTheme.merge(
       data: IconThemeData(
         color: iconColor,
-        size: size,
+        size: widget.size,
       ),
-      child: child,
+      child: widget.child,
     );
 
-    if (onPressed != null) {
-      content = MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: onPressed,
-          child: content,
+    if (widget.onPressed != null) {
+      content = Semantics(
+        button: true,
+        child: FocusableActionDetector(
+          mouseCursor: SystemMouseCursors.click,
+          onShowHoverHighlight: (v) => setState(() => _isHovered = v),
+          onShowFocusHighlight: (v) => setState(() => _isFocused = v),
+          actions: {
+            ActivateIntent: CallbackAction<Intent>(
+              onInvoke: (_) {
+                widget.onPressed?.call();
+                return null;
+              },
+            ),
+          },
+          child: GestureDetector(
+            onTap: widget.onPressed,
+            child: content,
+          ),
         ),
       );
     }
 
     return Padding(
-      padding: padding,
+      padding: widget.padding,
       child: content,
     );
   }
 }
 
 /// A responsive toggler button for collapsing/expanding navbar content (`BsNavbarToggler`).
-class BsNavbarToggler extends StatelessWidget {
+class BsNavbarToggler extends StatefulWidget {
   /// Creates a [BsNavbarToggler] widget.
   const BsNavbarToggler({
     super.key,
@@ -380,10 +436,17 @@ class BsNavbarToggler extends StatelessWidget {
   final bool? isDark;
 
   @override
+  State<BsNavbarToggler> createState() => _BsNavbarTogglerState();
+}
+
+class _BsNavbarTogglerState extends State<BsNavbarToggler> {
+  bool _isFocused = false;
+
+  @override
   Widget build(BuildContext context) {
     final scope = _BsNavbarScope.of(context);
-    final isDarkNavbar = isDark ?? scope?.isDark ?? false;
-    final activeOnPressed = onPressed ?? scope?.toggleCollapse;
+    final isDarkNavbar = widget.isDark ?? scope?.isDark ?? false;
+    final activeOnPressed = widget.onPressed ?? scope?.toggleCollapse;
 
     final theme = context.bs;
     final Color togglerBorderColor = isDarkNavbar
@@ -393,25 +456,39 @@ class BsNavbarToggler extends StatelessWidget {
         ? Colors.white.withValues(alpha: 0.55)
         : theme.bodyText.withValues(alpha: 0.55);
 
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: activeOnPressed,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          decoration: BoxDecoration(
-            border: Border.all(color: togglerBorderColor, width: 1.0),
-            borderRadius: BorderRadius.circular(4.0),
+    return Semantics(
+      button: true,
+      child: FocusableActionDetector(
+        mouseCursor: SystemMouseCursors.click,
+        onShowFocusHighlight: (v) => setState(() => _isFocused = v),
+        actions: {
+          ActivateIntent: CallbackAction<Intent>(
+            onInvoke: (_) {
+              activeOnPressed?.call();
+              return null;
+            },
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(width: 20, height: 2, color: togglerIconColor),
-              const SizedBox(height: 4),
-              Container(width: 20, height: 2, color: togglerIconColor),
-              const SizedBox(height: 4),
-              Container(width: 20, height: 2, color: togglerIconColor),
-            ],
+        },
+        child: GestureDetector(
+          onTap: activeOnPressed,
+          child: AnimatedContainer(
+            duration: BsTransitions.baseDuration,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              border: Border.all(color: togglerBorderColor, width: 1.0),
+              borderRadius: BorderRadius.circular(4.0),
+              boxShadow: _isFocused ? BsShadows.focusRing(togglerIconColor) : null,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(width: 20, height: 2, color: togglerIconColor),
+                const SizedBox(height: 4),
+                Container(width: 20, height: 2, color: togglerIconColor),
+                const SizedBox(height: 4),
+                Container(width: 20, height: 2, color: togglerIconColor),
+              ],
+            ),
           ),
         ),
       ),
@@ -570,6 +647,7 @@ class BsNavbarLink extends StatefulWidget {
 
 class _BsNavbarLinkState extends State<BsNavbarLink> {
   bool _isHovered = false;
+  bool _isFocused = false;
 
   @override
   Widget build(BuildContext context) {
@@ -597,7 +675,7 @@ class _BsNavbarLinkState extends State<BsNavbarLink> {
       textColor = baseColor.withValues(alpha: isDark ? 0.25 : 0.3);
     } else if (widget.active) {
       textColor = baseColor;
-    } else if (_isHovered) {
+    } else if (_isHovered || _isFocused) {
       textColor = hasCustomColor
           ? baseColor.withValues(alpha: 0.8)
           : baseColor.withValues(alpha: isDark ? 0.75 : 0.7);
@@ -622,13 +700,25 @@ class _BsNavbarLinkState extends State<BsNavbarLink> {
     );
 
     if (!widget.disabled && widget.onPressed != null) {
-      content = MouseRegion(
-        cursor: SystemMouseCursors.click,
-        onEnter: (_) => setState(() => _isHovered = true),
-        onExit: (_) => setState(() => _isHovered = false),
-        child: GestureDetector(
-          onTap: widget.onPressed,
-          child: content,
+      content = Semantics(
+        button: true,
+        enabled: !widget.disabled,
+        child: FocusableActionDetector(
+          mouseCursor: SystemMouseCursors.click,
+          onShowHoverHighlight: (v) => setState(() => _isHovered = v),
+          onShowFocusHighlight: (v) => setState(() => _isFocused = v),
+          actions: {
+            ActivateIntent: CallbackAction<Intent>(
+              onInvoke: (_) {
+                widget.onPressed?.call();
+                return null;
+              },
+            ),
+          },
+          child: GestureDetector(
+            onTap: widget.onPressed,
+            child: content,
+          ),
         ),
       );
     }

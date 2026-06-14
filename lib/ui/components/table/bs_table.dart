@@ -47,9 +47,9 @@ class BsTable extends StatefulWidget {
     this.small = false,
     this.caption,
     this.captionTop = false,
-    this.responsive = BsTableResponsive.always,
+    this.responsive = .always,
     this.isResponsive = false,
-    this.verticalAlign = BsTableVerticalAlign.top,
+    this.verticalAlign = .top,
     this.groupDivider = false,
     this.columnWidths,
     this.defaultColumnWidth = const FlexColumnWidth(1.0),
@@ -392,11 +392,11 @@ class _BsTableState extends State<BsTable> {
 
   TableCellVerticalAlignment _mapVerticalAlign(BsTableVerticalAlign align) {
     switch (align) {
-      case BsTableVerticalAlign.top:
+      case .top:
         return TableCellVerticalAlignment.top;
-      case BsTableVerticalAlign.middle:
+      case .middle:
         return TableCellVerticalAlignment.middle;
-      case BsTableVerticalAlign.bottom:
+      case .bottom:
         return TableCellVerticalAlignment.bottom;
     }
   }
@@ -570,49 +570,49 @@ class _TableColors {
     if (variant == null) return const _TableColors();
 
     switch (variant) {
-      case BsVariant.primary:
+      case .primary:
         return _TableColors(
           bgColor: theme.primaryBgSubtle,
           textColor: theme.primaryTextEmphasis,
           borderColor: theme.primaryBorderSubtle,
         );
-      case BsVariant.secondary:
+      case .secondary:
         return _TableColors(
           bgColor: theme.secondaryBgSubtle,
           textColor: theme.secondaryTextEmphasis,
           borderColor: theme.secondaryBorderSubtle,
         );
-      case BsVariant.success:
+      case .success:
         return _TableColors(
           bgColor: theme.successBgSubtle,
           textColor: theme.successTextEmphasis,
           borderColor: theme.successBorderSubtle,
         );
-      case BsVariant.danger:
+      case .danger:
         return _TableColors(
           bgColor: theme.dangerBgSubtle,
           textColor: theme.dangerTextEmphasis,
           borderColor: theme.dangerBorderSubtle,
         );
-      case BsVariant.warning:
+      case .warning:
         return _TableColors(
           bgColor: theme.warningBgSubtle,
           textColor: theme.warningTextEmphasis,
           borderColor: theme.warningBorderSubtle,
         );
-      case BsVariant.info:
+      case .info:
         return _TableColors(
           bgColor: theme.infoBgSubtle,
           textColor: theme.infoTextEmphasis,
           borderColor: theme.infoBorderSubtle,
         );
-      case BsVariant.light:
+      case .light:
         return _TableColors(
           bgColor: theme.light,
           textColor: theme.bodyText,
           borderColor: theme.border,
         );
-      case BsVariant.dark:
+      case .dark:
         return _TableColors(
           bgColor: theme.dark,
           textColor: Colors.white,

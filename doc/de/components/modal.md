@@ -1,5 +1,9 @@
 # Modaldialoge (Modals)
 
+## Vorschau
+
+![Vorschau](../../assets/Modals.gif)
+
 Modaldialoge (`BsModal` und `showBsModal`) sind flexible Container, die über dem Hauptinhalt der Seite eingeblendet werden, um Benutzerbenachrichtigungen, Formulare oder benutzerdefinierte Inhalte anzuzeigen.
 
 ## Features
@@ -20,11 +24,11 @@ Modaldialoge werden mit der Methode `showBsModal` aufgerufen:
 ```dart
 showBsModal(
   context: context,
-  backdrop: BsModalBackdrop.enabled, // Hintergrund-Verhalten
+  backdrop: .enabled, // Hintergrund-Verhalten
   keyboard: true,                    // Escape schließt Modal
   centered: true,                    // Vertikal zentrieren
   builder: (context) => BsModal(
-    size: BsModalSize.md,
+    size: .md,
     header: const BsModalHeader(
       child: Text('Modal Titel'),
     ),
@@ -35,12 +39,12 @@ showBsModal(
       children: [
         BsButton(
           label: 'Abbrechen',
-          variant: BsButtonVariant.secondary,
+          variant: .secondary,
           onPressed: () => Navigator.of(context).pop(),
         ),
         BsButton(
           label: 'Speichern',
-          variant: BsButtonVariant.primary,
+          variant: .primary,
           onPressed: () {
             // Speichern-Logik
             Navigator.of(context).pop();
@@ -61,7 +65,7 @@ showBsModal(
 | `body` | `Widget` | *erforderlich* | Der primäre Inhaltsbereich des Modals. |
 | `header` | `BsModalHeader?` | `null` | Die Kopfzeile des Modals. |
 | `footer` | `BsModalFooter?` | `null` | Die Fußzeile des Modals. |
-| `size` | `BsModalSize` | `BsModalSize.md` | Die maximale Breite des Modals (`sm`, `md`, `lg`, `xl`, `fullscreen`). |
+| `size` | `BsModalSize` | `.md` | Die maximale Breite des Modals (`sm`, `md`, `lg`, `xl`, `fullscreen`). |
 | `centered` | `bool` | `false` | Falls `true`, wird das Modal vertikal in der Mitte zentriert. |
 | `scrollable` | `bool` | `false` | Falls `true`, scrollt nur der Body-Inhalt, während Header und Footer fixiert bleiben. |
 

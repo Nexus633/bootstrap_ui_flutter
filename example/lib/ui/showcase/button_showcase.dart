@@ -98,13 +98,13 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  BsButton(label: 'Primary', variant: BsButtonVariant.outlinePrimary, onPressed: () {}),
-                  BsButton(label: 'Secondary', variant: BsButtonVariant.outlineSecondary, onPressed: () {}),
-                  BsButton(label: 'Success', variant: BsButtonVariant.outlineSuccess, onPressed: () {}),
-                  BsButton(label: 'Danger', variant: BsButtonVariant.outlineDanger, onPressed: () {}),
-                  BsButton(label: 'Warning', variant: BsButtonVariant.outlineWarning, onPressed: () {}),
-                  BsButton(label: 'Info', variant: BsButtonVariant.outlineInfo, onPressed: () {}),
-                  BsButton(label: 'Dark', variant: BsButtonVariant.outlineDark, onPressed: () {}),
+                  BsButton(label: 'Primary', variant: BsButtonVariant.primary, outline: true, onPressed: () {}),
+                  BsButton(label: 'Secondary', variant: BsButtonVariant.secondary, outline: true, onPressed: () {}),
+                  BsButton(label: 'Success', variant: BsButtonVariant.success, outline: true, onPressed: () {}),
+                  BsButton(label: 'Danger', variant: BsButtonVariant.danger, outline: true, onPressed: () {}),
+                  BsButton(label: 'Warning', variant: BsButtonVariant.warning, outline: true, onPressed: () {}),
+                  BsButton(label: 'Info', variant: BsButtonVariant.info, outline: true, onPressed: () {}),
+                  BsButton(label: 'Dark', variant: BsButtonVariant.dark, outline: true, onPressed: () {}),
                 ],
               ),
             ),
@@ -199,7 +199,8 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                       ),
                       const BsButton(
                         label: 'Disabled Outline',
-                        variant: BsButtonVariant.outlinePrimary,
+                        variant: BsButtonVariant.primary,
+                        outline: true,
                       ),
                       BsButton(
                         label: 'Click to Load',
@@ -229,19 +230,23 @@ class _ButtonShowcaseState extends State<ButtonShowcase> {
                   ).pb2(),
                   BsButton(
                     label: 'Block Outline Button',
-                    variant: BsButtonVariant.outlineSecondary,
+                    variant: BsButtonVariant.secondary,
+                    outline: true,
                     fullWidth: true,
                     onPressed: () {},
                   ).pb4(),
 
                   const Text('Button Groups:').fwBold().fs6().pb2(),
-                  BsButtonGroup(
-                    groupSize: BsButtonSize.md,
-                    children: [
-                      BsButton(label: 'Left Option', variant: BsButtonVariant.outlinePrimary, onPressed: () {}),
-                      BsButton(label: 'Middle Option', variant: BsButtonVariant.outlinePrimary, onPressed: () {}),
-                      BsButton(label: 'Right Option', variant: BsButtonVariant.outlinePrimary, onPressed: () {}),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: BsButtonGroup(
+                      groupSize: BsButtonSize.md,
+                      children: [
+                        BsButton(label: 'Left', variant: BsButtonVariant.primary, outline: true, onPressed: () {}),
+                        BsButton(label: 'Middle', variant: BsButtonVariant.primary, outline: true, onPressed: () {}),
+                        BsButton(label: 'Right', variant: BsButtonVariant.primary, outline: true, onPressed: () {}),
+                      ],
+                    ),
                   ),
                 ],
               ),
