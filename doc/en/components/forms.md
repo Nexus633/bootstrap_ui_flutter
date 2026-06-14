@@ -158,3 +158,21 @@ BsValidatedForm(
 )
 ```
 When `wasValidated` is `true`, any field without a validator error will automatically render in the green, valid state.
+
+### Accessibility & Localization
+
+When validation errors occur, they are appended to the widget's semantics structure so screen readers (e.g., TalkBack or VoiceOver) can read them. By default, the error message is prefixed with `"Error: "` (or `"Fehler: "` if the app locale is German).
+
+You can customize this prefix globally in your app (e.g., in `main.dart`):
+
+```dart
+import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
+
+void main() {
+  // Set global error prefix for semantics
+  BsLocalizationConfig.errorSemanticsPrefix = 'Alert';
+  runApp(const MyApp());
+}
+```
+
+If no global prefix is defined, the library automatically resolves the prefix based on the current `Locale` from the `BuildContext` (e.g., `"Fehler"` for German, `"Error"` for English/fallback).

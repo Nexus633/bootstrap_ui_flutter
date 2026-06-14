@@ -14,6 +14,7 @@ class BsBadge extends StatelessWidget {
     required this.label,
     this.variant = .primary,
     this.isPill = false,
+    this.semanticsLabel,
   });
 
   /// The text label to display inside the badge.
@@ -24,6 +25,11 @@ class BsBadge extends StatelessWidget {
 
   /// Whether the badge should have a pill-like shape (fully rounded).
   final bool isPill;
+
+  /// Optional semantics label for screen readers.
+  ///
+  /// If provided, this text will be read instead of [label].
+  final String? semanticsLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,7 @@ class BsBadge extends StatelessWidget {
     final BorderRadius radius =
         isPill ? BorderRadius.circular(50.0) : BorderRadius.circular(4.0);
 
-    return Container(
+    final Widget badgeWidget = Container(
       decoration: BoxDecoration(
         color: style.backgroundColor,
         borderRadius: radius,
@@ -56,6 +62,15 @@ class BsBadge extends StatelessWidget {
         ),
       ).px(isPill ? 10 : 6).py(4),
     );
+
+    if (semanticsLabel != null) {
+      return Semantics(
+        label: semanticsLabel,
+        child: badgeWidget,
+      );
+    }
+
+    return badgeWidget;
   }
 
   // ─── Color Logic ───────────────────────────────────────────────────────────

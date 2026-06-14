@@ -14,6 +14,7 @@ export 'ui/utilities/alignment_extension.dart';
 export 'ui/utilities/size_extension.dart';
 export 'ui/utilities/text_extension.dart';
 export 'ui/utilities/border_extension.dart';
+export 'ui/utilities/bs_localizations.dart';
 export 'ui/components/button/bs_button.dart';
 export 'ui/components/button/bs_button_group.dart';
 export 'ui/components/button/bs_close_button.dart';

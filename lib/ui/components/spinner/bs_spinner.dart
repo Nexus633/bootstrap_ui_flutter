@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../utilities/bs_localizations.dart';
 
 /// A Bootstrap-style Spinner component.
 ///
@@ -14,6 +15,7 @@ class BsSpinner extends StatelessWidget {
     this.color,
     this.size = .md,
     this.animationDuration = const Duration(milliseconds: 750),
+    this.semanticsLabel,
   });
 
   /// Creates a 'border' spinner.
@@ -23,6 +25,7 @@ class BsSpinner extends StatelessWidget {
     this.color,
     this.size = .md,
     this.animationDuration = const Duration(milliseconds: 750),
+    this.semanticsLabel,
   }) : type = .border;
 
   /// Creates a 'grow' spinner.
@@ -32,6 +35,7 @@ class BsSpinner extends StatelessWidget {
     this.color,
     this.size = .md,
     this.animationDuration = const Duration(milliseconds: 750),
+    this.semanticsLabel,
   }) : type = .grow;
 
   /// The type of spinner to display (border or grow).
@@ -49,6 +53,11 @@ class BsSpinner extends StatelessWidget {
 
   /// Duration for a complete animation cycle. Defaults to 750ms.
   final Duration animationDuration;
+
+  /// Optional custom semantics label for screen readers.
+  ///
+  /// Defaults to automatic detection via [BsLocalizations.spinner].
+  final String? semanticsLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -92,27 +101,31 @@ class BsSpinner extends StatelessWidget {
     final double width = size == .sm ? 16.0 : 32.0;
     final double height = size == .sm ? 16.0 : 32.0;
 
-    if (type == .grow) {
-      return SizedBox(
-        width: width,
-        height: height,
-        child: _BsSpinnerGrow(
-          color: effectiveColor,
-          duration: animationDuration,
-        ),
-      );
-    }
+    final Widget spinnerWidget = type == .grow
+        ? SizedBox(
+            width: width,
+            height: height,
+            child: _BsSpinnerGrow(
+              color: effectiveColor,
+              duration: animationDuration,
+            ),
+          )
+        : SizedBox(
+            width: width,
+            height: height,
+            child: _BsSpinnerBorder(
+              color: effectiveColor,
+              borderWidth: size == .sm ? 3.2 : 4.0,
+              duration: animationDuration,
+            ),
+          );
 
-    // Default to border spinner
-    final double borderWidth = size == .sm ? 3.2 : 4.0;
-    return SizedBox(
-      width: width,
-      height: height,
-      child: _BsSpinnerBorder(
-        color: effectiveColor,
-        borderWidth: borderWidth,
-        duration: animationDuration,
-      ),
+    final String label = semanticsLabel ?? (BsLocalizations.of(context)?.spinner ?? 'Loading...');
+
+    return Semantics(
+      label: label,
+      liveRegion: true,
+      child: spinnerWidget,
     );
   }
 }

@@ -77,7 +77,7 @@ class _AlertShowcaseState extends State<AlertShowcase> {
                 children: [
                   if (activeAlerts.isEmpty)
                     Text(
-                      'All alerts closed!',
+                      'All alerts closed! ${BsLocalizations.of(context)?.errorPrefix}',
                       style: TextStyle(
                         fontStyle: FontStyle.italic,
                         color: theme.bodyTextSecondary,

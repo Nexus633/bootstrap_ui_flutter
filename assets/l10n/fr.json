@@ -1,0 +1,9 @@
+{
+  "errorPrefix": "Erreur",
+  "carouselNext": "Diapositive suivante",
+  "carouselPrev": "Diapositive précédente",
+  "carouselContainer": "Carrousel d'images",
+  "carouselIndicator": "Aller à la diapositive {index}",
+  "spinner": "Chargement...",
+  "progressBar": "Barre de progression"
+}

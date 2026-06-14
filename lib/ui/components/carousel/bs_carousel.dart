@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../tokens/spacing.dart';
 import '../../tokens/transitions.dart';
+import '../../utilities/bs_localizations.dart';
 
 /// An InheritedWidget to share carousel-specific state down to captions or other children.
 class _BsCarouselScope extends InheritedWidget {
@@ -375,9 +376,13 @@ class _BsCarouselState extends State<BsCarousel> {
       );
     }
 
-    return _BsCarouselScope(
-      dark: widget.dark,
-      child: layoutWrapper,
+    return Semantics(
+      container: true,
+      label: BsLocalizations.of(context)?.carouselContainer ?? 'Image carousel',
+      child: _BsCarouselScope(
+        dark: widget.dark,
+        child: layoutWrapper,
+      ),
     );
   }
 
@@ -439,17 +444,22 @@ class _BsCarouselState extends State<BsCarousel> {
           return GestureDetector(
             onTap: () => _goToSlide(index),
             behavior: HitTestBehavior.opaque,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-              child: AnimatedContainer(
-                duration: BsTransitions.modalDuration,
-                curve: Curves.easeInOut,
-                // Premium micro-animation: width stretches when active (similar to modern web sliders)
-                width: isActive ? 30.0 : 16.0,
-                height: 3.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1.5),
-                  color: baseColor.withValues(alpha: isActive ? 1.0 : 0.4),
+            child: Semantics(
+              button: true,
+              label: BsLocalizations.of(context)?.carouselIndicator(index) ?? 'Go to slide ${index + 1}',
+              selected: isActive,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                child: AnimatedContainer(
+                  duration: BsTransitions.modalDuration,
+                  curve: Curves.easeInOut,
+                  // Premium micro-animation: width stretches when active (similar to modern web sliders)
+                  width: isActive ? 30.0 : 16.0,
+                  height: 3.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(1.5),
+                    color: baseColor.withValues(alpha: isActive ? 1.0 : 0.4),
+                  ),
                 ),
               ),
             ),
@@ -498,39 +508,47 @@ class _CarouselControlButtonState extends State<_CarouselControlButton> {
 
   @override
   Widget build(BuildContext context) {
+    final String label = widget.isNext
+        ? (BsLocalizations.of(context)?.carouselNext ?? 'Next slide')
+        : (BsLocalizations.of(context)?.carouselPrev ?? 'Previous slide');
+
     // Bootstrap: side buttons stretch full-height and are 15% width of the carousel
-    return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
-      child: GestureDetector(
-        onTap: widget.onTap,
-        behavior: HitTestBehavior.opaque,
-        child: AnimatedContainer(
-          duration: BsTransitions.baseDuration,
-          width: 60,
-          height: double.infinity,
-          // Premium: subtle hover background gradient
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: widget.isNext ? Alignment.centerLeft : Alignment.centerRight,
-              end: widget.isNext ? Alignment.centerRight : Alignment.centerLeft,
-              colors: [
-                Colors.transparent,
-                Colors.black.withValues(alpha: _isHovered ? 0.08 : 0.0),
-              ],
+    return Semantics(
+      button: true,
+      label: label,
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        child: GestureDetector(
+          onTap: widget.onTap,
+          behavior: HitTestBehavior.opaque,
+          child: AnimatedContainer(
+            duration: BsTransitions.baseDuration,
+            width: 60,
+            height: double.infinity,
+            // Premium: subtle hover background gradient
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: widget.isNext ? Alignment.centerLeft : Alignment.centerRight,
+                end: widget.isNext ? Alignment.centerRight : Alignment.centerLeft,
+                colors: [
+                  Colors.transparent,
+                  Colors.black.withValues(alpha: _isHovered ? 0.08 : 0.0),
+                ],
+              ),
             ),
-          ),
-          alignment: Alignment.center,
-          child: AnimatedScale(
-            scale: _isHovered ? 1.15 : 1.0,
-            duration: BsTransitions.fadeDuration,
-            child: AnimatedOpacity(
-              opacity: _isHovered ? 0.9 : 0.5,
+            alignment: Alignment.center,
+            child: AnimatedScale(
+              scale: _isHovered ? 1.15 : 1.0,
               duration: BsTransitions.fadeDuration,
-              child: Icon(
-                widget.icon,
-                color: widget.color,
-                size: 38,
+              child: AnimatedOpacity(
+                opacity: _isHovered ? 0.9 : 0.5,
+                duration: BsTransitions.fadeDuration,
+                child: Icon(
+                  widget.icon,
+                  color: widget.color,
+                  size: 38,
+                ),
               ),
             ),
           ),

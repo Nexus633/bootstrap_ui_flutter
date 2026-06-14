@@ -1,0 +1,9 @@
+{
+  "errorPrefix": "Erro",
+  "carouselNext": "Próximo slide",
+  "carouselPrev": "Slide anterior",
+  "carouselContainer": "Carrossel de imagens",
+  "carouselIndicator": "Ir para o slide {index}",
+  "spinner": "Carregando...",
+  "progressBar": "Barra de progresso"
+}

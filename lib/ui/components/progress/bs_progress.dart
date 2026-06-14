@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
+import '../../utilities/bs_localizations.dart';
 
 // ─── BsProgressBar ────────────────────────────────────────────────────────────
 
@@ -22,6 +23,8 @@ class BsProgressBar extends StatefulWidget {
     this.animated = false,
     this.color,
     this.textColor,
+    this.semanticsLabel,
+    this.semanticsValue,
   }) : assert(
           value >= 0.0 && value <= 100.0,
           'Value must be between 0.0 and 100.0',
@@ -49,6 +52,16 @@ class BsProgressBar extends StatefulWidget {
 
   /// Custom text color of the progress bar label. Takes precedence over [variant]'s default text color.
   final Color? textColor;
+
+  /// Optional custom semantics label for screen readers.
+  ///
+  /// Defaults to automatic detection via [BsLocalizations.progressBar].
+  final String? semanticsLabel;
+
+  /// Optional custom semantics value string representation for screen readers.
+  ///
+  /// Defaults to `"${value.toStringAsFixed(0)}%"`.
+  final String? semanticsValue;
 
   @override
   State<BsProgressBar> createState() => _BsProgressBarState();
@@ -181,7 +194,14 @@ class _BsProgressBarState extends State<BsProgressBar> with SingleTickerProvider
       }
     }
 
-    return content;
+    final String label = widget.semanticsLabel ?? (BsLocalizations.of(context)?.progressBar ?? 'Progress bar');
+    final String valStr = widget.semanticsValue ?? '${widget.value.toStringAsFixed(0)}%';
+
+    return Semantics(
+      label: label,
+      value: valStr,
+      child: content,
+    );
   }
 }
 

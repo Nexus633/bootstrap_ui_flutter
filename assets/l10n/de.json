@@ -1,0 +1,9 @@
+{
+  "errorPrefix": "Fehler",
+  "carouselNext": "Nächstes Bild",
+  "carouselPrev": "Vorheriges Bild",
+  "carouselContainer": "Bildkarussell",
+  "carouselIndicator": "Gehe zu Bild {index}",
+  "spinner": "Ladevorgang",
+  "progressBar": "Fortschrittsanzeige"
+}

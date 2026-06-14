@@ -1,0 +1,9 @@
+{
+  "errorPrefix": "Ошибка",
+  "carouselNext": "Следующий слайд",
+  "carouselPrev": "Предыдущий слайд",
+  "carouselContainer": "Карусель изображений",
+  "carouselIndicator": "Перейти к слайdu {index}",
+  "spinner": "Загрузка...",
+  "progressBar": "Индикатор выполнения"
+}

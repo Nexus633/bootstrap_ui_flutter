@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../tokens/bootstrap_theme.dart';
 import '../../tokens/enums.dart';
 import '../../tokens/typography.dart';
+import '../../utilities/bs_localizations.dart';
 import 'bs_feedback.dart';
 import 'bs_input_group.dart';
 import 'bs_validated_form.dart';
@@ -94,8 +95,7 @@ class _BsSelectState<T> extends FormFieldState<T> {
     final bool wasValidated = BsValidatedForm.of(context);
 
     // Resolve Validation State
-    BsValidationState currentState =
-        widget.validationState ?? .none;
+    BsValidationState currentState = widget.validationState ?? .none;
     if (widget.validationState == null) {
       if (hasError) {
         currentState = .invalid;
@@ -172,7 +172,12 @@ class _BsSelectState<T> extends FormFieldState<T> {
     final bool isFloating = widget.floatingLabel != null;
     if (isFloating) {
       minHeight = 58.0; // 3.5rem + 2px
-      padding = const EdgeInsets.only(top: 26.0, bottom: 6.0, left: 12.0, right: 36.0);
+      padding = const EdgeInsets.only(
+        top: 26.0,
+        bottom: 6.0,
+        left: 12.0,
+        right: 36.0,
+      );
     }
 
     final double baseRadius = effectiveSize == .sm
@@ -196,81 +201,122 @@ class _BsSelectState<T> extends FormFieldState<T> {
     final BorderRadius borderRadius =
         groupBorderRadius ?? widget.customBorderRadius ?? BorderRadius.all(r);
 
+    String? placeholderText;
+    if (widget.placeholder is Text) {
+      placeholderText = (widget.placeholder as Text).data;
+    }
+
+    final String errorPrefix = BsLocalizations.of(context)?.errorPrefix ?? 'Error';
+
+    final String? semanticsLabel = widget.floatingLabel != null
+        ? (hasError ? '${widget.floatingLabel} - $errorPrefix: $errorText' : widget.floatingLabel)
+        : (hasError && placeholderText == null ? '$errorPrefix: $errorText' : null);
+
+    final String? semanticsHint = placeholderText != null
+        ? (hasError && widget.floatingLabel == null ? '$placeholderText - $errorPrefix: $errorText' : placeholderText)
+        : null;
+
+    DropdownMenuItem<T>? selectedItem;
+    for (final item in widget.items) {
+      if (item.value == value) {
+        selectedItem = item;
+        break;
+      }
+    }
+    String? semanticsValue;
+    if (selectedItem != null && selectedItem.child is Text) {
+      semanticsValue = (selectedItem.child as Text).data;
+    }
+
     // Container for Focus Ring
-    final Widget selectWidget = AnimatedContainer(
-      duration: const Duration(milliseconds: 150),
-      constraints: BoxConstraints(minHeight: minHeight),
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: borderRadius,
-        border: Border.all(
-          color: _isFocused ? focusBorderColor : borderColor,
-          width: 1.0,
-        ),
-        boxShadow: (_isFocused && !widget.disabled)
-            ? [
-                BoxShadow(
-                  color: focusRingColor,
-                  blurRadius: 0,
-                  spreadRadius: 4.0,
-                ),
-              ]
-            : null,
-      ),
-      child: Stack(
-        alignment: Alignment.centerLeft,
-        children: [
-          DropdownButtonHideUnderline(
-            child: DropdownButton<T>(
-              isDense: true,
-              value: value,
-              items: widget.items,
-              onChanged: widget.disabled
-                  ? null
-                  : (T? newValue) {
-                      didChange(newValue);
-                      if (widget.onChanged != null) widget.onChanged!(newValue);
-                    },
-              focusNode: _focusNode,
-              hint: isFloating ? (value == null && _isFocused ? widget.placeholder : null) : widget.placeholder,
-              style: TextStyle(
-                color: widget.disabled ? theme.bodyTextSecondary : theme.bodyText,
-                fontSize: fontSize,
-              ),
-              icon: Icon(
-                Icons.expand_more,
-                color: indicatorColor,
-                size: iconSize,
-              ), // Custom chevron
-              iconSize: iconSize,
-              isExpanded: true, // Make sure it takes full width of the field
-              dropdownColor: theme.bodyBg, // Match dropdown background to theme
-              padding: padding, // Use padding here directly
-            ),
+    final Widget selectWidget = Semantics(
+      label: semanticsLabel,
+      hint: semanticsHint,
+      value: semanticsValue,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        constraints: BoxConstraints(minHeight: minHeight),
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: borderRadius,
+          border: Border.all(
+            color: _isFocused ? focusBorderColor : borderColor,
+            width: 1.0,
           ),
-          if (isFloating)
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 100),
-              curve: Curves.easeInOut,
-              left: 12.0,
-              top: _isFocused || value != null ? 6.0 : (minHeight / 2 - fontSize / 2 - 2),
-              child: IgnorePointer(
-                child: AnimatedScale(
-                  duration: const Duration(milliseconds: 100),
-                  curve: Curves.easeInOut,
-                  scale: _isFocused || value != null ? 0.85 : 1.0,
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    widget.floatingLabel!,
-                    style: TextStyle(
-                      color: theme.bodyTextSecondary,
-                      fontSize: fontSize,
+          boxShadow: (_isFocused && !widget.disabled)
+              ? [
+                  BoxShadow(
+                    color: focusRingColor,
+                    blurRadius: 0,
+                    spreadRadius: 4.0,
+                  ),
+                ]
+              : null,
+        ),
+        child: Stack(
+          alignment: Alignment.centerLeft,
+          children: [
+            DropdownButtonHideUnderline(
+              child: DropdownButton<T>(
+                isDense: true,
+                value: value,
+                items: widget.items,
+                onChanged: widget.disabled
+                    ? null
+                    : (T? newValue) {
+                        didChange(newValue);
+                        if (widget.onChanged != null) {
+                          widget.onChanged!(newValue);
+                        }
+                      },
+                focusNode: _focusNode,
+                hint: isFloating
+                    ? (value == null && _isFocused ? widget.placeholder : null)
+                    : widget.placeholder,
+                style: TextStyle(
+                  color: widget.disabled
+                      ? theme.bodyTextSecondary
+                      : theme.bodyText,
+                  fontSize: fontSize,
+                ),
+                icon: Icon(
+                  Icons.expand_more,
+                  color: indicatorColor,
+                  size: iconSize,
+                ), // Custom chevron
+                iconSize: iconSize,
+                isExpanded: true, // Make sure it takes full width of the field
+                dropdownColor:
+                    theme.bodyBg, // Match dropdown background to theme
+                padding: padding, // Use padding here directly
+              ),
+            ),
+            if (isFloating)
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 100),
+                curve: Curves.easeInOut,
+                left: 12.0,
+                top: _isFocused || value != null
+                    ? 6.0
+                    : (minHeight / 2 - fontSize / 2 - 2),
+                child: IgnorePointer(
+                  child: AnimatedScale(
+                    duration: const Duration(milliseconds: 100),
+                    curve: Curves.easeInOut,
+                    scale: _isFocused || value != null ? 0.85 : 1.0,
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      widget.floatingLabel!,
+                      style: TextStyle(
+                        color: theme.bodyTextSecondary,
+                        fontSize: fontSize,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
 
@@ -286,10 +332,7 @@ class _BsSelectState<T> extends FormFieldState<T> {
         if (hasError)
           Padding(
             padding: const EdgeInsets.only(top: 4.0),
-            child: BsFormFeedback(
-              state: .invalid,
-              message: errorText!,
-            ),
+            child: BsFormFeedback(state: .invalid, message: errorText!),
           ),
       ],
     );

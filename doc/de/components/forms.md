@@ -142,3 +142,21 @@ BsInput(
 ```
 
 Wenn die Komponente innerhalb eines `Form` verwendet wird, nutzen Sie einfach die `validator` Eigenschaft. Die Komponente wechselt automatisch in den `invalid` Zustand und zeigt ein rotes `BsFormFeedback` Widget an, falls der Validator einen Fehlerstring zurückgibt.
+
+### Barrierefreiheit & Lokalisierung (Accessibility & Localization)
+
+Wenn Validierungsfehler auftreten, werden diese an die Semantics-Struktur des Widgets angehängt, damit sie von Screenreadern (z. B. TalkBack oder VoiceOver) erfasst werden. Standardmäßig wird vor dem Fehler der Präfix `"Error: "` bzw. `"Fehler: "` (bei deutscher App-Locale) gesprochen.
+
+Du kannst dieses Präfix global in deiner App anpassen (z. B. in `main.dart`):
+
+```dart
+import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
+
+void main() {
+  // Globales Fehlerpräfix für Semantics festlegen
+  BsLocalizationConfig.errorSemanticsPrefix = 'Achtung';
+  runApp(const MyApp());
+}
+```
+
+Wenn kein globales Präfix definiert ist, ermittelt die Bibliothek das Präfix automatisch anhand der aktuellen `Locale` des `BuildContext` (z. B. `"Fehler"` für Deutsch, `"Error"` für Englisch und als Fallback).

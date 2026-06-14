@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
+import 'de_locale_helper.dart';
 
 void main() {
   Widget buildTestableWidget(Widget widget) {
@@ -105,5 +106,132 @@ void main() {
       // Hint text should be visible since it's floating
       expect(find.byType(TextField), findsOneWidget);
     });
+
+    testWidgets('supports accessibility/semantics with labels, hints, and error prefix', (WidgetTester tester) async {
+      final formKey = GlobalKey<FormState>();
+
+      await tester.pumpWidget(
+        buildTestableWidget(
+          Form(
+            key: formKey,
+            child: BsInput(
+              floatingLabel: 'Email address',
+              placeholder: 'name@example.com',
+              validator: (val) => 'Required',
+            ),
+          ),
+        ),
+      );
+
+      formKey.currentState!.validate();
+      await tester.pumpAndSettle();
+
+      final Finder inputSemanticsFinder = find.byWidgetPredicate(
+        (widget) => widget is Semantics && widget.properties.label == 'Email address - Error: Required',
+      );
+      expect(inputSemanticsFinder, findsOneWidget);
+
+      final Semantics inputSemantics = tester.widget(inputSemanticsFinder);
+      expect(inputSemantics.properties.hint, equals('name@example.com'));
+    });
+
+    testWidgets('uses German error translation in BsInput when locale is de', (WidgetTester tester) async {
+      final formKey = GlobalKey<FormState>();
+
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData(
+            extensions: [BsThemeData.lightTheme],
+          ),
+          locale: const Locale('de'),
+          supportedLocales: const [Locale('de'), Locale('en')],
+          localizationsDelegates: const [
+            ...deLocalizationsDelegates,
+            DefaultMaterialLocalizations.delegate,
+            DefaultWidgetsLocalizations.delegate,
+            _TestBsLocalizationsDelegate(errorPrefix: 'Fehler'),
+          ],
+          home: Scaffold(
+            body: Form(
+              key: formKey,
+              child: BsInput(
+                floatingLabel: 'Email address',
+                validator: (val) => 'Required',
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      formKey.currentState!.validate();
+      await tester.pumpAndSettle();
+
+      final Finder inputSemanticsFinder = find.byWidgetPredicate(
+        (widget) => widget is Semantics && widget.properties.label == 'Email address - Fehler: Required',
+      );
+      expect(inputSemanticsFinder, findsOneWidget);
+    });
+
+    testWidgets('respects BsLocalizations custom errorSemanticsPrefix in BsInput', (WidgetTester tester) async {
+      final formKey = GlobalKey<FormState>();
+
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData(
+            extensions: [BsThemeData.lightTheme],
+          ),
+          localizationsDelegates: const [
+            DefaultMaterialLocalizations.delegate,
+            DefaultWidgetsLocalizations.delegate,
+            _TestBsLocalizationsDelegate(errorPrefix: 'CustomError'),
+          ],
+          home: Scaffold(
+            body: Form(
+              key: formKey,
+              child: BsInput(
+                floatingLabel: 'Email address',
+                validator: (val) => 'Required',
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      formKey.currentState!.validate();
+      await tester.pumpAndSettle();
+
+      final Finder inputSemanticsFinder = find.byWidgetPredicate(
+        (widget) => widget is Semantics && widget.properties.label == 'Email address - CustomError: Required',
+      );
+      expect(inputSemanticsFinder, findsOneWidget);
+    });
   });
+}
+
+class _TestBsLocalizations extends BsLocalizations {
+  _TestBsLocalizations(super.locale, {required this.customErrorPrefix});
+  final String customErrorPrefix;
+
+  @override
+  String get errorPrefix => customErrorPrefix;
+}
+
+class _TestBsLocalizationsDelegate extends LocalizationsDelegate<BsLocalizations> {
+  const _TestBsLocalizationsDelegate({required this.errorPrefix});
+  final String errorPrefix;
+
+  @override
+  bool isSupported(Locale locale) => true;
+
+  @override
+  Future<BsLocalizations> load(Locale locale) async {
+    return _TestBsLocalizations(locale, customErrorPrefix: errorPrefix);
+  }
+
+  @override
+  bool shouldReload(_TestBsLocalizationsDelegate old) => false;
 }

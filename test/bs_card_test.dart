@@ -284,6 +284,61 @@ void main() {
       expect(find.text('Card A'), findsOneWidget);
       expect(find.text('Card B'), findsOneWidget);
     });
+
+    testWidgets('supports onTap callback and triggers it on tap', (WidgetTester tester) async {
+      int tapCount = 0;
+      await tester.pumpWidget(
+        wrap(
+          BsCard(
+            onTap: () => tapCount++,
+            body: const BsCardBody(child: Text('Clickable Card')),
+          ),
+        ),
+      );
+
+      // Verify that GestureDetector is rendered
+      expect(find.byType(GestureDetector), findsOneWidget);
+
+      // Tap card
+      await tester.tap(find.text('Clickable Card'));
+      await tester.pumpAndSettle();
+
+      expect(tapCount, 1);
+    });
+
+    testWidgets('supports semantics configurations (isLink, isButton)', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        wrap(
+          const BsCard(
+            isLink: true,
+            body: BsCardBody(child: Text('Link Card')),
+          ),
+        ),
+      );
+
+      final linkSemanticsFinder = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.properties.link == true &&
+            widget.properties.button != true,
+      );
+      expect(linkSemanticsFinder, findsOneWidget);
+
+      await tester.pumpWidget(
+        wrap(
+          const BsCard(
+            isButton: true,
+            body: BsCardBody(child: Text('Button Card')),
+          ),
+        ),
+      );
+
+      final buttonSemanticsFinder = find.byWidgetPredicate(
+        (widget) => widget is Semantics &&
+            widget.properties.button == true &&
+            widget.properties.link != true,
+      );
+      expect(buttonSemanticsFinder, findsOneWidget);
+    });
   });
 }
 

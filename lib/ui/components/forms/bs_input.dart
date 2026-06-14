@@ -4,6 +4,7 @@ import '../../tokens/enums.dart';
 import '../../tokens/shadows.dart';
 import '../../tokens/transitions.dart';
 import '../../tokens/typography.dart';
+import '../../utilities/bs_localizations.dart';
 import '../../utilities/spacing_extension.dart';
 import 'bs_feedback.dart';
 import 'bs_input_group.dart';
@@ -383,12 +384,14 @@ class _BsInputState extends FormFieldState<String> {
       ),
     );
 
+    final String errorPrefix = BsLocalizations.of(context)?.errorPrefix ?? 'Error';
+
     final String? semanticsLabel = widget.floatingLabel != null
-        ? (hasError ? '${widget.floatingLabel} - Fehler: $errorText' : widget.floatingLabel)
+        ? (hasError ? '${widget.floatingLabel} - $errorPrefix: $errorText' : widget.floatingLabel)
         : null;
 
     final String? semanticsHint = widget.placeholder != null
-        ? (hasError && widget.floatingLabel == null ? '${widget.placeholder} - Fehler: $errorText' : widget.placeholder)
+        ? (hasError && widget.floatingLabel == null ? '${widget.placeholder} - $errorPrefix: $errorText' : widget.placeholder)
         : null;
 
     final Widget semanticsWidget = Semantics(

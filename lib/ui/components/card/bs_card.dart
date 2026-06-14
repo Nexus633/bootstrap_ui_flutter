@@ -32,6 +32,9 @@ class BsCard extends StatelessWidget {
     this.borderRadius,
     this.width,
     this.height,
+    this.onTap,
+    this.isLink = false,
+    this.isButton = false,
   });
 
   /// The header widget of the card.
@@ -103,6 +106,17 @@ class BsCard extends StatelessWidget {
   /// Custom height constraint.
   final double? height;
 
+  /// Optional callback for when the card is tapped.
+  ///
+  /// Setting this makes the card interactive.
+  final VoidCallback? onTap;
+
+  /// Whether the card should be declared as a link in the semantics tree.
+  final bool isLink;
+
+  /// Whether the card should be declared as a button in the semantics tree.
+  final bool isButton;
+
   /// Creates a copy of this card with the given parameters overridden.
   BsCard copyWith({
     Widget? header,
@@ -120,6 +134,9 @@ class BsCard extends StatelessWidget {
     BorderRadius? borderRadius,
     double? width,
     double? height,
+    VoidCallback? onTap,
+    bool? isLink,
+    bool? isButton,
   }) {
     return BsCard(
       key: key,
@@ -137,6 +154,9 @@ class BsCard extends StatelessWidget {
       borderRadius: borderRadius ?? this.borderRadius,
       width: width ?? this.width,
       height: height ?? this.height,
+      onTap: onTap ?? this.onTap,
+      isLink: isLink ?? this.isLink,
+      isButton: isButton ?? this.isButton,
       children: children ?? this.children,
     );
   }
@@ -351,7 +371,7 @@ class BsCard extends StatelessWidget {
       cardChild = DefaultTextStyle(style: defaultStyle, child: cardChild);
     }
 
-    return Container(
+    Widget result = Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
@@ -361,6 +381,24 @@ class BsCard extends StatelessWidget {
       ),
       child: cardChild,
     );
+
+    if (onTap != null) {
+      result = GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: result,
+      );
+    }
+
+    if (isLink || isButton || onTap != null) {
+      result = Semantics(
+        link: isLink,
+        button: isButton || (onTap != null && !isLink),
+        child: result,
+      );
+    }
+
+    return result;
   }
 }
 
