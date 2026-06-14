@@ -161,18 +161,39 @@ When `wasValidated` is `true`, any field without a validator error will automati
 
 ### Accessibility & Localization
 
-When validation errors occur, they are appended to the widget's semantics structure so screen readers (e.g., TalkBack or VoiceOver) can read them. By default, the error message is prefixed with `"Error: "` (or `"Fehler: "` if the app locale is German).
+When validation errors occur, they are appended to the widget's semantics structure so screen readers (e.g., TalkBack or VoiceOver) can read them. The error prefix (e.g., `"Error"` for English, `"Fehler"` for German) is automatically resolved at runtime via Flutter's built-in localization system `BsLocalizations`.
 
-You can customize this prefix globally in your app (e.g., in `main.dart`):
+The library comes pre-configured with translations for **10 languages**. To use them in your application, simply register the delegate in your `MaterialApp`:
 
 ```dart
 import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-  // Set global error prefix for semantics
-  BsLocalizationConfig.errorSemanticsPrefix = 'Alert';
   runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      locale: const Locale('en'),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        BsLocalizations.delegate, // <--- Register delegate
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('de'),
+      ],
+      home: const Scaffold(body: Center(child: Text('Hello World'))),
+    );
+  }
 }
 ```
 
-If no global prefix is defined, the library automatically resolves the prefix based on the current `Locale` from the `BuildContext` (e.g., `"Fehler"` for German, `"Error"` for English/fallback).
+If no delegate is registered, a safe English fallback will be used. You can easily add new languages (e.g., `zh.json` for Chinese) by putting them into the `assets/l10n/` folder of your host project and adding the locale to the `supportedLocales` list. The library loads them dynamically at runtime!

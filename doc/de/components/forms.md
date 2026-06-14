@@ -145,18 +145,39 @@ Wenn die Komponente innerhalb eines `Form` verwendet wird, nutzen Sie einfach di
 
 ### Barrierefreiheit & Lokalisierung (Accessibility & Localization)
 
-Wenn Validierungsfehler auftreten, werden diese an die Semantics-Struktur des Widgets angehängt, damit sie von Screenreadern (z. B. TalkBack oder VoiceOver) erfasst werden. Standardmäßig wird vor dem Fehler der Präfix `"Error: "` bzw. `"Fehler: "` (bei deutscher App-Locale) gesprochen.
+Wenn Validierungsfehler auftreten, werden diese an die Semantics-Struktur des Widgets angehängt, damit sie von Screenreadern (z. B. TalkBack oder VoiceOver) erfasst werden. Das Fehlerpräfix (z. B. `"Fehler"` für Deutsch, `"Error"` für Englisch) wird automatisch zur Laufzeit über das integrierte Flutter-Lokalisierungssystem `BsLocalizations` aufgelöst.
 
-Du kannst dieses Präfix global in deiner App anpassen (z. B. in `main.dart`):
+Die Library bringt standardmäßig Übersetzungen für **10 Sprachen** mit. Um diese in deiner App zu nutzen, registriere einfach den Delegate in deiner `MaterialApp`:
 
 ```dart
 import 'package:bootstrap_ui_flutter/bootstrap_ui_flutter.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-  // Globales Fehlerpräfix für Semantics festlegen
-  BsLocalizationConfig.errorSemanticsPrefix = 'Achtung';
   runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      locale: const Locale('de'),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        BsLocalizations.delegate, // <--- Delegat registrieren
+      ],
+      supportedLocales: const [
+        Locale('de'),
+        Locale('en'),
+      ],
+      home: const Scaffold(body: Center(child: Text('Hallo Welt'))),
+    );
+  }
 }
 ```
 
-Wenn kein globales Präfix definiert ist, ermittelt die Bibliothek das Präfix automatisch anhand der aktuellen `Locale` des `BuildContext` (z. B. `"Fehler"` für Deutsch, `"Error"` für Englisch und als Fallback).
+Wenn kein Delegat definiert ist, greift ein sicherer, englischer Fallback. Du kannst neue Sprachen (z. B. eine `zh.json` für Chinesisch) einfach im `assets/l10n/` Ordner deines Host-Projekts ablegen und in der `supportedLocales`-Liste registrieren. Die Library lädt diese zur Laufzeit vollautomatisch!
