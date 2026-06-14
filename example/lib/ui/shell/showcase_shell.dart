@@ -173,6 +173,12 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
     ),
     _NavItem(
       group: 'Components',
+      label: 'Icons',
+      icon: BsIcons.starFill,
+      page: const IconShowcase(),
+    ),
+    _NavItem(
+      group: 'Components',
       label: 'Image',
       icon: BsIcons.image,
       page: ImageShowcase(),
