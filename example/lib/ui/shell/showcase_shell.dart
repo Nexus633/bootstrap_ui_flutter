@@ -173,12 +173,6 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
     ),
     _NavItem(
       group: 'Components',
-      label: 'Icons',
-      icon: BsIcons.starFill,
-      page: const IconShowcase(),
-    ),
-    _NavItem(
-      group: 'Components',
       label: 'Image',
       icon: BsIcons.image,
       page: ImageShowcase(),
@@ -295,9 +289,7 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
       builder: (context) {
         return BsOffcanvas(
           width: 280,
-          header: const BsOffcanvasHeader(
-            child: Text('Navigation'),
-          ),
+          header: const BsOffcanvasHeader(child: Text('Navigation')),
           body: BsOffcanvasBody(
             padding: EdgeInsets.zero,
             scrollable: false,
@@ -343,7 +335,11 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
                               color: context.bs.primary,
                               borderRadius: BsRadius.md,
                             ),
-                            child: const BsIcon(BsIcons.bootstrap, color: Colors.white, size: 20),
+                            child: const BsIcon(
+                              BsIcons.bootstrap,
+                              color: Colors.white,
+                              size: 20,
+                            ),
                           ),
                           const SizedBox(width: BsSpacing.s2),
                           Text(
@@ -364,9 +360,7 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
                   ),
                 ),
               ),
-              Expanded(
-                child: _items[_selectedIndex].page,
-              ),
+              Expanded(child: _items[_selectedIndex].page),
             ],
           ),
         ),
@@ -383,17 +377,14 @@ class _ShowcaseShellState extends State<ShowcaseShell> {
             selectedIndex: _selectedIndex,
             onSelect: (index) => setState(() => _selectedIndex = index),
             isCollapsed: _isSidebarCollapsed,
-            onToggleCollapse: () => setState(() => _isSidebarCollapsed = !_isSidebarCollapsed),
+            onToggleCollapse: () =>
+                setState(() => _isSidebarCollapsed = !_isSidebarCollapsed),
             showToggle: true,
           ),
           // ── Vertical Divider ────────────────────────────────────────────────
           VerticalDivider(width: 1, color: context.bs.border),
           // ── Content ───────────────────────────────────────────────────────────
-          Expanded(
-            child: SafeArea(
-              child: _items[_selectedIndex].page,
-            ),
-          ),
+          Expanded(child: SafeArea(child: _items[_selectedIndex].page)),
         ],
       ),
     );
@@ -505,7 +496,11 @@ class _SidebarHeader extends StatelessWidget {
               color: context.bs.primary,
               borderRadius: BsRadius.md,
             ),
-            child: const BsIcon(BsIcons.bootstrap, color: Colors.white, size: 20),
+            child: const BsIcon(
+              BsIcons.bootstrap,
+              color: Colors.white,
+              size: 20,
+            ),
           ).mb2(),
           IconButton(
             icon: const Icon(Icons.chevron_right, size: 16),
